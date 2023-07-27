@@ -1,0 +1,10 @@
+digraph G {
+
+  node [shape=rect; style=rounded];
+  datauis;
+  
+  datauis -> core;
+  class -> datauis;
+  run -> core;
+  app -> core;
+}

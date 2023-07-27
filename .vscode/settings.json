@@ -1,0 +1,3 @@
+{
+    "purescript.buildCommand": "just build-ide"
+}

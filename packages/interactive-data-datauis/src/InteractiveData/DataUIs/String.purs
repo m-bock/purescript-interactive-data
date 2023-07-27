@@ -1,13 +1,16 @@
 module InteractiveData.DataUIs.String where
 
-import InteractiveData.Prelude.UI
+import InteractiveData.Core.Prelude
 
 import Data.String as Str
-import InteractiveData.Core.Types (DataUI(..), DataUiItf(..), Opt)
-import InteractiveData.Core.Types as Core
-import InteractiveData.Defaults (class Cfg, getAll)
-import InteractiveData.Types (class IDHtml, DataTree(..), DataTreeChildren(..), IDDataUI, IDSurface(..), ViewMode(..))
-import InteractiveData.Types.DataTree (DataAction(..), Icon(..))
+import InteractiveData.Core as Core
+-- import InteractiveData.Core
+--   ( DataResult
+--   , class IDHtml
+--   , DataAction(..)
+--   , Icon(..)
+--   , ViewMode(..)
+--   )
 import VirtualDOM as VD
 
 -------------------------------------------------------------------------------
@@ -24,7 +27,7 @@ newtype StringState = StringState String
 --- Extract
 -------------------------------------------------------------------------------
 
-stringExtract :: StringState -> Opt String
+stringExtract :: StringState -> Core.DataResult String
 stringExtract (StringState s) = Right s
 
 -------------------------------------------------------------------------------
@@ -53,7 +56,7 @@ type CfgView =
   , maxLength :: Maybe Int
   }
 
-stringView :: forall html. IDHtml html => CfgView -> StringState -> html StringMsg
+stringView :: forall html. Core.IDHtml html => CfgView -> StringState -> html StringMsg
 stringView { multiline, maxLength } (StringState state) = withCtx \ctx ->
   let
     el =
@@ -95,13 +98,13 @@ stringView { multiline, maxLength } (StringState state) = withCtx \ctx ->
       else lineInput
   in
     case ctx.viewMode of
-      Standalone ->
+      Core.Standalone ->
         el.root []
           [ getLineInput multiline.standalone
           , el.details []
               [ VD.text ("Length: " <> show (Str.length state)) ]
           ]
-      Inline ->
+      Core.Inline ->
         el.root []
           [ getLineInput multiline.inline
           ]
@@ -110,79 +113,79 @@ stringView { multiline, maxLength } (StringState state) = withCtx \ctx ->
 --- DataActions
 -------------------------------------------------------------------------------
 
-stringActions :: Array (DataAction StringMsg)
+stringActions :: Array (Core.DataAction StringMsg)
 stringActions =
-  [ DataAction
-      { icon: IconUnicode 'x'
+  [ Core.DataAction
+      { icon: Core.IconUnicode 'x'
       , label: "Clear"
       , msg: This $ SetString ""
       , description: "Clear the string"
       }
-  , DataAction
-      { icon: IconUnicode 'x'
+  , Core.DataAction
+      { icon: Core.IconUnicode 'x'
       , label: "Trim"
       , msg: This $ TrimString
       , description: "Trim whitespace from string"
       }
   ]
 
--------------------------------------------------------------------------------
---- DataUI
--------------------------------------------------------------------------------
+-- -------------------------------------------------------------------------------
+-- --- DataUI
+-- -------------------------------------------------------------------------------
 
-type DataUIString html fm fs = Core.DataUI
-  (IDSurface html)
-  fm
-  fs
-  StringMsg
-  StringState
-  String
+-- type DataUIString html fm fs = Core.DataUI
+--   (IDSurface html)
+--   fm
+--   fs
+--   StringMsg
+--   StringState
+--   String
 
-type CfgString msg =
-  { multiline ::
-      { inline :: Boolean
-      , standalone :: Boolean
-      }
-  , actions :: Array (DataAction msg)
-  , maxLength :: Maybe Int
-  }
+-- type CfgString msg =
+--   { multiline ::
+--       { inline :: Boolean
+--       , standalone :: Boolean
+--       }
+--   , actions :: Array (DataAction msg)
+--   , maxLength :: Maybe Int
+--   }
 
-defaults :: CfgString StringMsg
-defaults =
-  { multiline:
-      { inline: false
-      , standalone: true
-      }
-  , actions: stringActions
-  , maxLength: Nothing
-  }
+-- defaults :: CfgString StringMsg
+-- defaults =
+--   { multiline:
+--       { inline: false
+--       , standalone: true
+--       }
+--   , actions: stringActions
+--   , maxLength: Nothing
+--   }
 
-string
-  :: forall opt html fm fs
-   . Cfg (CfgString StringMsg) opt
-  => IDHtml html
-  => opt
-  -> DataUIString html fm fs
-string opt =
-  let
-    cfg :: CfgString StringMsg
-    cfg = getAll defaults opt
+-- string
+--   :: forall opt html fm fs
+--    . Cfg (CfgString StringMsg) opt
+--   => IDHtml html
+--   => opt
+--   -> DataUIString html fm fs
+-- string opt =
+--   let
+--     cfg :: CfgString StringMsg
+--     cfg = getAll defaults opt
 
-    { multiline, actions, maxLength } = cfg
-  in
-    DataUI \_ -> DataUiItf
-      { name: "String"
-      , view: \state -> IDSurface \_ ->
-          DataTree
-            { view: stringView { multiline, maxLength } state
-            , actions
-            , children: Fields []
-            , meta: Nothing
-            }
-      , extract: stringExtract
-      , update: stringUpdate
-      , init: stringInit
-      }
+--     { multiline, actions, maxLength } = cfg
+--   in
+--     DataUI \_ -> DataUiItf
+--       { name: "String"
+--       , view: \state -> IDSurface \_ ->
+--           DataTree
+--             { view: stringView { multiline, maxLength } state
+--             , actions
+--             , children: Fields []
+--             , meta: Nothing
+--             }
+--       , extract: stringExtract
+--       , update: stringUpdate
+--       , init: stringInit
+--       }
 
-string_ :: forall html fm fs. IDHtml html => DataUIString html fm fs
-string_ = string {}
+-- string_ :: forall html fm fs. IDHtml html => DataUIString html fm fs
+-- string_ = string {}
