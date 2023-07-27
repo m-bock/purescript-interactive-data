@@ -1,0 +1,13 @@
+package:
+  name: interactive-data-run
+  dependencies:
+    - interactive-data-core
+    - virtual-dom
+    - identity
+    - mvc
+    - prelude
+    - unsafe-coerce
+    - virtual-dom-styled
+  test:
+    dependencies: []
+    main: Test.Main

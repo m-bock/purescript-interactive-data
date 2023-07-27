@@ -31,3 +31,6 @@ import DataMVC.Types
   , DataUiItf(..)
   ) as Export
 
+import DataMVC.Types.DataUI
+  ( runDataUi
+  ) as Export
