@@ -1,13 +1,14 @@
 package:
   dependencies:
-    - console
-    - effect
-    - prelude
+    - interactive-data-core
+
   name: interactive-data-mono
   test:
     dependencies: []
     main: Test.Main
 workspace:
-  extra_packages: {}
+  extra_packages:
+    interactive-data-base: 
+      path: "./packages/interactive-data-core/spago.yaml"
   package_set:
     registry: 31.0.0
