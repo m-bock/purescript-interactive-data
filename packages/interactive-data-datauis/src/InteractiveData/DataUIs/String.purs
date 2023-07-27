@@ -1,16 +1,15 @@
-module InteractiveData.DataUIs.String where
+module InteractiveData.DataUIs.String
+  ( StringMsg(..)
+  , StringState(..)
+  , string
+  , string_
+  ) where
 
 import InteractiveData.Core.Prelude
 
 import Data.String as Str
 import InteractiveData.Core as Core
--- import InteractiveData.Core
---   ( DataResult
---   , class IDHtml
---   , DataAction(..)
---   , Icon(..)
---   , ViewMode(..)
---   )
+import InteractiveData.Core.Classes.OptArgs (class OptArgs, getAllArgs)
 import VirtualDOM as VD
 
 -------------------------------------------------------------------------------
@@ -129,63 +128,55 @@ stringActions =
       }
   ]
 
--- -------------------------------------------------------------------------------
--- --- DataUI
--- -------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+--- DataUI
+-------------------------------------------------------------------------------
 
--- type DataUIString html fm fs = Core.DataUI
---   (IDSurface html)
---   fm
---   fs
---   StringMsg
---   StringState
---   String
+type CfgString msg =
+  { multiline ::
+      { inline :: Boolean
+      , standalone :: Boolean
+      }
+  , actions :: Array (Core.DataAction msg)
+  , maxLength :: Maybe Int
+  }
 
--- type CfgString msg =
---   { multiline ::
---       { inline :: Boolean
---       , standalone :: Boolean
---       }
---   , actions :: Array (DataAction msg)
---   , maxLength :: Maybe Int
---   }
+defaults :: CfgString StringMsg
+defaults =
+  { multiline:
+      { inline: false
+      , standalone: true
+      }
+  , actions: stringActions
+  , maxLength: Nothing
+  }
 
--- defaults :: CfgString StringMsg
--- defaults =
---   { multiline:
---       { inline: false
---       , standalone: true
---       }
---   , actions: stringActions
---   , maxLength: Nothing
---   }
+string
+  :: forall opt html
+   . OptArgs (CfgString StringMsg) opt
+  => Core.IDHtml html
+  => opt
+  -> Core.IDDataUI html StringMsg StringState String
+string opt =
+  let
+    cfg :: CfgString StringMsg
+    cfg = getAllArgs defaults opt
 
--- string
---   :: forall opt html fm fs
---    . Cfg (CfgString StringMsg) opt
---   => IDHtml html
---   => opt
---   -> DataUIString html fm fs
--- string opt =
---   let
---     cfg :: CfgString StringMsg
---     cfg = getAll defaults opt
+    { multiline, actions, maxLength } = cfg
+  in
+    Core.DataUI \_ -> Core.DataUiItf
+      { name: "String"
+      , view: \state -> Core.IDSurface \_ ->
+          Core.DataTree
+            { view: stringView { multiline, maxLength } state
+            , actions
+            , children: Core.Fields []
+            , meta: Nothing
+            }
+      , extract: stringExtract
+      , update: stringUpdate
+      , init: stringInit
+      }
 
---     { multiline, actions, maxLength } = cfg
---   in
---     DataUI \_ -> DataUiItf
---       { name: "String"
---       , view: \state -> IDSurface \_ ->
---           DataTree
---             { view: stringView { multiline, maxLength } state
---             , actions
---             , children: Fields []
---             , meta: Nothing
---             }
---       , extract: stringExtract
---       , update: stringUpdate
---       , init: stringInit
---       }
-
--- string_ :: forall html fm fs. IDHtml html => DataUIString html fm fs
--- string_ = string {}
+string_ :: forall html. Core.IDHtml html => Core.IDDataUI html StringMsg StringState String
+string_ = string {}

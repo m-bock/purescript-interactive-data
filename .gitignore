@@ -7,7 +7,4 @@
 /.purs*
 /.psa*
 /.spago
-/output/*/externs.cbor
-/output/*/corefn.json
-/output/*/*.js
-/output/cache-db.json
+/output

@@ -1,3 +1,3 @@
 # purescript-interactive-data
 
-[](./assets/local-packages-graph.svg)
+![!image](./assets/local-packages-graph.svg)

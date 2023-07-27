@@ -2,7 +2,7 @@ package:
   dependencies:
     - interactive-data-core
     - virtual-dom
-    - virtual-dom-styled
+    - strings
   name: interactive-data-datauis
   test:
     dependencies: []
