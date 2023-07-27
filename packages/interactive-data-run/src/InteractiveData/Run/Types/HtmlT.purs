@@ -1,18 +1,18 @@
 module InteractiveData.Run.Types.HtmlT
   ( IDHtmlT
   , runIDHtmlT
-  )
-  where
+  ) where
 
 import Prelude
 
+import Data.These (These)
 import InteractiveData.Core (class IDHtml, IDOutMsg, IDViewCtx)
 import VirtualDOM (class Html)
 import VirtualDOM.Styled (class RegisterStyleMap, StyleT, runStyleT)
 import VirtualDOM.Transformers.Ctx.Class (class AskCtx, class Ctx)
 import VirtualDOM.Transformers.Ctx.Trans (CtxT, runCtxT)
 import VirtualDOM.Transformers.OutMsg.Class (class OutMsg, class RunOutMsg)
-import VirtualDOM.Transformers.OutMsg.Trans (OutMsgT, runOutMsgT)
+import VirtualDOM.Transformers.OutMsg.Trans (OutMsgT, runOutMsgT, unOutMsgT)
 
 newtype IDHtmlT html a = IDHtmlT
   ( CtxT IDViewCtx
@@ -43,10 +43,9 @@ runIDHtmlT
    . Functor html
   => Html html
   => IDViewCtx
-  -> msg
   -> IDHtmlT html msg
-  -> html msg
-runIDHtmlT viewCtx msg (IDHtmlT idHtml) =
+  -> html (These msg IDOutMsg)
+runIDHtmlT viewCtx (IDHtmlT idHtml) =
   let
     styleHtml :: StyleT (OutMsgT IDOutMsg html) msg
     styleHtml = runCtxT idHtml viewCtx
@@ -54,5 +53,5 @@ runIDHtmlT viewCtx msg (IDHtmlT idHtml) =
     outMsgHtml :: OutMsgT IDOutMsg html msg
     outMsgHtml = runStyleT styleHtml
   in
-    runOutMsgT (msg) outMsgHtml
+    unOutMsgT outMsgHtml
 

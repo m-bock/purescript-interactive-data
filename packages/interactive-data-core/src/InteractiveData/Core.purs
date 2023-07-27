@@ -28,9 +28,10 @@ import DataMVC.Types
   , DataResult
   , DataUI(..)
   , DataUICtx(..)
-  , DataUiItf(..)
   ) as Export
 
 import DataMVC.Types.DataUI
   ( runDataUi
+  , DataUiItf(..)
+  , applyWrap
   ) as Export
