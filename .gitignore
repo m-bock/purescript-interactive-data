@@ -8,3 +8,5 @@
 /.psa*
 /.spago
 /output
+/.parcel-cache
+/dist

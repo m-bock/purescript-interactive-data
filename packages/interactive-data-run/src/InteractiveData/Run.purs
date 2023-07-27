@@ -1,4 +1,8 @@
-module InteractiveData.Run where
+module InteractiveData.Run
+  ( ctxNoWrap
+  , toUI
+  )
+  where
 
 import Prelude
 

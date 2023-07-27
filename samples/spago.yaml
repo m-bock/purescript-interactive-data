@@ -1,0 +1,7 @@
+package:
+  name: interactive-data-samples
+  dependencies:
+    - interactive-data
+  test:
+    dependencies: []
+    main: Test.Main

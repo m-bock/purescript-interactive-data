@@ -1,0 +1,8 @@
+package:
+  dependencies:
+    - interactive-data-run
+    - interactive-data-datauis
+  name: interactive-data
+  test:
+    dependencies: []
+    main: Test.Main

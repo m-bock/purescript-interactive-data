@@ -8,6 +8,7 @@ module InteractiveData.DataUIs.String
 import InteractiveData.Core.Prelude
 
 import Data.String as Str
+import InteractiveData.Core (IDSurface(..))
 import InteractiveData.Core as Core
 import InteractiveData.Core.Classes.OptArgs (class OptArgs, getAllArgs)
 import VirtualDOM as VD
@@ -152,11 +153,11 @@ defaults =
   }
 
 string
-  :: forall opt html
+  :: forall opt html fm fs
    . OptArgs (CfgString StringMsg) opt
   => Core.IDHtml html
   => opt
-  -> Core.IDDataUI html StringMsg StringState String
+  -> Core.DataUI (IDSurface html) fm fs StringMsg StringState String
 string opt =
   let
     cfg :: CfgString StringMsg
@@ -178,5 +179,8 @@ string opt =
       , init: stringInit
       }
 
-string_ :: forall html. Core.IDHtml html => Core.IDDataUI html StringMsg StringState String
+string_
+  :: forall html fm fs
+   . Core.IDHtml html
+  => Core.DataUI (IDSurface html) fm fs StringMsg StringState String
 string_ = string {}

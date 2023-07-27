@@ -1,8 +1,8 @@
 package:
-  dependencies:
-    - interactive-data-datauis
+  dependencies: []
+#    - interactive-data-datauis
 
-  name: interactive-data-mono
+  name: interactive-data-x
   test:
     dependencies: []
     main: Test.Main
@@ -187,71 +187,6 @@ workspace:
         - ordered-set
         - prelude
         - tuples
-    interactive-data-core:
-      git: https://github.com/thought2/purescript-interactive-data-core.git
-      ref: 33b1487ba8ecdd172b320f814dfb7eef1625382b
-      dependencies:
-        - arrays
-        - bifunctors
-        - data-mvc
-        - dodo-printer
-        - maybe
-        - newtype
-        - prelude
-        - these
-        - tuples
-    interactive-data-class:
-      git: ssh://git@github.com/thought2/purescript-interactive-data-class.git
-      ref: d50d4f31de3459544436a7edc3789e955cb46a03
-      dependencies:
-        - arrays
-        - either
-        - integers
-        - interactive-data
-        - interactive-data-core
-        - labeled-data
-        - maybe
-        - prelude
-        - record
-        - strings
-        - tuples
-        - type-equality
-        - variant
-        - virtual-dom
-    interactive-data:
-      git: ssh://git@github.com/thought2/purescript-interactive-data.git
-      ref: d9d9b16b55f051b444a0ca5c1e77746e6bd72601
-      dependencies:
-        - arrays
-        - bifunctors
-        - convertable-options
-        - data-mvc
-        - dodo-printer
-        - either
-        - foldable-traversable
-        - heterogeneous
-        - identity
-        - integers
-        - interactive-data-core
-        - justifill
-        - labeled-data
-        - maybe
-        - newtype
-        - numbers
-        - ordered-collections
-        - partial
-        - prelude
-        - record
-        - routing-duplex
-        - spec
-        - strings
-        - these
-        - tuples
-        - typelevel-prelude
-        - unsafe-coerce
-        - variant
-        - virtual-dom
-        - virtual-dom-styled
     data-functions:
       git: ssh://git@github.com/thought2/purescript-data-functions.git
       ref: 8707ec9f38faf43e5fbed190338580980be00557

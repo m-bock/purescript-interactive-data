@@ -6,6 +6,7 @@
   "author": "Michael Bock <no-day@posteo.net>",
   "license": "MIT",
   "devDependencies": {
+    "parcel": "^2.9.3",
     "spago": "^0.93.9"
   }
 }
