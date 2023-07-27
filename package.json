@@ -1,0 +1,10 @@
+{
+  "name": "purescript-interactive-data-mono",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Michael Bock <no-day@posteo.net>",
+  "license": "MIT",
+  "devDependencies": {
+    "spago": "^0.93.9"
+  }
+}
