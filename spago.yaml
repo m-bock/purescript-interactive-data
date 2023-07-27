@@ -1,6 +1,7 @@
 package:
   dependencies:
     - interactive-data-core
+    - interactive-data-datauis
 
   name: interactive-data-mono
   test:
@@ -8,6 +9,32 @@ package:
     main: Test.Main
 workspace:
   extra_packages:
+    mvc:
+      git: https://github.com/thought2/purescript-mvc.git
+      ref: 884cf062846de0cc11a505816d73ba63204cedcc
+      dependencies: 
+        - heterogeneous
+        - maybe
+        - newtype
+        - prelude
+        - record
+        - variant
+    data-mvc:
+      git: https://github.com/thought2/purescript-data-mvc.git
+      ref: 167f2543680a583202a6bd47878967211619f98c
+      dependencies: 
+        - arrays
+        - bifunctors
+        - mvc
+        - either
+        - heterogeneous
+        - maybe
+        - newtype
+        - prelude
+        - profunctor
+        - record
+        - variant
+
     interactive-data-base: 
       path: "./packages/interactive-data-core/spago.yaml"
   package_set:

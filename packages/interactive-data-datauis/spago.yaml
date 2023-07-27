@@ -1,0 +1,8 @@
+package:
+  dependencies:
+    - interactive-data-core
+    - virtual-dom
+  name: interactive-data-datauis
+  test:
+    dependencies: []
+    main: Test.Main
