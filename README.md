@@ -1,8 +1,22 @@
+
 # purescript-interactive-data
 
 ![interactive-data](./assets/logo.svg)
 
 Composable UIs to interactively maniupulate data.
+
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+- [Features](#features)
+- [Getting started](#getting-started)
+  - [Installation](#installation)
+  - [Minimal complete example](#minimal-complete-example)
+  - [Run](#run)
+- [Local Packages](#local-packages)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 
 ## Features
 
@@ -17,6 +31,7 @@ Composable UIs to interactively maniupulate data.
 ## Getting started
 
 
+
 ### Installation
 
 ```sh
@@ -28,9 +43,13 @@ npm install parcel
 
 The following example renders with `Halogen`. Have a look at the demo folder for more examples in different frameworks.
 
+
+
 *src/Main.purs*
+
+<!-- START demo -->
 ```hs
-module Main where
+module Demo.Samples.MinimalComplete where
 
 import Prelude
 
@@ -44,18 +63,16 @@ import VirtualDOM.Impl.Halogen as HI
 main :: Effect Unit
 main = do
   let
-    -- Compose a Data UI for a specific type 
+    -- Compose a Data UI for a specific type
     sampleDataUi = ID.string_
-  
   let
-    -- 
-    { ui, extract } = 
+    { ui, extract } =
       sampleDataUi
         # VD.Run.toUI
-          { name: "Sample"
-          , initData: Just "hello!"
-          }
-          VD.Run.ctxNoWrap
+            { name: "Sample"
+            , initData: Just "hello!"
+            , context: VD.Run.ctxNoWrap
+            }
 
   ui
     -- Turn into a Halogen component
@@ -65,7 +82,9 @@ main = do
         }
     -- Mount at the root element
     # HI.uiMountAtId "root"
+
 ```
+<!-- END demo -->
 
 *index.html*
 ```html

@@ -14,8 +14,14 @@ format:
 gen:
     dot -Tsvg assets/local-packages-graph.dot -o assets/local-packages-graph.svg
 
+gen-readme:
+    node scripts/patch-readme.js
+    doctoc README.md
+
 dev: clean-parcel
-    FRAMEWORK=halogen SAMPLE=unwrapped yarn run parcel demo/static/index.html
+    FRAMEWORK=halogen \
+    SAMPLE=unwrapped \
+    parcel demo/static/index.html
 
 clean-parcel:
     rm -rf .parcel-cache

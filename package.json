@@ -10,5 +10,9 @@
     "parcel": "^2.9.3",
     "process": "^0.11.10",
     "spago": "^0.93.9"
+  },
+  "dependencies": {
+    "doctoc": "^2.2.1",
+    "purs-to-md": "^0.3.0"
   }
 }
