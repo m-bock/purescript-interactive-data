@@ -1,4 +1,4 @@
-module Samples.Unwrapped where
+module Demo.Samples.Unwrapped where
 
 import Prelude
 

@@ -1,13 +1,13 @@
-module Samples.Main where
+module Demo.Main where
 
 import Prelude
 
 import Effect (Effect)
 import Effect.Class.Console (log)
 import Foreign.Object (Object)
-import Samples.EnvVars (EnvVars, Sample(..), getEnvVars)
-import Samples.RunHalogen (runHalogen)
-import Samples.Unwrapped as Samples.Unwrapped
+import Demo.EnvVars (EnvVars, Sample(..), getEnvVars)
+import Demo.RunHalogen (runHalogen)
+import Demo.Samples.Unwrapped as Samples.Unwrapped
 
 main :: Object String -> Effect Unit
 main envVarsObj = do

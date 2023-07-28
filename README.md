@@ -16,8 +16,73 @@ Composable UIs to interactively maniupulate data.
 
 ## Getting started
 
+
+### Installation
+
 ```sh
 spago install interactive-data
+npm install parcel
+```
+
+### Minimal complete example
+
+The following example renders with `Halogen`. Have a look at the demo folder for more examples in different frameworks.
+
+*src/Main.purs*
+```hs
+module Main where
+
+import Prelude
+
+import Data.Maybe (Maybe(..))
+import Effect (Effect)
+import Effect.Class.Console (log)
+import InteractiveData.DataUIs as ID
+import InteractiveData.Run as VD.Run
+import VirtualDOM.Impl.Halogen as HI
+
+main :: Effect Unit
+main = do
+  let
+    sampleDataUi = ID.string_
+  let
+    { ui, extract } = VD.Run.toUI
+      { name: "Sample"
+      , initData: Just "hello!"
+      }
+      VD.Run.ctxNoWrap
+      sampleDataUi
+
+  ui
+    # HI.uiToHalogenComponent
+        { onStateChange: \newState -> do
+            log (show $ extract newState)
+        }
+    # HI.uiMountAtId "root"
+```
+
+*index.html*
+```html
+<html>
+  <body>
+    <script src="main.js" type="module"></script>
+    <div id="root"></div>
+  </body>
+</html>
+```
+
+*main.js*
+```js
+import { main } from "../../output/Main/index.js";
+
+main();
+```
+
+### Run
+
+```
+spago build
+parcel demo/index.html
 ```
 
 ## Local Packages

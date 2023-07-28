@@ -1,4 +1,4 @@
-module Samples.RunHalogen where
+module Demo.RunHalogen where
 
 import Prelude
 

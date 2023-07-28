@@ -1,4 +1,4 @@
-module Samples.EnvVars
+module Demo.EnvVars
   ( EnvVars
   , Framework(..)
   , Sample(..)
