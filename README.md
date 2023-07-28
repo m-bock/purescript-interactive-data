@@ -24,11 +24,11 @@ spago install interactive-data
 
 |                         |                                |
 | ----------------------- | ------------------------------ |
-| [core](link-core)       |                                |
-| [app](link-app)         | App layer that adds navigation |
-| [datauis](link-datauis) | UIs for specific data types    |
-| [run](link-run)         |                                |
-| [class](link-class)     |                                |
+| [core][link-core]       |                                |
+| [app][link-app]         | App layer that adds navigation |
+| [datauis][link-datauis] | UIs for specific data types    |
+| [run][link-run]         |                                |
+| [class][link-class]     |                                |
 
 ![!image](./assets/local-packages-graph.svg)
 
