@@ -10,9 +10,9 @@ Composable UIs to interactively maniupulate data.
 - Configurable
 - Extensible
 - Types
-    - Primitive types
-    - Custom ADTs
-    - Variants
+  - Primitive types
+  - Custom ADTs
+  - Variants
 
 ## Getting started
 
@@ -22,12 +22,18 @@ spago install interactive-data
 
 ## Local Packages
 
-| foo         | bar |
-| ----------- | --- |
-| [core]()    | s   |
-| [app]()     | s   |
-| [datauis]() | s   |
-| [run]()     | s   |
-| [class]()   | s   |
+|                         |                                |
+| ----------------------- | ------------------------------ |
+| [core](link-core)       |                                |
+| [app](link-app)         | App layer that adds navigation |
+| [datauis](link-datauis) | UIs for specific data types    |
+| [run](link-run)         |                                |
+| [class](link-class)     |                                |
 
 ![!image](./assets/local-packages-graph.svg)
+
+[link-core]: packages/interactive-data-core
+[link-app]: packages/interactive-data-app
+[link-datauis]: packages/interactive-data-datauis
+[link-run]: packages/interactive-data-run
+[link-class]: packages/interactive-data-class
