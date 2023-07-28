@@ -6,11 +6,9 @@ package:
     - identity
     - mvc
     - prelude
-    - unsafe-coerce
     - virtual-dom-styled
     - maybe
     - newtype
-    - these
   test:
     dependencies: []
     main: Test.Main

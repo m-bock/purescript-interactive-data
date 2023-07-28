@@ -1,7 +1,6 @@
 package:
   name: interactive-data-demo
   dependencies:
-    - interactive-data
     - interactive-data-core
     - interactive-data-datauis
     - interactive-data-run
@@ -15,6 +14,10 @@ package:
     - console
     - effect
     - identity
+    - either
+    - exceptions
+    - foreign-object
+    - lists
   test:
     dependencies: []
     main: Test.Main

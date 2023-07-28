@@ -1,6 +1,6 @@
 digraph G {
 
-  node [shape=rect; style=rounded];
+  node [shape=rect; style=rounded; fontname="Arial"];
   datauis;
   
   datauis -> core;
