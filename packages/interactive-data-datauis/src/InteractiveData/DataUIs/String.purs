@@ -23,6 +23,8 @@ data StringMsg
 
 newtype StringState = StringState String
 
+derive newtype instance Show StringState
+
 -------------------------------------------------------------------------------
 --- Extract
 -------------------------------------------------------------------------------

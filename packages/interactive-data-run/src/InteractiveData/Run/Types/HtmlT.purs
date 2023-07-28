@@ -5,14 +5,13 @@ module InteractiveData.Run.Types.HtmlT
 
 import Prelude
 
-import Data.These (These)
 import InteractiveData.Core (class IDHtml, IDOutMsg, IDViewCtx)
-import VirtualDOM (class Html)
+import VirtualDOM (class Html, class MaybeMsg)
 import VirtualDOM.Styled (class RegisterStyleMap, StyleT, runStyleT)
 import VirtualDOM.Transformers.Ctx.Class (class AskCtx, class Ctx)
 import VirtualDOM.Transformers.Ctx.Trans (CtxT, runCtxT)
 import VirtualDOM.Transformers.OutMsg.Class (class OutMsg, class RunOutMsg)
-import VirtualDOM.Transformers.OutMsg.Trans (OutMsgT, runOutMsgT, unOutMsgT)
+import VirtualDOM.Transformers.OutMsg.Trans (OutMsgT, runOutMsgT)
 
 newtype IDHtmlT html a = IDHtmlT
   ( CtxT IDViewCtx
@@ -42,9 +41,10 @@ runIDHtmlT
   :: forall html msg
    . Functor html
   => Html html
+  => MaybeMsg html
   => IDViewCtx
   -> IDHtmlT html msg
-  -> html (These msg IDOutMsg)
+  -> html msg
 runIDHtmlT viewCtx (IDHtmlT idHtml) =
   let
     styleHtml :: StyleT (OutMsgT IDOutMsg html) msg
@@ -53,5 +53,5 @@ runIDHtmlT viewCtx (IDHtmlT idHtml) =
     outMsgHtml :: OutMsgT IDOutMsg html msg
     outMsgHtml = runStyleT styleHtml
   in
-    unOutMsgT outMsgHtml
+    runOutMsgT outMsgHtml
 

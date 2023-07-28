@@ -10,7 +10,7 @@ import InteractiveData.Core as Core
 import InteractiveData.DataUIs as ID
 import InteractiveData.Run as Run
 import MVC.Types (UI)
-import VirtualDOM (class Html)
+import VirtualDOM (class Html, class MaybeMsg)
 
 type Sample = String
 
@@ -23,7 +23,8 @@ sampleDataUi = ID.string_
 ui
   :: forall html
    . Html html
-  => { ui :: UI html (These (Identity _) IDOutMsg) (Identity _)
+  => MaybeMsg html
+  => { ui :: UI html (Identity _) (Identity _)
      , extract :: Identity _ -> DataResult Sample
      }
 ui = Run.toUI

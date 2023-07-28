@@ -110,7 +110,7 @@ workspace:
         - web-dom
     virtual-dom-halogen:
       git: https://github.com/thought2/purescript-virtual-dom-halogen.git
-      ref: 71132c2c8946ad737d08f605433951034ad7ecfc
+      ref: e26819a3cdab9b234e801199be95411cdd479ba0
       dependencies:
         - aff
         - bifunctors
@@ -128,7 +128,7 @@ workspace:
         - web-html
     virtual-dom:
       git: https://github.com/thought2/purescript-virtual-dom.git
-      ref: c6ad98165afe63040b50c066caa5c0800546c36f
+      ref: c24b0a4986addfee1caf498b9268fc4bdb7232c7
       dependencies:
         - either
         - foldable-traversable

@@ -2,6 +2,19 @@ package:
   name: interactive-data-samples
   dependencies:
     - interactive-data
+    - interactive-data-core
+    - interactive-data-datauis
+    - interactive-data-run
+    - virtual-dom-halogen
+    - maybe
+    - mvc
+    - prelude
+    - these
+    - virtual-dom
+    - typedenv
+    - console
+    - effect
+    - identity
   test:
     dependencies: []
     main: Test.Main
