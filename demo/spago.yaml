@@ -1,5 +1,5 @@
 package:
-  name: interactive-data-samples
+  name: interactive-data-demo
   dependencies:
     - interactive-data
     - interactive-data-core
