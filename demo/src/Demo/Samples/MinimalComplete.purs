@@ -14,12 +14,13 @@ main = do
   let
     sampleDataUi = ID.string_
   let
-    { ui, extract } = VD.Run.toUI
-      { name: "Sample"
-      , initData: Just "hello!"
-      }
-      VD.Run.ctxNoWrap
+    { ui, extract } =
       sampleDataUi
+        # VD.Run.toUI
+            { name: "Sample"
+            , initData: Just "hello!"
+            , context: VD.Run.ctxNoWrap
+            }
 
   ui
     # HI.uiToHalogenComponent

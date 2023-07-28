@@ -24,19 +24,19 @@ toUI
   => MaybeMsg html
   => { name :: String
      , initData :: Maybe a
+     , context :: DataUICtx (IDSurface (IDHtmlT html)) fm fs
      }
-  -> DataUICtx (IDSurface (IDHtmlT html)) fm fs
   -> DataUI (IDSurface (IDHtmlT html)) fm fs msg sta a
   -> { ui :: UI html (fm msg) (fs sta)
      , extract :: fs sta -> DataResult a
      }
-toUI { name, initData } ctx dataUi =
+toUI { name, initData, context } dataUi =
   let
     dataUi' :: DataUI (IDSurface (IDHtmlT html)) fm fs (fm msg) (fs sta) a
     dataUi' = applyWrap dataUi
 
     dataUiItf :: DataUiItf (IDSurface (IDHtmlT html)) (fm msg) (fs sta) a
-    dataUiItf = runDataUi dataUi' ctx
+    dataUiItf = runDataUi dataUi' context
 
     uiWithExtract
       :: { ui :: UI (IDSurface (IDHtmlT html)) (fm msg) (fs sta)

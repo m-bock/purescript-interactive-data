@@ -28,6 +28,8 @@ ui
      , extract :: Identity _ -> DataResult Sample
      }
 ui = Run.toUI
-  { name: "Sample", initData: Nothing }
-  Run.ctxNoWrap
+  { name: "Sample"
+  , initData: Nothing
+  , context: Run.ctxNoWrap
+  }
   sampleDataUi
