@@ -1,6 +1,8 @@
 
 # purescript-interactive-data
 
+<img align="right" width="400" src="assets/demo.png">
+
 ![interactive-data](./assets/logo.svg)
 
 Composable UIs to interactively maniupulate data.
