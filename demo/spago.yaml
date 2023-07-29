@@ -15,7 +15,6 @@ package:
     - maybe
     - mvc
     - prelude
-    - these
     - typedenv
     - virtual-dom
     - virtual-dom-halogen

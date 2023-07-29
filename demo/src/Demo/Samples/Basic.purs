@@ -3,8 +3,9 @@ module Demo.Samples.Basic where
 import Data.Identity (Identity)
 import Data.Maybe (Maybe(..))
 import DataMVC.Types (DataUI, DataResult)
+import InteractiveData.App.WrapData (WrapMsg, WrapState)
 import InteractiveData.App.WrapData as App.WrapData
-import InteractiveData.Core (class IDHtml, IDSurface, WrapMsg, WrapState)
+import InteractiveData.Core (class IDHtml, IDSurface)
 import InteractiveData.DataUIs (StringMsg, StringState)
 import InteractiveData.DataUIs as ID
 import InteractiveData.Run as Run

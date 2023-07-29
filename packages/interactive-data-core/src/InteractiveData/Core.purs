@@ -9,12 +9,8 @@ import InteractiveData.Core.Types.DataTree
   , TreeMeta
   ) as Export
 import InteractiveData.Core.Types.IDDataUI
-  ( IDDataUI
-  , IDDataUICtx
-  , IDSurface(..)
+  ( IDSurface(..)
   , IDSurfaceCtx
-  , WrapMsg(..)
-  , WrapState(..)
   ) as Export
 import InteractiveData.Core.Types.IDOutMsg (IDOutMsg(..)) as Export
 import InteractiveData.Core.Types.IDViewCtx (PathInContext, IDViewCtx, ViewMode(..)) as Export

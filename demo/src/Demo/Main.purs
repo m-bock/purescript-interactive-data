@@ -20,7 +20,8 @@ main envVarsObj = do
       let ui = Samples.Unwrapped.ui
       runHalogen ui
     Basic -> do
-      log "Running 'Basic' sample"
-      let ui = Samples.Basic.ui
-      runHalogen ui
+      pure unit
+      -- log "Running 'Basic' sample"
+      -- let ui = Samples.Basic.ui
+      -- runHalogen ui
     

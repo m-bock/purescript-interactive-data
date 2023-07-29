@@ -1,5 +1,7 @@
 module InteractiveData.App.WrapData
-  ( dataUiCtx
+  ( WrapMsg(..)
+  , WrapState(..)
+  , dataUiCtx
   )
   where
 
@@ -13,25 +15,21 @@ import DataMVC.Types.DataError (DataError(..), DataErrorCase(..), DataResult)
 import InteractiveData.App.UI.ActionButton (viewActionButton)
 import InteractiveData.App.UI.Card as UI.Card
 import InteractiveData.App.UI.DataLabel as UI.DataLabel
-import InteractiveData.Core
-  ( class IDHtml
-  , DataAction
-  , DataTree(..)
-  , IDDataUICtx
-  , IDOutMsg(..)
-  , IDSurface(..)
-  , IDViewCtx
-  , TreeMeta
-  , ViewMode(..)
-  , WrapMsg(..)
-  , WrapState(..)
-  )
+import InteractiveData.Core (class IDHtml, DataAction, DataTree(..), IDOutMsg(..), IDSurface(..), IDViewCtx, TreeMeta, ViewMode(..))
 import InteractiveData.Core.Types.DataPathExtra (dataPathToStrings, segmentToString)
 import InteractiveData.Core.Types.IDDataUI (runIdSurface)
 import VirtualDOM as VD
 import VirtualDOM.Transformers.Ctx.Class (withCtx)
 import VirtualDOM.Transformers.OutMsg.Class (fromOutHtml)
 import VirtualDOM.Types (ElemNode)
+
+newtype WrapState sta = WrapState
+  { childState :: sta }
+
+data WrapMsg msg = ChildMsg msg
+
+derive instance Eq sta => Eq (WrapState sta)
+derive instance Eq msg => Eq (WrapMsg msg)
 
 type ViewDataCfg (html :: Type -> Type) msg =
   { label :: String
@@ -303,5 +301,8 @@ dataUiItf (DataUiItf { name, extract, init, update, view }) = DataUiItf
 
 ---
 
-dataUiCtx :: forall html. IDHtml html => IDDataUICtx html
+dataUiCtx
+  :: forall html
+   . IDHtml html
+  => DataUICtx (IDSurface html) WrapMsg WrapState
 dataUiCtx = DataUICtx { wrap: \s -> dataUiItf s }
