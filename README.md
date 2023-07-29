@@ -1,6 +1,7 @@
 # purescript-interactive-data
 
 <img align="right" width="400" src="assets/demo.png">
+<br>
 
 ![interactive-data](./assets/logo.svg)
 
@@ -16,7 +17,7 @@ Composable UIs to interactively maniupulate data.
   - Custom ADTs
   - Variants
 
-<div style="clear:both"></div>
+<br>
 
 ## Table of Contents
 

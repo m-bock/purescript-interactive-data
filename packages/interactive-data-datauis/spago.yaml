@@ -1,9 +1,16 @@
 package:
   dependencies:
+    - arrays
     - data-mvc
     - interactive-data-core
+    - maybe
+    - mvc
+    - newtype
+    - prelude
     - strings
+    - tuples
     - virtual-dom
+    - virtual-dom-styled
   name: interactive-data-datauis
   test:
     dependencies: []

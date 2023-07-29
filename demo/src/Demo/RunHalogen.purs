@@ -11,7 +11,7 @@ import VirtualDOM.Impl.Halogen as HI
 
 runHalogen
   :: forall msg sta a
-   . Show a => Show sta
+   . Show a
   => { ui :: UI HalogenHtml msg sta
      , extract :: sta -> DataResult a
      }

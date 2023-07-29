@@ -2,11 +2,15 @@ package:
   dependencies:
     - arrays
     - data-mvc
+    - either
     - foldable-traversable
     - interactive-data-core
+    - maybe
+    - newtype
     - ordered-collections
     - prelude
     - strings
+    - these
     - tuples
     - virtual-dom
     - virtual-dom-styled
