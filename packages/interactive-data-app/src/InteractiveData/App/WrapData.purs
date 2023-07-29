@@ -2,8 +2,7 @@ module InteractiveData.App.WrapData
   ( WrapMsg(..)
   , WrapState(..)
   , dataUiCtx
-  )
-  where
+  ) where
 
 import InteractiveData.Core.Prelude
 
@@ -15,7 +14,16 @@ import DataMVC.Types.DataError (DataError(..), DataErrorCase(..), DataResult)
 import InteractiveData.App.UI.ActionButton (viewActionButton)
 import InteractiveData.App.UI.Card as UI.Card
 import InteractiveData.App.UI.DataLabel as UI.DataLabel
-import InteractiveData.Core (class IDHtml, DataAction, DataTree(..), IDOutMsg(..), IDSurface(..), IDViewCtx, TreeMeta, ViewMode(..))
+import InteractiveData.Core
+  ( class IDHtml
+  , DataAction
+  , DataTree(..)
+  , IDOutMsg(..)
+  , IDSurface(..)
+  , IDViewCtx
+  , TreeMeta
+  , ViewMode(..)
+  )
 import InteractiveData.Core.Types.DataPathExtra (dataPathToStrings, segmentToString)
 import InteractiveData.Core.Types.IDDataUI (runIdSurface)
 import VirtualDOM as VD
@@ -30,6 +38,15 @@ data WrapMsg msg = ChildMsg msg
 
 derive instance Eq sta => Eq (WrapState sta)
 derive instance Eq msg => Eq (WrapMsg msg)
+
+derive instance Generic (WrapState sta) _
+derive instance Generic (WrapMsg msg) _
+
+instance Show sta => Show (WrapState sta) where
+  show = genericShow
+
+instance Show msg => Show (WrapMsg msg) where
+  show = genericShow
 
 type ViewDataCfg (html :: Type -> Type) msg =
   { label :: String
