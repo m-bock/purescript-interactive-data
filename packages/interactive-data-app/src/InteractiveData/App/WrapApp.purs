@@ -39,7 +39,6 @@ import InteractiveData.Core.Types.IDDataUI (runIdSurface)
 import VirtualDOM as VD
 import VirtualDOM.Transformers.Ctx.Class (class Ctx, putCtx, withCtx)
 import VirtualDOM.Transformers.OutMsg.Class (runOutMsg)
-import VirtualDOM.Transformers.TreeAccum.Trans (Tree)
 
 newtype AppState sta = AppState
   { selectedPath :: Array String
@@ -64,7 +63,6 @@ type Menu = Map DataPath { expanded :: Boolean }
 
 type WithState sta r = (state :: AppState sta | r)
 
-type WithTree r = (tree :: Tree (DataPathSegment /\ { isValid :: Boolean }) | r)
 
 viewNavigationWrapper
   :: forall html msg sta

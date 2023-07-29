@@ -13,7 +13,7 @@ import InteractiveData.DataUIs (StringMsg, StringState)
 import InteractiveData.DataUIs as ID
 import InteractiveData.Run as Run
 import MVC.Types (UI)
-import VirtualDOM (class Html, class MaybeMsg)
+import VirtualDOM (class Html)
 
 type Sample =
   { firstName :: String
@@ -24,21 +24,22 @@ sampleDataUi
   :: forall html
    . IDHtml html
   => DataUI (IDSurface html) _ _ _ _ Sample
-sampleDataUi = ID.record_
-  { firstName: ID.string_
-  , lastName: ID.string_
-  }
+sampleDataUi =
+  ID.record_
+    { firstName: ID.string_
+    , lastName: ID.string_
+    }
 
 ui
   :: forall html
    . Html html
-  => MaybeMsg html
   => { ui :: UI html _ _
      , extract :: _ -> DataResult Sample
      }
-ui = Run.toUI
-  { name: "Sample"
-  , initData: Nothing
-  , context: App.WrapData.dataUiCtx
-  }
-  $ wrapApp sampleDataUi
+ui =
+  Run.toUI
+    { name: "Sample"
+    , initData: Nothing
+    , context: App.WrapData.dataUiCtx
+    }
+    $ wrapApp sampleDataUi

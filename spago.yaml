@@ -25,9 +25,27 @@ workspace:
         - profunctor
         - record
         - variant
+    virtual-dom-react-basic:
+      git: https://github.com/thought2/purescript-virtual-dom-react-basic.git
+      ref: add7f92ac6c2bc14f9edd0ddcccbc341fc952e6b
+      dependencies:
+        - arrays
+        - effect
+        - foreign
+        - foreign-object
+        - maybe
+        - prelude
+        - react-basic
+        - react-basic-dom
+        - react-basic-hooks
+        - strings
+        - tuples
+        - unsafe-coerce
+        - virtual-dom
+        - web-dom
     virtual-dom-halogen:
       git: https://github.com/thought2/purescript-virtual-dom-halogen.git
-      ref: e26819a3cdab9b234e801199be95411cdd479ba0
+      ref: 0ebb1d775d1d9a5efe2f00e577c5615d19276259
       dependencies:
         - aff
         - bifunctors
@@ -47,7 +65,7 @@ workspace:
         - web-html
     virtual-dom:
       git: https://github.com/thought2/purescript-virtual-dom.git
-      ref: c24b0a4986addfee1caf498b9268fc4bdb7232c7
+      ref: c55df5a9e2138e055f0cf0966c9e0ad5ad24958e
       dependencies:
         - either
         - foldable-traversable

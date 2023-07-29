@@ -35,11 +35,13 @@ instance ParseValue Sample where
   parseValue = case _ of
     "unwrapped" -> Just Unwrapped
     "basic" -> Just Basic
+    "embed-react" -> Just EmbedReact
     _ -> Nothing
 
 data Sample
   = Unwrapped
   | Basic
+  | EmbedReact
 
 getEnvVars :: Object String -> Effect EnvVars
 getEnvVars envVarsObj =

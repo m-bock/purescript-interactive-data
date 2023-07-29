@@ -6,6 +6,7 @@ import Demo.EnvVars (EnvVars, Sample(..), getEnvVars)
 import Demo.RunHalogen (runHalogen)
 import Demo.Samples.Basic as Samples.Basic
 import Demo.Samples.Unwrapped as Samples.Unwrapped
+import Demo.Samples.EmbedReact as Samples.EmbedReact
 import Effect (Effect)
 import Effect.Class.Console (log)
 import Foreign.Object (Object)
@@ -23,4 +24,5 @@ main envVarsObj = do
       log "Running 'Basic' sample"
       let ui = Samples.Basic.ui
       runHalogen ui
-    
+    EmbedReact -> do
+      pure unit -- Samples.EmbedReact.main

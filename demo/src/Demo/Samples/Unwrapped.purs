@@ -8,7 +8,7 @@ import InteractiveData.DataUIs (StringMsg, StringState)
 import InteractiveData.DataUIs as ID
 import InteractiveData.Run as Run
 import MVC.Types (UI)
-import VirtualDOM (class Html, class MaybeMsg)
+import VirtualDOM (class Html)
 
 type Sample = String
 
@@ -23,7 +23,6 @@ sampleDataUi = ID.string_
 ui
   :: forall html
    . Html html
-  => MaybeMsg html
   => { ui ::
          UI html
            (Identity StringMsg)

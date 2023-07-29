@@ -6,7 +6,7 @@ module InteractiveData.Run.Types.HtmlT
 import Prelude
 
 import InteractiveData.Core (class IDHtml, IDOutMsg, IDViewCtx)
-import VirtualDOM (class Html, class MaybeMsg)
+import VirtualDOM (class Html)
 import VirtualDOM.Styled (class RegisterStyleMap, StyleT, runStyleT)
 import VirtualDOM.Transformers.Ctx.Class (class AskCtx, class Ctx)
 import VirtualDOM.Transformers.Ctx.Trans (CtxT, runCtxT)
@@ -41,7 +41,6 @@ runIDHtmlT
   :: forall html msg
    . Functor html
   => Html html
-  => MaybeMsg html
   => IDViewCtx
   -> IDHtmlT html msg
   -> html msg

@@ -15,9 +15,11 @@ package:
     - maybe
     - mvc
     - prelude
+    - react-basic
     - typedenv
     - virtual-dom
     - virtual-dom-halogen
+    - virtual-dom-react-basic
   test:
     dependencies: []
     main: Test.Main

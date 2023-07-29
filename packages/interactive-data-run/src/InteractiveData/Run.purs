@@ -15,12 +15,11 @@ import InteractiveData.Core.Types.IDDataUI (runIdSurface)
 import InteractiveData.Core.Types.IDViewCtx (defaultViewCtx)
 import InteractiveData.Run.Types.HtmlT (IDHtmlT, runIDHtmlT)
 import MVC.Types (UI)
-import VirtualDOM (class Html, class MaybeMsg)
+import VirtualDOM (class Html)
 
 toUI
   :: forall html fm fs msg sta a
    . Html html
-  => MaybeMsg html
   => { name :: String
      , initData :: Maybe a
      , context :: DataUICtx (IDSurface (IDHtmlT html)) fm fs
@@ -52,7 +51,6 @@ toUI { name, initData, context } dataUi =
 runHtml
   :: forall html msg
    . Html html
-  => MaybeMsg html
   => { name :: String }
   -> IDSurface (IDHtmlT html) msg
   -> html msg
