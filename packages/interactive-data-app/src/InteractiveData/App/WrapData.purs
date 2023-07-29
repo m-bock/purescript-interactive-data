@@ -5,13 +5,14 @@ import InteractiveData.Core.Prelude
 import Data.Array as Array
 import Data.Array.NonEmpty (NonEmptyArray)
 import Data.Tuple (fst)
-import DataMVC.Types.DataError (DataError(..))
+import DataMVC.Types (DataUICtx(..), DataUiItf(..))
+import DataMVC.Types.DataError (DataError(..), DataErrorCase(..), DataResult)
+import InteractiveData.App.UI.ActionButton (viewActionButton)
 import InteractiveData.App.UI.Card as UI.Card
 import InteractiveData.App.UI.DataLabel as UI.DataLabel
-import InteractiveData.Core (class IDHtml, DataAction, DataError, DataErrorCase(..), DataResult, DataTree(..), DataUICtx(..), DataUiItf(..), IDDataUICtx, IDOutMsg(..), IDSurface(..), IDViewCtx, TreeMeta, ViewMode(..), WrapMsg(..), WrapState(..))
+import InteractiveData.Core (class IDHtml, DataAction, DataTree(..), IDDataUICtx, IDOutMsg(..), IDSurface(..), IDViewCtx, TreeMeta, ViewMode(..), WrapMsg(..), WrapState(..))
 import InteractiveData.Core.Types.DataPathExtra (dataPathToStrings, segmentToString)
 import InteractiveData.Core.Types.IDDataUI (runIdSurface)
-import InteractiveData.UI.ActionButton (viewActionButton)
 import VirtualDOM as VD
 import VirtualDOM.Transformers.Ctx.Class (withCtx)
 import VirtualDOM.Transformers.OutMsg.Class (fromOutHtml)

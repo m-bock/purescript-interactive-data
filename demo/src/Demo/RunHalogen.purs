@@ -2,10 +2,10 @@ module Demo.RunHalogen where
 
 import Prelude
 
+import DataMVC.Types (DataResult)
 import Effect (Effect)
 import Effect.Class.Console (log)
 import MVC.Types (UI)
-import InteractiveData.Core (DataResult)
 import VirtualDOM.Impl.Halogen (HalogenHtml)
 import VirtualDOM.Impl.Halogen as HI
 

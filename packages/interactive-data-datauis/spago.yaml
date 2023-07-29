@@ -1,8 +1,9 @@
 package:
   dependencies:
+    - data-mvc
     - interactive-data-core
-    - virtual-dom
     - strings
+    - virtual-dom
   name: interactive-data-datauis
   test:
     dependencies: []

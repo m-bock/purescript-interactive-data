@@ -3,9 +3,10 @@ module InteractiveData.App.UI.Menu.Tree where
 import InteractiveData.Core.Prelude
 
 import Data.Tuple (fst)
+import DataMVC.Types (DataPath, DataPathSegment)
 import InteractiveData.App.UI.Menu.Row (ViewRowOpts)
 import InteractiveData.App.UI.Menu.Types (SumTree(..), treeIsLeaf)
-import InteractiveData.Core (class IDHtml, DataPath, DataPathSegment)
+import InteractiveData.Core (class IDHtml)
 import InteractiveData.Core.Types.DataTree (TreeMeta)
 import VirtualDOM as VD
 import VirtualDOM.Styled (styleNode)

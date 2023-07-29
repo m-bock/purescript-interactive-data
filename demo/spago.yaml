@@ -1,23 +1,24 @@
 package:
   name: interactive-data-demo
   dependencies:
+    - console
+    - data-mvc
+    - effect
+    - either
+    - exceptions
+    - foreign-object
+    - identity
     - interactive-data-core
     - interactive-data-datauis
     - interactive-data-run
-    - virtual-dom-halogen
+    - lists
     - maybe
     - mvc
     - prelude
     - these
-    - virtual-dom
     - typedenv
-    - console
-    - effect
-    - identity
-    - either
-    - exceptions
-    - foreign-object
-    - lists
+    - virtual-dom
+    - virtual-dom-halogen
   test:
     dependencies: []
     main: Test.Main

@@ -8,7 +8,8 @@ module InteractiveData.DataUIs.String
 import InteractiveData.Core.Prelude
 
 import Data.String as Str
-import InteractiveData.Core (IDSurface(..))
+import DataMVC.Types (DataResult, DataUI(..), DataUiItf(..))
+import InteractiveData.Core (class IDHtml, IDSurface)
 import InteractiveData.Core as Core
 import InteractiveData.Core.Classes.OptArgs (class OptArgs, getAllArgs)
 import VirtualDOM as VD
@@ -29,7 +30,7 @@ derive newtype instance Show StringState
 --- Extract
 -------------------------------------------------------------------------------
 
-stringExtract :: StringState -> Core.DataResult String
+stringExtract :: StringState -> DataResult String
 stringExtract (StringState s) = Right s
 
 -------------------------------------------------------------------------------
@@ -159,7 +160,7 @@ string
    . OptArgs (CfgString StringMsg) opt
   => Core.IDHtml html
   => opt
-  -> Core.DataUI (IDSurface html) fm fs StringMsg StringState String
+  -> DataUI (IDSurface html) fm fs StringMsg StringState String
 string opt =
   let
     cfg :: CfgString StringMsg
@@ -167,7 +168,7 @@ string opt =
 
     { multiline, actions, maxLength } = cfg
   in
-    Core.DataUI \_ -> Core.DataUiItf
+    DataUI \_ -> DataUiItf
       { name: "String"
       , view: \state -> Core.IDSurface \_ ->
           Core.DataTree
@@ -183,6 +184,6 @@ string opt =
 
 string_
   :: forall html fm fs
-   . Core.IDHtml html
-  => Core.DataUI (IDSurface html) fm fs StringMsg StringState String
+   . IDHtml html
+  => DataUI (IDSurface html) fm fs StringMsg StringState String
 string_ = string {}

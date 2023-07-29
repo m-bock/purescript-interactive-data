@@ -6,8 +6,9 @@ import InteractiveData.Core.Prelude
 
 import Data.Array (intersperse)
 import Data.Array as Array
+import DataMVC.Types (DataPathSegment)
 import InteractiveData.App.UI.Icons as UI.Icons
-import InteractiveData.Core (class IDHtml, DataPathSegment)
+import InteractiveData.Core (class IDHtml)
 import InteractiveData.Core.Types.Common (PathInContext)
 import VirtualDOM as VD
 import VirtualDOM.Styled (styleNode)

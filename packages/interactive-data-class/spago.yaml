@@ -1,0 +1,6 @@
+package:
+  dependencies: []
+  name: interactive-data-class
+  test:
+    dependencies: []
+    main: Test.Main

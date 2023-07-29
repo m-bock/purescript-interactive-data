@@ -6,12 +6,13 @@ module InteractiveData.App.UI.Footer
 import InteractiveData.Core.Prelude
 
 import Data.Array as Array
+import DataMVC.Types (DataErrorCase(..), DataPath, DataPathSegment)
 import DataMVC.Types.DataError (DataError(..))
 import InteractiveData.App.UI.Assets as UI.Assets
 import InteractiveData.App.UI.Breadcrumbs as UI.Breadcrumbs
 import InteractiveData.App.UI.Card as UI.Card
 import InteractiveData.App.UI.DataLabel as UI.DataLabel
-import InteractiveData.Core (class IDHtml, DataError, DataErrorCase(..), DataPath, DataPathSegment)
+import InteractiveData.Core (class IDHtml)
 import InteractiveData.Core.Types.Common (PathInContext, unPathInContext)
 import VirtualDOM as VD
 

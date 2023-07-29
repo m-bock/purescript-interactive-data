@@ -1,10 +1,12 @@
 package:
   dependencies:
     - arrays
+    - data-mvc
     - foldable-traversable
     - interactive-data-core
     - ordered-collections
-    - prelude strings
+    - prelude
+    - strings
     - tuples
     - virtual-dom
     - virtual-dom-styled

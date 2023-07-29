@@ -5,7 +5,8 @@ import Prelude
 import Data.Identity (Identity)
 import Data.Maybe (Maybe(..))
 import Data.These (These)
-import InteractiveData.Core (IDOutMsg, IDSurface(..), DataResult)
+import DataMVC.Types (DataUI, DataResult)
+import InteractiveData.Core (class IDHtml, IDOutMsg, IDSurface(..))
 import InteractiveData.Core as Core
 import InteractiveData.DataUIs as ID
 import InteractiveData.Run as Run
@@ -16,8 +17,8 @@ type Sample = String
 
 sampleDataUi
   :: forall html fm fs
-   . Core.IDHtml html
-  => Core.DataUI (IDSurface html) fm fs _ _ String
+   . IDHtml html
+  => DataUI (IDSurface html) fm fs _ _ String
 sampleDataUi = ID.string_
 
 ui

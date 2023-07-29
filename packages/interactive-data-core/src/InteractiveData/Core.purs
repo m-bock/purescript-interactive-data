@@ -18,20 +18,3 @@ import InteractiveData.Core.Types.IDDataUI
   ) as Export
 import InteractiveData.Core.Types.IDOutMsg (IDOutMsg(..)) as Export
 import InteractiveData.Core.Types.IDViewCtx (PathInContext, IDViewCtx, ViewMode(..)) as Export
-
-import DataMVC.Types
-  ( DataError
-  , DataErrorCase(..)
-  , DataPath
-  , DataPathSegment(..)
-  , DataPathSegmentField(..)
-  , DataResult
-  , DataUI(..)
-  , DataUICtx(..)
-  ) as Export
-
-import DataMVC.Types.DataUI
-  ( runDataUi
-  , DataUiItf(..)
-  , applyWrap
-  ) as Export

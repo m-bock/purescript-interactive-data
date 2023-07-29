@@ -8,18 +8,9 @@ import Prelude
 import Data.Identity (Identity(..))
 import Data.Maybe (Maybe)
 import Data.Newtype (un)
-import InteractiveData.Core
-  ( class IDHtml
-  , DataResult
-  , DataTree(..)
-  , DataUI
-  , DataUICtx(..)
-  , DataUiItf(..)
-  , IDSurface
-  , IDViewCtx
-  , applyWrap
-  , runDataUi
-  )
+import DataMVC.Types (DataResult, DataUI, DataUICtx(..), DataUiItf(..))
+import DataMVC.Types.DataUI (applyWrap, runDataUi)
+import InteractiveData.Core (class IDHtml, DataTree(..), IDSurface, IDViewCtx)
 import InteractiveData.Core.Types.IDDataUI (runIdSurface)
 import InteractiveData.Core.Types.IDViewCtx (defaultViewCtx)
 import InteractiveData.Run.Types.HtmlT (IDHtmlT, runIDHtmlT)

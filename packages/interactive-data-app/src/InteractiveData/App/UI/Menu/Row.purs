@@ -7,8 +7,9 @@ module InteractiveData.App.UI.Menu.Row
 
 import InteractiveData.Core.Prelude
 
+import DataMVC.Types (DataPath)
 import InteractiveData.App.UI.Assets as UI.Assets
-import InteractiveData.Core (class IDHtml, DataPath)
+import InteractiveData.Core (class IDHtml)
 import InteractiveData.Core.Types.DataTree (TreeMeta)
 import VirtualDOM as VD
 
