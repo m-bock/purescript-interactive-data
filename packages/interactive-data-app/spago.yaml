@@ -1,0 +1,14 @@
+package:
+  dependencies: []
+  name: interactive-data-app
+  test:
+    dependencies:
+      - arrays
+      - foldable-traversable
+      - interactive-data-core
+      - ordered-collections
+      - prelude strings
+      - tuples
+      - virtual-dom
+      - virtual-dom-styled
+    main: Test.Main

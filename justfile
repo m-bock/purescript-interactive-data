@@ -19,9 +19,15 @@ gen-readme:
     doctoc README.md
 
 dev: clean-parcel
-    FRAMEWORK=halogen \
-    SAMPLE=unwrapped \
+    #!/bin/bash
+    FRAMEWORK=halogen
+    SAMPLE=unwrapped
     parcel demo/static/index.html
 
 clean-parcel:
     rm -rf .parcel-cache
+
+purs-docs:
+    #!/bin/bash
+    shopt -s globstar;
+    purs docs $(spago sources)
