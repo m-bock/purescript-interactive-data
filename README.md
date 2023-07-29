@@ -1,4 +1,3 @@
-
 # purescript-interactive-data
 
 <img align="right" width="400" src="assets/demo.png">
@@ -6,6 +5,20 @@
 ![interactive-data](./assets/logo.svg)
 
 Composable UIs to interactively maniupulate data.
+
+## Features
+
+- Framework agnostic
+- Configurable
+- Extensible
+- Types
+  - Primitive types
+  - Custom ADTs
+  - Variants
+
+<div style="clear:both"></div>
+
+## Table of Contents
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
@@ -19,20 +32,7 @@ Composable UIs to interactively maniupulate data.
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-
-## Features
-
-- Framework agnostic
-- Configurable
-- Extensible
-- Types
-  - Primitive types
-  - Custom ADTs
-  - Variants
-
 ## Getting started
-
-
 
 ### Installation
 
@@ -45,11 +45,10 @@ npm install parcel
 
 The following example renders with `Halogen`. Have a look at the demo folder for more examples in different frameworks.
 
-
-
-*src/Main.purs*
+_src/Main.purs_
 
 <!-- START demo -->
+
 ```hs
 module Demo.Samples.MinimalComplete where
 
@@ -86,9 +85,11 @@ main = do
     # HI.uiMountAtId "root"
 
 ```
+
 <!-- END demo -->
 
-*index.html*
+_index.html_
+
 ```html
 <html>
   <body>
@@ -98,7 +99,8 @@ main = do
 </html>
 ```
 
-*main.js*
+_main.js_
+
 ```js
 import { main } from "../../output/Main/index.js";
 
