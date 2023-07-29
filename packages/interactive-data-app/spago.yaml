@@ -1,14 +1,14 @@
 package:
-  dependencies: []
+  dependencies:
+    - arrays
+    - foldable-traversable
+    - interactive-data-core
+    - ordered-collections
+    - prelude strings
+    - tuples
+    - virtual-dom
+    - virtual-dom-styled
   name: interactive-data-app
   test:
-    dependencies:
-      - arrays
-      - foldable-traversable
-      - interactive-data-core
-      - ordered-collections
-      - prelude strings
-      - tuples
-      - virtual-dom
-      - virtual-dom-styled
+    dependencies: []
     main: Test.Main
