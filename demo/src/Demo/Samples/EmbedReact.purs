@@ -39,7 +39,6 @@ sampleItf :: DataUiItf ReactHtml _ _ Sample
 sampleItf =
   Run.run
     { name: "Sample"
-    , initData: Nothing
     , context: App.WrapData.dataUiCtx
     }
     $ wrapApp sampleDataUi
@@ -71,7 +70,11 @@ reactComponent = do
             }
         , children:
             [ DOM.div
-                { style: css { border: "1px solid black", height: "50%", flex: "1 1 0px" }
+                { style: css
+                    { border: "1px solid black"
+                    , height: "50%"
+                    , flex: "1 1 0px"
+                    }
                 , children:
                     [ case itf.extract state of
                         Left errors -> DOM.text $ show errors
@@ -83,7 +86,11 @@ reactComponent = do
                 }
 
             , DOM.div
-                { style: css { border: "1px solid black", height: "50%", flex: "1 1 0px" }
+                { style: css
+                    { border: "1px solid black"
+                    , height: "50%"
+                    , flex: "1 1 0px"
+                    }
                 , children:
                     [ runReactHtml { handler } defaultConfig
                         $ itf.view state

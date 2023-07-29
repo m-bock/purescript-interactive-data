@@ -20,11 +20,10 @@ main = do
       sampleDataUi
         # ID.Run.run
             { name: "Sample"
-            , initData: Just "hello!"
             , context: ID.Run.ctxNoWrap
             }
 
-    ui = Run.getUi itf
+    ui = Run.getUi Nothing itf
     extract = Run.getExtract itf
   ui
     -- Turn into a Halogen component

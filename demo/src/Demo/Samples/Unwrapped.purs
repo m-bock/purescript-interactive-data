@@ -22,7 +22,6 @@ sampleDataUi = ID.string_
 
 itf = Run.run
   { name: "Sample"
-  , initData: Nothing
   , context: Run.ctxNoWrap
   }
   sampleDataUi

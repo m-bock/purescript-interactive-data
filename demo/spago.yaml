@@ -17,6 +17,8 @@ package:
     - mvc
     - prelude
     - react-basic
+    - react-basic-dom
+    - react-basic-hooks
     - typedenv
     - virtual-dom
     - virtual-dom-halogen

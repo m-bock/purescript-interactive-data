@@ -11,42 +11,39 @@ import Data.Identity (Identity(..))
 import Data.Maybe (Maybe)
 import Data.Newtype (un)
 import DataMVC.Types (DataResult, DataUI, DataUICtx(..), DataUiItf(..))
-import DataMVC.Types.DataUI (applyWrap, runDataUi)
+import DataMVC.Types.DataUI (runDataUi)
 import InteractiveData.Core (class IDHtml, DataTree(..), IDSurface, IDViewCtx)
 import InteractiveData.Core.Types.IDDataUI (runIdSurface)
 import InteractiveData.Core.Types.IDViewCtx (defaultViewCtx)
 import InteractiveData.Run.Types.HtmlT (IDHtmlT, runIDHtmlT)
 import MVC.Types (UI)
-import Unsafe.Coerce (unsafeCoerce)
 import VirtualDOM (class Html)
 
 run
   :: forall html fm fs msg sta a
    . Html html
   => { name :: String
-     , initData :: Maybe a
      , context :: DataUICtx (IDSurface (IDHtmlT html)) fm fs
      }
   -> DataUI (IDSurface (IDHtmlT html)) fm fs msg sta a
-  -> DataUiItf html  msg  sta a
-run { name, initData, context } dataUi =
+  -> DataUiItf html msg sta a
+run { name, context } dataUi =
   dataUi
-    -- # applyWrap
     # flip runDataUi context
-    # hoistSrf'' (runHtml { name })
+    # hoistSrf (runHtml { name })
 
-getUi :: forall html msg sta a. DataUiItf html msg sta a -> UI html msg sta
-getUi = unsafeCoerce 1
+getUi :: forall html msg sta a. Maybe a -> DataUiItf html msg sta a -> UI html msg sta
+getUi initVal (DataUiItf { view, init, update }) =
+  { view
+  , init: init initVal
+  , update
+  }
 
 getExtract :: forall html msg sta a. DataUiItf html msg sta a -> (sta -> DataResult a)
-getExtract = unsafeCoerce 1
+getExtract (DataUiItf { extract }) = extract
 
-hoistSrf'
-  :: forall srf1 srf2 fm fs msg sta a. (srf1 ~> srf2) -> DataUI srf1 fm fs msg sta a -> DataUI srf2 fm fs msg sta a
-hoistSrf' nat ui = unsafeCoerce 1
-
-hoistSrf'' :: forall srf1 srf2 fm fs msg sta a. (srf1 ~> srf2) -> DataUiItf srf1 msg sta a -> DataUiItf srf2 msg sta a
-hoistSrf'' nat (DataUiItf itf) = DataUiItf itf
+hoistSrf :: forall srf1 srf2 msg sta a. (srf1 ~> srf2) -> DataUiItf srf1 msg sta a -> DataUiItf srf2 msg sta a
+hoistSrf nat (DataUiItf itf) = DataUiItf itf
   { view = itf.view >>> nat
   }
 
@@ -72,27 +69,6 @@ ctxNoWrap = DataUICtx
   { wrap: \s -> s
       # imapMsg Identity (un Identity)
       # imapState Identity (un Identity)
-  }
-
-hoistSrf :: forall srf1 srf2 msg sta. (srf1 ~> srf2) -> UI srf1 msg sta -> UI srf2 msg sta
-hoistSrf nat ui = ui
-  { view = ui.view >>> nat
-  }
-
-dataUiItfToUI
-  :: forall html msg sta a
-   . Maybe a
-  -> DataUiItf html msg sta a
-  -> { ui :: UI html msg sta
-     , extract :: sta -> DataResult a
-     }
-dataUiItfToUI init (DataUiItf dataUi) =
-  { ui:
-      { init: dataUi.init init
-      , update: dataUi.update
-      , view: dataUi.view
-      }
-  , extract: dataUi.extract
   }
 
 imapMsg

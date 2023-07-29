@@ -30,17 +30,10 @@ sampleDataUi =
     , lastName: ID.string_
     }
 
--- ui
---   :: forall html
---    . Html html
---   => { ui :: UI html _ _
---      , extract :: _ -> DataResult Sample
---      }
 itf :: forall html. Html html => DataUiItf html _ _ Sample
 itf =
   Run.run
     { name: "Sample"
-    , initData: Nothing
     , context: App.WrapData.dataUiCtx
     }
     $ wrapApp sampleDataUi
