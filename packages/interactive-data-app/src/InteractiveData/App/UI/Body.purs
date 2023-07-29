@@ -1,8 +1,7 @@
 module InteractiveData.App.UI.Body
   ( ViewBodyCfg
   , viewBody
-  )
-  where
+  ) where
 
 import InteractiveData.Core.Prelude
 

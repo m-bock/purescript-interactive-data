@@ -6,8 +6,7 @@ module InteractiveData.App.UI.Menu
   , initMenu
   , updateMenu
   , viewMenu
-  )
-  where
+  ) where
 
 import InteractiveData.Core.Prelude
 
@@ -92,7 +91,7 @@ viewLabel
 viewLabel { onSelectPath } { path, label } =
   let
     el =
-      { label: styleNode VD.div 
+      { label: styleNode VD.div
           [ "cursor: pointer"
           , "display: flex"
           , "gap: 4px"

@@ -5,8 +5,7 @@ module InteractiveData.App.UI.DataLabel
   , mkTitleGoto
   , mkTitleSelect
   , viewDataLabel
-  )
-  where
+  ) where
 
 import InteractiveData.Core.Prelude
 
@@ -135,7 +134,8 @@ viewDataLabel' { dataPath, mkTitle } { onHit, isSelected } = withCtx \ctx ->
       , VD.span_ [ VD.text label ]
       ]
 
-viewDataLabel :: forall opt html msg. OptArgs (ViewDataLabelOpt msg) opt => IDHtml html => ViewDataLabelCfg -> opt -> html msg
+viewDataLabel
+  :: forall opt html msg. OptArgs (ViewDataLabelOpt msg) opt => IDHtml html => ViewDataLabelCfg -> opt -> html msg
 viewDataLabel cfg = getAllArgs defaults >>> viewDataLabel' cfg
   where
 

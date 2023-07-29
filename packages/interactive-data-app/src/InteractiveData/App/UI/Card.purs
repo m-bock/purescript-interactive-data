@@ -3,8 +3,7 @@ module InteractiveData.App.UI.Card
   , ViewCardOpt
   , defaultViewCardOpt
   , viewCard
-  )
-  where
+  ) where
 
 import InteractiveData.Core.Prelude
 

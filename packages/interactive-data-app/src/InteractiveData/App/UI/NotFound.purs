@@ -1,8 +1,7 @@
 module InteractiveData.App.UI.NotFound
   ( ViewNotFoundCfg
   , viewNotFound
-  )
-  where
+  ) where
 
 import InteractiveData.Core.Prelude
 

@@ -2,8 +2,7 @@ module InteractiveData.App.UI.Menu.Types
   ( SumTree(..)
   , sumTree
   , treeIsLeaf
-  )
-  where
+  ) where
 
 import InteractiveData.Core.Prelude
 

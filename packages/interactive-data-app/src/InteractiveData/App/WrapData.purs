@@ -10,7 +10,19 @@ import DataMVC.Types.DataError (DataError(..), DataErrorCase(..), DataResult)
 import InteractiveData.App.UI.ActionButton (viewActionButton)
 import InteractiveData.App.UI.Card as UI.Card
 import InteractiveData.App.UI.DataLabel as UI.DataLabel
-import InteractiveData.Core (class IDHtml, DataAction, DataTree(..), IDDataUICtx, IDOutMsg(..), IDSurface(..), IDViewCtx, TreeMeta, ViewMode(..), WrapMsg(..), WrapState(..))
+import InteractiveData.Core
+  ( class IDHtml
+  , DataAction
+  , DataTree(..)
+  , IDDataUICtx
+  , IDOutMsg(..)
+  , IDSurface(..)
+  , IDViewCtx
+  , TreeMeta
+  , ViewMode(..)
+  , WrapMsg(..)
+  , WrapState(..)
+  )
 import InteractiveData.Core.Types.DataPathExtra (dataPathToStrings, segmentToString)
 import InteractiveData.Core.Types.IDDataUI (runIdSurface)
 import VirtualDOM as VD

@@ -1,8 +1,7 @@
 module InteractiveData.App.UI.Header
   ( ViewHeaderCfg
   , viewHeader
-  )
-  where
+  ) where
 
 import InteractiveData.Core.Prelude
 
@@ -62,7 +61,7 @@ viewHeaderRoot
      , right :: html msg
      }
   -> html msg
-viewHeaderRoot { viewBreadcrumbs, viewTypeName: viewTypeName', right } = 
+viewHeaderRoot { viewBreadcrumbs, viewTypeName: viewTypeName', right } =
   let
     el =
       { header: styleNode VD.div

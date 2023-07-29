@@ -2,8 +2,7 @@ module InteractiveData.App.UI.Menu.Row
   ( ViewRowCfg
   , ViewRowOpts
   , viewRow
-  )
-  where
+  ) where
 
 import InteractiveData.Core.Prelude
 
