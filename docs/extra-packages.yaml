@@ -1,0 +1,178 @@
+workspace:
+  extra_packages:
+    interactive-data-run:
+      git: ssh://git@github.com/thought2/purescript-interactive-data.git
+      ref: 74eb2531f92bac9ddb560ec8cd8d86233b91d44f
+      subdir: packages/interactive-data-run
+      dependencies:
+        - data-mvc
+        - identity
+        - interactive-data-core
+        - maybe
+        - mvc
+        - newtype
+        - prelude
+        - virtual-dom
+        - virtual-dom-styled
+    interactive-data-datauis:
+      git: ssh://git@github.com/thought2/purescript-interactive-data.git
+      ref: 74eb2531f92bac9ddb560ec8cd8d86233b91d44f
+      subdir: packages/interactive-data-datauis
+      dependencies:
+        - arrays
+        - data-mvc
+        - interactive-data-core
+        - maybe
+        - mvc
+        - newtype
+        - prelude
+        - strings
+        - tuples
+        - virtual-dom
+        - virtual-dom-styled
+    interactive-data-core:
+      git: ssh://git@github.com/thought2/purescript-interactive-data.git
+      ref: 74eb2531f92bac9ddb560ec8cd8d86233b91d44f
+      subdir: packages/interactive-data-core
+      dependencies:
+        - arrays
+        - bifunctors
+        - data-mvc
+        - dodo-printer
+        - maybe
+        - newtype
+        - prelude
+        - these
+        - tuples
+        - convertable-options
+        - virtual-dom-styled
+        - either
+        - identity
+        - typelevel-prelude
+        - virtual-dom
+    interactive-data-class:
+      git: ssh://git@github.com/thought2/purescript-interactive-data.git
+      ref: 74eb2531f92bac9ddb560ec8cd8d86233b91d44f
+      subdir: packages/interactive-data-class
+      dependencies: []
+    interactive-data-app:
+      git: ssh://git@github.com/thought2/purescript-interactive-data.git
+      ref: 74eb2531f92bac9ddb560ec8cd8d86233b91d44f
+      subdir: packages/interactive-data-app
+      dependencies:
+        - arrays
+        - data-mvc
+        - either
+        - foldable-traversable
+        - interactive-data-core
+        - maybe
+        - newtype
+        - ordered-collections
+        - prelude
+        - strings
+        - these
+        - tuples
+        - virtual-dom
+        - virtual-dom-styled
+    interactive-data:
+      git: ssh://git@github.com/thought2/purescript-interactive-data.git
+      ref: 74eb2531f92bac9ddb560ec8cd8d86233b91d44f
+      subdir: packages/interactive-data
+      dependencies:
+        - data-mvc
+        - interactive-data-core
+        - interactive-data-datauis
+        - interactive-data-run
+        - interactive-data-app
+        - prelude
+        - virtual-dom
+    mvc:
+      git: https://github.com/thought2/purescript-mvc.git
+      ref: 884cf062846de0cc11a505816d73ba63204cedcc
+      dependencies:
+        - heterogeneous
+        - maybe
+        - newtype
+        - prelude
+        - record
+        - variant
+    data-mvc:
+      git: https://github.com/thought2/purescript-data-mvc.git
+      ref: 167f2543680a583202a6bd47878967211619f98c
+      dependencies:
+        - arrays
+        - bifunctors
+        - mvc
+        - either
+        - heterogeneous
+        - maybe
+        - newtype
+        - prelude
+        - profunctor
+        - record
+        - variant
+    virtual-dom-react-basic:
+      git: https://github.com/thought2/purescript-virtual-dom-react-basic.git
+      ref: add7f92ac6c2bc14f9edd0ddcccbc341fc952e6b
+      dependencies:
+        - arrays
+        - effect
+        - foreign
+        - foreign-object
+        - maybe
+        - prelude
+        - react-basic
+        - react-basic-dom
+        - react-basic-hooks
+        - strings
+        - tuples
+        - unsafe-coerce
+        - virtual-dom
+        - web-dom
+    virtual-dom-halogen:
+      git: https://github.com/thought2/purescript-virtual-dom-halogen.git
+      ref: 0ebb1d775d1d9a5efe2f00e577c5615d19276259
+      dependencies:
+        - aff
+        - bifunctors
+        - effect
+        - foreign
+        - foreign-object
+        - halogen
+        - halogen-vdom
+        - maybe
+        - prelude
+        - safe-coerce
+        - strings
+        - tuples
+        - unsafe-coerce
+        - virtual-dom
+        - web-events
+        - web-html
+    virtual-dom:
+      git: https://github.com/thought2/purescript-virtual-dom.git
+      ref: c55df5a9e2138e055f0cf0966c9e0ad5ad24958e
+      dependencies:
+        - either
+        - foldable-traversable
+        - foreign
+        - maybe
+        - prelude
+        - strings
+        - these
+        - transformers
+        - tuples
+        - variant
+    virtual-dom-styled:
+      git: ssh://git@github.com/thought2/purescript-virtual-dom-styled.git
+      ref: 95f5508a93c5f00e6eb25b7b6328a24d5529bfcb
+      dependencies:
+        - arrays
+        - foldable-traversable
+        - maybe
+        - newtype
+        - prelude
+        - strings
+        - tuples
+        - unordered-collections
+        - virtual-dom

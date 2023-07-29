@@ -7,7 +7,7 @@ const source = fs.readFileSync("./README.md", "utf8").toString();
 
 const patch = fs
   .readFileSync("./demo/src/Demo/Samples/MinimalComplete.purs", "utf8")
-  .toString();
+  .toString().replace(/module [A-Za-z.]*/g, 'module Main');
 
 const patchSection = (name, patch) => (source) => {
   const regex = mkRegex(name);

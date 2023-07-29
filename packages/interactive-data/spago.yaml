@@ -4,6 +4,7 @@ package:
     - interactive-data-core
     - interactive-data-datauis
     - interactive-data-run
+    - interactive-data-app
     - prelude
     - virtual-dom
   name: interactive-data

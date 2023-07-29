@@ -24,7 +24,6 @@ Composable UIs to interactively maniupulate data.
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-- [Features](#features)
 - [Getting started](#getting-started)
   - [Installation](#installation)
   - [Minimal complete example](#minimal-complete-example)
@@ -37,10 +36,23 @@ Composable UIs to interactively maniupulate data.
 
 ### Installation
 
-```sh
-spago install interactive-data
-npm install parcel
-```
+1. Install the library
+
+   ```sh
+   spago install interactive-data
+   ```
+
+2. Install a virtual dom implementation, e.g.:
+
+   ```sh
+   spago install virtual-dom-halogen
+   ```
+
+3. Install a bundler, e.g.:
+
+   ```sh
+   npm install --dev --save parcel
+   ```
 
 ### Minimal complete example
 
@@ -49,17 +61,15 @@ The following example renders with `Halogen`. Have a look at the demo folder for
 _src/Main.purs_
 
 <!-- START demo -->
-
 ```hs
-module Demo.Samples.MinimalComplete where
+module Main where
 
 import Prelude
 
 import Data.Maybe (Maybe(..))
 import Effect (Effect)
 import Effect.Class.Console (log)
-import InteractiveData.DataUIs as ID
-import InteractiveData.Run as VD.Run
+import InteractiveData as ID
 import VirtualDOM.Impl.Halogen as HI
 
 main :: Effect Unit
@@ -68,14 +78,14 @@ main = do
     -- Compose a Data UI for a specific type
     sampleDataUi = ID.string_
   let
-    { ui, extract } =
+    itf =
       sampleDataUi
-        # VD.Run.toUI
+        # ID.runApp
             { name: "Sample"
-            , initData: Just "hello!"
-            , context: VD.Run.ctxNoWrap
             }
 
+    ui = ID.getUi Nothing itf
+    extract = ID.getExtract itf
   ui
     -- Turn into a Halogen component
     # HI.uiToHalogenComponent
@@ -86,7 +96,6 @@ main = do
     # HI.uiMountAtId "root"
 
 ```
-
 <!-- END demo -->
 
 _index.html_
@@ -103,7 +112,7 @@ _index.html_
 _main.js_
 
 ```js
-import { main } from "../../output/Main/index.js";
+import { main } from "../output/Main/index.js";
 
 main();
 ```

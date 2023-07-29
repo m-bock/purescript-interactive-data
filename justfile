@@ -4,7 +4,7 @@ build-ide:
     spago build --json-errors
 
 build:
-    spago build
+    spago build --pedantic-packages
 
 format:
     purs-tidy format-in-place "packages/*/src/**/*.purs"
@@ -17,6 +17,9 @@ gen:
 gen-readme:
     node scripts/patch-readme.js
     doctoc README.md
+
+gen-extra-packages:
+    node scripts/gen-extra-packages.js
 
 dev: clean-parcel
     #!/bin/bash
