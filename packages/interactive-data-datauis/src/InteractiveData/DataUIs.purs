@@ -1,8 +1,8 @@
 module InteractiveData.DataUIs (module Export) where
 
 import InteractiveData.DataUIs.String
-  ( StringMsg(..)
-  , StringState(..)
+  ( StringMsg
+  , StringState
   , string
   , string_
   ) as Export

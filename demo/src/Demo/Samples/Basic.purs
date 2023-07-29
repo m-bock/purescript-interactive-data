@@ -2,17 +2,8 @@ module Demo.Samples.Basic where
 
 import Prelude
 
-import Data.Identity (Identity)
-import Data.Maybe (Maybe(..))
-import DataMVC.Types (DataResult, DataUI, DataUiItf)
-import InteractiveData.App.WrapApp (wrapApp)
-import InteractiveData.App.WrapData (WrapMsg, WrapState)
-import InteractiveData.App.WrapData as App.WrapData
-import InteractiveData.Core (class IDHtml, IDSurface)
-import InteractiveData.DataUIs (StringMsg, StringState)
-import InteractiveData.DataUIs as ID
-import InteractiveData.Run as Run
-import MVC.Types (UI)
+import InteractiveData (class IDHtml, DataUI, IDSurface)
+import InteractiveData as ID
 import VirtualDOM (class Html)
 
 type Sample =
@@ -30,10 +21,8 @@ sampleDataUi =
     , lastName: ID.string_
     }
 
-itf :: forall html. Html html => DataUiItf html _ _ Sample
+itf :: forall html. Html html => ID.DataUiItf html _ _ Sample
 itf =
-  Run.run
-    { name: "Sample"
-    , context: App.WrapData.dataUiCtx
-    }
-    $ wrapApp sampleDataUi
+  ID.runApp
+    { name: "Sample" }
+    sampleDataUi

@@ -1,6 +1,6 @@
 module InteractiveData.DataUIs.String
-  ( StringMsg(..)
-  , StringState(..)
+  ( StringMsg
+  , StringState
   , string
   , string_
   ) where
@@ -9,9 +9,11 @@ import InteractiveData.Core.Prelude
 
 import Data.String as Str
 import DataMVC.Types (DataResult, DataUI(..), DataUiItf(..))
+
 import InteractiveData.Core (class IDHtml, IDSurface)
 import InteractiveData.Core as Core
 import InteractiveData.Core.Classes.OptArgs (class OptArgs, getAllArgs)
+
 import VirtualDOM as VD
 
 -------------------------------------------------------------------------------

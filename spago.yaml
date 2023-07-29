@@ -92,3 +92,5 @@ workspace:
         - virtual-dom
   package_set:
     registry: 31.0.0
+  build_opts:
+    pedantic_packages: true

@@ -16,7 +16,6 @@ package:
     - maybe
     - mvc
     - prelude
-    - react-basic
     - react-basic-dom
     - react-basic-hooks
     - typedenv

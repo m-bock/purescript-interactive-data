@@ -27,7 +27,7 @@ run
      }
   -> DataUI (IDSurface (IDHtmlT html)) fm fs msg sta a
   -> DataUiItf html msg sta a
-run { name, context } dataUi =
+run { name,  context } dataUi =
   dataUi
     # flip runDataUi context
     # hoistSrf (runHtml { name })

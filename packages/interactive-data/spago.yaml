@@ -1,7 +1,11 @@
 package:
   dependencies:
-    - interactive-data-run
+    - data-mvc
+    - interactive-data-core
     - interactive-data-datauis
+    - interactive-data-run
+    - prelude
+    - virtual-dom
   name: interactive-data
   test:
     dependencies: []

@@ -5,14 +5,11 @@ import Prelude
 import Data.Argonaut (encodeJson, stringifyWithIndent)
 import Data.Either (Either(..))
 import Data.Maybe (Maybe(..))
-import DataMVC.Types (DataUI, DataUiItf(..))
+import DataMVC.Types (DataUiItf(..))
 import Effect (Effect)
-import Effect.Console (log)
-import InteractiveData.App.WrapApp (wrapApp)
-import InteractiveData.App.WrapData as App.WrapData
+import InteractiveData (DataUI, DataUiItf)
+import InteractiveData as ID
 import InteractiveData.Core (class IDHtml, IDSurface)
-import InteractiveData.DataUIs as ID
-import InteractiveData.Run as Run
 import React.Basic.DOM (css)
 import React.Basic.DOM as DOM
 import React.Basic.Hooks ((/\))
@@ -37,11 +34,10 @@ sampleDataUi =
 
 sampleItf :: DataUiItf ReactHtml _ _ Sample
 sampleItf =
-  Run.run
+  ID.runApp
     { name: "Sample"
-    , context: App.WrapData.dataUiCtx
     }
-    $ wrapApp sampleDataUi
+    sampleDataUi
 
 reactComponent :: React.Component {}
 reactComponent = do

@@ -5,9 +5,7 @@ import Prelude
 import Data.Maybe (Maybe(..))
 import Effect (Effect)
 import Effect.Class.Console (log)
-import InteractiveData.DataUIs as ID
-import InteractiveData.Run as ID.Run
-import InteractiveData.Run as Run
+import InteractiveData as ID
 import VirtualDOM.Impl.Halogen as HI
 
 main :: Effect Unit
@@ -18,13 +16,12 @@ main = do
   let
     itf =
       sampleDataUi
-        # ID.Run.run
+        # ID.runApp
             { name: "Sample"
-            , context: ID.Run.ctxNoWrap
             }
 
-    ui = Run.getUi Nothing itf
-    extract = Run.getExtract itf
+    ui = ID.getUi Nothing itf
+    extract = ID.getExtract itf
   ui
     -- Turn into a Halogen component
     # HI.uiToHalogenComponent

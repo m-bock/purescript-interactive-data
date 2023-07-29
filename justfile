@@ -4,7 +4,7 @@ build-ide:
     spago build --json-errors
 
 build:
-    spago build --pedantic-packages
+    spago build
 
 format:
     purs-tidy format-in-place "packages/*/src/**/*.purs"
