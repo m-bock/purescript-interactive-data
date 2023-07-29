@@ -20,18 +20,7 @@ sampleDataUi
        String
 sampleDataUi = ID.string_
 
-ui
-  :: forall html
-   . Html html
-  => { ui ::
-         UI html
-           (Identity StringMsg)
-           (Identity StringState)
-     , extract ::
-         Identity StringState
-         -> DataResult Sample
-     }
-ui = Run.toUI
+itf = Run.run
   { name: "Sample"
   , initData: Nothing
   , context: Run.ctxNoWrap

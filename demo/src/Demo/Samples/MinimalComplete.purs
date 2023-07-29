@@ -7,6 +7,7 @@ import Effect (Effect)
 import Effect.Class.Console (log)
 import InteractiveData.DataUIs as ID
 import InteractiveData.Run as ID.Run
+import InteractiveData.Run as Run
 import VirtualDOM.Impl.Halogen as HI
 
 main :: Effect Unit
@@ -15,14 +16,16 @@ main = do
     -- Compose a Data UI for a specific type
     sampleDataUi = ID.string_
   let
-    { ui, extract } =
+    itf =
       sampleDataUi
-        # ID.Run.toUI
+        # ID.Run.run
             { name: "Sample"
             , initData: Just "hello!"
             , context: ID.Run.ctxNoWrap
             }
 
+    ui = Run.getUi itf
+    extract = Run.getExtract itf
   ui
     -- Turn into a Halogen component
     # HI.uiToHalogenComponent

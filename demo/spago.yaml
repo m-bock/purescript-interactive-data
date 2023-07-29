@@ -1,6 +1,7 @@
 package:
   name: interactive-data-demo
   dependencies:
+    - argonaut
     - console
     - data-mvc
     - effect

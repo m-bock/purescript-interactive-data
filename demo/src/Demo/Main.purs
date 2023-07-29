@@ -17,12 +17,13 @@ main envVarsObj = do
 
   case envVars."SAMPLE" of
     Unwrapped -> do
-      log "Running 'Unwrapped' sample"
-      let ui = Samples.Unwrapped.ui
-      runHalogen ui
+      pure unit
+      -- log "Running 'Unwrapped' sample"
+      -- let ui = Samples.Unwrapped.ui
+      -- runHalogen ui
     Basic -> do
       log "Running 'Basic' sample"
-      let ui = Samples.Basic.ui
+      let ui = Samples.Basic.itf
       runHalogen ui
     EmbedReact -> do
-      pure unit -- Samples.EmbedReact.main
+      Samples.EmbedReact.main

@@ -4,7 +4,7 @@ import Prelude
 
 import Data.Identity (Identity)
 import Data.Maybe (Maybe(..))
-import DataMVC.Types (DataUI, DataResult)
+import DataMVC.Types (DataResult, DataUI, DataUiItf)
 import InteractiveData.App.WrapApp (wrapApp)
 import InteractiveData.App.WrapData (WrapMsg, WrapState)
 import InteractiveData.App.WrapData as App.WrapData
@@ -30,14 +30,15 @@ sampleDataUi =
     , lastName: ID.string_
     }
 
-ui
-  :: forall html
-   . Html html
-  => { ui :: UI html _ _
-     , extract :: _ -> DataResult Sample
-     }
-ui =
-  Run.toUI
+-- ui
+--   :: forall html
+--    . Html html
+--   => { ui :: UI html _ _
+--      , extract :: _ -> DataResult Sample
+--      }
+itf :: forall html. Html html => DataUiItf html _ _ Sample
+itf =
+  Run.run
     { name: "Sample"
     , initData: Nothing
     , context: App.WrapData.dataUiCtx

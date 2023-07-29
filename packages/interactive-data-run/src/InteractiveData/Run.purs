@@ -1,6 +1,8 @@
 module InteractiveData.Run
   ( ctxNoWrap
-  , toUI
+  , getExtract
+  , getUi
+  , run
   ) where
 
 import Prelude
@@ -15,9 +17,10 @@ import InteractiveData.Core.Types.IDDataUI (runIdSurface)
 import InteractiveData.Core.Types.IDViewCtx (defaultViewCtx)
 import InteractiveData.Run.Types.HtmlT (IDHtmlT, runIDHtmlT)
 import MVC.Types (UI)
+import Unsafe.Coerce (unsafeCoerce)
 import VirtualDOM (class Html)
 
-toUI
+run
   :: forall html fm fs msg sta a
    . Html html
   => { name :: String
@@ -25,28 +28,27 @@ toUI
      , context :: DataUICtx (IDSurface (IDHtmlT html)) fm fs
      }
   -> DataUI (IDSurface (IDHtmlT html)) fm fs msg sta a
-  -> { ui :: UI html (fm msg) (fs sta)
-     , extract :: fs sta -> DataResult a
-     }
-toUI { name, initData, context } dataUi =
-  let
-    dataUi' :: DataUI (IDSurface (IDHtmlT html)) fm fs (fm msg) (fs sta) a
-    dataUi' = applyWrap dataUi
+  -> DataUiItf html  msg  sta a
+run { name, initData, context } dataUi =
+  dataUi
+    -- # applyWrap
+    # flip runDataUi context
+    # hoistSrf'' (runHtml { name })
 
-    dataUiItf :: DataUiItf (IDSurface (IDHtmlT html)) (fm msg) (fs sta) a
-    dataUiItf = runDataUi dataUi' context
+getUi :: forall html msg sta a. DataUiItf html msg sta a -> UI html msg sta
+getUi = unsafeCoerce 1
 
-    uiWithExtract
-      :: { ui :: UI (IDSurface (IDHtmlT html)) (fm msg) (fs sta)
-         , extract :: fs sta -> DataResult a
-         }
-    uiWithExtract = dataUiItfToUI initData dataUiItf
+getExtract :: forall html msg sta a. DataUiItf html msg sta a -> (sta -> DataResult a)
+getExtract = unsafeCoerce 1
 
-    ui :: UI html (fm msg) (fs sta)
-    ui = hoistSrf (runHtml { name }) uiWithExtract.ui
+hoistSrf'
+  :: forall srf1 srf2 fm fs msg sta a. (srf1 ~> srf2) -> DataUI srf1 fm fs msg sta a -> DataUI srf2 fm fs msg sta a
+hoistSrf' nat ui = unsafeCoerce 1
 
-  in
-    { ui, extract: uiWithExtract.extract }
+hoistSrf'' :: forall srf1 srf2 fm fs msg sta a. (srf1 ~> srf2) -> DataUiItf srf1 msg sta a -> DataUiItf srf2 msg sta a
+hoistSrf'' nat (DataUiItf itf) = DataUiItf itf
+  { view = itf.view >>> nat
+  }
 
 runHtml
   :: forall html msg
