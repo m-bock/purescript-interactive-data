@@ -34,10 +34,12 @@ instance ParseValue Framework where
 instance ParseValue Sample where
   parseValue = case _ of
     "unwrapped" -> Just Unwrapped
+    "basic" -> Just Basic
     _ -> Nothing
 
-data Sample =
-  Unwrapped
+data Sample
+  = Unwrapped
+  | Basic
 
 getEnvVars :: Object String -> Effect EnvVars
 getEnvVars envVarsObj =

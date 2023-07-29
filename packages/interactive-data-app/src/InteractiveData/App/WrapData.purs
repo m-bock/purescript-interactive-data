@@ -1,4 +1,7 @@
-module InteractiveData.App.WrapData where
+module InteractiveData.App.WrapData
+  ( dataUiCtx
+  )
+  where
 
 import InteractiveData.Core.Prelude
 

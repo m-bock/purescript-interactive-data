@@ -20,8 +20,8 @@ gen-readme:
 
 dev: clean-parcel
     #!/bin/bash
-    FRAMEWORK=halogen
-    SAMPLE=unwrapped
+    export FRAMEWORK=halogen
+    export SAMPLE=basic
     parcel demo/static/index.html
 
 clean-parcel:
