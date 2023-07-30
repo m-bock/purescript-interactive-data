@@ -35,7 +35,7 @@ The following types are supported out of the box:
   - [Installation](#installation)
   - [Minimal complete example](#minimal-complete-example)
   - [Run](#run)
-- [Local Packages](#local-packages)
+- [Contributing](#contributing)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -68,7 +68,6 @@ The following example renders with `Halogen`. Have a look at the demo folder for
 _src/Main.purs_
 
 <!-- START demo -->
-
 ```hs
 module Main where
 
@@ -113,7 +112,6 @@ main = do
   HI.uiMountAtId "root" halogenComponent
 
 ```
-
 <!-- END demo -->
 
 We also need to create a simple html file and a `main.js` file to run the web app.

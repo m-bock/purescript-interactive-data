@@ -34,13 +34,9 @@
       {
         devShell = pkgs.mkShell {
           nativeBuildInputs = [
-            pkgs.purescript
             pkgs.purs-tidy
             pkgs.bashInteractive
-            pkgs.spago
             pkgs.just
-            pkgs.yarn
-            pkgs.psa
           ];
         };
       }
