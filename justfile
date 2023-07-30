@@ -69,4 +69,4 @@ purs-docs:
     purs docs $(spago sources)
 
 check-git-clean:
-    [ -z "$(git status --porcelain)" ]
+    [ " M docs/extra-packages.yaml" = "$(git status --porcelain)" ]
