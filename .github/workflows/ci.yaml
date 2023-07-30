@@ -6,7 +6,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2.4.0
     - uses: cachix/install-nix-action@v15 
-    - run: echo 1
+    - run: npm ci
     - run: echo 2
     
     # nix develop --command just ci
