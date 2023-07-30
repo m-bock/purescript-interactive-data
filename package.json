@@ -2,23 +2,20 @@
   "name": "purescript-interactive-data-mono",
   "version": "1.0.0",
   "type": "module",
-  "main": "index.js",
   "author": "Michael Bock <no-day@posteo.net>",
   "license": "MIT",
-  "devDependencies": {
-    "markdown-magic": "https://github.com/thought2/markdown-magic",
-    "parcel": "^2.9.3",
-    "process": "^0.11.10",
-    "spago": "^0.93.9"
-  },
   "dependencies": {
     "@inquirer/select": "^1.2.6",
     "doctoc": "^2.2.1",
     "glob": "^10.3.3",
     "js-yaml": "^4.1.0",
+    "parcel": "^2.9.3",
+    "process": "^0.11.10",
+    "purescript": "^0.15.10",
     "purs-to-md": "^0.3.0",
     "purs-virtual-dom-assets": "^0.1.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "spago": "^0.93.9"
   }
 }

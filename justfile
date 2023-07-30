@@ -8,6 +8,14 @@ build:
 
 ci: format gen build
 
+dist-example: clean
+    #!/bin/bash
+    export FRAMEWORK=halogen
+    export SAMPLE=Simple
+    mv output/package.json output/package.json.bak
+    parcel build demo/static/index.html
+    mv output/package.json.bak output/package.json
+
 format:
     purs-tidy format-in-place "packages/*/src/**/*.purs"
     purs-tidy format-in-place "packages/*/test/**/*.purs"
@@ -35,7 +43,7 @@ gen-assets:
 dev: clean-parcel
     #!/bin/bash
     export FRAMEWORK=halogen
-    export SAMPLE=basic
+    export SAMPLE=Basic
     parcel demo/static/index.html
 
 run-example: build clean-parcel
@@ -46,7 +54,12 @@ run-example: build clean-parcel
     export SAMPLE=`cat $FILE`
     echo "Starting $SAMPLE"
     parcel demo/static/index.html
-    
+
+clean: clean-parcel clean-purs-output
+
+clean-purs-output:
+    rm -rf output
+
 clean-parcel:
     rm -rf .parcel-cache
 
