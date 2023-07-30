@@ -20,7 +20,7 @@ import InteractiveData.App.UI.Header as UI.Header
 import InteractiveData.App.UI.Layout as UI.Layout
 import InteractiveData.App.UI.Menu (MenuSelfMsg)
 import InteractiveData.App.UI.Menu as UI.Menu
-import InteractiveData.App.UI.Menu.Types (SumTree, sumTree)
+import InteractiveData.App.UI.Types.SumTree (SumTree, sumTree)
 import InteractiveData.App.UI.NotFound as UI.NotFound
 import InteractiveData.Core
   ( class IDHtml

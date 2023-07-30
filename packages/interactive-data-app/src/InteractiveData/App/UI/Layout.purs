@@ -19,7 +19,7 @@ type ViewLayoutCfg (html :: Type -> Type) msg =
 -- TODO: Find a better way to load the font
 viewEmbedFont :: forall html msg. IDHtml html => html msg
 viewEmbedFont = VDE.style []
-  [ VD.text "@import url('https://fonts.googleapis.com/css2?family=Signika+Negative:wght@300&display=swap');" ]
+  [ VD.text "@import url('https://fonts.googleapis.com/css2?family=Signika+Negative:wght@300&display=swap')" ]
 
 viewLayout :: forall html msg. IDHtml html => ViewLayoutCfg html msg -> html msg
 viewLayout { viewHeader, viewSidebar, viewBody, viewFooter } =

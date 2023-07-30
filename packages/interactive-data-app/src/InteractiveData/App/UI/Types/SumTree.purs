@@ -1,4 +1,4 @@
-module InteractiveData.App.UI.Menu.Types
+module InteractiveData.App.UI.Types.SumTree
   ( SumTree(..)
   , sumTree
   , treeIsLeaf
@@ -10,7 +10,9 @@ import Data.Traversable (for)
 import DataMVC.Types (DataPathSegment(..))
 import InteractiveData.Core.Types.DataTree (TreeMeta, DataTree(..), DataTreeChildren(..))
 
----
+--------------------------------------------------------------------------------
+--- Types
+--------------------------------------------------------------------------------
 
 newtype SumTree = SumTree
   { meta :: TreeMeta
@@ -22,7 +24,9 @@ newtype SumTree = SumTree
         }
   }
 
----
+--------------------------------------------------------------------------------
+--- Functions
+--------------------------------------------------------------------------------
 
 -- TODO: Make tail recursive
 sumTree
@@ -36,14 +40,6 @@ sumTree (DataTree { children, meta: meta' }) = do
   meta <- meta'
 
   case children of
-    -- Case { key, value: singleton } ->
-    --   let
-    --     { deepSingletons, tree } = sumTree singleton
-    --   in
-    --     { deepSingletons: [ SegCase key /\ { errored: isLeft errored } ] <> deepSingletons
-    --     , tree
-    --     }
-
     Case (key /\ value) -> do
       { deepSingletons, tree } <- sumTree value
 
@@ -61,7 +57,7 @@ sumTree (DataTree { children, meta: meta' }) = do
             }
         }
     Fields fields -> do
-      children <- for fields
+      children' <- for fields
         \(key /\ value) -> do
 
           { deepSingletons, tree } <- sumTree value
@@ -72,7 +68,7 @@ sumTree (DataTree { children, meta: meta' }) = do
         { deepSingletons: []
         , tree: SumTree
             { meta
-            , children
+            , children: children'
             }
         }
 
@@ -80,6 +76,10 @@ treeIsLeaf :: SumTree -> Boolean
 treeIsLeaf (SumTree { children }) = case children of
   [] -> true
   _ -> false
+
+--------------------------------------------------------------------------------
+--- Instances
+--------------------------------------------------------------------------------
 
 derive instance Generic SumTree _
 

@@ -26,7 +26,7 @@ mkIcon char =
           , "height: 18px"
           , "cursor: default"
           ]
-      , inner: styleNode VD.div ""
+      , inner: VD.div
       }
   in
     el.root []
