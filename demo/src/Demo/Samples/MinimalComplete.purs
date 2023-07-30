@@ -11,14 +11,14 @@ import VirtualDOM.Impl.Halogen as HI
 main :: Effect Unit
 main = do
   let
-    -- Compose a "Data UI" for a specific type
+    -- 1. Compose a "Data UI" for a specific type
     sampleDataUi =
       ID.record_
         { firstName: ID.string_
         , lastName: ID.string_
         }
 
-    -- Turn "Data UI" into
+    -- 2. Turn "Data UI" into an App interface
     sampleApp =
       ID.toApp
         { name: "Sample"
@@ -26,7 +26,7 @@ main = do
         }
         sampleDataUi
 
-    -- Create Halogen component
+    -- 3. Create Halogen component
     halogenComponent =
       HI.uiToHalogenComponent
         { onStateChange: \newState -> do
@@ -36,5 +36,5 @@ main = do
         }
         sampleApp.ui
 
-  -- Finally mount the component at the root element
+  -- 4. Finally mount the component to the DOM
   HI.uiMountAtId "root" halogenComponent
