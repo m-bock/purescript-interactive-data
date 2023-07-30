@@ -27,6 +27,15 @@ dev: clean-parcel
     export SAMPLE=basic
     parcel demo/static/index.html
 
+run-example:
+    #!/bin/bash
+    FILE=`mktemp`
+    node scripts/run-example.js $FILE
+    export FRAMEWORK=halogen
+    export SAMPLE=`cat $FILE`
+    echo "Starting $SAMPLE"
+    parcel demo/static/index.html
+    
 clean-parcel:
     rm -rf .parcel-cache
 

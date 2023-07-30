@@ -3,6 +3,6 @@ module InteractiveData.App (module Export) where
 import InteractiveData.App.WrapApp
   ( AppMsg
   , AppState
-  , SelfMsg
+  , AppSelfMsg
   , wrapApp
   ) as Export

@@ -121,8 +121,10 @@ main();
 
 ```
 spago build
-parcel demo/index.html
+parcel index.html
 ```
+
+Go to http://localhost:1234
 
 ## Local Packages
 

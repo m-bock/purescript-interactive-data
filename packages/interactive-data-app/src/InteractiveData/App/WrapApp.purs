@@ -1,7 +1,7 @@
 module InteractiveData.App.WrapApp
   ( AppMsg
   , AppState
-  , SelfMsg
+  , AppSelfMsg
   , wrapApp
   ) where
 
@@ -9,19 +9,18 @@ import Prelude
 
 import Data.Array.NonEmpty as NEA
 import Data.Either (either)
-import Data.Map (Map)
 import Data.Maybe (Maybe(..))
 import Data.Newtype (un)
 import Data.These (These(..))
-import Data.Tuple.Nested (type (/\), (/\))
-import DataMVC.Types (DataPath, DataPathSegment, DataResult, DataUI(..), DataUiItf(..))
+import DataMVC.Types (DataPathSegment, DataResult, DataUI(..), DataUiItf(..))
 import DataMVC.Types.DataUI (applyWrap, runDataUi)
 import InteractiveData.App.UI.Body as UI.Body
 import InteractiveData.App.UI.Footer as UI.Footer
 import InteractiveData.App.UI.Header as UI.Header
 import InteractiveData.App.UI.Layout as UI.Layout
+import InteractiveData.App.UI.Menu (MenuSelfMsg)
 import InteractiveData.App.UI.Menu as UI.Menu
-import InteractiveData.App.UI.Menu.Types (sumTree)
+import InteractiveData.App.UI.Menu.Types (SumTree, sumTree)
 import InteractiveData.App.UI.NotFound as UI.NotFound
 import InteractiveData.Core
   ( class IDHtml
@@ -40,197 +39,260 @@ import VirtualDOM as VD
 import VirtualDOM.Transformers.Ctx.Class (class Ctx, putCtx, withCtx)
 import VirtualDOM.Transformers.OutMsg.Class (runOutMsg)
 
+--------------------------------------------------------------------------------
+--- Types
+--------------------------------------------------------------------------------
+
 newtype AppState sta = AppState
   { selectedPath :: Array String
   , menu :: UI.Menu.MenuState
   , dataState :: sta
-  , ignore :: Boolean
   , showMenu :: Boolean
   , showErrors :: Boolean
   }
 
-type AppMsg msg = These (SelfMsg msg) IDOutMsg
+type AppMsg msg = These (AppSelfMsg msg) IDOutMsg
 
-data SelfMsg msg
+data AppSelfMsg msg
   = SetSelectedPath (Array String)
   | DataMsg msg
-  | MenuMsg (UI.Menu.MenuMsg (SelfMsg msg))
+  | MenuMsg (UI.Menu.MenuMsg (AppSelfMsg msg))
   | SetShowMenu Boolean
   | SetShowErrors Boolean
-  | NoOp
 
-type Menu = Map DataPath { expanded :: Boolean }
+type DataTrees html msg =
+  { global ::
+      { dataTree :: DataTree html msg
+      , sumTree :: SumTree
+      , meta :: TreeMeta
+      , selectedDataPath :: Array DataPathSegment
+      }
+  , selected ::
+      { dataTree :: DataTree html msg
+      , meta :: TreeMeta
+      }
+  }
 
-type WithState sta r = (state :: AppState sta | r)
+--------------------------------------------------------------------------------
+--- View
+--------------------------------------------------------------------------------
 
-
-viewNavigationWrapper
+viewApp
   :: forall html msg sta
    . Ctx IDViewCtx html
   => IDHtml html
   => (sta -> DataTree html msg)
   -> AppState sta
   -> DataTree html (AppMsg msg)
-viewNavigationWrapper view' state@(AppState { selectedPath }) =
+viewApp view' state@(AppState { selectedPath }) =
   let
+    maybeDataTrees :: Maybe (DataTrees html msg)
+    maybeDataTrees = getDataTrees view' state
 
-    view = case viewNavigationWrapper' view' state of
+    view :: html (AppSelfMsg msg)
+    view = case maybeDataTrees of
       Nothing ->
-        UI.Layout.viewLayout
-          { viewHeader: VD.noHtml
-          , viewBody:
-              UI.NotFound.viewNotFound
-                { label: "not found"
-                , path: selectedPath
-                , onBackToHome: This $ SetSelectedPath mempty
-                }
-          , viewSidebar: Nothing
-          , viewFooter: Nothing
-          }
-      Just tree -> tree
+        viewNotFound { selectedPath }
 
+      Just dataTrees ->
+        viewFound dataTrees state
+
+    viewOut :: html (AppMsg msg)
+    viewOut = runOutMsg view
   in
-
     DataTree
-      { view
+      { view: viewOut
       , actions: []
       , children: Fields []
       , meta: Nothing
       }
 
-viewNavigationWrapper'
+viewNotFound
+  :: forall html msg
+   . IDHtml html
+  => { selectedPath :: Array String }
+  -> html (AppSelfMsg msg)
+viewNotFound { selectedPath } =
+  UI.Layout.viewLayout
+    { viewHeader: VD.noHtml
+    , viewBody:
+        UI.NotFound.viewNotFound
+          { path: selectedPath
+          , onBackToHome: SetSelectedPath mempty
+          }
+    , viewSidebar: Nothing
+    , viewFooter: Nothing
+    }
+
+viewFound
   :: forall html msg sta
    . Ctx IDViewCtx html
   => IDHtml html
-  => (sta -> DataTree html msg)
+  => DataTrees html msg
   -> AppState sta
-  -> Maybe (html (AppMsg msg))
-viewNavigationWrapper' view' (AppState { showErrors, dataState, selectedPath, menu, showMenu }) = do
+  -> html (AppSelfMsg msg)
+viewFound { global, selected } (AppState { showErrors, menu, showMenu }) =
   let
-    globalDataTree = view' dataState
-
-  dataPath :: Array DataPathSegment <-
-    dataPathFromStrings selectedPath globalDataTree
-
-  selectedDataTree :: DataTree html msg <-
-    DT.find dataPath globalDataTree
-
-  dataPathWithMeta :: Array (DataPathSegment /\ TreeMeta) <-
-    DT.mapMetadataAlongPath dataPath globalDataTree
-
-  globalMeta <- globalDataTree # un DataTree # _.meta
-
-  selectedMeta <- selectedDataTree # un DataTree # _.meta
-
-  let
-    ui =
-      { menu: UI.Menu.viewMenu
-      }
-
-    header :: html (SelfMsg msg)
+    header :: html (AppSelfMsg msg)
     header =
       UI.Header.viewHeader
-        { dataPath
+        { dataPath: global.selectedDataPath
         , onSelectPath: SetSelectedPath <<< dataPathToStrings
         , showMenu
         , onSetShowMenu: SetShowMenu
-        , typeName: selectedMeta.typeName
+        , typeName: global.meta.typeName
         }
 
-  tree <- sumTree globalDataTree <#> _.tree
-
-  let
-    sidebar :: Maybe (html (SelfMsg msg))
+    sidebar :: html (AppSelfMsg msg)
     sidebar =
-      if showMenu then
-        Just $ map MenuMsg $
-          ui.menu
-            { onSelectPath: SetSelectedPath
-            , tree
-            }
-            menu
-      else Nothing
+      map MenuMsg $
+        UI.Menu.viewMenu
+          { onSelectPath: SetSelectedPath
+          , tree: global.sumTree
+          }
+          menu
 
-    body :: html (SelfMsg msg)
+    body :: html (AppSelfMsg msg)
     body = UI.Body.viewBody
-      { viewContent: selectedDataTree # un DataTree # _.view # map DataMsg }
+      { viewContent: selected.dataTree # un DataTree # _.view # map DataMsg }
 
-
-    footer :: Maybe (html (SelfMsg msg))
-    footer = Just $
+    footer :: html (AppSelfMsg msg)
+    footer =
       UI.Footer.viewFooter
-        { errors: either NEA.toArray (\_ -> []) globalMeta.errored
+        { errors: either NEA.toArray (\_ -> []) global.meta.errored
         , onSelectPath: SetSelectedPath <<< dataPathToStrings
         , isExpanded: showErrors
         , onChangeIsExpanded: SetShowErrors
         }
 
-  pure $
+  in
     withCtx \(ctx :: IDViewCtx) ->
       let
 
         viewCtx :: IDViewCtx
         viewCtx =
           ctx
-            { path = dataPath
-            , selectedPath = dataPath
+            { path = global.selectedDataPath
+            , selectedPath = global.selectedDataPath
             , viewMode = Standalone
             }
       in
 
-        runOutMsg
-          $ putCtx viewCtx
+        putCtx viewCtx
           $ UI.Layout.viewLayout
               { viewHeader: header
-              , viewSidebar: sidebar
+              , viewSidebar: if showMenu then Just sidebar else Nothing
               , viewBody: body
-              , viewFooter: footer
+              , viewFooter: Just footer
               }
 
+getDataTrees
+  :: forall html msg sta
+   . Ctx IDViewCtx html
+  => IDHtml html
+  => (sta -> DataTree html msg)
+  -> AppState sta
+  -> Maybe (DataTrees html msg)
+getDataTrees view' (AppState { dataState, selectedPath }) = do
+
+  -- Global
+
+  let
+    globalDataTree :: DataTree html msg
+    globalDataTree = view' dataState
+
+  selectedDataPath :: Array DataPathSegment <-
+    dataPathFromStrings selectedPath globalDataTree
+
+  globalMeta :: TreeMeta <-
+    globalDataTree # un DataTree # _.meta
+
+  sumTree <- sumTree globalDataTree <#> _.tree
+
+  -- Selected
+
+  selectedDataTree :: DataTree html msg <-
+    DT.find selectedDataPath globalDataTree
+
+  selectedMeta :: TreeMeta <-
+    selectedDataTree # un DataTree # _.meta
+
+  pure
+    { global:
+        { dataTree: globalDataTree
+        , sumTree
+        , selectedDataPath
+        , meta: globalMeta
+        }
+    , selected:
+        { dataTree: selectedDataTree
+        , meta: selectedMeta
+        }
+    }
+
+--------------------------------------------------------------------------------
+--- Update
+--------------------------------------------------------------------------------
+
 update :: forall msg sta. (msg -> sta -> sta) -> AppMsg msg -> AppState sta -> AppState sta
-update update' msg_ state_ = case msg_ of
-  This msg -> updateThis msg state_
-  That outMsg -> updateThat outMsg state_
-  Both msg outMsg -> state_
-    # updateThat outMsg
-    # updateThis msg
+update update' =
+  updateThese
+    updateThis
+    updateThat
+
   where
 
+  updateThis :: AppSelfMsg msg -> AppState sta -> AppState sta
   updateThis msg st@(AppState state) = case msg of
-    SetSelectedPath path -> AppState state { selectedPath = path }
-    DataMsg msg' -> AppState state { dataState = update' msg' state.dataState }
-    MenuMsg msg' -> st
-      #
-        f
-          (\msg'' (AppState st') -> AppState st' { menu = UI.Menu.updateMenu msg'' st'.menu })
-          (\msg' -> update update' (This msg'))
-          msg'
-    NoOp -> st
-    SetShowMenu showMenu -> AppState state { showMenu = showMenu }
-    SetShowErrors showErrors -> AppState state { showErrors = showErrors }
+    SetSelectedPath path ->
+      AppState state { selectedPath = path }
 
-  updateThat outMsg st@(AppState state) =
+    DataMsg msg' ->
+      AppState state { dataState = update' msg' state.dataState }
+
+    MenuMsg msg' ->
+      updateThese
+        ( \(msg'' :: MenuSelfMsg) (AppState st') ->
+            AppState st' { menu = UI.Menu.updateMenu msg'' st'.menu }
+        )
+        (\(msg'' :: AppSelfMsg msg) -> update update' (This msg''))
+        msg'
+        st
+
+    SetShowMenu showMenu ->
+      AppState state { showMenu = showMenu }
+
+    SetShowErrors showErrors ->
+      AppState state { showErrors = showErrors }
+
+  updateThat :: IDOutMsg -> AppState sta -> AppState sta
+  updateThat outMsg (AppState state) =
     case outMsg of
       GlobalSelectDataPath path -> AppState state { selectedPath = path }
 
-f :: forall a b z. (a -> (z -> z)) -> (b -> (z -> z)) -> These a b -> (z -> z)
-f f1 f2 = case _ of
-  This x -> f1 x
-  That y -> f2 y
-  Both x y -> f1 x >>> f2 y
+--------------------------------------------------------------------------------
+--- Init
+--------------------------------------------------------------------------------
 
 init :: forall sta a. (Maybe a -> sta) -> Maybe a -> AppState sta
 init init' opt = AppState
   { selectedPath: []
   , dataState: init' opt
   , menu: UI.Menu.initMenu
-  , ignore: false
   , showMenu: false
   , showErrors: false
   }
 
+--------------------------------------------------------------------------------
+--- Extract
+--------------------------------------------------------------------------------
+
 extract :: forall sta a. (sta -> DataResult a) -> AppState sta -> DataResult a
 extract extract' (AppState { dataState }) = extract' dataState
+
+--------------------------------------------------------------------------------
+--- DataUI
+--------------------------------------------------------------------------------
 
 wrapApp
   :: forall html fm fs msg sta a
@@ -241,12 +303,17 @@ wrapApp
 wrapApp dataUi' =
   DataUI \ctx ->
     let
+      dataUi'' :: DataUI (IDSurface html) fm fs (fm msg) (fs sta) a
       dataUi'' = applyWrap dataUi'
-      DataUiItf itf = runDataUi dataUi'' ctx
 
-      view :: AppState (fs sta) -> IDSurface html (These (SelfMsg (fm msg)) IDOutMsg)
+      itf_ :: DataUiItf (IDSurface html) (fm msg) (fs sta) a
+      itf_ = runDataUi dataUi'' ctx
+
+      DataUiItf itf = itf_
+
+      view :: AppState (fs sta) -> IDSurface html (AppMsg (fm msg))
       view state = IDSurface \idSurfaceCtx ->
-        viewNavigationWrapper
+        viewApp
           (itf.view >>> runIdSurface idSurfaceCtx)
           state
     in
@@ -257,3 +324,14 @@ wrapApp dataUi' =
         , init: init itf.init
         , extract: extract itf.extract
         }
+
+--------------------------------------------------------------------------------
+--- Utils
+--------------------------------------------------------------------------------
+
+-- | Update `This` with `f1`, `That` with `f2` and `Both` with `f1` and `f2` composed
+updateThese :: forall a b z. (a -> (z -> z)) -> (b -> (z -> z)) -> These a b -> (z -> z)
+updateThese f1 f2 = case _ of
+  This x -> f1 x
+  That y -> f2 y
+  Both x y -> f1 x >>> f2 y

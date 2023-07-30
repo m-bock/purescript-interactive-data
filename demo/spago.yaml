@@ -6,6 +6,7 @@ package:
     - data-mvc
     - effect
     - either
+    - enums
     - exceptions
     - foreign-object
     - identity
@@ -15,9 +16,11 @@ package:
     - lists
     - maybe
     - mvc
+    - ordered-collections
     - prelude
     - react-basic-dom
     - react-basic-hooks
+    - tuples
     - typedenv
     - virtual-dom
     - virtual-dom-halogen

@@ -11,8 +11,7 @@ import InteractiveData.App.UI.Assets as UI.Assets
 import VirtualDOM as VD
 
 type ViewNotFoundCfg msg =
-  { label :: String
-  , onBackToHome :: msg
+  { onBackToHome :: msg
   , path :: Array String
   }
 
