@@ -37,6 +37,7 @@
             pkgs.purs-tidy
             pkgs.bashInteractive
             pkgs.just
+            pkgs.graphviz
           ];
         };
       }

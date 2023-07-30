@@ -1,5 +1,7 @@
 # purescript-interactive-data
 
+![ci](https://github.com/thought2/purescript-interactive-data/actions/workflows/ci.yml/badge.svg)
+
 <img align="right" width="400" src="assets/demo.png">
 <br>
 
