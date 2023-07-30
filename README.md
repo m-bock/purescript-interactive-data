@@ -5,19 +5,26 @@
 
 ![interactive-data](./assets/logo.svg)
 
-Composable UIs to interactively maniupulate data.
+Composable UIs for interactive data.
 
 ## Features
 
-- Framework agnostic
-- Configurable
-- Extensible
-- Types
-  - Primitive types
-  - Custom ADTs
-  - Variants
+- **Framework agnostic**
+  <br>
+  _Can be embedded in any ReactBasic or Halogen app_
+- **Configurable**
+  <br>
+  _UIs for each data type can be customized_
+- **Extensible**
+  <br>
+  _UIs for any data type can be written in a simple MVC architecture_
 
-<br>
+## Supported types
+
+The following types are supported out of the box:
+
+- Strings
+- Records
 
 ## Table of Contents
 
@@ -61,6 +68,7 @@ The following example renders with `Halogen`. Have a look at the demo folder for
 _src/Main.purs_
 
 <!-- START demo -->
+
 ```hs
 module Main where
 
@@ -105,7 +113,10 @@ main = do
   HI.uiMountAtId "root" halogenComponent
 
 ```
+
 <!-- END demo -->
+
+We also need to create a simple html file and a `main.js` file to run the web app.
 
 _index.html_
 
@@ -135,15 +146,17 @@ parcel index.html
 
 Go to http://localhost:1234
 
-## Local Packages
+## Contributing
 
-|                         |                                |
-| ----------------------- | ------------------------------ |
-| [core][link-core]       |                                |
-| [app][link-app]         | App layer that adds navigation |
-| [datauis][link-datauis] | UIs for specific data types    |
-| [run][link-run]         |                                |
-| [class][link-class]     |                                |
+The codebase is split into several local packages.
+
+|                         |                                                                 |
+| ----------------------- | --------------------------------------------------------------- |
+| [core][link-core]       | Core types that are used by most other packages                 |
+| [app][link-app]         | UI for App layer that adds general navigation and data wrapping |
+| [datauis][link-datauis] | UIs for specific data types                                     |
+| [run][link-run]         | Machinery that turns data UIs into a regualar UI components     |
+| [class][link-class]     | Type class for generic Data UI creation                         |
 
 ![!image](./assets/local-packages-graph.svg)
 
