@@ -2,8 +2,10 @@ module Demo.Samples.Basic where
 
 import Prelude
 
+import Data.Maybe (Maybe(..))
 import InteractiveData (class IDHtml, DataUI, IDSurface)
 import InteractiveData as ID
+import InteractiveData.Entry (InteractiveDataApp)
 import VirtualDOM (class Html)
 
 type Sample =
@@ -21,8 +23,10 @@ sampleDataUi =
     , lastName: ID.string_
     }
 
-itf :: forall html. Html html => ID.DataUiItf html _ _ Sample
-itf =
-  ID.runApp
-    { name: "Sample" }
+sampleApp :: forall html. Html html => InteractiveDataApp html _ _ Sample
+sampleApp =
+  ID.toApp
+    { name: "Sample"
+    , initData: Nothing
+    }
     sampleDataUi

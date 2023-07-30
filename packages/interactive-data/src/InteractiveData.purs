@@ -22,9 +22,9 @@ import InteractiveData.Core
 
 import DataMVC.Types
   ( DataUI
-  , DataUiItf
+  , DataUiInterface
   ) as Export
 
 import InteractiveData.Entry
-  ( runApp
+  ( toApp
   ) as Export

@@ -1,10 +1,12 @@
 package:
   dependencies:
     - data-mvc
+    - interactive-data-app
     - interactive-data-core
     - interactive-data-datauis
     - interactive-data-run
-    - interactive-data-app
+    - maybe
+    - mvc
     - prelude
     - virtual-dom
   name: interactive-data

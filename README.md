@@ -75,25 +75,33 @@ import VirtualDOM.Impl.Halogen as HI
 main :: Effect Unit
 main = do
   let
-    -- Compose a Data UI for a specific type
-    sampleDataUi = ID.string_
-  let
-    itf =
-      sampleDataUi
-        # ID.runApp
-            { name: "Sample"
-            }
-
-    ui = ID.getUi Nothing itf
-    extract = ID.getExtract itf
-  ui
-    -- Turn into a Halogen component
-    # HI.uiToHalogenComponent
-        { onStateChange: \newState -> do
-            log (show $ extract newState)
+    -- Compose a "Data UI" for a specific type
+    sampleDataUi =
+      ID.record_
+        { firstName: ID.string_
+        , lastName: ID.string_
         }
-    -- Mount at the root element
-    # HI.uiMountAtId "root"
+
+    -- Turn "Data UI" into
+    sampleApp =
+      ID.toApp
+        { name: "Sample"
+        , initData : Nothing
+        }
+        sampleDataUi
+
+    -- Create Halogen component
+    halogenComponent =
+      HI.uiToHalogenComponent
+        { onStateChange: \newState -> do
+            
+            -- Use the `extract` function to get data out of the state
+            log (show $ sampleApp.extract newState)
+        }
+        sampleApp.ui
+
+  -- Finally mount the component at the root element
+  HI.uiMountAtId "root" halogenComponent
 
 ```
 <!-- END demo -->

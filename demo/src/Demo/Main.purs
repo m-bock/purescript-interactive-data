@@ -23,7 +23,7 @@ main envVarsObj = do
       -- runHalogen ui
     Basic -> do
       log "Running 'Basic' sample"
-      let ui = Samples.Basic.itf
-      runHalogen ui
+      let sampleApp = Samples.Basic.sampleApp
+      runHalogen sampleApp
     EmbedReact -> do
       Samples.EmbedReact.main

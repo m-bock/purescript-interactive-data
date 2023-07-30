@@ -5,11 +5,11 @@ import Prelude
 import Data.Argonaut (encodeJson, stringifyWithIndent)
 import Data.Either (Either(..))
 import Data.Maybe (Maybe(..))
-import DataMVC.Types (DataUiItf(..))
 import Effect (Effect)
-import InteractiveData (DataUI, DataUiItf)
+import InteractiveData (DataUI)
 import InteractiveData as ID
 import InteractiveData.Core (class IDHtml, IDSurface)
+import InteractiveData.Entry (InteractiveDataApp)
 import React.Basic.DOM (css)
 import React.Basic.DOM as DOM
 import React.Basic.Hooks ((/\))
@@ -32,24 +32,26 @@ sampleDataUi =
     , lastName: ID.string_
     }
 
-sampleItf :: DataUiItf ReactHtml _ _ Sample
-sampleItf =
-  ID.runApp
+sampleApp :: InteractiveDataApp ReactHtml _ _ Sample
+sampleApp =
+  ID.toApp
     { name: "Sample"
+    , initData: Nothing
     }
     sampleDataUi
 
 reactComponent :: React.Component {}
 reactComponent = do
   let
-    DataUiItf itf = sampleItf
+    { ui, extract } = sampleApp
+
   React.component "Root" \_props -> React.do
 
-    state /\ setState <- React.useState $ itf.init Nothing
+    state /\ setState <- React.useState $ ui.init
 
     let
       handler msg = do
-        setState $ itf.update msg
+        setState $ ui.update msg
 
     pure $
       DOM.div
@@ -72,7 +74,7 @@ reactComponent = do
                     , flex: "1 1 0px"
                     }
                 , children:
-                    [ case itf.extract state of
+                    [ case extract state of
                         Left errors -> DOM.text $ show errors
                         Right value ->
                           DOM.pre_
@@ -89,7 +91,7 @@ reactComponent = do
                     }
                 , children:
                     [ runReactHtml { handler } defaultConfig
-                        $ itf.view state
+                        $ ui.view state
                     ]
                 }
 

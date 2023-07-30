@@ -12,7 +12,7 @@ workspace:
         - variant
     data-mvc:
       git: https://github.com/thought2/purescript-data-mvc.git
-      ref: 167f2543680a583202a6bd47878967211619f98c
+      ref: a414b169821d708552ffbafe8d55553e56feac77
       dependencies:
         - arrays
         - bifunctors
@@ -27,7 +27,7 @@ workspace:
         - variant
     virtual-dom-react-basic:
       git: https://github.com/thought2/purescript-virtual-dom-react-basic.git
-      ref: add7f92ac6c2bc14f9edd0ddcccbc341fc952e6b
+      ref: fa2515fa125d0112a026992a16ed7d64a9d81027
       dependencies:
         - arrays
         - effect

@@ -10,7 +10,7 @@ import Prelude
 import Data.Array.NonEmpty (NonEmptyArray)
 import Data.Bifunctor (lmap)
 import Data.Newtype (class Newtype)
-import DataMVC.Types (DataPath, DataUI(..), DataUICtx, DataUiItf(..))
+import DataMVC.Types (DataPath, DataUI(..), DataUICtx, DataUiInterface(..))
 import DataMVC.Types.DataError (DataError)
 import InteractiveData.Core.Types.DataTree (DataTree)
 
@@ -46,9 +46,9 @@ mapErrors
   -> DataUI (IDSurface html) fm fs msg sta a
 mapErrors f (DataUI mkDataUi) = DataUI \ctx ->
   let
-    DataUiItf { init, extract, name, update, view } = mkDataUi ctx
+    DataUiInterface { init, extract, name, update, view } = mkDataUi ctx
   in
-    DataUiItf
+    DataUiInterface
       { extract: extract >>> lmap f
       , init
       , name

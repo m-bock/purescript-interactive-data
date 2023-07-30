@@ -2,7 +2,7 @@ workspace:
   extra_packages:
     interactive-data-run:
       git: ssh://git@github.com/thought2/purescript-interactive-data.git
-      ref: 74eb2531f92bac9ddb560ec8cd8d86233b91d44f
+      ref: 22971aa4d4332de6bc63b15976e21754e27d261b
       subdir: packages/interactive-data-run
       dependencies:
         - data-mvc
@@ -16,7 +16,7 @@ workspace:
         - virtual-dom-styled
     interactive-data-datauis:
       git: ssh://git@github.com/thought2/purescript-interactive-data.git
-      ref: 74eb2531f92bac9ddb560ec8cd8d86233b91d44f
+      ref: 22971aa4d4332de6bc63b15976e21754e27d261b
       subdir: packages/interactive-data-datauis
       dependencies:
         - arrays
@@ -32,7 +32,7 @@ workspace:
         - virtual-dom-styled
     interactive-data-core:
       git: ssh://git@github.com/thought2/purescript-interactive-data.git
-      ref: 74eb2531f92bac9ddb560ec8cd8d86233b91d44f
+      ref: 22971aa4d4332de6bc63b15976e21754e27d261b
       subdir: packages/interactive-data-core
       dependencies:
         - arrays
@@ -52,12 +52,12 @@ workspace:
         - virtual-dom
     interactive-data-class:
       git: ssh://git@github.com/thought2/purescript-interactive-data.git
-      ref: 74eb2531f92bac9ddb560ec8cd8d86233b91d44f
+      ref: 22971aa4d4332de6bc63b15976e21754e27d261b
       subdir: packages/interactive-data-class
       dependencies: []
     interactive-data-app:
       git: ssh://git@github.com/thought2/purescript-interactive-data.git
-      ref: 74eb2531f92bac9ddb560ec8cd8d86233b91d44f
+      ref: 22971aa4d4332de6bc63b15976e21754e27d261b
       subdir: packages/interactive-data-app
       dependencies:
         - arrays
@@ -76,14 +76,16 @@ workspace:
         - virtual-dom-styled
     interactive-data:
       git: ssh://git@github.com/thought2/purescript-interactive-data.git
-      ref: 74eb2531f92bac9ddb560ec8cd8d86233b91d44f
+      ref: 22971aa4d4332de6bc63b15976e21754e27d261b
       subdir: packages/interactive-data
       dependencies:
         - data-mvc
+        - interactive-data-app
         - interactive-data-core
         - interactive-data-datauis
         - interactive-data-run
-        - interactive-data-app
+        - maybe
+        - mvc
         - prelude
         - virtual-dom
     mvc:
@@ -98,7 +100,7 @@ workspace:
         - variant
     data-mvc:
       git: https://github.com/thought2/purescript-data-mvc.git
-      ref: 167f2543680a583202a6bd47878967211619f98c
+      ref: a414b169821d708552ffbafe8d55553e56feac77
       dependencies:
         - arrays
         - bifunctors
@@ -113,7 +115,7 @@ workspace:
         - variant
     virtual-dom-react-basic:
       git: https://github.com/thought2/purescript-virtual-dom-react-basic.git
-      ref: add7f92ac6c2bc14f9edd0ddcccbc341fc952e6b
+      ref: fa2515fa125d0112a026992a16ed7d64a9d81027
       dependencies:
         - arrays
         - effect

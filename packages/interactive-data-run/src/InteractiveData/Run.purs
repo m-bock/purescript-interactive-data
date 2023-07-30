@@ -10,7 +10,7 @@ import Prelude
 import Data.Identity (Identity(..))
 import Data.Maybe (Maybe)
 import Data.Newtype (un)
-import DataMVC.Types (DataResult, DataUI, DataUICtx(..), DataUiItf(..))
+import DataMVC.Types (DataResult, DataUI, DataUICtx(..), DataUiInterface(..))
 import DataMVC.Types.DataUI (runDataUi)
 import InteractiveData.Core (class IDHtml, DataTree(..), IDSurface, IDViewCtx)
 import InteractiveData.Core.Types.IDDataUI (runIdSurface)
@@ -26,24 +26,25 @@ run
      , context :: DataUICtx (IDSurface (IDHtmlT html)) fm fs
      }
   -> DataUI (IDSurface (IDHtmlT html)) fm fs msg sta a
-  -> DataUiItf html msg sta a
-run { name,  context } dataUi =
+  -> DataUiInterface html msg sta a
+run { name, context } dataUi =
   dataUi
     # flip runDataUi context
     # hoistSrf (runHtml { name })
 
-getUi :: forall html msg sta a. Maybe a -> DataUiItf html msg sta a -> UI html msg sta
-getUi initVal (DataUiItf { view, init, update }) =
+getUi :: forall html msg sta a. { initData :: Maybe a } -> DataUiInterface html msg sta a -> UI html msg sta
+getUi { initData } (DataUiInterface { view, init, update }) =
   { view
-  , init: init initVal
+  , init: init initData
   , update
   }
 
-getExtract :: forall html msg sta a. DataUiItf html msg sta a -> (sta -> DataResult a)
-getExtract (DataUiItf { extract }) = extract
+getExtract :: forall html msg sta a. DataUiInterface html msg sta a -> (sta -> DataResult a)
+getExtract (DataUiInterface { extract }) = extract
 
-hoistSrf :: forall srf1 srf2 msg sta a. (srf1 ~> srf2) -> DataUiItf srf1 msg sta a -> DataUiItf srf2 msg sta a
-hoistSrf nat (DataUiItf itf) = DataUiItf itf
+hoistSrf
+  :: forall srf1 srf2 msg sta a. (srf1 ~> srf2) -> DataUiInterface srf1 msg sta a -> DataUiInterface srf2 msg sta a
+hoistSrf nat (DataUiInterface itf) = DataUiInterface itf
   { view = itf.view >>> nat
   }
 
@@ -76,9 +77,9 @@ imapMsg
    . Functor srf
   => (msg1 -> msg2)
   -> (msg2 -> msg1)
-  -> DataUiItf srf msg1 sta a
-  -> DataUiItf srf msg2 sta a
-imapMsg mapMsg unmapMsg (DataUiItf itf) = DataUiItf
+  -> DataUiInterface srf msg1 sta a
+  -> DataUiInterface srf msg2 sta a
+imapMsg mapMsg unmapMsg (DataUiInterface itf) = DataUiInterface
   { init: itf.init
   , update: \msg state -> itf.update (unmapMsg msg) state
   , view: itf.view >>> map mapMsg
@@ -91,9 +92,9 @@ imapState
    . Functor srf
   => (sta1 -> sta2)
   -> (sta2 -> sta1)
-  -> DataUiItf srf msg sta1 a
-  -> DataUiItf srf msg sta2 a
-imapState mapState unmapState (DataUiItf itf) = DataUiItf
+  -> DataUiInterface srf msg sta1 a
+  -> DataUiInterface srf msg sta2 a
+imapState mapState unmapState (DataUiInterface itf) = DataUiInterface
   { init: itf.init >>> mapState
   , update: \msg state -> mapState $ itf.update msg (unmapState state)
   , view: unmapState >>> itf.view

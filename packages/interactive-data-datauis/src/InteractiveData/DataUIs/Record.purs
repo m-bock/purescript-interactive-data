@@ -33,7 +33,7 @@ recordViewEntries { viewRow } entries =
   withCtx \ctx ->
     let
       el =
-        {noFields: styleNode VD.div
+        { noFields: styleNode VD.div
             [ "font-style: italic"
             , "font-size: 10px"
             , "color: #999"

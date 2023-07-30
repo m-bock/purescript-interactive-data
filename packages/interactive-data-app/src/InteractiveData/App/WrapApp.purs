@@ -12,7 +12,7 @@ import Data.Either (either)
 import Data.Maybe (Maybe(..))
 import Data.Newtype (un)
 import Data.These (These(..))
-import DataMVC.Types (DataPathSegment, DataResult, DataUI(..), DataUiItf(..))
+import DataMVC.Types (DataPathSegment, DataResult, DataUI(..), DataUiInterface(..))
 import DataMVC.Types.DataUI (applyWrap, runDataUi)
 import InteractiveData.App.UI.Body as UI.Body
 import InteractiveData.App.UI.Footer as UI.Footer
@@ -306,10 +306,10 @@ wrapApp dataUi' =
       dataUi'' :: DataUI (IDSurface html) fm fs (fm msg) (fs sta) a
       dataUi'' = applyWrap dataUi'
 
-      itf_ :: DataUiItf (IDSurface html) (fm msg) (fs sta) a
+      itf_ :: DataUiInterface (IDSurface html) (fm msg) (fs sta) a
       itf_ = runDataUi dataUi'' ctx
 
-      DataUiItf itf = itf_
+      DataUiInterface itf = itf_
 
       view :: AppState (fs sta) -> IDSurface html (AppMsg (fm msg))
       view state = IDSurface \idSurfaceCtx ->
@@ -317,7 +317,7 @@ wrapApp dataUi' =
           (itf.view >>> runIdSurface idSurfaceCtx)
           state
     in
-      DataUiItf
+      DataUiInterface
         { name: itf.name
         , view
         , update: update itf.update

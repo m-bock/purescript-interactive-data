@@ -37,7 +37,7 @@ viewLayout { viewHeader, viewSidebar, viewBody, viewFooter } =
           -- , "left: 0px"
           -- , "right: 0px"
           -- , "bottom: 0px"
-          
+
           , "font-family: 'Signika Negative'"
           ]
       , header: styleNode VD.div

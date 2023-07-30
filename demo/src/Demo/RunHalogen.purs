@@ -2,23 +2,20 @@ module Demo.RunHalogen where
 
 import Prelude
 
-import Data.Maybe (Maybe(..))
-import DataMVC.Types (DataUiItf)
 import Effect (Effect)
 import Effect.Class.Console (log)
-import InteractiveData.Run as Run
+import InteractiveData.Entry (InteractiveDataApp)
 import VirtualDOM.Impl.Halogen (HalogenHtml)
 import VirtualDOM.Impl.Halogen as HI
 
 runHalogen
   :: forall msg sta a
    . Show a
-  => DataUiItf HalogenHtml msg sta a
+  => InteractiveDataApp HalogenHtml msg sta a
   -> Effect Unit
-runHalogen itf = do
+runHalogen app = do
   let
-    ui = Run.getUi Nothing itf
-    extract = Run.getExtract itf
+    {ui, extract} = app
   ui
     # HI.uiToHalogenComponent
         { onStateChange: \newState -> do

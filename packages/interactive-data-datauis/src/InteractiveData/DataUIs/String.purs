@@ -8,7 +8,7 @@ module InteractiveData.DataUIs.String
 import InteractiveData.Core.Prelude
 
 import Data.String as Str
-import DataMVC.Types (DataResult, DataUI(..), DataUiItf(..))
+import DataMVC.Types (DataResult, DataUI(..), DataUiInterface(..))
 
 import InteractiveData.Core (class IDHtml, IDSurface)
 import InteractiveData.Core as Core
@@ -170,7 +170,7 @@ string opt =
 
     { multiline, actions, maxLength } = cfg
   in
-    DataUI \_ -> DataUiItf
+    DataUI \_ -> DataUiInterface
       { name: "String"
       , view: \state -> Core.IDSurface \_ ->
           Core.DataTree

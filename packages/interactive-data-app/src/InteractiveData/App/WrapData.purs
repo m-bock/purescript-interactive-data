@@ -9,7 +9,7 @@ import InteractiveData.Core.Prelude
 import Data.Array as Array
 import Data.Array.NonEmpty (NonEmptyArray)
 import Data.Tuple (fst)
-import DataMVC.Types (DataUICtx(..), DataUiItf(..))
+import DataMVC.Types (DataUICtx(..), DataUiInterface(..))
 import DataMVC.Types.DataError (DataError, DataResult)
 import InteractiveData.App.UI.ActionButton (viewActionButton)
 import InteractiveData.App.UI.Card as UI.Card
@@ -307,12 +307,12 @@ viewDataTree { viewInner, viewHtml, extract, typeName } state@(WrapState { child
       , meta: Just meta
       }
 
-dataUiItf
+dataUiInterface
   :: forall html msg sta a
    . IDHtml html
-  => DataUiItf (IDSurface html) msg sta a
-  -> DataUiItf (IDSurface html) (WrapMsg msg) (WrapState sta) a
-dataUiItf (DataUiItf { name, extract, init, update, view }) = DataUiItf
+  => DataUiInterface (IDSurface html) msg sta a
+  -> DataUiInterface (IDSurface html) (WrapMsg msg) (WrapState sta) a
+dataUiInterface (DataUiInterface { name, extract, init, update, view }) = DataUiInterface
   { name
   , view: \state -> IDSurface \ctx ->
       viewDataTree
@@ -335,4 +335,4 @@ dataUiCtx
   :: forall html
    . IDHtml html
   => DataUICtx (IDSurface html) WrapMsg WrapState
-dataUiCtx = DataUICtx { wrap: dataUiItf }
+dataUiCtx = DataUICtx { wrap: dataUiInterface }
