@@ -4,7 +4,7 @@ build-ide:
     spago build --json-errors
 
 build:
-    spago build --pedantic-packages
+    spago build
 
 ci: format gen build
 
@@ -14,7 +14,7 @@ format:
     purs-tidy format-in-place "demo/src/**/*.purs"
     purs-tidy format-in-place "demo/test/**/*.purs"
 
-gen: gen-graph gen-readme gen-extra-packages
+gen: gen-graph gen-readme gen-extra-packages gen-assets
 
 gen-graph:
     dot -Tsvg assets/local-packages-graph.dot -o assets/local-packages-graph.svg
@@ -25,6 +25,12 @@ gen-readme:
 
 gen-extra-packages:
     node scripts/gen-extra-packages.js
+
+gen-assets:
+    purs-virtual-dom-assets \
+      --srcPath packages/interactive-data-app/assets \
+      --dstPath packages/interactive-data-app/src/InteractiveData/App/UI/Assets \
+      --baseModule 'InteractiveData.App.UI.Assets'
 
 dev: clean-parcel
     #!/bin/bash

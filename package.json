@@ -17,6 +17,7 @@
     "glob": "^10.3.3",
     "js-yaml": "^4.1.0",
     "purs-to-md": "^0.3.0",
+    "purs-virtual-dom-assets": "^0.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   }

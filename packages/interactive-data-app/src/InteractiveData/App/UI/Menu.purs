@@ -150,7 +150,8 @@ viewTree cfg@{ pathIsExpanded, viewRow, viewLabel } { path, tree } =
       { item: VD.div
       , sub: styleNode VD.div
           [ "padding-left: 15px" ]
-      , root: VD.div
+      , root: styleNode VD.div
+          [ "padding: 5px" ]
       }
 
   in
@@ -223,6 +224,11 @@ viewRow { onSetExpanded } { viewLabel, path, isExpanded, isLeaf } =
           , "width: 14px"
           , "scale: 0.4"
           ]
+      , iconDash: styleNode VD.div
+          [ "height: 20px"
+          , "width: 24px"
+          , "scale: 0.6"
+          ]
       }
 
   in
@@ -232,7 +238,9 @@ viewRow { onSetExpanded } { viewLabel, path, isExpanded, isLeaf } =
             else VD.onClick (onSetExpanded path (not isExpanded))
           ]
           [ if isLeaf then
-              VD.noHtml
+              el.iconDash
+                []
+                [ UI.Assets.viewDash ]
             else
               el.iconInner
                 []

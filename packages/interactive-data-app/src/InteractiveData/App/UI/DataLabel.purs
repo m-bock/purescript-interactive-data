@@ -118,7 +118,7 @@ viewDataLabel' { dataPath, mkTitle } { onHit, isSelected } = withCtx \ctx ->
     icon = case maybeSegment of
       Just (SegCase _) | isSelected -> UI.Assets.viewDiamondFilled
       Just (SegCase _) -> UI.Assets.viewDiamond
-      Just (SegField _) -> UI.Assets.viewLabel2
+      Just (SegField _) -> UI.Assets.viewLabel
       Nothing -> UI.Assets.viewHome
 
     title' :: String

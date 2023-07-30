@@ -2,62 +2,6 @@ module InteractiveData.App.UI.Assets where
 
 import VirtualDOM as VD
 
-viewTreeMenu :: forall html msg. VD.Html html => html msg
-viewTreeMenu =
-  VD.elem (VD.ElemName "svg")
-    [ VD.attr "width" "800px"
-    , VD.attr "height" "800px"
-    , VD.attr "viewBox" "0 0 400 400"
-    , VD.attr "fill" "none"
-    , VD.attr "xmlns" "http://www.w3.org/2000/svg"
-    ]
-    [ VD.elem (VD.ElemName "path")
-        [ VD.attr "d" "M203 64C201.497 149.148 199.374 261.958 203 335"
-        , VD.attr "stroke" "#000000"
-        , VD.attr "stroke-opacity" "0.9"
-        , VD.attr "stroke-width" "16"
-        , VD.attr "stroke-linecap" "round"
-        , VD.attr "stroke-linejoin" "round"
-        ]
-        []
-    , VD.elem (VD.ElemName "path")
-        [ VD.attr "d" "M263 267C221.502 270.141 178.013 281.069 137 275.39"
-        , VD.attr "stroke" "#000000"
-        , VD.attr "stroke-opacity" "0.9"
-        , VD.attr "stroke-width" "16"
-        , VD.attr "stroke-linecap" "round"
-        , VD.attr "stroke-linejoin" "round"
-        ]
-        []
-    , VD.elem (VD.ElemName "path")
-        [ VD.attr "d" "M248 211.191C219.278 210.419 173.975 212.182 156 213"
-        , VD.attr "stroke" "#000000"
-        , VD.attr "stroke-opacity" "0.9"
-        , VD.attr "stroke-width" "16"
-        , VD.attr "stroke-linecap" "round"
-        , VD.attr "stroke-linejoin" "round"
-        ]
-        []
-    , VD.elem (VD.ElemName "path")
-        [ VD.attr "d" "M227 151C209.488 149.283 191.824 149.403 174 149"
-        , VD.attr "stroke" "#000000"
-        , VD.attr "stroke-opacity" "0.9"
-        , VD.attr "stroke-width" "16"
-        , VD.attr "stroke-linecap" "round"
-        , VD.attr "stroke-linejoin" "round"
-        ]
-        []
-    , VD.elem (VD.ElemName "path")
-        [ VD.attr "d" "M210 102C205.442 102 200.669 102 196 102"
-        , VD.attr "stroke" "#000000"
-        , VD.attr "stroke-opacity" "0.9"
-        , VD.attr "stroke-width" "16"
-        , VD.attr "stroke-linecap" "round"
-        , VD.attr "stroke-linejoin" "round"
-        ]
-        []
-    ]
-
 viewSwitch :: forall html msg. VD.Html html => html msg
 viewSwitch =
   VD.elem (VD.ElemName "svg")
@@ -84,8 +28,7 @@ viewSwitch =
         ]
         []
     , VD.elem (VD.ElemName "path")
-        [ VD.attr "d"
-            "M18 12L20.913 9.08704V9.08704C20.961 9.03897 20.961 8.96103 20.913 8.91296V8.91296L18 6"
+        [ VD.attr "d" "M18 12L20.913 9.08704V9.08704C20.961 9.03897 20.961 8.96103 20.913 8.91296V8.91296L18 6"
         , VD.attr "stroke" "#323232"
         , VD.attr "stroke-width" "2"
         , VD.attr "stroke-linecap" "round"
@@ -93,8 +36,7 @@ viewSwitch =
         ]
         []
     , VD.elem (VD.ElemName "path")
-        [ VD.attr "d"
-            "M6 18L3.08704 15.087V15.087C3.03897 15.039 3.03897 14.961 3.08704 14.913V14.913L6 12"
+        [ VD.attr "d" "M6 18L3.08704 15.087V15.087C3.03897 15.039 3.03897 14.961 3.08704 14.913V14.913L6 12"
         , VD.attr "stroke" "#323232"
         , VD.attr "stroke-width" "2"
         , VD.attr "stroke-linecap" "round"
@@ -106,10 +48,7 @@ viewSwitch =
 viewPageNotFound :: forall html msg. VD.Html html => html msg
 viewPageNotFound =
   VD.elem (VD.ElemName "svg")
-    [ VD.attr "fill" "none"
-    , VD.attr "xmlns" "http://www.w3.org/2000/svg"
-    , VD.attr "viewBox" "38.15 62.11 73.28 86.01"
-    ]
+    [ VD.attr "fill" "none", VD.attr "xmlns" "http://www.w3.org/2000/svg", VD.attr "viewBox" "38.15 62.11 73.28 86.01" ]
     [ VD.elem (VD.ElemName "path")
         [ VD.attr "fill-rule" "evenodd"
         , VD.attr "clip-rule" "evenodd"
@@ -136,68 +75,11 @@ viewLevelUp =
         []
     ]
 
-viewLabel2 :: forall html msg. VD.Html html => html msg
-viewLabel2 =
-  VD.elem (VD.ElemName "svg")
-    [ VD.attr "fill" "#000000"
-    , VD.attr "xmlns" "http://www.w3.org/2000/svg"
-    , VD.attr "viewBox" "10 14 20 12"
-    ]
-    [ VD.elem (VD.ElemName "path")
-        [ VD.attr "d" "M25 14l5 6-5 6H10V14h15zm-1 2H12v8h12l3.5-4-3.5-4z" ]
-        []
-    ]
-
 viewLabel :: forall html msg. VD.Html html => html msg
 viewLabel =
   VD.elem (VD.ElemName "svg")
-    [ VD.attr "fill" "#000000"
-    , VD.attr "height" "800px"
-    , VD.attr "width" "800px"
-    , VD.attr "version" "1.1"
-    , VD.attr "id" "Capa_1"
-    , VD.attr "xmlns" "http://www.w3.org/2000/svg"
-    , VD.attr "xmlns:xlink" "http://www.w3.org/1999/xlink"
-    , VD.attr "viewBox" "0 0 486.82 486.82"
-    , VD.attr "xml:space" "preserve"
-    ]
-    [ VD.elem (VD.ElemName "g") []
-        [ VD.elem (VD.ElemName "path")
-            [ VD.attr "d"
-                "M486.82,21.213L465.607,0l-42.768,42.768H238.991L0,281.759L205.061,486.82l238.992-238.991V63.98L486.82,21.213z\r\n\t\t M414.053,235.403L205.061,444.394L42.427,281.759L251.418,72.768h141.421l-40.097,40.097c-14.56-6.167-32.029-3.326-43.898,8.543\r\n\t\tc-15.621,15.621-15.621,40.948,0,56.569c15.621,15.621,40.948,15.621,56.568,0c11.869-11.869,14.71-29.338,8.543-43.898\r\n\t\tl40.097-40.097V235.403z"
-            ]
-            []
-        ]
-    ]
-
-viewKeySolid :: forall html msg. VD.Html html => html msg
-viewKeySolid =
-  VD.elem (VD.ElemName "svg")
-    [ VD.attr "xmlns" "http://www.w3.org/2000/svg", VD.attr "viewBox" "0 0 512 512" ]
-    [ VD.elem (VD.ElemName "path")
-        [ VD.attr "d"
-            "M336 352c97.2 0 176-78.8 176-176S433.2 0 336 0S160 78.8 160 176c0 18.7 2.9 36.8 8.3 53.7L7 391c-4.5 4.5-7 10.6-7 17v80c0 13.3 10.7 24 24 24h80c13.3 0 24-10.7 24-24V448h40c13.3 0 24-10.7 24-24V384h40c6.4 0 12.5-2.5 17-7l33.3-33.3c16.9 5.4 35 8.3 53.7 8.3zM376 96a40 40 0 1 1 0 80 40 40 0 1 1 0-80z"
-        ]
-        []
-    ]
-
-viewJson :: forall html msg. VD.Html html => html msg
-viewJson =
-  VD.elem (VD.ElemName "svg")
-    [ VD.attr "width" "800px"
-    , VD.attr "height" "800px"
-    , VD.attr "viewBox" "0 0 16 16"
-    , VD.attr "xmlns" "http://www.w3.org/2000/svg"
-    , VD.attr "fill" "#000000"
-    ]
-    [ VD.elem (VD.ElemName "path")
-        [ VD.attr "fill-rule" "evenodd"
-        , VD.attr "clip-rule" "evenodd"
-        , VD.attr "d"
-            "M6 2.984V2h-.09c-.313 0-.616.062-.909.185a2.33 2.33 0 0 0-.775.53 2.23 2.23 0 0 0-.493.753v.001a3.542 3.542 0 0 0-.198.83v.002a6.08 6.08 0 0 0-.024.863c.012.29.018.58.018.869 0 .203-.04.393-.117.572v.001a1.504 1.504 0 0 1-.765.787 1.376 1.376 0 0 1-.558.115H2v.984h.09c.195 0 .38.04.556.121l.001.001c.178.078.329.184.455.318l.002.002c.13.13.233.285.307.465l.001.002c.078.18.117.368.117.566 0 .29-.006.58-.018.869-.012.296-.004.585.024.87v.001c.033.283.099.558.197.824v.001c.106.273.271.524.494.753.223.23.482.407.775.53.293.123.596.185.91.185H6v-.984h-.09c-.2 0-.387-.038-.563-.115a1.613 1.613 0 0 1-.457-.32 1.659 1.659 0 0 1-.309-.467c-.074-.18-.11-.37-.11-.573 0-.228.003-.453.011-.672.008-.228.008-.45 0-.665a4.639 4.639 0 0 0-.055-.64 2.682 2.682 0 0 0-.168-.609A2.284 2.284 0 0 0 3.522 8a2.284 2.284 0 0 0 .738-.955c.08-.192.135-.393.168-.602.033-.21.051-.423.055-.64.008-.22.008-.442 0-.666-.008-.224-.012-.45-.012-.678a1.47 1.47 0 0 1 .877-1.354 1.33 1.33 0 0 1 .563-.121H6zm4 10.032V14h.09c.313 0 .616-.062.909-.185.293-.123.552-.3.775-.53.223-.23.388-.48.493-.753v-.001c.1-.266.165-.543.198-.83v-.002c.028-.28.036-.567.024-.863-.012-.29-.018-.58-.018-.869 0-.203.04-.393.117-.572v-.001a1.502 1.502 0 0 1 .765-.787 1.38 1.38 0 0 1 .558-.115H14v-.984h-.09c-.196 0-.381-.04-.557-.121l-.001-.001a1.376 1.376 0 0 1-.455-.318l-.002-.002a1.415 1.415 0 0 1-.307-.465v-.002a1.405 1.405 0 0 1-.118-.566c0-.29.006-.58.018-.869a6.174 6.174 0 0 0-.024-.87v-.001a3.537 3.537 0 0 0-.197-.824v-.001a2.23 2.23 0 0 0-.494-.753 2.331 2.331 0 0 0-.775-.53 2.325 2.325 0 0 0-.91-.185H10v.984h.09c.2 0 .387.038.562.115.174.082.326.188.457.32.127.134.23.29.309.467.074.18.11.37.11.573 0 .228-.003.452-.011.672-.008.228-.008.45 0 .665.004.222.022.435.055.64.033.214.089.416.168.609a2.285 2.285 0 0 0 .738.955 2.285 2.285 0 0 0-.738.955 2.689 2.689 0 0 0-.168.602c-.033.21-.051.423-.055.64a9.15 9.15 0 0 0 0 .666c.008.224.012.45.012.678a1.471 1.471 0 0 1-.877 1.354 1.33 1.33 0 0 1-.563.121H10z"
-        ]
-        []
-    ]
+    [ VD.attr "fill" "#000000", VD.attr "xmlns" "http://www.w3.org/2000/svg", VD.attr "viewBox" "10 14 20 12" ]
+    [ VD.elem (VD.ElemName "path") [ VD.attr "d" "M25 14l5 6-5 6H10V14h15zm-1 2H12v8h12l3.5-4-3.5-4z" ] [] ]
 
 viewHome :: forall html msg. VD.Html html => html msg
 viewHome =
@@ -220,24 +102,16 @@ viewHome =
 viewExpandUp :: forall html msg. VD.Html html => html msg
 viewExpandUp =
   VD.elem (VD.ElemName "svg")
-    [ VD.attr "viewBox" "0 0 24 24"
-    , VD.attr "fill" "none"
-    , VD.attr "xmlns" "http://www.w3.org/2000/svg"
-    ]
-    [ VD.elem (VD.ElemName "path") [ VD.attr "d" "M18 18L12 12L6 18", VD.attr "stroke" "#222222" ]
-        []
+    [ VD.attr "viewBox" "0 0 24 24", VD.attr "fill" "none", VD.attr "xmlns" "http://www.w3.org/2000/svg" ]
+    [ VD.elem (VD.ElemName "path") [ VD.attr "d" "M18 18L12 12L6 18", VD.attr "stroke" "#222222" ] []
     , VD.elem (VD.ElemName "path") [ VD.attr "d" "M18 12L12 6L6 12", VD.attr "stroke" "#222222" ] []
     ]
 
 viewExpandDown :: forall html msg. VD.Html html => html msg
 viewExpandDown =
   VD.elem (VD.ElemName "svg")
-    [ VD.attr "viewBox" "0 0 24 24"
-    , VD.attr "fill" "none"
-    , VD.attr "xmlns" "http://www.w3.org/2000/svg"
-    ]
-    [ VD.elem (VD.ElemName "path") [ VD.attr "d" "M18 9L12 15L6 9", VD.attr "stroke" "#222222" ] []
-    ]
+    [ VD.attr "viewBox" "0 0 24 24", VD.attr "fill" "none", VD.attr "xmlns" "http://www.w3.org/2000/svg" ]
+    [ VD.elem (VD.ElemName "path") [ VD.attr "d" "M18 9L12 15L6 9", VD.attr "stroke" "#222222" ] [] ]
 
 viewDotMenuSolid :: forall html msg. VD.Html html => html msg
 viewDotMenuSolid =
@@ -257,9 +131,7 @@ viewDotMenuSolid =
         ]
         []
     , VD.elem (VD.ElemName "path")
-        [ VD.attr "d" "M6,13c-1.654,0-3,1.346-3,3s1.346,3,3,3s3-1.346,3-3S7.654,13,6,13z"
-        , VD.attr "id" "XMLID_289_"
-        ]
+        [ VD.attr "d" "M6,13c-1.654,0-3,1.346-3,3s1.346,3,3,3s3-1.346,3-3S7.654,13,6,13z", VD.attr "id" "XMLID_289_" ]
         []
     , VD.elem (VD.ElemName "path")
         [ VD.attr "d" "M26,13c-1.654,0-3,1.346-3,3s1.346,3,3,3s3-1.346,3-3S27.654,13,26,13z"
@@ -323,11 +195,7 @@ viewDotMenu =
 viewDiamondFilled :: forall html msg. VD.Html html => html msg
 viewDiamondFilled =
   VD.elem (VD.ElemName "svg")
-    [ VD.attr "fill" "#000000"
-    , VD.attr "width" "800"
-    , VD.attr "height" "800"
-    , VD.attr "viewBox" "0 0 32 32"
-    ]
+    [ VD.attr "fill" "#000000", VD.attr "width" "800", VD.attr "height" "800", VD.attr "viewBox" "0 0 32 32" ]
     [ VD.elem (VD.ElemName "path")
         [ VD.attr "d"
             "M 30.531,15.47 16.53,1.47 C 16.394,1.334 16.207,1.25 16,1.25 c -0.207,0 -0.395,0.084 -0.53,0.22 l -14,14 C 1.334,15.606 1.25,15.793 1.25,16 c 0,0.207 0.084,0.395 0.22,0.53 l 14,14.001 c 0.136,0.135 0.323,0.219 0.53,0.219 0.207,0 0.394,-0.084 0.53,-0.219 L 30.531,16.53 c 0.135,-0.136 0.218,-0.323 0.218,-0.53 0,-0.207 -0.083,-0.394 -0.218,-0.53 z M 16,28.939 3.061,16 16,3.061 28.939,16 Z"
@@ -357,6 +225,20 @@ viewDiamond =
     , VD.elem (VD.ElemName "path")
         [ VD.attr "d"
             "M30.531 15.47l-14.001-14c-0.136-0.136-0.323-0.22-0.53-0.22s-0.395 0.084-0.53 0.22l-14 14c-0.136 0.136-0.22 0.323-0.22 0.53s0.084 0.395 0.22 0.53l14 14.001c0.136 0.135 0.323 0.219 0.53 0.219s0.394-0.084 0.53-0.219l14.001-14.001c0.135-0.136 0.218-0.323 0.218-0.53s-0.083-0.394-0.218-0.53l0 0zM16 28.939l-12.939-12.939 12.939-12.939 12.939 12.939z"
+        ]
+        []
+    ]
+
+viewDash :: forall html msg. VD.Html html => html msg
+viewDash =
+  VD.elem (VD.ElemName "svg")
+    [ VD.attr "viewBox" "0 0 24 24", VD.attr "fill" "none", VD.attr "xmlns" "http://www.w3.org/2000/svg" ]
+    [ VD.elem (VD.ElemName "path")
+        [ VD.attr "d" "M3 12L21 12"
+        , VD.attr "stroke" "#000000"
+        , VD.attr "stroke-width" "2"
+        , VD.attr "stroke-linecap" "round"
+        , VD.attr "stroke-linejoin" "round"
         ]
         []
     ]
