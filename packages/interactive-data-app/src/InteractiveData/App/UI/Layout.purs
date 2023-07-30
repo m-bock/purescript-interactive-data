@@ -22,24 +22,29 @@ viewEmbedFont = VDE.style []
   [ VD.text "@import url('https://fonts.googleapis.com/css2?family=Signika+Negative:wght@300&display=swap')" ]
 
 viewLayout :: forall html msg. IDHtml html => ViewLayoutCfg html msg -> html msg
-viewLayout { viewHeader, viewSidebar, viewBody, viewFooter } =
+viewLayout { viewHeader, viewSidebar, viewBody, viewFooter } = withCtx \ctx ->
   let
     showSidebar :: Boolean
     showSidebar = isJust viewSidebar
 
     el =
       { layout: styleNode VD.div
-          [ "display: flex"
-          , "flex-direction: column"
-          , "height: 100%"
-          -- , "position: fixed"
-          -- , "top: 0px"
-          -- , "left: 0px"
-          -- , "right: 0px"
-          -- , "bottom: 0px"
-
-          , "font-family: 'Signika Negative'"
-          ]
+          $
+            ( if ctx.fullscreen then
+                [ "position: fixed"
+                , "top: 0px"
+                , "left: 0px"
+                , "right: 0px"
+                , "bottom: 0px"
+                ]
+              else []
+            )
+          /\
+            [ "display: flex"
+            , "flex-direction: column"
+            , "height: 100%"
+            , "font-family: 'Signika Negative'"
+            ]
       , header: styleNode VD.div
           [ "min-height: 70px"
           , "position: sticky"

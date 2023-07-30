@@ -4,7 +4,7 @@ import Prelude
 
 import Demo.EnvVars (EnvVars, Sample(..), getEnvVars)
 import Demo.RunHalogen (runHalogen)
-import Demo.Samples.Basic as Samples.Basic
+import Demo.Samples.Simple as Samples.Basic
 import Demo.Samples.Unwrapped as Samples.Unwrapped
 import Demo.Samples.EmbedReact as Samples.EmbedReact
 import Effect (Effect)
@@ -18,10 +18,10 @@ main envVarsObj = do
   case envVars."SAMPLE" of
     Unwrapped -> do
       pure unit
-      -- log "Running 'Unwrapped' sample"
-      -- let ui = Samples.Unwrapped.ui
-      -- runHalogen ui
-    Basic -> do
+    -- log "Running 'Unwrapped' sample"
+    -- let ui = Samples.Unwrapped.ui
+    -- runHalogen ui
+    Simple -> do
       log "Running 'Basic' sample"
       let sampleApp = Samples.Basic.sampleApp
       runHalogen sampleApp

@@ -47,7 +47,7 @@ instance ParseValue Sample where
 
 data Sample
   = Unwrapped
-  | Basic
+  | Simple
   | EmbedReact
 
 derive instance Generic Sample _

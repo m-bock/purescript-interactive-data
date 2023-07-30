@@ -15,7 +15,7 @@ runHalogen
   -> Effect Unit
 runHalogen app = do
   let
-    {ui, extract} = app
+    { ui, extract } = app
   ui
     # HI.uiToHalogenComponent
         { onStateChange: \newState -> do

@@ -35,16 +35,18 @@ toApp
    . Html html
   => { name :: String
      , initData :: Maybe a
+     , fullscreen :: Boolean
      }
   -> DataUI (IDSurface (IDHtmlT html)) WrapMsg WrapState msg sta a
   -> InteractiveDataApp html (AppMsg (WrapMsg msg)) (AppState (WrapState sta)) a
-toApp { name, initData } dataUi =
+toApp { name, fullscreen, initData } dataUi =
   let
     interface :: DataUiInterface html (AppMsg (WrapMsg msg)) (AppState (WrapState sta)) a
     interface =
       Run.run
         { name
         , context: App.WrapData.dataUiCtx
+        , fullscreen
         }
         $ App.wrapApp dataUi
 

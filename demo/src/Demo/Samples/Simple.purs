@@ -1,4 +1,4 @@
-module Demo.Samples.Basic where
+module Demo.Samples.Simple where
 
 import Prelude
 
@@ -28,5 +28,6 @@ sampleApp =
   ID.toApp
     { name: "Sample"
     , initData: Nothing
+    , fullscreen: true
     }
     sampleDataUi

@@ -23,5 +23,6 @@ sampleDataUi = ID.string_
 itf = Run.run
   { name: "Sample"
   , context: Run.ctxNoWrap
+  , fullscreen: true
   }
   sampleDataUi

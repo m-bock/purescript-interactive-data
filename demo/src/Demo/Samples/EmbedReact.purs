@@ -37,6 +37,7 @@ sampleApp =
   ID.toApp
     { name: "Sample"
     , initData: Nothing
+    , fullscreen: false
     }
     sampleDataUi
 

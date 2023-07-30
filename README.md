@@ -86,7 +86,8 @@ main = do
     sampleApp =
       ID.toApp
         { name: "Sample"
-        , initData : Nothing
+        , initData: Nothing
+        , fullscreen: true
         }
         sampleDataUi
 
@@ -94,7 +95,7 @@ main = do
     halogenComponent =
       HI.uiToHalogenComponent
         { onStateChange: \newState -> do
-            
+
             -- Use the `extract` function to get data out of the state
             log (show $ sampleApp.extract newState)
         }

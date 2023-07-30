@@ -6,10 +6,13 @@ build-ide:
 build:
     spago build --pedantic-packages
 
+ci: format gen build
+
 format:
     purs-tidy format-in-place "packages/*/src/**/*.purs"
     purs-tidy format-in-place "packages/*/test/**/*.purs"
-    purs-tidy format-in-place "packages/*/sample/**/*.purs"
+    purs-tidy format-in-place "demo/src/**/*.purs"
+    purs-tidy format-in-place "demo/test/**/*.purs"
 
 gen: gen-graph gen-readme gen-extra-packages
 
@@ -29,7 +32,7 @@ dev: clean-parcel
     export SAMPLE=basic
     parcel demo/static/index.html
 
-run-example:
+run-example: build clean-parcel
     #!/bin/bash
     FILE=`mktemp`
     node scripts/run-example.js $FILE

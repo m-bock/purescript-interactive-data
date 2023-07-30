@@ -22,6 +22,7 @@ type IDViewCtx =
   , viewMode :: ViewMode
   , root :: String /\ TreeMeta
   , mapMetaAlongPath :: PathInContext DataPathSegment -> PathInContext (DataPathSegment /\ TreeMeta)
+  , fullscreen :: Boolean
   }
 
 type PathInContext a =
@@ -44,6 +45,7 @@ defaultViewCtx { label } =
   , viewMode: Standalone
   , root: label /\ { errored: Right unit, typeName: mempty }
   , mapMetaAlongPath: \_ -> mempty
+  , fullscreen: true
   }
 
 --------------------------------------------------------------------------------
