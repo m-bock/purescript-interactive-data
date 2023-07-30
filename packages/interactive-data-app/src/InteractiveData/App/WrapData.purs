@@ -10,7 +10,7 @@ import Data.Array as Array
 import Data.Array.NonEmpty (NonEmptyArray)
 import Data.Tuple (fst)
 import DataMVC.Types (DataUICtx(..), DataUiItf(..))
-import DataMVC.Types.DataError (DataError(..), DataErrorCase(..), DataResult)
+import DataMVC.Types.DataError (DataError, DataResult)
 import InteractiveData.App.UI.ActionButton (viewActionButton)
 import InteractiveData.App.UI.Card as UI.Card
 import InteractiveData.App.UI.DataLabel as UI.DataLabel
@@ -29,12 +29,27 @@ import InteractiveData.Core.Types.IDDataUI (runIdSurface)
 import VirtualDOM as VD
 import VirtualDOM.Transformers.Ctx.Class (withCtx)
 import VirtualDOM.Transformers.OutMsg.Class (fromOutHtml)
-import VirtualDOM.Types (ElemNode)
+
+--------------------------------------------------------------------------------
+--- Types
+--------------------------------------------------------------------------------
 
 newtype WrapState sta = WrapState
   { childState :: sta }
 
 data WrapMsg msg = ChildMsg msg
+
+type ViewDataCfg (html :: Type -> Type) msg =
+  { label :: String
+  , typeName :: String
+  , viewContent :: html msg
+  , actions :: Array (DataAction msg)
+  , error :: Either (NonEmptyArray DataError) Unit
+  }
+
+--------------------------------------------------------------------------------
+--- Instances
+--------------------------------------------------------------------------------
 
 derive instance Eq sta => Eq (WrapState sta)
 derive instance Eq msg => Eq (WrapMsg msg)
@@ -48,13 +63,9 @@ instance Show sta => Show (WrapState sta) where
 instance Show msg => Show (WrapMsg msg) where
   show = genericShow
 
-type ViewDataCfg (html :: Type -> Type) msg =
-  { label :: String
-  , typeName :: String
-  , viewContent :: html msg
-  , actions :: Array (DataAction msg)
-  , error :: Either (NonEmptyArray DataError) Unit
-  }
+--------------------------------------------------------------------------------
+--- View
+--------------------------------------------------------------------------------
 
 viewData :: forall html msg. IDHtml html => ViewDataCfg html msg -> html msg
 viewData cfg =
@@ -69,27 +80,28 @@ viewStandalone :: forall html msg. IDHtml html => ViewDataCfg html msg -> html m
 viewStandalone { viewContent, actions } =
   withCtx \ctx ->
     let
-
       el =
-
         { data_: styleNode VD.div
             [ case ctx.viewMode of
-                Inline -> "background-color: #f8f8f8"
-                Standalone -> "background-color: white"
+                Inline ->
+                  "background-color: #f8f8f8"
+                Standalone ->
+                  "background-color: white"
             , "margin-bottom: 20px"
             , "position: relative"
             , "border-radius: 5px"
             , "padding-bottom: 5px"
             , "padding-top: 10px"
             , case ctx.viewMode of
-                Inline -> "border: 1px solid #ddd"
-                Standalone -> ""
+                Inline ->
+                  "border: 1px solid #ddd"
+                Standalone ->
+                  mempty
             ]
         , content: VD.div
         , actions:
             styleNode VD.div
-              [ "display: flex"
-              ]
+              [ "display: flex" ]
         , item:
             styleNode VD.div
               case ctx.viewMode of
@@ -105,7 +117,7 @@ viewStandalone { viewContent, actions } =
               , "margin-bottom: 10px"
               , "align-items: center"
               , "justify-content: right"
-              ] :: ElemNode html msg
+              ]
 
         }
 
@@ -143,8 +155,7 @@ viewInline { viewContent, typeName, actions } =
             , "font-weight: bold"
             ]
         , actions: styleNode VD.div
-            [ "display: flex"
-            ]
+            [ "display: flex" ]
         }
 
       typeRow :: html msg
@@ -177,15 +188,6 @@ viewInline { viewContent, typeName, actions } =
                   , size: UI.DataLabel.Large
                   }
           }
-
-printError :: DataError -> String
-printError (DataError _ case_) = case case_ of
-  DataErrNotYetDefined -> "Not yet defined"
-  DataErrMsg msg -> msg
-
---------------------------------------------------------------------------------
---- View
---------------------------------------------------------------------------------
 
 type ViewCfgStatic sta a =
   { name :: String
@@ -229,7 +231,12 @@ dataWrapperView cfgStatic cfgDynamic@{ viewInner } (WrapState { childState }) =
 --- Update
 --------------------------------------------------------------------------------
 
-dataWrapperUpdate :: forall msg sta. (msg -> sta -> sta) -> WrapMsg msg -> WrapState sta -> WrapState sta
+dataWrapperUpdate
+  :: forall msg sta
+   . (msg -> sta -> sta)
+  -> WrapMsg msg
+  -> WrapState sta
+  -> WrapState sta
 dataWrapperUpdate update' msg (WrapState sta) = WrapState case msg of
   ChildMsg childMsg -> sta
     { childState = update' childMsg sta.childState
@@ -239,7 +246,11 @@ dataWrapperUpdate update' msg (WrapState sta) = WrapState case msg of
 --- Extract
 --------------------------------------------------------------------------------
 
-dataWrapperExtract :: forall sta a. (sta -> DataResult a) -> WrapState sta -> DataResult a
+dataWrapperExtract
+  :: forall sta a
+   . (sta -> DataResult a)
+  -> WrapState sta
+  -> DataResult a
 dataWrapperExtract ext (WrapState state) = ext state.childState
 
 --------------------------------------------------------------------------------
@@ -316,10 +327,12 @@ dataUiItf (DataUiItf { name, extract, init, update, view }) = DataUiItf
   , init: dataWrapperInit init
   }
 
----
+--------------------------------------------------------------------------------
+--- DataUI Ctx
+--------------------------------------------------------------------------------
 
 dataUiCtx
   :: forall html
    . IDHtml html
   => DataUICtx (IDSurface html) WrapMsg WrapState
-dataUiCtx = DataUICtx { wrap: \s -> dataUiItf s }
+dataUiCtx = DataUICtx { wrap: dataUiItf }
