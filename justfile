@@ -6,7 +6,7 @@ build-ide:
 build:
     spago build
 
-ci: format gen build
+ci: format gen build check-git-clean
 
 dist-example: clean
     #!/bin/bash
@@ -67,3 +67,6 @@ purs-docs:
     #!/bin/bash
     shopt -s globstar;
     purs docs $(spago sources)
+
+check-git-clean:
+    [ -z "$(git status --porcelain)" ]
