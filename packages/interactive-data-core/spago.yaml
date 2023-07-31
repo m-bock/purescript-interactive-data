@@ -10,11 +10,11 @@ package:
     - these
     - tuples
     - convertable-options
-    - virtual-dom-styled
+    - chameleon-styled
     - either
     - identity
     - typelevel-prelude
-    - virtual-dom
+    - chameleon
   name: interactive-data-core
   test:
     dependencies: []

@@ -8,7 +8,7 @@ import InteractiveData.DataUIs (StringMsg, StringState)
 import InteractiveData.DataUIs as ID
 import InteractiveData.Run as Run
 import MVC.Types (UI)
-import VirtualDOM (class Html)
+import Chameleon (class Html)
 
 type Sample = String
 

@@ -18,7 +18,7 @@ import InteractiveData.Core (class IDHtml)
 import InteractiveData.Core.Classes.OptArgs (class OptArgs, getAllArgs)
 import InteractiveData.Core.Types.Common (PathInContext)
 import InteractiveData.Core.Types.DataPathExtra (segmentToString)
-import VirtualDOM as VD
+import Chameleon as VD
 
 type ViewDataLabelCfg =
   { dataPath :: PathInContext DataPathSegment

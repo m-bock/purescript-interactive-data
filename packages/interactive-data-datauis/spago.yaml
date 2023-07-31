@@ -9,8 +9,8 @@ package:
     - prelude
     - strings
     - tuples
-    - virtual-dom
-    - virtual-dom-styled
+    - chameleon
+    - chameleon-styled
   name: interactive-data-datauis
   test:
     dependencies: []

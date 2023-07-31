@@ -19,9 +19,9 @@ import InteractiveData.Core (class IDHtml, DataTree(..), DataTreeChildren(..), I
 import InteractiveData.Core.Types.IDDataUI (runIdSurface)
 import MVC.Record (RecordMsg, RecordState) as Export
 import MVC.Record (RecordMsg, RecordState, ViewResult)
-import VirtualDOM as VD
-import VirtualDOM.Styled (styleNode)
-import VirtualDOM.Transformers.Ctx.Class (putCtx, withCtx)
+import Chameleon as VD
+import Chameleon.Styled (styleNode)
+import Chameleon.Transformers.Ctx.Class (putCtx, withCtx)
 
 recordViewEntries
   :: forall html msg

@@ -6,8 +6,8 @@ module InteractiveData.App.UI.Layout
 import InteractiveData.Core.Prelude
 
 import InteractiveData.Core (class IDHtml)
-import VirtualDOM as VD
-import VirtualDOM.HTML.Elements as VDE
+import Chameleon as VD
+import Chameleon.HTML.Elements as VDE
 
 type ViewLayoutCfg (html :: Type -> Type) msg =
   { viewHeader :: html msg

@@ -8,7 +8,7 @@ package:
     - maybe
     - mvc
     - prelude
-    - virtual-dom
+    - chameleon
   name: interactive-data
   test:
     dependencies: []

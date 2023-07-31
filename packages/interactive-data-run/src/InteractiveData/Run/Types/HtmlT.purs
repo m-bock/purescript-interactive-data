@@ -6,12 +6,12 @@ module InteractiveData.Run.Types.HtmlT
 import Prelude
 
 import InteractiveData.Core (class IDHtml, IDOutMsg, IDViewCtx)
-import VirtualDOM (class Html)
-import VirtualDOM.Styled (class RegisterStyleMap, StyleT, runStyleT)
-import VirtualDOM.Transformers.Ctx.Class (class AskCtx, class Ctx)
-import VirtualDOM.Transformers.Ctx.Trans (CtxT, runCtxT)
-import VirtualDOM.Transformers.OutMsg.Class (class OutMsg, class RunOutMsg)
-import VirtualDOM.Transformers.OutMsg.Trans (OutMsgT, runOutMsgT)
+import Chameleon (class Html)
+import Chameleon.Styled (class RegisterStyleMap, StyleT, runStyleT)
+import Chameleon.Transformers.Ctx.Class (class AskCtx, class Ctx)
+import Chameleon.Transformers.Ctx.Trans (CtxT, runCtxT)
+import Chameleon.Transformers.OutMsg.Class (class OutMsg, class RunOutMsg)
+import Chameleon.Transformers.OutMsg.Trans (OutMsgT, runOutMsgT)
 
 newtype IDHtmlT html a = IDHtmlT
   ( CtxT IDViewCtx

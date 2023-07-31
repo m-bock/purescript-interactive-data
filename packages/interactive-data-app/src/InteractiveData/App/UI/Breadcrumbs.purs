@@ -10,8 +10,8 @@ import DataMVC.Types (DataPathSegment)
 import InteractiveData.App.UI.Icons as UI.Icons
 import InteractiveData.Core (class IDHtml)
 import InteractiveData.Core.Types.Common (PathInContext)
-import VirtualDOM as VD
-import VirtualDOM.Styled (styleNode)
+import Chameleon as VD
+import Chameleon.Styled (styleNode)
 
 viewBreadcrumbs
   :: forall html msg

@@ -15,7 +15,7 @@ import InteractiveData.Core (IDSurface)
 import InteractiveData.Run as Run
 import InteractiveData.Run.Types.HtmlT (IDHtmlT)
 import MVC.Types (UI)
-import VirtualDOM (class Html)
+import Chameleon (class Html)
 
 --------------------------------------------------------------------------------
 --- Types

@@ -22,9 +22,9 @@ package:
     - react-basic-hooks
     - tuples
     - typedenv
-    - virtual-dom
-    - virtual-dom-halogen
-    - virtual-dom-react-basic
+    - chameleon
+    - chameleon-halogen
+    - chameleon-react-basic
   test:
     dependencies: []
     main: Test.Main

@@ -8,8 +8,8 @@ package:
     - mvc
     - newtype
     - prelude
-    - virtual-dom
-    - virtual-dom-styled
+    - chameleon
+    - chameleon-styled
   test:
     dependencies: []
     main: Test.Main

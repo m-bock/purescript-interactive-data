@@ -14,7 +14,7 @@ import InteractiveData.App.UI.Card as UI.Card
 import InteractiveData.App.UI.DataLabel as UI.DataLabel
 import InteractiveData.Core (class IDHtml)
 import InteractiveData.Core.Types.Common (PathInContext, unPathInContext)
-import VirtualDOM as VD
+import Chameleon as VD
 
 type ViewFooterCfg msg =
   { errors :: Array DataError

@@ -26,9 +26,9 @@ import InteractiveData.Core
   )
 import InteractiveData.Core.Types.DataPathExtra (dataPathToStrings, segmentToString)
 import InteractiveData.Core.Types.IDDataUI (runIdSurface)
-import VirtualDOM as VD
-import VirtualDOM.Transformers.Ctx.Class (withCtx)
-import VirtualDOM.Transformers.OutMsg.Class (fromOutHtml)
+import Chameleon as VD
+import Chameleon.Transformers.Ctx.Class (withCtx)
+import Chameleon.Transformers.OutMsg.Class (fromOutHtml)
 
 --------------------------------------------------------------------------------
 --- Types

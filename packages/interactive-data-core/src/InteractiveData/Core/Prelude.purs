@@ -246,7 +246,7 @@ import Data.These
   , thisOrBoth
   ) as Export
 
-import VirtualDOM.Styled
+import Chameleon.Styled
   ( class IsStyle
   , class RegisterStyleMap
   , Anim
@@ -268,5 +268,5 @@ import VirtualDOM.Styled
   , toStyle
   ) as Export
 --import InteractiveData.Types as Export
-import VirtualDOM.Transformers.Ctx.Class (class AskCtx, class Ctx, putCtx, setCtx, withCtx) as Export
+import Chameleon.Transformers.Ctx.Class (class AskCtx, class Ctx, putCtx, setCtx, withCtx) as Export
 --import InteractiveData.Defaults as Export

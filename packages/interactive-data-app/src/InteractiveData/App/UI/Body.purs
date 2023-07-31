@@ -6,7 +6,7 @@ module InteractiveData.App.UI.Body
 import InteractiveData.Core.Prelude
 
 import InteractiveData.Core (class IDHtml)
-import VirtualDOM as VD
+import Chameleon as VD
 
 type ViewBodyCfg (html :: Type -> Type) msg =
   { viewContent :: html msg

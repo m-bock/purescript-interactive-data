@@ -14,8 +14,8 @@ import React.Basic.DOM (css)
 import React.Basic.DOM as DOM
 import React.Basic.Hooks ((/\))
 import React.Basic.Hooks as React
-import VirtualDOM.Impl.ReactBasic as RI
-import VirtualDOM.Impl.ReactBasic.Html (ReactHtml, defaultConfig, runReactHtml)
+import Chameleon.Impl.ReactBasic as RI
+import Chameleon.Impl.ReactBasic.Html (ReactHtml, defaultConfig, runReactHtml)
 
 type Sample =
   { firstName :: String

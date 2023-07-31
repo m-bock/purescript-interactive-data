@@ -4,10 +4,10 @@ module InteractiveData.Core.Classes.IDHtml
 
 import InteractiveData.Core.Types.IDOutMsg (IDOutMsg)
 import InteractiveData.Core.Types.IDViewCtx (IDViewCtx)
-import VirtualDOM (class Html)
-import VirtualDOM.Styled (class RegisterStyleMap)
-import VirtualDOM.Transformers.Ctx.Class (class Ctx)
-import VirtualDOM.Transformers.OutMsg.Class (class RunOutMsg)
+import Chameleon (class Html)
+import Chameleon.Styled (class RegisterStyleMap)
+import Chameleon.Transformers.Ctx.Class (class Ctx)
+import Chameleon.Transformers.OutMsg.Class (class RunOutMsg)
 
 class
   ( Html html

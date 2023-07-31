@@ -22,7 +22,7 @@ import InteractiveData.App.UI.Types.SumTree (SumTree(..), treeIsLeaf)
 import InteractiveData.Core (class IDHtml)
 import InteractiveData.Core.Types.DataPathExtra (dataPathToStrings)
 import InteractiveData.Core.Types.DataTree (TreeMeta)
-import VirtualDOM as VD
+import Chameleon as VD
 
 -------------------------------------------------------------------------------
 --- Types

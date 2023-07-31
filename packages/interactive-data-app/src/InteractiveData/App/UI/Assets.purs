@@ -1,6 +1,6 @@
 module InteractiveData.App.UI.Assets where
 
-import VirtualDOM as VD
+import Chameleon as VD
 
 viewSwitch :: forall html msg. VD.Html html => html msg
 viewSwitch =

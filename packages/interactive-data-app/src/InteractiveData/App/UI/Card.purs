@@ -8,7 +8,7 @@ module InteractiveData.App.UI.Card
 import InteractiveData.Core.Prelude
 
 import InteractiveData.Core (class IDHtml)
-import VirtualDOM as VD
+import Chameleon as VD
 
 type ViewCardCfg (html :: Type -> Type) msg =
   { viewBody :: html msg

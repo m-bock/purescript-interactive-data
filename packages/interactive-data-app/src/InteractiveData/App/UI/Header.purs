@@ -11,7 +11,7 @@ import InteractiveData.App.UI.Breadcrumbs as UI.Breadcrumbs
 import InteractiveData.App.UI.DataLabel as UI.DataLabel
 import InteractiveData.Core (class IDHtml)
 import InteractiveData.Core.Types.Common (PathInContext, unPathInContext)
-import VirtualDOM as VD
+import Chameleon as VD
 
 type ViewHeaderCfg msg =
   { dataPath :: Array DataPathSegment

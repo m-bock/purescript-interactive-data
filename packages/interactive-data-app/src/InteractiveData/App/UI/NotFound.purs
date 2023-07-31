@@ -8,7 +8,7 @@ import InteractiveData.Core.Prelude
 import Data.String as Str
 import InteractiveData.Core (class IDHtml)
 import InteractiveData.App.UI.Assets as UI.Assets
-import VirtualDOM as VD
+import Chameleon as VD
 
 type ViewNotFoundCfg msg =
   { onBackToHome :: msg

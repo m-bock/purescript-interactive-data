@@ -7,8 +7,8 @@ import InteractiveData.Core.Prelude
 import Data.String.NonEmpty as NES
 import Data.String.NonEmpty.CodeUnits as Str
 import InteractiveData.Core (class IDHtml)
-import VirtualDOM as VD
-import VirtualDOM.Styled (styleNode)
+import Chameleon as VD
+import Chameleon.Styled (styleNode)
 
 breadCrumb :: forall html msg. IDHtml html => html msg
 breadCrumb = mkIcon '›'

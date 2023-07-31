@@ -14,7 +14,7 @@ import InteractiveData.Core (class IDHtml, IDSurface)
 import InteractiveData.Core as Core
 import InteractiveData.Core.Classes.OptArgs (class OptArgs, getAllArgs)
 
-import VirtualDOM as VD
+import Chameleon as VD
 
 -------------------------------------------------------------------------------
 --- Types

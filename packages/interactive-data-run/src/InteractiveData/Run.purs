@@ -17,7 +17,7 @@ import InteractiveData.Core.Types.IDDataUI (runIdSurface)
 import InteractiveData.Core.Types.IDViewCtx (defaultViewCtx)
 import InteractiveData.Run.Types.HtmlT (IDHtmlT, runIDHtmlT)
 import MVC.Types (UI)
-import VirtualDOM (class Html)
+import Chameleon (class Html)
 
 run
   :: forall html fm fs msg sta a

@@ -6,7 +6,7 @@ import Data.Maybe (Maybe(..))
 import InteractiveData (class IDHtml, DataUI, IDSurface)
 import InteractiveData as ID
 import InteractiveData.Entry (InteractiveDataApp)
-import VirtualDOM (class Html)
+import Chameleon (class Html)
 
 type Sample =
   { firstName :: String

@@ -5,8 +5,8 @@ import Prelude
 import Effect (Effect)
 import Effect.Class.Console (log)
 import InteractiveData.Entry (InteractiveDataApp)
-import VirtualDOM.Impl.Halogen (HalogenHtml)
-import VirtualDOM.Impl.Halogen as HI
+import Chameleon.Impl.Halogen (HalogenHtml)
+import Chameleon.Impl.Halogen as HI
 
 runHalogen
   :: forall msg sta a

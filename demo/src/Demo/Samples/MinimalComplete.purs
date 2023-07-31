@@ -6,7 +6,7 @@ import Data.Maybe (Maybe(..))
 import Effect (Effect)
 import Effect.Class.Console (log)
 import InteractiveData as ID
-import VirtualDOM.Impl.Halogen as HI
+import Chameleon.Impl.Halogen as HI
 
 main :: Effect Unit
 main = do

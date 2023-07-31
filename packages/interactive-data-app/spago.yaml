@@ -1,6 +1,9 @@
 package:
   dependencies:
     - arrays
+    - chameleon
+    - chameleon-styled
+    - chameleon-transformers
     - data-mvc
     - either
     - foldable-traversable
@@ -12,8 +15,6 @@ package:
     - strings
     - these
     - tuples
-    - virtual-dom
-    - virtual-dom-styled
   name: interactive-data-app
   test:
     dependencies: []
