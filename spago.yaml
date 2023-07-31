@@ -1,21 +1,6 @@
 workspace:
-  extra_packages:
-    data-mvc:
-      git: https://github.com/thought2/purescript-data-mvc.git
-      ref: a414b169821d708552ffbafe8d55553e56feac77
-      dependencies:
-        - arrays
-        - bifunctors
-        - mvc
-        - either
-        - heterogeneous
-        - maybe
-        - newtype
-        - prelude
-        - profunctor
-        - record
-        - variant
+  extra_packages: {}
   package_set:
-    registry: 31.3.0
+    registry: 31.4.0
   build_opts:
     pedantic_packages: true
