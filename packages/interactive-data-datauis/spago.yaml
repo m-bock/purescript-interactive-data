@@ -11,6 +11,7 @@ package:
     - tuples
     - chameleon
     - chameleon-styled
+    - chameleon-transformers
   name: interactive-data-datauis
   test:
     dependencies: []
