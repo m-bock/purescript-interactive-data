@@ -1,15 +1,5 @@
 workspace:
   extra_packages:
-    mvc:
-      git: https://github.com/thought2/purescript-mvc.git
-      ref: 884cf062846de0cc11a505816d73ba63204cedcc
-      dependencies:
-        - heterogeneous
-        - maybe
-        - newtype
-        - prelude
-        - record
-        - variant
     data-mvc:
       git: https://github.com/thought2/purescript-data-mvc.git
       ref: a414b169821d708552ffbafe8d55553e56feac77

@@ -1,6 +1,9 @@
 package:
   name: interactive-data-run
   dependencies:
+    - chameleon
+    - chameleon-styled
+    - chameleon-transformers
     - data-mvc
     - identity
     - interactive-data-core
@@ -8,8 +11,6 @@ package:
     - mvc
     - newtype
     - prelude
-    - chameleon
-    - chameleon-styled
   test:
     dependencies: []
     main: Test.Main

@@ -15,6 +15,7 @@ package:
     - identity
     - typelevel-prelude
     - chameleon
+    - chameleon-transformers
   name: interactive-data-core
   test:
     dependencies: []
