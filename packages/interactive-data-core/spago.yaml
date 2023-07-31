@@ -22,8 +22,9 @@ package:
     main: Test.Main
 
   publish:
-    version: 0.0.4
+    version: 0.0.5
     license: BSD-3-Clause
     location:
       githubOwner: thought2
       githubRepo: purescript-interactive-data
+      subdir: packages/interactive-data-core
