@@ -70,3 +70,6 @@ purs-docs:
 
 check-git-clean:
     [ " M docs/extra-packages.yaml" = "$(git status --porcelain)" ]
+
+mk-single-pkg:
+    node scripts/mk-single-pkg.js
