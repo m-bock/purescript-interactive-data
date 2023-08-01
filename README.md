@@ -1,10 +1,10 @@
 # purescript-interactive-data
 
-![ci](https://github.com/thought2/purescript-interactive-data/actions/workflows/ci.yml/badge.svg)
-
 ![interactive-data](./assets/logo.svg)
 
 Composable UIs for interactive data.
+
+![ci](https://github.com/thought2/purescript-interactive-data/actions/workflows/ci.yaml/badge.svg)
 
 ## Discaimer ⚠
 
