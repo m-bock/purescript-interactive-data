@@ -8,7 +8,7 @@ build:
 
 ci: format gen build check-git-clean
 
-dist-example: clean
+dist-example: clean build
     #!/bin/bash
     export FRAMEWORK=halogen
     export SAMPLE=Simple
