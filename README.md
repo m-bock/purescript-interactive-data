@@ -131,7 +131,7 @@ main = do
 
 We also need to create a simple html file and a `main.js` file to run the web app.
 
-_index.html_
+_static/index.html_
 
 ```html
 <html>
@@ -142,7 +142,7 @@ _index.html_
 </html>
 ```
 
-_main.js_
+_static/main.js_
 
 ```js
 import { main } from "../output/Main/index.js";
@@ -154,7 +154,7 @@ main();
 
 ```
 spago build
-parcel index.html
+parcel static/index.html
 ```
 
 Go to http://localhost:1234
