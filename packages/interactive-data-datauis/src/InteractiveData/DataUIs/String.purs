@@ -1,8 +1,10 @@
 module InteractiveData.DataUIs.String
   ( StringMsg
   , StringState
+  , CfgString
   , string
   , string_
+  , defaultCfgString
   ) where
 
 import InteractiveData.Core.Prelude
@@ -57,12 +59,13 @@ stringUpdate msg (StringState state) =
 -------------------------------------------------------------------------------
 
 type CfgView =
-  { multiline :: { inline :: Boolean, standalone :: Boolean }
+  { multilineInline :: Boolean
+  , multilineStandalone :: Boolean
   , maxLength :: Maybe Int
   }
 
 stringView :: forall html. Core.IDHtml html => CfgView -> StringState -> html StringMsg
-stringView { multiline, maxLength } (StringState state) = withCtx \ctx ->
+stringView { multilineInline, multilineStandalone, maxLength } (StringState state) = withCtx \ctx ->
   let
     el =
       { root: VD.div
@@ -105,13 +108,13 @@ stringView { multiline, maxLength } (StringState state) = withCtx \ctx ->
     case ctx.viewMode of
       Core.Standalone ->
         el.root []
-          [ getLineInput multiline.standalone
+          [ getLineInput multilineStandalone
           , el.details []
               [ VD.text ("Length: " <> show (Str.length state)) ]
           ]
       Core.Inline ->
         el.root []
-          [ getLineInput multiline.inline
+          [ getLineInput multilineInline
           ]
 
 -------------------------------------------------------------------------------
@@ -139,20 +142,16 @@ stringActions =
 -------------------------------------------------------------------------------
 
 type CfgString msg =
-  { multiline ::
-      { inline :: Boolean
-      , standalone :: Boolean
-      }
+  { multilineInline :: Boolean
+  , multilineStandalone :: Boolean
   , actions :: Array (Core.DataAction msg)
   , maxLength :: Maybe Int
   }
 
-defaults :: CfgString StringMsg
-defaults =
-  { multiline:
-      { inline: false
-      , standalone: true
-      }
+defaultCfgString :: CfgString StringMsg
+defaultCfgString =
+  { multilineInline: false
+  , multilineStandalone: true
   , actions: stringActions
   , maxLength: Nothing
   }
@@ -166,15 +165,15 @@ string
 string opt =
   let
     cfg :: CfgString StringMsg
-    cfg = getAllArgs defaults opt
+    cfg = getAllArgs defaultCfgString opt
 
-    { multiline, actions, maxLength } = cfg
+    { multilineInline, multilineStandalone, actions, maxLength } = cfg
   in
     DataUI \_ -> DataUiInterface
       { name: "String"
       , view: \state -> Core.IDSurface \_ ->
           Core.DataTree
-            { view: stringView { multiline, maxLength } state
+            { view: stringView { multilineInline, multilineStandalone, maxLength } state
             , actions
             , children: Core.Fields []
             , meta: Nothing
