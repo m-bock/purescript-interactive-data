@@ -1,9 +1,6 @@
 import * as fs from "fs";
-import * as cp from "child_process";
 
 const source = fs.readFileSync("./README.md", "utf8").toString();
-
-// const x = cp.spawnSync('purs-to-md', ['--input-purs', '' , '--output-md', '-']).stdout.toString().trim();
 
 const patch = fs
   .readFileSync("./demo/src/Demo/Samples/MinimalComplete.purs", "utf8")
@@ -35,8 +32,7 @@ const patchAll = (patchData) => (source_) => {
 //
 
 const patchData = {
-  demo: codeBlock(patch),
-  details: "foo",
+  demo: codeBlock(patch)
 };
 
 const result = patchAll(patchData)(source);
