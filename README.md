@@ -2,13 +2,13 @@
 
 ![ci](https://github.com/thought2/purescript-interactive-data/actions/workflows/ci.yml/badge.svg)
 
-## Discaimer
-
-This library is in early development and the API is not stable yet. Things may not yet work as expected.
-
 ![interactive-data](./assets/logo.svg)
 
 Composable UIs for interactive data.
+
+## Discaimer ⚠
+
+This library is in early development and the API is not stable yet. Things may not yet work as expected.
 
 ## Features
 
