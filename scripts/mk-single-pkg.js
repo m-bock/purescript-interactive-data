@@ -139,11 +139,11 @@ const main = () => {
     "utf8"
   );
 
-  cp.execsync(`git add *`, { cwd: tgtRepoDir });
-  cp.execsync(`git commit -m "v${version}"`, {
+  cp.execSync(`git add *`, { cwd: tgtRepoDir });
+  cp.execSync(`git commit -m "v${version}"`, {
     cwd: tgtRepoDir,
   });
-  cp.execsync(`git tag v${version}`, { cwd: tgtRepoDir });
+  cp.execSync(`git tag v${version}`, { cwd: tgtRepoDir });
 
   spagoEnsureRanges(tgtRepoDir);
 };
