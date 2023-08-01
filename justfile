@@ -8,13 +8,19 @@ build:
 
 ci: format gen build check-git-clean
 
-dist-example: clean build
+dist-example: build
     #!/bin/bash
     export FRAMEWORK=halogen
     export SAMPLE=Simple
     mv output/package.json output/package.json.bak
-    parcel build demo/static/index.html
+    parcel build \
+      --dist-dir dist/purescript-interactive-data \
+      --public-url /purescript-interactive-data/ \
+      demo/static/index.html
     mv output/package.json.bak output/package.json
+
+run-dist:
+    http-server dist
 
 format:
     purs-tidy format-in-place "packages/*/src/**/*.purs"
