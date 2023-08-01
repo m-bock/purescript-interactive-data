@@ -6,6 +6,25 @@ Composable UIs for interactive data.
 
 ![ci](https://github.com/thought2/purescript-interactive-data/actions/workflows/ci.yaml/badge.svg)
 
+
+## Table of Contents
+
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+- [Discaimer ⚠](#discaimer-)
+- [Live Demo](#live-demo)
+- [Features](#features)
+- [Supported types](#supported-types)
+- [Getting started](#getting-started)
+  - [Installation](#installation)
+  - [Minimal complete example](#minimal-complete-example)
+  - [Run](#run)
+- [Contributing](#contributing)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+
 ## Discaimer ⚠
 
 This library is in early development and the API is not stable yet. Things may not yet work as expected.
@@ -34,19 +53,6 @@ The following types are supported out of the box:
 
 - Strings
 - Records
-
-## Table of Contents
-
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-
-- [Getting started](#getting-started)
-  - [Installation](#installation)
-  - [Minimal complete example](#minimal-complete-example)
-  - [Run](#run)
-- [Contributing](#contributing)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 ## Getting started
 
