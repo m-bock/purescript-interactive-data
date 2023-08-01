@@ -10,6 +10,12 @@ Composable UIs for interactive data.
 
 This library is in early development and the API is not stable yet. Things may not yet work as expected.
 
+## Live Demo
+
+<img src="https://github.com/thought2/assets/blob/ae1e971611b02c4a6bcd42124e4e1d43aa2e537e/interactive-data/demo1.png" width="200">
+
+[thought2.github.io/purescript-interactive-data](https://thought2.github.io/purescript-interactive-data)
+
 ## Features
 
 - **Framework agnostic**
