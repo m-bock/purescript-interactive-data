@@ -4,8 +4,7 @@ module InteractiveData.Core.Classes.OptArgs
   , getAllArgs
   , class OptArgsMixed
   , getAllArgsMixed
-  )
-  where
+  ) where
 
 import Prelude
 
