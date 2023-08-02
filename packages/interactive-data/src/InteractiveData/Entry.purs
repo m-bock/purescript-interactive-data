@@ -1,7 +1,8 @@
 module InteractiveData.Entry
   ( InteractiveDataApp
   , ToAppCfg
-  , ToAppOpt
+  , ToAppMandatory
+  , ToAppOptional
   , defaultToAppCfg
   , toApp
   ) where
@@ -16,7 +17,7 @@ import InteractiveData.App as App
 import InteractiveData.App.WrapData (WrapMsg, WrapState)
 import InteractiveData.App.WrapData as App.WrapData
 import InteractiveData.Core (IDSurface)
-import InteractiveData.Core.Classes.OptArgs (class MixedOptArgs, mixedGetAllArgs)
+import InteractiveData.Core.Classes.OptArgs (class OptArgsMixed, getAllArgsMixed)
 import InteractiveData.Run as Run
 import InteractiveData.Run.Types.HtmlT (IDHtmlT)
 import MVC.Types (UI)
@@ -34,33 +35,39 @@ type InteractiveDataApp html msg sta a =
 --- Functions
 --------------------------------------------------------------------------------
 
-type ToAppCfg a =
-  { name :: String
-  | ToAppOpt a
-  }
+type ToAppCfg a = Record (ToAppMandatory (ToAppOptional a ()))
 
-type ToAppOpt a =
-  ( initData :: Maybe a
-  , fullscreen :: Boolean
+type ToAppMandatory r =
+  ( name :: String
+  | r
   )
 
-defaultToAppCfg :: forall a. Record (ToAppOpt a)
+type ToAppOptional a r =
+  ( initData :: Maybe a
+  , fullscreen :: Boolean
+  | r
+  )
+
+defaultToAppCfg :: forall a. Record (ToAppOptional a ())
 defaultToAppCfg =
   { initData: Nothing
   , fullscreen: false
   }
 
 toApp
-  :: forall html opt msg sta a
+  :: forall html given msg sta a
    . Html html
-  => MixedOptArgs (ToAppCfg a) (ToAppOpt a) opt
-  => opt
+  => OptArgsMixed
+       (ToAppCfg a)
+       (ToAppOptional a ())
+       given
+  => given
   -> DataUI (IDSurface (IDHtmlT html)) WrapMsg WrapState msg sta a
   -> InteractiveDataApp html (AppMsg (WrapMsg msg)) (AppState (WrapState sta)) a
-toApp opt dataUi =
+toApp given dataUi =
   let
     cfg :: ToAppCfg a
-    cfg = mixedGetAllArgs defaultToAppCfg opt
+    cfg = getAllArgsMixed defaultToAppCfg given
 
     { name, fullscreen, initData } = cfg
 

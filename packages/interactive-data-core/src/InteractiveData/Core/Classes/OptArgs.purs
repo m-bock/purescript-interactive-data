@@ -1,9 +1,9 @@
 module InteractiveData.Core.Classes.OptArgs
   ( NoConvert
   , class OptArgs
-  , class MixedOptArgs
   , getAllArgs
-  , mixedGetAllArgs
+  , class OptArgsMixed
+  , getAllArgsMixed
   )
   where
 
@@ -28,13 +28,14 @@ instance
 
 --------------------------------------------------------------------------------
 
-class MixedOptArgs all defaults given | all -> defaults given  where
-  mixedGetAllArgs :: Record defaults -> given -> all
+---
+class OptArgsMixed all defaults given | all -> defaults given where
+  getAllArgsMixed :: Record defaults -> given -> all
 
 instance
   ( ConvertOptionsWithDefaults NoConvert (Record defaults) given all
   ) =>
-  MixedOptArgs all defaults given
+  OptArgsMixed all defaults given
   where
-  mixedGetAllArgs defaults given = convertOptionsWithDefaults NoConvert defaults given
+  getAllArgsMixed defaults given = convertOptionsWithDefaults NoConvert defaults given
 
