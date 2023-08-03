@@ -1,5 +1,5 @@
 module InteractiveData.Run.Types.HtmlT
-  ( IDHtmlT
+  ( IDHtmlT(..)
   , runIDHtmlT
   ) where
 
