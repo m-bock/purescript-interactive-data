@@ -1,9 +1,11 @@
 module InteractiveData.DataUIs.Record
-  ( record'
-  , record_
-  , mkSegmentStatic
+  ( mkSegmentStatic
+  , mkSurface
   , module Export
-  ) where
+  , record'
+  , record_
+  )
+  where
 
 import Prelude
 
