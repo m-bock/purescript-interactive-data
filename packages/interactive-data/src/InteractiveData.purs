@@ -5,6 +5,10 @@ import InteractiveData.DataUIs
   , StringState
   , string
   , string_
+  , NumberMsg
+  , NumberState
+  , number
+  , number_
   , RecordMsg
   , RecordState
   , record_

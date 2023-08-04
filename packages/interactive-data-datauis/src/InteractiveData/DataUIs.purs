@@ -7,6 +7,13 @@ import InteractiveData.DataUIs.String
   , string_
   ) as Export
 
+import InteractiveData.DataUIs.Number
+  ( NumberMsg
+  , NumberState
+  , number
+  , number_
+  ) as Export
+
 import InteractiveData.DataUIs.Record
   ( RecordMsg
   , RecordState

@@ -10,6 +10,7 @@ module InteractiveData.DataUIs.Number
 import InteractiveData.Core.Prelude
 
 import Chameleon as VD
+import InteractiveData.UI.Slider as UI.Slider
 
 -------------------------------------------------------------------------------
 --- Types
@@ -56,7 +57,7 @@ type CfgNumberView =
 view :: forall html. IDHtml html => CfgNumberView -> NumberState -> html NumberMsg
 view
   _
-  _ =
+  (NumberState val) =
   withCtx \ctx ->
     let
       el =
@@ -67,11 +68,25 @@ view
       case ctx.viewMode of
         Standalone ->
           el.root []
-            [ VD.text "number"
+            [ VD.text (show val)
+            , UI.Slider.view
+                { min: 0.0
+                , max: 100.0
+                , step: 1.0
+                , value: val
+                , onChange: SetNumber
+                }
             ]
         Inline ->
           el.root []
-            [ VD.text "number"
+            [ VD.text (show val)
+            , UI.Slider.view
+                { min: 0.0
+                , max: 100.0
+                , step: 1.0
+                , value: val
+                , onChange: SetNumber
+                }
             ]
 
 -------------------------------------------------------------------------------
