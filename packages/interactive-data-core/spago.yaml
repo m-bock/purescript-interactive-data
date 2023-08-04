@@ -9,10 +9,12 @@ package:
     - data-mvc
     - dodo-printer
     - either
+    - heterogeneous
     - identity
     - maybe
     - newtype
     - prelude
+    - record
     - these
     - tuples
     - typelevel-prelude

@@ -9,12 +9,9 @@ module InteractiveData.DataUIs.String
 
 import InteractiveData.Core.Prelude
 
-import Data.String as Str
-import DataMVC.Types (DataResult, DataUI(..), DataUiInterface(..))
-
-import InteractiveData.Core (class IDHtml, IDSurface)
-import InteractiveData.Core as Core
 import Chameleon as VD
+import Data.String as Str
+import InteractiveData.Core.Util.RecordProjection (pick)
 
 -------------------------------------------------------------------------------
 --- Types
@@ -33,22 +30,22 @@ derive newtype instance Show StringState
 --- Extract
 -------------------------------------------------------------------------------
 
-stringExtract :: StringState -> DataResult String
-stringExtract (StringState s) = Right s
+extract :: StringState -> DataResult String
+extract (StringState s) = Right s
 
 -------------------------------------------------------------------------------
 --- Init
 -------------------------------------------------------------------------------
 
-stringInit :: Maybe String -> StringState
-stringInit optStr = StringState $ fromMaybe "" optStr
+init :: Maybe String -> StringState
+init optStr = StringState $ fromMaybe "" optStr
 
 -------------------------------------------------------------------------------
 --- Update
 -------------------------------------------------------------------------------
 
-stringUpdate :: StringMsg -> StringState -> StringState
-stringUpdate msg (StringState state) =
+update :: StringMsg -> StringState -> StringState
+update msg (StringState state) =
   case msg of
     SetString newString -> StringState newString
     Clear -> StringState ""
@@ -64,8 +61,8 @@ type CfgStringView =
   , maxLength :: Maybe Int
   }
 
-stringView :: forall html. IDHtml html => CfgStringView -> StringState -> html StringMsg
-stringView
+view :: forall html. IDHtml html => CfgStringView -> StringState -> html StringMsg
+view
   { multilineInline, multilineStandalone, maxLength }
   (StringState state) =
   withCtx \ctx ->
@@ -109,13 +106,13 @@ stringView
         else singleLineInput
     in
       case ctx.viewMode of
-        Core.Standalone ->
+        Standalone ->
           el.root []
             [ getLineInput multilineStandalone
             , el.details []
                 [ VD.text ("Length: " <> show (Str.length state)) ]
             ]
-        Core.Inline ->
+        Inline ->
           el.root []
             [ getLineInput multilineInline
             ]
@@ -124,14 +121,14 @@ stringView
 --- DataActions
 -------------------------------------------------------------------------------
 
-stringActions :: Array (Core.DataAction StringMsg)
-stringActions =
-  [ Core.DataAction
+actions :: Array (DataAction StringMsg)
+actions =
+  [ DataAction
       { label: "Clear"
       , msg: This $ Clear
       , description: "Clear the string"
       }
-  , Core.DataAction
+  , DataAction
       { label: "Trim"
       , msg: This $ TrimString
       , description: "Trim whitespace from string"
@@ -145,7 +142,7 @@ stringActions =
 type CfgString msg =
   { multilineInline :: Boolean
   , multilineStandalone :: Boolean
-  , actions :: Array (Core.DataAction msg)
+  , actions :: Array (DataAction msg)
   , maxLength :: Maybe Int
   }
 
@@ -153,14 +150,14 @@ defaultCfgString :: CfgString StringMsg
 defaultCfgString =
   { multilineInline: false
   , multilineStandalone: true
-  , actions: stringActions
+  , actions
   , maxLength: Nothing
   }
 
 string
   :: forall opt html fm fs
    . OptArgs (CfgString StringMsg) opt
-  => Core.IDHtml html
+  => IDHtml html
   => opt
   -> DataUI (IDSurface html) fm fs StringMsg StringState String
 string opt =
@@ -168,20 +165,19 @@ string opt =
     cfg :: CfgString StringMsg
     cfg = getAllArgs defaultCfgString opt
 
-    { multilineInline, multilineStandalone, actions, maxLength } = cfg
   in
     DataUI \_ -> DataUiInterface
       { name: "String"
-      , view: \state -> Core.IDSurface \_ ->
-          Core.DataTree
-            { view: stringView { multilineInline, multilineStandalone, maxLength } state
+      , view: \state -> IDSurface \_ ->
+          DataTree
+            { view: view (pick cfg) state
             , actions
-            , children: Core.Fields []
+            , children: Fields []
             , meta: Nothing
             }
-      , extract: stringExtract
-      , update: stringUpdate
-      , init: stringInit
+      , extract
+      , update
+      , init
       }
 
 string_

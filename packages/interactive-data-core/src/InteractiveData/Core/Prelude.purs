@@ -226,3 +226,29 @@ import InteractiveData.Core.Classes.OptArgs
   , getAllArgs
   , getAllArgsMixed
   ) as Export
+
+import DataMVC.Types
+  ( DataError
+  , DataErrorCase(..)
+  , DataPath
+  , DataPathSegment(..)
+  , DataPathSegmentField(..)
+  , DataResult
+  , DataUI(..)
+  , DataUICtx(..)
+  , DataUiInterface(..)
+  ) as Export
+
+import InteractiveData.Core
+  ( class IDHtml
+  , DataAction(..)
+  , DataTree(..)
+  , DataTreeChildren(..)
+  , IDOutMsg(..)
+  , IDSurface(..)
+  , IDSurfaceCtx
+  , IDViewCtx
+  , PathInContext
+  , TreeMeta
+  , ViewMode(..)
+  ) as Export

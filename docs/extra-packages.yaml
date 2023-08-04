@@ -2,7 +2,7 @@ workspace:
   extra_packages:
     interactive-data-run:
       git: ssh://git@github.com/thought2/purescript-interactive-data.git
-      ref: a83c426470936fd1347ebd096341ca73d0bfbc08
+      ref: 4c7298fd31fbdb557538dfc04f174642d70c745e
       subdir: packages/interactive-data-run
       dependencies:
         - chameleon
@@ -17,7 +17,7 @@ workspace:
         - prelude
     interactive-data-datauis:
       git: ssh://git@github.com/thought2/purescript-interactive-data.git
-      ref: a83c426470936fd1347ebd096341ca73d0bfbc08
+      ref: 4c7298fd31fbdb557538dfc04f174642d70c745e
       subdir: packages/interactive-data-datauis
       dependencies:
         - arrays
@@ -34,7 +34,7 @@ workspace:
         - chameleon-transformers
     interactive-data-core:
       git: ssh://git@github.com/thought2/purescript-interactive-data.git
-      ref: a83c426470936fd1347ebd096341ca73d0bfbc08
+      ref: 4c7298fd31fbdb557538dfc04f174642d70c745e
       subdir: packages/interactive-data-core
       dependencies:
         - arrays
@@ -55,17 +55,16 @@ workspace:
         - typelevel-prelude
     interactive-data-class:
       git: ssh://git@github.com/thought2/purescript-interactive-data.git
-      ref: a83c426470936fd1347ebd096341ca73d0bfbc08
+      ref: 4c7298fd31fbdb557538dfc04f174642d70c745e
       subdir: packages/interactive-data-class
       dependencies: []
     interactive-data-app:
       git: ssh://git@github.com/thought2/purescript-interactive-data.git
-      ref: a83c426470936fd1347ebd096341ca73d0bfbc08
+      ref: 4c7298fd31fbdb557538dfc04f174642d70c745e
       subdir: packages/interactive-data-app
       dependencies:
         - arrays
         - chameleon
-        - chameleon-styled
         - chameleon-transformers
         - data-mvc
         - either
@@ -80,7 +79,7 @@ workspace:
         - tuples
     interactive-data:
       git: ssh://git@github.com/thought2/purescript-interactive-data.git
-      ref: a83c426470936fd1347ebd096341ca73d0bfbc08
+      ref: 4c7298fd31fbdb557538dfc04f174642d70c745e
       subdir: packages/interactive-data
       dependencies:
         - data-mvc
