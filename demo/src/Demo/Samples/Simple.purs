@@ -1,6 +1,5 @@
 module Demo.Samples.Simple where
 
-
 import Data.Maybe (Maybe(..))
 import InteractiveData (class IDHtml, DataUI, IDSurface)
 import InteractiveData as ID
