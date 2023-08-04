@@ -12,11 +12,16 @@ main :: Effect Unit
 main = do
   let
     -- 1. Compose a "Data UI" for a specific type
-    sampleDataUi =
-      ID.record_
-        { firstName: ID.string_
-        , lastName: ID.string_
-        }
+    sampleDataUi = ID.record_
+      { user: ID.record_
+          { firstName: ID.string_
+          , lastName: ID.string_
+          }
+      , meta: ID.record_
+          { description: ID.string_
+          , headline: ID.string_
+          }
+      }
 
     -- 2. Turn "Data UI" into an App interface
     sampleApp =

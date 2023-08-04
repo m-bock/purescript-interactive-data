@@ -6,7 +6,6 @@ Composable UIs for interactive data.
 
 ![ci](https://github.com/thought2/purescript-interactive-data/actions/workflows/ci.yaml/badge.svg)
 
-
 ## Table of Contents
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
@@ -23,7 +22,6 @@ Composable UIs for interactive data.
 - [Contributing](#contributing)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
 
 ## Discaimer ⚠
 
@@ -80,9 +78,10 @@ The following types are supported out of the box:
 
 The following example renders with `Halogen`. Have a look at the demo folder for more examples in different frameworks.
 
-_src/Main.purs_
+<!-- START demoApp -->
 
-<!-- START demo -->
+_src/Main.purs:_
+
 ```hs
 module Main where
 
@@ -98,11 +97,16 @@ main :: Effect Unit
 main = do
   let
     -- 1. Compose a "Data UI" for a specific type
-    sampleDataUi =
-      ID.record_
-        { firstName: ID.string_
-        , lastName: ID.string_
-        }
+    sampleDataUi = ID.record_
+      { user: ID.record_
+          { firstName: ID.string_
+          , lastName: ID.string_
+          }
+      , meta: ID.record_
+          { description: ID.string_
+          , headline: ID.string_
+          }
+      }
 
     -- 2. Turn "Data UI" into an App interface
     sampleApp =
@@ -125,16 +129,21 @@ main = do
 
   -- 4. Finally mount the component to the DOM
   HI.uiMountAtId "root" halogenComponent
-
 ```
-<!-- END demo -->
+
+<!-- END demoApp -->
 
 We also need to create a simple html file and a `main.js` file to run the web app.
 
-_static/index.html_
+<!-- START demoHtml -->
+
+_static/index.html:_
 
 ```html
 <html>
+  <head>
+    <title>Interactive Data Sample</title>
+  </head>
   <body>
     <script src="main.js" type="module"></script>
     <div id="root"></div>
@@ -142,13 +151,19 @@ _static/index.html_
 </html>
 ```
 
-_static/main.js_
+<!-- END demoHtml -->
+
+<!-- START demoIndex -->
+
+_static/main.js:_
 
 ```js
 import { main } from "../output/Main/index.js";
 
 main();
 ```
+
+<!-- END demoIndex -->
 
 ### Run
 
@@ -161,15 +176,21 @@ Go to http://localhost:1234
 
 ## Contributing
 
-The codebase is split into several local packages.
+If you have ideas for improvements or want to contribute, please open an issue or PR.
 
-|                         |                                                                 |
-| ----------------------- | --------------------------------------------------------------- |
-| [core][link-core]       | Core types that are used by most other packages                 |
-| [app][link-app]         | UI for App layer that adds general navigation and data wrapping |
-| [datauis][link-datauis] | UIs for specific data types                                     |
-| [run][link-run]         | Machinery that turns data UIs into a regualar UI components     |
-| [class][link-class]     | Type class for generic Data UI creation                         |
+The codebase is split into several local packages organized in a spago monorepo.
+
+| Package name                             | Description                                                     |
+| ---------------------------------------- | --------------------------------------------------------------- |
+| interactive-data-[core][link-core]       | Core types that are used by most other packages                 |
+| interactive-data-[app][link-app]         | UI for App layer that adds general navigation and data wrapping |
+| interactive-data-[datauis][link-datauis] | UIs for specific data types                                     |
+| interactive-data-[run][link-run]         | Machinery that turns data UIs into a regualar UI components     |
+| interactive-data-[class][link-class]     | Type class for generic Data UI creation                         |
+
+Due to a limitation of the current spago@next release local packages are not yet published separately. Instead they are published as a single package located in a generated [mirror repo](https://github.com/thought2/purescript-interactive-data.all).
+
+To give you an idea of the package structure, here is a _Dependency graph of local packages:_
 
 ![!image](./assets/local-packages-graph.svg)
 

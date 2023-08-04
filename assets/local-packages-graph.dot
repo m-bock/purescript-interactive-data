@@ -1,7 +1,15 @@
 digraph G {
-
-  node [shape=rect; style=rounded; fontname="Arial"];
-  datauis;
+  node [
+    shape=rect;
+    style=rounded;
+    fontname="Arial"
+    fontsize="10"
+  ];
+  
+  edge [
+    arrowsize=0.5
+  ];
+  
   
   datauis -> core;
   class -> datauis;

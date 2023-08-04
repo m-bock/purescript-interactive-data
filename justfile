@@ -32,7 +32,7 @@ gen-graph:
     dot -Tsvg assets/local-packages-graph.dot -o assets/local-packages-graph.svg
 
 gen-readme:
-    node scripts/patch-readme.js
+    node scripts/gen-readme.js
     doctoc README.md
 
 gen-extra-packages:
