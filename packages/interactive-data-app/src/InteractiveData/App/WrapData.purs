@@ -25,7 +25,7 @@ import InteractiveData.Core
   , ViewMode(..)
   )
 import InteractiveData.Core.Types.DataPathExtra (dataPathToStrings, segmentToString)
-import InteractiveData.Core.Types.IDDataUI (runIdSurface)
+import InteractiveData.Core.Types.IDSurface (runIdSurface)
 import Chameleon as VD
 import Chameleon.Transformers.Ctx.Class (withCtx)
 import Chameleon.Transformers.OutMsg.Class (fromOutHtml)

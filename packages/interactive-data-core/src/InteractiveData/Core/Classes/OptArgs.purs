@@ -15,6 +15,10 @@ data NoConvert = NoConvert
 instance ConvertOption NoConvert sym a a where
   convertOption _ _ = identity
 
+--------------------------------------------------------------------------------
+--- OptArgs
+--------------------------------------------------------------------------------
+
 class OptArgs all given where
   getAllArgs :: all -> given -> all
 
@@ -23,11 +27,15 @@ instance
   ) =>
   OptArgs all given
   where
-  getAllArgs defaults given = convertOptionsWithDefaults NoConvert defaults given
+  getAllArgs defaults given = convertOptionsWithDefaults
+    NoConvert
+    defaults
+    given
 
 --------------------------------------------------------------------------------
+--- OptArgsMixed
+--------------------------------------------------------------------------------
 
----
 class OptArgsMixed all defaults given | all -> defaults given where
   getAllArgsMixed :: Record defaults -> given -> all
 
@@ -36,5 +44,8 @@ instance
   ) =>
   OptArgsMixed all defaults given
   where
-  getAllArgsMixed defaults given = convertOptionsWithDefaults NoConvert defaults given
+  getAllArgsMixed defaults given = convertOptionsWithDefaults
+    NoConvert
+    defaults
+    given
 

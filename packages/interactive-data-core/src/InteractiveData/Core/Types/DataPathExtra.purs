@@ -1,4 +1,8 @@
-module InteractiveData.Core.Types.DataPathExtra where
+module InteractiveData.Core.Types.DataPathExtra
+  ( dataPathFromStrings
+  , dataPathToStrings
+  , segmentToString
+  ) where
 
 import Prelude
 
@@ -12,39 +16,56 @@ import InteractiveData.Core.Types.DataTree (DataTree(..), DataTreeChildren(..))
 dataPathFromStrings :: forall srf msg. Array String -> DataTree srf msg -> Maybe DataPath
 dataPathFromStrings = loop []
   where
-  loop accum strPath (DataTree { children }) = case Array.uncons strPath, children of
-    Nothing, _ ->
-      Just accum
 
-    Just { head, tail },
-    Case (caseTree /\ tree)
-      | head == caseTree ->
-          loop (accum <> [ SegCase head ]) tail tree
+  loop :: Array DataPathSegment -> Array String -> DataTree srf msg -> Maybe (Array DataPathSegment)
+  loop accum strPath (DataTree { children }) =
+    let
+      unconsResult :: Maybe { head :: String, tail :: Array String }
+      unconsResult = Array.uncons strPath
+    in
+      case { unconsResult, children } of
+        { unconsResult: Nothing
+        , children: _
+        } ->
+          Just accum
 
-    Just { head, tail },
-    Fields fields
-      | (Just (key /\ tree)) <- Array.find (fst >>> (isDataPathSegmentField head)) fields ->
+        { unconsResult: Just { head, tail }
+        , children: Case (caseTree /\ tree)
+        }
+          | head == caseTree ->
+              loop (accum <> [ SegCase head ]) tail tree
+
+        { unconsResult: Just { head, tail }
+        , children: Fields fields
+        } -> do
+          key /\ tree <- Array.find (fst >>> (isDataPathSegmentField head)) fields
           loop (accum <> [ SegField key ]) tail tree
 
-    _, _ -> Nothing
+        { unconsResult: Just _
+        , children: _
+        } ->
+          Nothing
 
 isDataPathSegmentField :: String -> DataPathSegmentField -> Boolean
 isDataPathSegmentField str = case _ of
-  SegStaticKey s -> str == s
-  SegStaticIndex i -> str == show i
-  SegDynamicKey s -> str == s
-  SegDynamicIndex i -> str == show i
-  SegVirtualKey s -> str == s
+  SegStaticKey keyStr -> str == keyStr
+  SegStaticIndex index -> str == show index
+  SegDynamicKey keyStr -> str == keyStr
+  SegDynamicIndex index -> str == show index
+  SegVirtualKey keyStr -> str == keyStr
 
 dataPathToStrings :: DataPath -> Array String
 dataPathToStrings = map segmentToString
 
 segmentToString :: DataPathSegment -> String
 segmentToString = case _ of
-  SegCase s -> s
-  SegField x -> case x of
-    SegStaticKey s -> s
-    SegStaticIndex i -> show i
-    SegDynamicKey s -> s
-    SegDynamicIndex i -> show i
-    SegVirtualKey s -> s
+  SegCase caseStr -> caseStr
+  SegField field -> fieldToString field
+
+fieldToString :: DataPathSegmentField -> String
+fieldToString = case _ of
+  SegStaticKey keyStr -> keyStr
+  SegStaticIndex index -> show index
+  SegDynamicKey keyStr -> keyStr
+  SegDynamicIndex index -> show index
+  SegVirtualKey keyStr -> keyStr

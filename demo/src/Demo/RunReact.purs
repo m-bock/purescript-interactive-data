@@ -1,7 +1,6 @@
 module Demo.RunReact
   ( runReact
-  )
-  where
+  ) where
 
 import Prelude
 

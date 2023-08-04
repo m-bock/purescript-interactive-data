@@ -1,7 +1,6 @@
 module Demo.RunHalogen
   ( runHalogen
-  )
-  where
+  ) where
 
 import Prelude
 

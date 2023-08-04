@@ -5,7 +5,6 @@ module InteractiveData.Core.Types.DataTree
   , find
   , hasNoChildren
   , mapMetadataAlongPath
-  , mkDataTree
   , setChildren
   ) where
 
@@ -15,7 +14,7 @@ import Data.Array as Array
 import Data.Eq (class Eq1)
 import Data.Generic.Rep (class Generic)
 import Data.Maybe (Maybe(..))
-import Data.Newtype (class Newtype, over, un)
+import Data.Newtype (class Newtype, over)
 import Data.Ord (class Ord1)
 import Data.Tuple (fst)
 import Data.Tuple.Nested (type (/\), (/\))
@@ -49,17 +48,10 @@ data DataTreeChildren srf msg
 --------------------------------------------------------------------------------
 
 hasNoChildren :: forall srf msg. DataTree srf msg -> Boolean
-hasNoChildren = un DataTree >>> _.children >>> case _ of
-  Fields fields -> Array.null fields
-  Case _ -> false
-
-mkDataTree :: forall srf msg. { view :: srf msg, typeName :: String } -> DataTree srf msg
-mkDataTree { view, typeName } = DataTree
-  { view
-  , children: Fields []
-  , actions: []
-  , meta: Nothing
-  }
+hasNoChildren (DataTree { children }) =
+  case children of
+    Fields fields -> Array.null fields
+    Case _ -> false
 
 mapMetadataAlongPath
   :: forall srf msg
@@ -68,23 +60,39 @@ mapMetadataAlongPath
   -> Maybe (Array (DataPathSegment /\ TreeMeta))
 mapMetadataAlongPath = loop []
   where
-  loop accum path (DataTree { children }) = case Array.uncons path, children of
-    Nothing, _ ->
-      Just accum
+  loop
+    :: Array (DataPathSegment /\ TreeMeta)
+    -> Array DataPathSegment
+    -> DataTree srf msg
+    -> Maybe (Array (DataPathSegment /\ TreeMeta))
+  loop accum path (DataTree { children }) =
+    let
+      unconsResult :: Maybe { head :: DataPathSegment, tail :: Array DataPathSegment }
+      unconsResult = Array.uncons path
+    in
+      case { unconsResult, children } of
+        { unconsResult: Nothing
+        , children: _
+        } ->
+          Just accum
 
-    Just { head: SegCase casePath, tail },
-    Case (caseTree /\ tree@(DataTree { meta }))
-      | casePath == caseTree -> do
-          meta' <- meta
-          loop (accum <> [ SegCase casePath /\ meta' ]) tail tree
+        { unconsResult: Just { head: SegCase casePath, tail }
+        , children: Case (caseTree /\ tree@(DataTree { meta }))
+        } ->
+          if casePath == caseTree then do
+            meta' <- meta
+            loop (accum <> [ SegCase casePath /\ meta' ]) tail tree
+          else
+            Nothing
 
-    Just { head: SegField fieldPath, tail },
-    Fields fields
-      | (Just (_ /\ tree@(DataTree { meta }))) <- Array.find (fst >>> (_ == fieldPath)) fields -> do
+        { unconsResult: Just { head: SegField fieldPath, tail }
+        , children: Fields fields
+        } -> do
+          _ /\ tree@(DataTree { meta }) <- Array.find (fst >>> (_ == fieldPath)) fields
           meta' <- meta
           loop (accum <> [ SegField fieldPath /\ meta' ]) tail tree
 
-    _, _ -> Nothing
+        _ -> Nothing
 
 setChildren :: forall srf msg. DataTreeChildren srf msg -> DataTree srf msg -> DataTree srf msg
 setChildren children = over DataTree _ { children = children }
@@ -108,9 +116,9 @@ find path tree@(DataTree { children }) =
           find tail tree'
 
     Just { head: SegField fieldPath, tail },
-    Fields fields
-      | (Just (_ /\ tree')) <- Array.find (fst >>> (_ == fieldPath)) fields ->
-          find tail tree'
+    Fields fields -> do
+      _ /\ tree' <- Array.find (fst >>> (_ == fieldPath)) fields
+      find tail tree'
 
     _, _ -> Nothing
 

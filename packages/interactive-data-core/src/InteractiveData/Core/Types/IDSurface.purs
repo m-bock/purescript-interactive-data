@@ -1,4 +1,4 @@
-module InteractiveData.Core.Types.IDDataUI
+module InteractiveData.Core.Types.IDSurface
   ( IDSurface(..)
   , IDSurfaceCtx
   , mapErrors
@@ -10,7 +10,7 @@ import Prelude
 import Data.Array.NonEmpty (NonEmptyArray)
 import Data.Bifunctor (lmap)
 import Data.Newtype (class Newtype)
-import DataMVC.Types (DataPath, DataUI(..), DataUICtx, DataUiInterface(..))
+import DataMVC.Types (DataPath, DataUI(..), DataUiInterface(..))
 import DataMVC.Types.DataError (DataError)
 import InteractiveData.Core.Types.DataTree (DataTree)
 

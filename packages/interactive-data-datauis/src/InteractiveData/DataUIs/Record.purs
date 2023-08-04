@@ -4,8 +4,7 @@ module InteractiveData.DataUIs.Record
   , module Export
   , record'
   , record_
-  )
-  where
+  ) where
 
 import Prelude
 
@@ -18,7 +17,7 @@ import DataMVC.Record.DataUI (class DataUiRecord)
 import DataMVC.Record.DataUI as R
 import DataMVC.Types (DataPathSegment(..), DataPathSegmentField(..), DataUI)
 import InteractiveData.Core (class IDHtml, DataTree(..), DataTreeChildren(..), IDSurface(..), ViewMode(..))
-import InteractiveData.Core.Types.IDDataUI (runIdSurface)
+import InteractiveData.Core.Types.IDSurface (runIdSurface)
 import MVC.Record (RecordMsg, RecordState) as Export
 import MVC.Record (RecordMsg, RecordState, ViewResult)
 import Chameleon as VD

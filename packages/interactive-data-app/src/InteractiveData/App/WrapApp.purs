@@ -34,7 +34,7 @@ import InteractiveData.Core
   )
 import InteractiveData.Core.Types.DataPathExtra (dataPathFromStrings, dataPathToStrings)
 import InteractiveData.Core.Types.DataTree as DT
-import InteractiveData.Core.Types.IDDataUI (runIdSurface)
+import InteractiveData.Core.Types.IDSurface (runIdSurface)
 import Chameleon as VD
 import Chameleon.Transformers.Ctx.Class (class Ctx, putCtx, withCtx)
 import Chameleon.Transformers.OutMsg.Class (runOutMsg)

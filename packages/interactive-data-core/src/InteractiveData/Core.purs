@@ -1,14 +1,14 @@
 module InteractiveData.Core (module Export) where
 
 import InteractiveData.Core.Classes.IDHtml (class IDHtml) as Export
-import InteractiveData.Core.Types.DataAction (DataAction(..), Icon(..)) as Export
+import InteractiveData.Core.Types.DataAction (DataAction(..)) as Export
 
 import InteractiveData.Core.Types.DataTree
   ( DataTree(..)
   , DataTreeChildren(..)
   , TreeMeta
   ) as Export
-import InteractiveData.Core.Types.IDDataUI
+import InteractiveData.Core.Types.IDSurface
   ( IDSurface(..)
   , IDSurfaceCtx
   ) as Export
