@@ -1,114 +1,18 @@
-module InteractiveData.Core.Prelude (module Export) where
+module InteractiveData.Core.Prelude
+  ( module Export
+  , module Prelude
+  ) where
 
 import Prelude
-  ( class Applicative
-  , class Apply
-  , class Bind
-  , class BooleanAlgebra
-  , class Bounded
-  , class Category
-  , class CommutativeRing
-  , class Discard
-  , class DivisionRing
-  , class Eq
-  , class EuclideanRing
-  , class Field
-  , class Functor
-  , class HeytingAlgebra
-  , class Monad
-  , class Monoid
-  , class Ord
-  , class Ring
-  , class Semigroup
-  , class Semigroupoid
-  , class Semiring
-  , class Show
-  , type (~>)
-  , Ordering(..)
-  , Unit
-  , Void
-  , absurd
-  , add
-  , ap
-  , append
-  , apply
-  , between
-  , bind
-  , bottom
-  , clamp
-  , compare
-  , comparing
-  , compose
-  , conj
-  , const
-  , degree
-  , discard
-  , disj
-  , div
-  , eq
-  , flap
-  , flip
-  , gcd
-  , identity
-  , ifM
-  , join
-  , lcm
-  , liftA1
-  , liftM1
-  , map
-  , max
-  , mempty
-  , min
-  , mod
-  , mul
-  , negate
-  , not
-  , notEq
-  , one
-  , otherwise
-  , pure
-  , recip
-  , show
-  , sub
-  , top
-  , unit
-  , unless
-  , unlessM
-  , void
-  , when
-  , whenM
-  , zero
-  , (#)
-  , ($)
-  , ($>)
-  , (&&)
-  , (*)
-  , (*>)
-  , (+)
-  , (-)
-  , (/)
-  , (/=)
-  , (<)
-  , (<#>)
-  , (<$)
-  , (<$>)
-  , (<*)
-  , (<*>)
-  , (<<<)
-  , (<=)
-  , (<=<)
-  , (<>)
-  , (<@>)
-  , (=<<)
-  , (==)
-  , (>)
-  , (>=)
-  , (>=>)
-  , (>>=)
-  , (>>>)
-  , (||)
+
+import Data.Eq
+  ( class Eq1
+  , class EqRecord
+  , eq1
+  , eqRecord
+  , notEq1
   ) as Export
-import Data.Eq (class Eq1, class EqRecord, eq1, eqRecord, notEq1) as Export
+
 import Data.Generic.Rep
   ( class Generic
   , Argument(..)
@@ -121,8 +25,26 @@ import Data.Generic.Rep
   , repOf
   , to
   ) as Export
-import Data.Maybe (Maybe(..), fromJust, fromMaybe, fromMaybe', isJust, isNothing, maybe, maybe', optional) as Export
-import Data.Newtype (un, unwrap, wrap, class Newtype) as Export
+
+import Data.Maybe
+  ( Maybe(..)
+  , fromJust
+  , fromMaybe
+  , fromMaybe'
+  , isJust
+  , isNothing
+  , maybe
+  , maybe'
+  , optional
+  ) as Export
+
+import Data.Newtype
+  ( un
+  , unwrap
+  , wrap
+  , class Newtype
+  ) as Export
+
 import Data.Ord
   ( class Ord1
   , class OrdRecord
@@ -135,7 +57,11 @@ import Data.Ord
   , lessThanOrEq
   , signum
   ) as Export
-import Data.Identity (Identity(..)) as Export
+
+import Data.Identity
+  ( Identity(..)
+  ) as Export
+
 import Data.Either
   ( Either(..)
   , blush
@@ -151,7 +77,16 @@ import Data.Either
   , note
   , note'
   ) as Export
-import Type.Row (class Cons, class Lacks, class Nub, class Union, type (+), RowApply) as Export
+
+import Type.Row
+  ( class Cons
+  , class Lacks
+  , class Nub
+  , class Union
+  , type (+)
+  , RowApply
+  ) as Export
+
 import Data.Tuple.Nested
   ( type (/\)
   , T10
@@ -226,7 +161,15 @@ import Data.Tuple.Nested
   , uncurry9
   , (/\)
   ) as Export
-import Data.Show.Generic (class GenericShow, class GenericShowArgs, genericShow, genericShow', genericShowArgs) as Export
+
+import Data.Show.Generic
+  ( class GenericShow
+  , class GenericShowArgs
+  , genericShow
+  , genericShow'
+  , genericShowArgs
+  ) as Export
+
 import Data.These
   ( These(..)
   , assoc
@@ -267,6 +210,19 @@ import Chameleon.Styled
   , styleNode
   , toStyle
   ) as Export
---import InteractiveData.Types as Export
-import Chameleon.Transformers.Ctx.Class (class AskCtx, class Ctx, putCtx, setCtx, withCtx) as Export
---import InteractiveData.Defaults as Export
+
+import Chameleon.Transformers.Ctx.Class
+  ( class AskCtx
+  , class Ctx
+  , putCtx
+  , setCtx
+  , withCtx
+  ) as Export
+
+import InteractiveData.Core.Classes.OptArgs
+  ( class OptArgs
+  , class OptArgsMixed
+  , NoConvert
+  , getAllArgs
+  , getAllArgsMixed
+  ) as Export

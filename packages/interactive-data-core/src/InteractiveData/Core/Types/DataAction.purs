@@ -12,7 +12,6 @@ import InteractiveData.Core.Types.IDOutMsg (IDOutMsg)
 newtype DataAction msg = DataAction
   { label :: String
   , description :: String
-  , icon :: Icon
   , msg :: These msg IDOutMsg
   }
 

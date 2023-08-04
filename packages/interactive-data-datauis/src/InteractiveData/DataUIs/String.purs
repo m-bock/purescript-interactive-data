@@ -14,8 +14,6 @@ import DataMVC.Types (DataResult, DataUI(..), DataUiInterface(..))
 
 import InteractiveData.Core (class IDHtml, IDSurface)
 import InteractiveData.Core as Core
-import InteractiveData.Core.Classes.OptArgs (class OptArgs, getAllArgs)
-
 import Chameleon as VD
 
 -------------------------------------------------------------------------------
@@ -58,64 +56,67 @@ stringUpdate msg (StringState state) =
 --- View
 -------------------------------------------------------------------------------
 
-type CfgView =
+type CfgStringView =
   { multilineInline :: Boolean
   , multilineStandalone :: Boolean
   , maxLength :: Maybe Int
   }
 
-stringView :: forall html. Core.IDHtml html => CfgView -> StringState -> html StringMsg
-stringView { multilineInline, multilineStandalone, maxLength } (StringState state) = withCtx \ctx ->
-  let
-    el =
-      { root: VD.div
-      , input: styleLeaf VD.input
-          "width: 100%"
-      , textarea: styleNode VD.textarea
-          [ "width: 100%"
-          , "height: 200px"
-          , "font-family: 'Signika Negative'"
-          ]
-      , details: styleNode VD.div
-          [ "font-size: 10px"
-          , "margin-top: 5px"
-          ]
-      }
+stringView :: forall html. IDHtml html => CfgStringView -> StringState -> html StringMsg
+stringView
+  { multilineInline, multilineStandalone, maxLength }
+  (StringState state) =
+  withCtx \ctx ->
+    let
+      el =
+        { root: VD.div
+        , input: styleLeaf VD.input
+            [ "width: 100%" ]
+        , textarea: styleNode VD.textarea
+            [ "width: 100%"
+            , "height: 200px"
+            , "font-family: 'Signika Negative'"
+            ]
+        , details: styleNode VD.div
+            [ "font-size: 10px"
+            , "margin-top: 5px"
+            ]
+        }
 
-    multilineInput :: html StringMsg
-    multilineInput =
-      el.textarea
-        [ VD.onInput SetString
-        , VD.value state
-        , maybe VD.noProp VD.maxlength maxLength
-        ]
-        []
-
-    lineInput :: html StringMsg
-    lineInput =
-      el.input
-        [ VD.type_ "text"
-        , VD.onInput SetString
-        , VD.value state
-        , maybe VD.noProp VD.maxlength maxLength
-        ]
-
-    getLineInput :: Boolean -> html StringMsg
-    getLineInput isMultiline =
-      if isMultiline then multilineInput
-      else lineInput
-  in
-    case ctx.viewMode of
-      Core.Standalone ->
-        el.root []
-          [ getLineInput multilineStandalone
-          , el.details []
-              [ VD.text ("Length: " <> show (Str.length state)) ]
+      multiLineInput :: html StringMsg
+      multiLineInput =
+        el.textarea
+          [ VD.onInput SetString
+          , VD.value state
+          , maybe VD.noProp VD.maxlength maxLength
           ]
-      Core.Inline ->
-        el.root []
-          [ getLineInput multilineInline
+          []
+
+      singleLineInput :: html StringMsg
+      singleLineInput =
+        el.input
+          [ VD.type_ "text"
+          , VD.onInput SetString
+          , VD.value state
+          , maybe VD.noProp VD.maxlength maxLength
           ]
+
+      getLineInput :: Boolean -> html StringMsg
+      getLineInput isMultiline =
+        if isMultiline then multiLineInput
+        else singleLineInput
+    in
+      case ctx.viewMode of
+        Core.Standalone ->
+          el.root []
+            [ getLineInput multilineStandalone
+            , el.details []
+                [ VD.text ("Length: " <> show (Str.length state)) ]
+            ]
+        Core.Inline ->
+          el.root []
+            [ getLineInput multilineInline
+            ]
 
 -------------------------------------------------------------------------------
 --- DataActions
@@ -124,14 +125,12 @@ stringView { multilineInline, multilineStandalone, maxLength } (StringState stat
 stringActions :: Array (Core.DataAction StringMsg)
 stringActions =
   [ Core.DataAction
-      { icon: Core.IconUnicode 'x'
-      , label: "Clear"
+      { label: "Clear"
       , msg: This $ SetString ""
       , description: "Clear the string"
       }
   , Core.DataAction
-      { icon: Core.IconUnicode 'x'
-      , label: "Trim"
+      { label: "Trim"
       , msg: This $ TrimString
       , description: "Trim whitespace from string"
       }
