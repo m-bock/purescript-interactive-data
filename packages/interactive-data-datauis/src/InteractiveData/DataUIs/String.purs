@@ -69,11 +69,14 @@ view
       el =
         { root: VD.div
         , input: styleLeaf VD.input
-            [ "width: 100%" ]
+            [ "width: 100%"
+            , "border: 1px solid #ccc"
+            ]
         , textarea: styleNode VD.textarea
             [ "width: 100%"
             , "height: 200px"
             , "font-family: 'Signika Negative'"
+            , "border: 1px solid #ccc"
             ]
         , details: styleNode VD.div
             [ "font-size: 10px"
