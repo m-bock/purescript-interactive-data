@@ -79,9 +79,7 @@ The following types are supported out of the box:
 The following example renders with `Halogen`. Have a look at the demo folder for more examples in different frameworks.
 
 <!-- START demoApp -->
-
-_src/Main.purs:_
-
+*src/Main.purs:*
 ```hs
 module Main where
 
@@ -130,15 +128,12 @@ main = do
   -- 4. Finally mount the component to the DOM
   HI.uiMountAtId "root" halogenComponent
 ```
-
 <!-- END demoApp -->
 
 We also need to create a simple html file and a `main.js` file to run the web app.
 
 <!-- START demoHtml -->
-
-_static/index.html:_
-
+*static/index.html:*
 ```html
 <html>
   <head>
@@ -150,19 +145,15 @@ _static/index.html:_
   </body>
 </html>
 ```
-
 <!-- END demoHtml -->
 
 <!-- START demoIndex -->
-
-_static/main.js:_
-
+*static/main.js:*
 ```js
 import { main } from "../output/Main/index.js";
 
 main();
 ```
-
 <!-- END demoIndex -->
 
 ### Run
