@@ -77,3 +77,7 @@ check-git-clean:
 
 mk-single-pkg:
     node scripts/mk-single-pkg.js
+
+install-git-hooks:
+    rm -rf .git/hooks
+    ln -s ../git-hooks .git/hooks
