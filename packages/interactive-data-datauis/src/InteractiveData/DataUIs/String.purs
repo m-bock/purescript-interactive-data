@@ -22,6 +22,7 @@ import Chameleon as VD
 
 data StringMsg
   = SetString String
+  | Clear
   | TrimString
 
 newtype StringState = StringState String
@@ -50,6 +51,7 @@ stringUpdate :: StringMsg -> StringState -> StringState
 stringUpdate msg (StringState state) =
   case msg of
     SetString newString -> StringState newString
+    Clear -> StringState ""
     TrimString -> StringState $ Str.trim state
 
 -------------------------------------------------------------------------------
@@ -126,7 +128,7 @@ stringActions :: Array (Core.DataAction StringMsg)
 stringActions =
   [ Core.DataAction
       { label: "Clear"
-      , msg: This $ SetString ""
+      , msg: This $ Clear
       , description: "Clear the string"
       }
   , Core.DataAction

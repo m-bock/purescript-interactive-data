@@ -2,7 +2,6 @@ package:
   dependencies:
     - arrays
     - chameleon
-    - chameleon-styled
     - chameleon-transformers
     - data-mvc
     - either

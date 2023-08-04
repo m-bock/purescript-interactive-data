@@ -2,7 +2,7 @@ workspace:
   extra_packages:
     interactive-data-run:
       git: ssh://git@github.com/thought2/purescript-interactive-data.git
-      ref: aa44a9b8368a72adcf3250f3e4ef9fcbf13005f6
+      ref: a83c426470936fd1347ebd096341ca73d0bfbc08
       subdir: packages/interactive-data-run
       dependencies:
         - chameleon
@@ -17,7 +17,7 @@ workspace:
         - prelude
     interactive-data-datauis:
       git: ssh://git@github.com/thought2/purescript-interactive-data.git
-      ref: aa44a9b8368a72adcf3250f3e4ef9fcbf13005f6
+      ref: a83c426470936fd1347ebd096341ca73d0bfbc08
       subdir: packages/interactive-data-datauis
       dependencies:
         - arrays
@@ -34,7 +34,7 @@ workspace:
         - chameleon-transformers
     interactive-data-core:
       git: ssh://git@github.com/thought2/purescript-interactive-data.git
-      ref: aa44a9b8368a72adcf3250f3e4ef9fcbf13005f6
+      ref: a83c426470936fd1347ebd096341ca73d0bfbc08
       subdir: packages/interactive-data-core
       dependencies:
         - arrays
@@ -55,12 +55,12 @@ workspace:
         - typelevel-prelude
     interactive-data-class:
       git: ssh://git@github.com/thought2/purescript-interactive-data.git
-      ref: aa44a9b8368a72adcf3250f3e4ef9fcbf13005f6
+      ref: a83c426470936fd1347ebd096341ca73d0bfbc08
       subdir: packages/interactive-data-class
       dependencies: []
     interactive-data-app:
       git: ssh://git@github.com/thought2/purescript-interactive-data.git
-      ref: aa44a9b8368a72adcf3250f3e4ef9fcbf13005f6
+      ref: a83c426470936fd1347ebd096341ca73d0bfbc08
       subdir: packages/interactive-data-app
       dependencies:
         - arrays
@@ -80,7 +80,7 @@ workspace:
         - tuples
     interactive-data:
       git: ssh://git@github.com/thought2/purescript-interactive-data.git
-      ref: aa44a9b8368a72adcf3250f3e4ef9fcbf13005f6
+      ref: a83c426470936fd1347ebd096341ca73d0bfbc08
       subdir: packages/interactive-data
       dependencies:
         - data-mvc

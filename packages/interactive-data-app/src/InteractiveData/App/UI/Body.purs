@@ -20,6 +20,7 @@ viewBody { viewContent } =
       , content: styleNode VD.div
           [ "padding: 10px"
           , "padding-left: 20px"
+          , "max-width: 600px"
           ]
       }
   in

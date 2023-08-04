@@ -46,7 +46,7 @@ gen-assets:
 
 dev: clean-parcel
     #!/bin/bash
-    export SAMPLE=BasicHalogen
+    export SAMPLE=SimpleHalogen
     parcel demo/static/index.html
 
 run-example: build clean-parcel
