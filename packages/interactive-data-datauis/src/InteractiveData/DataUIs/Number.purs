@@ -50,44 +50,32 @@ update msg _ =
 -------------------------------------------------------------------------------
 
 type CfgNumberView =
-  { minVal :: Maybe Number
-  , maxVal :: Maybe Number
+  { min :: Number
+  , max :: Number
+  , step :: Number
   }
 
 view :: forall html. IDHtml html => CfgNumberView -> NumberState -> html NumberMsg
 view
-  _
-  (NumberState val) =
-  withCtx \ctx ->
+  { min, max, step }
+  (NumberState value) =
+  withCtx \_ ->
     let
       el =
         { root: VD.div
         }
 
     in
-      case ctx.viewMode of
-        Standalone ->
-          el.root []
-            [ VD.text (show val)
-            , UI.Slider.view
-                { min: 0.0
-                , max: 100.0
-                , step: 1.0
-                , value: val
-                , onChange: SetNumber
-                }
-            ]
-        Inline ->
-          el.root []
-            [ VD.text (show val)
-            , UI.Slider.view
-                { min: 0.0
-                , max: 100.0
-                , step: 1.0
-                , value: val
-                , onChange: SetNumber
-                }
-            ]
+      el.root []
+        [ VD.text (show value)
+        , UI.Slider.view
+            { min
+            , max
+            , step
+            , value
+            , onChange: SetNumber
+            }
+        ]
 
 -------------------------------------------------------------------------------
 --- DataActions
@@ -101,14 +89,16 @@ actions = []
 -------------------------------------------------------------------------------
 
 type CfgNumber =
-  { minVal :: Maybe Number
-  , maxVal :: Maybe Number
+  { min ::  Number
+  , max ::  Number
+  , step :: Number
   }
 
 defaultCfgNumber :: CfgNumber
 defaultCfgNumber =
-  { minVal: Nothing
-  , maxVal: Nothing
+  { min: -100.0
+  , max: 100.0
+  , step: 1.0
   }
 
 number
