@@ -63,18 +63,24 @@ view
     let
       el =
         { root: VD.div
+        , slider: styleNode VD.div
+            [ "margin-top: 10px"
+            , "margin-bottom: 5px"
+            ]
         }
 
     in
       el.root []
         [ VD.text (show value)
-        , UI.Slider.view
-            { min
-            , max
-            , step
-            , value
-            , onChange: SetNumber
-            }
+        , el.slider []
+            [ UI.Slider.view
+                { min
+                , max
+                , step
+                , value
+                , onChange: SetNumber
+                }
+            ]
         ]
 
 -------------------------------------------------------------------------------

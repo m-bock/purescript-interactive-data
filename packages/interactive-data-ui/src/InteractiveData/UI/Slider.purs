@@ -65,7 +65,7 @@ view { onChange, value, min, max, step } =
       [ C.mapMaybe identity $
           el.input
             [ C.type_ "range"
-            , C.min $ print min
+            , C.min $ print $ min
             , C.max $ print max
             , C.value valueStr
             , C.step $ print step

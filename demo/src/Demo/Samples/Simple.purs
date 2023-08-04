@@ -26,7 +26,7 @@ sampleDataUi = ID.record_
   { user: ID.record_
       { firstName: ID.string_
       , lastName: ID.string_
-      , size: ID.number_
+      , size: ID.number { min: 0.0, max: 100.0 }
       }
   , meta: ID.record_
       { description: ID.string_
