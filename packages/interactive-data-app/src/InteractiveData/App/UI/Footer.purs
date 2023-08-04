@@ -11,7 +11,7 @@ import InteractiveData.App.UI.Assets as UI.Assets
 import InteractiveData.App.UI.Breadcrumbs as UI.Breadcrumbs
 import InteractiveData.App.UI.Card as UI.Card
 import InteractiveData.App.UI.DataLabel as UI.DataLabel
-import InteractiveData.Core.Types.Common (PathInContext, unPathInContext)
+import InteractiveData.Core.Types.Common (unPathInContext)
 import Chameleon as VD
 
 type ViewFooterCfg msg =

@@ -13,7 +13,6 @@ import Data.Array as Array
 import Data.String as Str
 import Data.Tuple (fst)
 import InteractiveData.App.UI.Assets as UI.Assets
-import InteractiveData.Core.Types.Common (PathInContext)
 import InteractiveData.Core.Types.DataPathExtra (segmentToString)
 import Chameleon as VD
 

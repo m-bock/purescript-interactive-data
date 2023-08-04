@@ -9,7 +9,7 @@ build:
 build-strict:
     spago build --json-errors | node scripts/filter-warnings.js
 
-ci: format gen build dist-example check-git-clean
+ci: format gen build build-strict dist-example check-git-clean
 
 dist-example: build
     #!/bin/bash

@@ -8,7 +8,6 @@ import Chameleon as VD
 import Data.Array (intersperse)
 import Data.Array as Array
 import InteractiveData.App.UI.Assets as UI.Assets
-import InteractiveData.Core.Types.Common (PathInContext)
 
 viewBreadcrumbs
   :: forall html msg
