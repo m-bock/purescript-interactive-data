@@ -89,8 +89,8 @@ actions = []
 -------------------------------------------------------------------------------
 
 type CfgNumber =
-  { min ::  Number
-  , max ::  Number
+  { min :: Number
+  , max :: Number
   , step :: Number
   }
 

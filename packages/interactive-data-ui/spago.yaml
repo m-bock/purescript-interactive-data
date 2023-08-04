@@ -6,6 +6,7 @@ package:
     - maybe
     - numbers
     - prelude
+    - tuples
   name: interactive-data-ui
   test:
     dependencies: []
