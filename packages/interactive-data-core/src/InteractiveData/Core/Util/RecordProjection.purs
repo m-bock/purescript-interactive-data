@@ -2,8 +2,7 @@ module InteractiveData.Core.Util.RecordProjection
   ( Prj
   , class Project
   , pick
-  )
-  where
+  ) where
 
 import Data.Symbol (class IsSymbol)
 import Heterogeneous.Folding (class FoldingWithIndex, class HFoldlWithIndex, hfoldlWithIndex)

@@ -1,0 +1,7 @@
+package:
+  dependencies:
+    - chameleon
+  name: interactive-data-ui
+  test:
+    dependencies: []
+    main: Test.Main

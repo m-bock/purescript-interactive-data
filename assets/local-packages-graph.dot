@@ -10,9 +10,10 @@ digraph G {
     arrowsize=0.5
   ];
   
-  
+  datauis -> ui;
   datauis -> core;
   class -> datauis;
   run -> core;
   app -> core;
+  app -> ui;
 }
