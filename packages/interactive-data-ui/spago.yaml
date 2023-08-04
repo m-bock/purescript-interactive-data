@@ -1,6 +1,11 @@
 package:
   dependencies:
     - chameleon
+    - chameleon-styled
+    - integers
+    - maybe
+    - numbers
+    - prelude
   name: interactive-data-ui
   test:
     dependencies: []

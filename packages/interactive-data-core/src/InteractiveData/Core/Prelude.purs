@@ -191,7 +191,7 @@ import Data.These
 
 import Chameleon.Styled
   ( class IsStyle
-  , class RegisterStyleMap
+  , class HtmlStyled
   , Anim
   , ClassName(..)
   , InlineStyle(..)

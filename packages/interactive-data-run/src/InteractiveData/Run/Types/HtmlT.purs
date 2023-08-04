@@ -7,7 +7,7 @@ import Prelude
 
 import InteractiveData.Core (class IDHtml, IDOutMsg, IDViewCtx)
 import Chameleon (class Html)
-import Chameleon.Styled (class RegisterStyleMap, StyleT, runStyleT)
+import Chameleon.Styled (class HtmlStyled, StyleT, runStyleT)
 import Chameleon.Transformers.Ctx.Class (class AskCtx, class Ctx)
 import Chameleon.Transformers.Ctx.Trans (CtxT, runCtxT)
 import Chameleon.Transformers.OutMsg.Class (class OutMsg, class RunOutMsg)
@@ -33,7 +33,7 @@ derive newtype instance Html html => RunOutMsg IDOutMsg (IDHtmlT html)
 
 derive instance Functor html => Functor (IDHtmlT html)
 
-derive newtype instance RegisterStyleMap (IDHtmlT html)
+derive newtype instance Html html => HtmlStyled (IDHtmlT html)
 
 instance (Html html) => IDHtml (IDHtmlT html)
 
