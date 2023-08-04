@@ -252,3 +252,7 @@ import InteractiveData.Core
   , TreeMeta
   , ViewMode(..)
   ) as Export
+
+import InteractiveData.Core.Util.RecordProjection
+  ( pick
+  ) as Export

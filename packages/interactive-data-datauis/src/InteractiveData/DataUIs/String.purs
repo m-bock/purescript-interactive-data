@@ -11,7 +11,6 @@ import InteractiveData.Core.Prelude
 
 import Chameleon as VD
 import Data.String as Str
-import InteractiveData.Core.Util.RecordProjection (pick)
 
 -------------------------------------------------------------------------------
 --- Types
