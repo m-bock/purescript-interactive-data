@@ -8,6 +8,7 @@ const getStdin = async () => {
 
 const filterWarning = ({ errorCode, filename, message, moduleName }, index) => {
   if (filename.startsWith(".spago")) return false;
+  if (errorCode === "WildcardInferredType") return false;
   return true;
 };
 

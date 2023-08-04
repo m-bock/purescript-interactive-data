@@ -86,5 +86,5 @@ install-git-hooks:
 suggest-list:
     spago build --json-errors | node scripts/filter-warnings.js | ps-suggest --list
 
-suggest-list:
+suggest-apply:
     spago build --json-errors | node scripts/filter-warnings.js | ps-suggest --apply
