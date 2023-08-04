@@ -49,8 +49,10 @@ This library is in early development and the API is not stable yet. Things may n
 
 The following types are supported out of the box:
 
-- Strings
-- Records
+- `String`
+- `Int`
+- `Number`
+- `Record`
 
 ## Getting started
 

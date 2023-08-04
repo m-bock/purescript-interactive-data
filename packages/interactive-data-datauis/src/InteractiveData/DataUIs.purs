@@ -14,6 +14,13 @@ import InteractiveData.DataUIs.Number
   , number_
   ) as Export
 
+import InteractiveData.DataUIs.Int
+  ( IntMsg
+  , IntState
+  , int
+  , int_
+  ) as Export
+
 import InteractiveData.DataUIs.Record
   ( RecordMsg
   , RecordState
