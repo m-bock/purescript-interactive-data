@@ -35,6 +35,7 @@
         devShell = pkgs.mkShell {
           nativeBuildInputs = [
             pkgs.purs-tidy
+            pkgs.psa
             pkgs.bashInteractive
             pkgs.just
             pkgs.purescript

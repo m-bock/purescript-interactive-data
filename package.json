@@ -17,5 +17,8 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "spago": "^0.93.9"
+  },
+  "devDependencies": {
+    "purescript-psa": "^0.8.2"
   }
 }

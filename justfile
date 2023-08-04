@@ -1,10 +1,13 @@
 export PATH := "node_modules/.bin:" + env_var('PATH')
 
 build-ide:
-    spago build --json-errors
+    spago build --json-errors | node scripts/filter-warnings.js
 
 build:
     spago build
+
+build-strict:
+    spago build --json-errors | node scripts/filter-warnings.js
 
 ci: format gen build dist-example check-git-clean
 
