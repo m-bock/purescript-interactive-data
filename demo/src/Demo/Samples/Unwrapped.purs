@@ -1,14 +1,11 @@
 module Demo.Samples.Unwrapped where
 
-import Data.Identity (Identity)
-import Data.Maybe (Maybe(..))
-import DataMVC.Types (DataUI, DataResult)
+import Chameleon (class Html)
+import DataMVC.Types (DataUI, DataUiInterface)
 import InteractiveData.Core (class IDHtml, IDSurface)
 import InteractiveData.DataUIs (StringMsg, StringState)
 import InteractiveData.DataUIs as ID
 import InteractiveData.Run as Run
-import MVC.Types (UI)
-import Chameleon (class Html)
 
 type Sample = String
 
@@ -20,6 +17,7 @@ sampleDataUi
        String
 sampleDataUi = ID.string_
 
+itf :: forall html. Html html => DataUiInterface html StringMsg StringState String
 itf = Run.run
   { name: "Sample"
   , context: Run.ctxNoWrap

@@ -7,9 +7,7 @@ import InteractiveData.Core.Prelude
 import Chameleon as VD
 import Data.Array (intersperse)
 import Data.Array as Array
-import DataMVC.Types (DataPathSegment)
 import InteractiveData.App.UI.Assets as UI.Assets
-import InteractiveData.Core (class IDHtml)
 import InteractiveData.Core.Types.Common (PathInContext)
 
 viewBreadcrumbs

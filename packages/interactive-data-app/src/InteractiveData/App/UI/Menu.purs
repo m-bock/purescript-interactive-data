@@ -15,11 +15,9 @@ import Data.Array as Array
 import Data.Map (Map)
 import Data.Map as Map
 import Data.Tuple (fst)
-import DataMVC.Types (DataPath, DataPathSegment)
 import InteractiveData.App.UI.Assets as UI.Assets
 import InteractiveData.App.UI.DataLabel (mkTitleGoto, viewDataLabel)
 import InteractiveData.App.UI.Types.SumTree (SumTree(..), treeIsLeaf)
-import InteractiveData.Core (class IDHtml)
 import InteractiveData.Core.Types.DataPathExtra (dataPathToStrings)
 import InteractiveData.Core.Types.DataTree (TreeMeta)
 import Chameleon as VD

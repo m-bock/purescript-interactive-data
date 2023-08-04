@@ -5,11 +5,9 @@ module InteractiveData.App.UI.Header
 
 import InteractiveData.Core.Prelude
 
-import DataMVC.Types (DataPathSegment)
 import InteractiveData.App.UI.Assets as UI.Assets
 import InteractiveData.App.UI.Breadcrumbs as UI.Breadcrumbs
 import InteractiveData.App.UI.DataLabel as UI.DataLabel
-import InteractiveData.Core (class IDHtml)
 import InteractiveData.Core.Types.Common (PathInContext, unPathInContext)
 import Chameleon as VD
 

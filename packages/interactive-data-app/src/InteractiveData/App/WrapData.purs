@@ -9,25 +9,12 @@ import InteractiveData.Core.Prelude
 import Data.Array as Array
 import Data.Array.NonEmpty (NonEmptyArray)
 import Data.Tuple (fst)
-import DataMVC.Types (DataUICtx(..), DataUiInterface(..))
-import DataMVC.Types.DataError (DataError, DataResult)
 import InteractiveData.App.UI.ActionButton (viewActionButton)
 import InteractiveData.App.UI.Card as UI.Card
 import InteractiveData.App.UI.DataLabel as UI.DataLabel
-import InteractiveData.Core
-  ( class IDHtml
-  , DataAction
-  , DataTree(..)
-  , IDOutMsg(..)
-  , IDSurface(..)
-  , IDViewCtx
-  , TreeMeta
-  , ViewMode(..)
-  )
 import InteractiveData.Core.Types.DataPathExtra (dataPathToStrings, segmentToString)
 import InteractiveData.Core.Types.IDSurface (runIdSurface)
 import Chameleon as VD
-import Chameleon.Transformers.Ctx.Class (withCtx)
 import Chameleon.Transformers.OutMsg.Class (fromOutHtml)
 
 --------------------------------------------------------------------------------

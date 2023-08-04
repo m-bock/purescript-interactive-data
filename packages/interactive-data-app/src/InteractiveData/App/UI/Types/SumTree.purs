@@ -7,7 +7,6 @@ module InteractiveData.App.UI.Types.SumTree
 import InteractiveData.Core.Prelude
 
 import Data.Traversable (for)
-import DataMVC.Types (DataPathSegment(..))
 import InteractiveData.Core.Types.DataTree (TreeMeta, DataTree(..), DataTreeChildren(..))
 
 --------------------------------------------------------------------------------

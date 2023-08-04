@@ -6,7 +6,6 @@ module InteractiveData.App.UI.NotFound
 import InteractiveData.Core.Prelude
 
 import Data.String as Str
-import InteractiveData.Core (class IDHtml)
 import InteractiveData.App.UI.Assets as UI.Assets
 import Chameleon as VD
 

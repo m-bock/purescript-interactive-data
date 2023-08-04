@@ -5,7 +5,6 @@ module InteractiveData.App.UI.Layout
 
 import InteractiveData.Core.Prelude
 
-import InteractiveData.Core (class IDHtml)
 import Chameleon as VD
 import Chameleon.HTML.Elements as VDE
 

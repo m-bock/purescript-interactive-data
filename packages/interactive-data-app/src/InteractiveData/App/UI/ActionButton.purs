@@ -5,7 +5,6 @@ module InteractiveData.App.UI.ActionButton
 
 import InteractiveData.Core.Prelude
 
-import InteractiveData.Core (class IDHtml, DataAction(..))
 import Chameleon as VD
 import Chameleon.Transformers.OutMsg.Class (fromOutHtml)
 

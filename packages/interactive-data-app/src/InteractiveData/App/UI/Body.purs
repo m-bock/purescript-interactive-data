@@ -5,7 +5,6 @@ module InteractiveData.App.UI.Body
 
 import InteractiveData.Core.Prelude
 
-import InteractiveData.Core (class IDHtml)
 import Chameleon as VD
 
 type ViewBodyCfg (html :: Type -> Type) msg =

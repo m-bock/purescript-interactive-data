@@ -12,10 +12,7 @@ import InteractiveData.Core.Prelude
 import Data.Array as Array
 import Data.String as Str
 import Data.Tuple (fst)
-import DataMVC.Types (DataPathSegment(..), DataPath)
 import InteractiveData.App.UI.Assets as UI.Assets
-import InteractiveData.Core (class IDHtml)
-import InteractiveData.Core.Classes.OptArgs (class OptArgs, getAllArgs)
 import InteractiveData.Core.Types.Common (PathInContext)
 import InteractiveData.Core.Types.DataPathExtra (segmentToString)
 import Chameleon as VD
