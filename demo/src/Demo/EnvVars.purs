@@ -1,6 +1,5 @@
 module Demo.EnvVars
   ( EnvVars
-  , Framework(..)
   , Sample(..)
   , getEnvVars
   , sampleValues
@@ -16,7 +15,7 @@ import Data.Generic.Rep (class Generic)
 import Data.List (List)
 import Data.Map (Map)
 import Data.Map as Map
-import Data.Maybe (Maybe(..))
+import Data.Maybe (Maybe)
 import Data.Set as Set
 import Data.Show.Generic (genericShow)
 import Data.Tuple.Nested (type (/\), (/\))
@@ -27,27 +26,16 @@ import Type.Proxy (Proxy(..))
 import TypedEnv (class ParseValue, EnvError, fromEnv, printEnvError)
 
 type EnvVars =
-  { "FRAMEWORK" :: Framework
-  , "SAMPLE" :: Sample
+  { "SAMPLE" :: Sample
   }
-
-data Framework
-  = Halogen
-  | React
-
-instance ParseValue Framework where
-  parseValue = case _ of
-    "halogen" -> Just Halogen
-    "react" -> Just React
-    _ -> Nothing
 
 instance ParseValue Sample where
   parseValue :: String -> Maybe Sample
   parseValue str = Map.lookup str sampleLookup
 
 data Sample
-  = Unwrapped
-  | Simple
+  = SimpleHalogen
+  | SimpleReact
   | EmbedReact
 
 derive instance Generic Sample _
@@ -68,14 +56,14 @@ instance Show Sample where
 sampleLookup :: Map String Sample
 sampleLookup =
   let
-    xs :: Array Sample
-    xs = enumFromTo bottom top
+    cases :: Array Sample
+    cases = enumFromTo bottom top
 
-    zs :: Array (String /\ Sample)
-    zs = map (\x -> show x /\ x) xs
+    caseLookup :: Array (String /\ Sample)
+    caseLookup = map (\x -> show x /\ x) cases
 
   in
-    Map.fromFoldable zs
+    Map.fromFoldable caseLookup
 
 sampleValues :: Array String
 sampleValues = Set.toUnfoldable $ Map.keys sampleLookup

@@ -48,15 +48,13 @@ gen-assets:
 
 dev: clean-parcel
     #!/bin/bash
-    export FRAMEWORK=halogen
-    export SAMPLE=Basic
+    export SAMPLE=BasicHalogen
     parcel demo/static/index.html
 
 run-example: build clean-parcel
     #!/bin/bash
     FILE=`mktemp`
     node scripts/run-example.js $FILE
-    export FRAMEWORK=halogen
     export SAMPLE=`cat $FILE`
     echo "Starting $SAMPLE"
     parcel demo/static/index.html

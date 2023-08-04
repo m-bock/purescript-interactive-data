@@ -1,5 +1,5 @@
-module Demo.RunHalogen
-  ( runHalogen
+module Demo.RunReact
+  ( runReact
   )
   where
 
@@ -8,20 +8,20 @@ import Prelude
 import Effect (Effect)
 import Effect.Class.Console (log)
 import InteractiveData.Entry (InteractiveDataApp)
-import Chameleon.Impl.Halogen (HalogenHtml)
-import Chameleon.Impl.Halogen as HalogenImpl
+import Chameleon.Impl.ReactBasic (ReactHtml)
+import Chameleon.Impl.ReactBasic as ReactImpl
 
-runHalogen
+runReact
   :: forall msg sta a
    . Show a
-  => InteractiveDataApp HalogenHtml msg sta a
+  => InteractiveDataApp ReactHtml msg sta a
   -> Effect Unit
-runHalogen app = do
+runReact app = do
   let
     { ui, extract } = app
   ui
-    # HalogenImpl.uiToHalogenComponent
+    # ReactImpl.uiToReactComponent
         { onStateChange: \newState -> do
             log (show $ extract newState)
         }
-    # HalogenImpl.uiMountAtId "root"
+    # ReactImpl.mountAtId "root"
