@@ -6,19 +6,17 @@ build-ide:
 build:
     spago build
 
-ci: format gen build check-git-clean
+ci: format gen build dist-example check-git-clean
 
 dist-example: build
     #!/bin/bash
-    export FRAMEWORK=halogen
-    export SAMPLE=Simple
-    mv output/package.json output/package.json.bak
+    export SAMPLE=SimpleHalogen
+    rm -f output/package.json
     parcel build \
       --dist-dir dist/purescript-interactive-data \
       --public-url /purescript-interactive-data/ \
       demo/static/index.html
-    mv output/package.json.bak output/package.json
-
+    
 run-dist:
     http-server dist
 
