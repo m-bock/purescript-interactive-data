@@ -82,3 +82,9 @@ mk-single-pkg:
 install-git-hooks:
     rm -rf .git/hooks
     ln -s ../git-hooks .git/hooks
+
+suggest-list:
+    spago build --json-errors | node scripts/filter-warnings.js | ps-suggest --list
+
+suggest-list:
+    spago build --json-errors | node scripts/filter-warnings.js | ps-suggest --apply

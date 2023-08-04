@@ -2816,6 +2816,11 @@ purescript-psa@^0.8.2:
   resolved "https://registry.yarnpkg.com/purescript-psa/-/purescript-psa-0.8.2.tgz#ee20c40f02cd0c5ed6dd3dd93ef02d9c466f17bc"
   integrity sha512-4Olf0aQQrNCfcDLXQI3gJgINEQ+3U+4QPLmQ2LHX2L/YOXSwM7fOGIUs/wMm/FQnwERUyQmHKQTJKB4LIjE2fg==
 
+purescript-suggest@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/purescript-suggest/-/purescript-suggest-2.2.0.tgz#19de4e7b1f1cdf084c95671813237ae194b65033"
+  integrity sha512-aYYBzo7m9BXVcTvT3/+PoiBujhFTfOLxxFa4fBgskD5EubBKElBErLxdNio1DR5njxG5BjLcQy5SeQTp1DDyiA==
+
 purescript@^0.15.10:
   version "0.15.10"
   resolved "https://registry.yarnpkg.com/purescript/-/purescript-0.15.10.tgz#e4bcd182b95ef2c7ce9f634ce242a8dc8f8eba06"

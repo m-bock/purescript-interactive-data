@@ -15,18 +15,16 @@ const main = async () => {
   const stdin = await getStdin();
   const problems = JSON.parse(stdin);
 
-
-  console.log(problems)
-
   const warnings = problems.warnings;
 
   const warningsFiltered = warnings.filter(filterWarning);
 
   const problemsFiltered = {
-    ...problems,
+    errors: problems.errors,
     warnings: warningsFiltered,
   };
 
+  console.log("Filtered warnings:");
   console.log(JSON.stringify(problemsFiltered));
 
   console.error(`Errors: ${problemsFiltered.errors.length}`);

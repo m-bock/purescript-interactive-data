@@ -19,6 +19,7 @@
     "spago": "^0.93.9"
   },
   "devDependencies": {
-    "purescript-psa": "^0.8.2"
+    "purescript-psa": "^0.8.2",
+    "purescript-suggest": "^2.2.0"
   }
 }
