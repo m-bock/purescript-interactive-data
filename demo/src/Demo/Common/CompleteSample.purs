@@ -10,6 +10,7 @@ type Sample =
       , lastName :: String
       , size :: Number
       , userId :: UserID
+      , age :: Int
       }
   , meta ::
       { description :: String
@@ -27,6 +28,7 @@ sampleDataUi = ID.record_
       , lastName: ID.string_
       , size: ID.number { min: 0.0, max: 100.0 }
       , userId: userId_
+      , age: ID.int { min: 0, max: 150 }
       }
   , meta: ID.record_
       { description: ID.string_

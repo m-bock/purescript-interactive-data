@@ -3,6 +3,7 @@ module InteractiveData.UI.NumberInput
   , class IsNumber
   , fromNumber
   , toNumber
+  , toString
   , view
   ) where
 
@@ -46,7 +47,7 @@ view { onChange, value, min, max, step } =
       pure $ onChange num
 
     valueStr :: String
-    valueStr = show $ toNumber value
+    valueStr = toString value
   in
     el.container []
       [ C.mapMaybe identity $
@@ -67,11 +68,14 @@ view { onChange, value, min, max, step } =
 class IsNumber a where
   fromNumber :: Number -> Maybe a
   toNumber :: a -> Number
+  toString :: a -> String
 
 instance IsNumber Int where
   fromNumber = Int.fromNumber
   toNumber = Int.toNumber
+  toString = show
 
 instance IsNumber Number where
   fromNumber = Just
   toNumber = identity
+  toString = show

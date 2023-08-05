@@ -10,13 +10,18 @@ module InteractiveData.DataUIs.Int
 import InteractiveData.Core.Prelude
 
 import Chameleon as VD
+import InteractiveData.UI.NumberInput as UI.NumberInput
 import InteractiveData.UI.Slider as UI.Slider
 
 -------------------------------------------------------------------------------
 --- Types
 -------------------------------------------------------------------------------
 
-data IntMsg = SetInt Int
+data IntMsg
+  = SetInt Int
+  | SetMin
+  | SetMax
+  | SetCenter
 
 newtype IntState = IntState Int
 
@@ -40,10 +45,19 @@ init optStr = IntState $ fromMaybe zero optStr
 --- Update
 -------------------------------------------------------------------------------
 
-update :: IntMsg -> IntState -> IntState
-update msg _ =
+update
+  :: { min :: Int
+     , max :: Int
+     }
+  -> IntMsg
+  -> IntState
+  -> IntState
+update { min, max } msg _ =
   case msg of
     SetInt newInt -> IntState newInt
+    SetMin -> IntState min
+    SetMax -> IntState max
+    SetCenter -> IntState $ (min + max) / 2
 
 -------------------------------------------------------------------------------
 --- View
@@ -62,18 +76,34 @@ view
   withCtx \_ ->
     let
       el =
-        { root: VD.div
-        , slider: styleNode VD.div
+        { root: styleNode VD.div
             [ "margin-top: 10px"
             , "margin-bottom: 5px"
+            , "display: flex"
+            , "flex-direction: row"
+            , "align-items: center"
+            , "justify-content: space-between"
+            , "gap: 10px"
             ]
+        , slider: styleNode VD.div
+            [ "flex: 3" ]
+        , input: styleNode VD.div
+            [ "flex: 1" ]
         }
 
     in
       el.root []
-        [ VD.text (show value)
-        , el.slider []
+        [ el.slider []
             [ UI.Slider.view
+                { min
+                , max
+                , step
+                , value
+                , onChange: SetInt
+                }
+            ]
+        , el.input []
+            [ UI.NumberInput.view
                 { min
                 , max
                 , step
@@ -88,7 +118,23 @@ view
 -------------------------------------------------------------------------------
 
 actions :: Array (DataAction IntMsg)
-actions = []
+actions =
+  [ DataAction
+      { label: "Min"
+      , description: "Set to min"
+      , msg: This $ SetMin
+      }
+  , DataAction
+      { label: "Center"
+      , description: "Set to center"
+      , msg: This $ SetCenter
+      }
+  , DataAction
+      { label: "Max"
+      , description: "Set to max"
+      , msg: This $ SetMax
+      }
+  ]
 
 -------------------------------------------------------------------------------
 --- DataUI
@@ -129,7 +175,7 @@ int opt =
             , meta: Nothing
             }
       , extract
-      , update
+      , update: update (pick cfg)
       , init
       }
 
