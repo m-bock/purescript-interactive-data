@@ -14,6 +14,7 @@ Composable UIs for interactive data.
 - [Discaimer ⚠](#discaimer-)
 - [Live Demo](#live-demo)
 - [Features](#features)
+- [Use cases](#use-cases)
 - [Supported types](#supported-types)
 - [Getting started](#getting-started)
   - [Installation](#installation)
@@ -44,6 +45,17 @@ This library is in early development and the API is not stable yet. Things may n
 - **Extensible**
   <br>
   _UIs for any data type can be written in a simple MVC architecture_
+- **Data validation**
+  <br>
+  _Data is validated on the fly and errors are displayed_
+
+## Use cases
+
+Any part of a web app that need to handle user input of nested structured data. E.g:
+
+- settings panel 
+- back office tools
+- user input forms
 
 ## Supported types
 
