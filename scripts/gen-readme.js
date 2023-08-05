@@ -15,13 +15,13 @@ const main = () => {
       "src/Main.purs",
       "hs",
       fs
-        .readFileSync("./demo/src/Demo/Samples/MinimalComplete.purs", "utf8")
+        .readFileSync("./demo/src/Demo/Samples/MinimalComplete/Main.purs", "utf8")
         .toString()
         .replace(/module [A-Za-z.]*/g, "module Main")
     ),
 
     demoIndex: codeBlock(
-      "static/main.js",
+      "static/index.js",
       "js",
       [`import { main } from "../output/Main/index.js";`, ``, `main();`].join(
         "\n"
@@ -31,7 +31,7 @@ const main = () => {
     demoHtml: codeBlock(
       "static/index.html",
       "html",
-      fs.readFileSync("./demo/static/index.html", "utf8").toString()
+      fs.readFileSync("./demo/src/Demo/Samples/MinimalComplete/index.html", "utf8").toString()
     ),
   };
 

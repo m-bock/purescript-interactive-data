@@ -1,3 +1,6 @@
 {
-    "purescript.buildCommand": "just build-ide"
+    "purescript.buildCommand": "just build-ide",
+    "purescript.censorWarnings": [
+        "WildcardInferredType"
+    ]
 }

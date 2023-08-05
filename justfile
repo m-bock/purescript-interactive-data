@@ -9,17 +9,21 @@ build:
 build-strict:
     spago build --json-errors | node scripts/filter-warnings.js
 
-ci: format gen build build-strict dist-example check-git-clean
+ci: format gen build build-strict dist-examples check-git-clean
 
-dist-example: build
-    #!/bin/bash
-    export SAMPLE=SimpleHalogen
+dist-examples:
+    #!/usr/bin/env bash
+    set -euxo pipefail
     rm -f output/package.json
-    parcel build \
-      --dist-dir dist/purescript-interactive-data \
-      --public-url /purescript-interactive-data/ \
-      demo/static/index.html
-    
+    rm -rf .parcel-cache
+    rm -rf dist
+    main_dir="purescript-interactive-data"; \
+    for dir in demo/src/Demo/Samples/*/; do \
+        name=$(basename $dir); \
+        echo Building $name; \
+        parcel build --dist-dir dist/$main_dir/$name --public-url /$main_dir/$name/ $dir/index.html ; \
+    done
+
 run-dist:
     http-server dist
 

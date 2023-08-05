@@ -32,7 +32,10 @@ This library is in early development and the API is not stable yet. Things may n
 
 <img src="https://github.com/thought2/assets/blob/ae1e971611b02c4a6bcd42124e4e1d43aa2e537e/interactive-data/demo1.png" width="200">
 
-[thought2.github.io/purescript-interactive-data](https://thought2.github.io/purescript-interactive-data)
+[Halogen Fullscreen](https://thought2.github.io/purescript-interactive-data/HalogenFullscreen)
+
+[React Embedded](https://thought2.github.io/purescript-interactive-data/ReactEmbed)
+
 
 ## Features
 
@@ -145,7 +148,7 @@ main = do
 ```
 <!-- END demoApp -->
 
-We also need to create a simple html file and a `main.js` file to run the web app.
+We also need to create a simple html file and a `index.js` file to run the web app.
 
 <!-- START demoHtml -->
 *static/index.html:*
@@ -155,7 +158,7 @@ We also need to create a simple html file and a `main.js` file to run the web ap
     <title>Interactive Data Sample</title>
   </head>
   <body>
-    <script src="main.js" type="module"></script>
+    <script src="index.js" type="module"></script>
     <div id="root"></div>
   </body>
 </html>
@@ -163,7 +166,7 @@ We also need to create a simple html file and a `main.js` file to run the web ap
 <!-- END demoHtml -->
 
 <!-- START demoIndex -->
-*static/main.js:*
+*static/index.js:*
 ```js
 import { main } from "../output/Main/index.js";
 

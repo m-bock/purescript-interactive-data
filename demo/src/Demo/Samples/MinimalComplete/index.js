@@ -1,4 +1,4 @@
-import { main } from "../../output/Demo.Main/index.js";
+import { main } from "../../../../../output/Demo.Samples.MinimalComplete/index.js";
 
 const envVars = {};
 

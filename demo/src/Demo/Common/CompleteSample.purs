@@ -1,10 +1,7 @@
-module Demo.Samples.Simple where
+module Demo.Common.CompleteSample where
 
-import Data.Maybe (Maybe(..))
 import InteractiveData (class IDHtml, DataUI, IDSurface)
 import InteractiveData as ID
-import InteractiveData.Entry (InteractiveDataApp)
-import Chameleon (class Html)
 
 type Sample =
   { user ::
@@ -33,12 +30,3 @@ sampleDataUi = ID.record_
       , headline: ID.string_
       }
   }
-
-sampleApp :: forall html. Html html => InteractiveDataApp html _ _ Sample
-sampleApp =
-  ID.toApp
-    { name: "Sample"
-    , initData: Nothing
-    , fullscreen: true
-    }
-    sampleDataUi

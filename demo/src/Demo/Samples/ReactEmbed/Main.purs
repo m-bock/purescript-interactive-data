@@ -1,4 +1,4 @@
-module Demo.Samples.EmbedReact where
+module Demo.Samples.ReactEmbed where
 
 import Prelude
 
@@ -8,42 +8,13 @@ import Data.Argonaut (encodeJson, stringifyWithIndent)
 import Data.Either (Either(..))
 import Data.Maybe (Maybe(..))
 import Effect (Effect)
-import InteractiveData (DataUI)
 import InteractiveData as ID
-import InteractiveData.Core (class IDHtml, IDSurface)
 import InteractiveData.Entry (InteractiveDataApp)
 import React.Basic.DOM (CSS, css)
 import React.Basic.DOM as DOM
 import React.Basic.Hooks ((/\))
 import React.Basic.Hooks as React
-
-type Sample =
-  { user ::
-      { firstName :: String
-      , lastName :: String
-      , size :: Number
-      }
-  , meta ::
-      { description :: String
-      , headline :: String
-      }
-  }
-
-sampleDataUi
-  :: forall html
-   . IDHtml html
-  => DataUI (IDSurface html) _ _ _ _ Sample
-sampleDataUi = ID.record_
-  { user: ID.record_
-      { firstName: ID.string_
-      , lastName: ID.string_
-      , size: ID.number { min: 0.0, max: 100.0 }
-      }
-  , meta: ID.record_
-      { description: ID.string_
-      , headline: ID.string_
-      }
-  }
+import Demo.Common.CompleteSample (sampleDataUi, Sample)
 
 sampleApp :: InteractiveDataApp ReactHtml _ _ Sample
 sampleApp =
