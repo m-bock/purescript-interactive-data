@@ -7,6 +7,9 @@ module InteractiveData.App.WrapApp
 
 import Prelude
 
+import Chameleon as VD
+import Chameleon.Transformers.Ctx.Class (class Ctx, putCtx, withCtx)
+import Chameleon.Transformers.OutMsg.Class (runOutMsg)
 import Data.Array.NonEmpty as NEA
 import Data.Either (either)
 import Data.Maybe (Maybe(..))
@@ -20,8 +23,9 @@ import InteractiveData.App.UI.Header as UI.Header
 import InteractiveData.App.UI.Layout as UI.Layout
 import InteractiveData.App.UI.Menu (MenuSelfMsg)
 import InteractiveData.App.UI.Menu as UI.Menu
-import InteractiveData.App.UI.Types.SumTree (SumTree, sumTree)
 import InteractiveData.App.UI.NotFound as UI.NotFound
+import InteractiveData.App.UI.SideBar as UI.SideBar
+import InteractiveData.App.UI.Types.SumTree (SumTree, sumTree)
 import InteractiveData.Core
   ( class IDHtml
   , DataTree(..)
@@ -35,9 +39,6 @@ import InteractiveData.Core
 import InteractiveData.Core.Types.DataPathExtra (dataPathFromStrings, dataPathToStrings)
 import InteractiveData.Core.Types.DataTree as DT
 import InteractiveData.Core.Types.IDSurface (runIdSurface)
-import Chameleon as VD
-import Chameleon.Transformers.Ctx.Class (class Ctx, putCtx, withCtx)
-import Chameleon.Transformers.OutMsg.Class (runOutMsg)
 
 --------------------------------------------------------------------------------
 --- Types
@@ -145,12 +146,14 @@ viewFound { global, selected } (AppState { showErrors, menu, showMenu }) =
 
     sidebar :: html (AppSelfMsg msg)
     sidebar =
-      map MenuMsg $
-        UI.Menu.viewMenu
-          { onSelectPath: SetSelectedPath
-          , tree: global.sumTree
-          }
-          menu
+      UI.SideBar.view
+        { menu: map MenuMsg $
+            UI.Menu.viewMenu
+              { onSelectPath: SetSelectedPath
+              , tree: global.sumTree
+              }
+              menu
+        }
 
     body :: html (AppSelfMsg msg)
     body = UI.Body.viewBody

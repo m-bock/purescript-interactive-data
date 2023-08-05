@@ -59,6 +59,107 @@ viewPageNotFound =
         []
     ]
 
+viewLogo :: forall html msg. C.Html html => html msg
+viewLogo =
+  C.elem (C.ElemName "svg")
+    [ C.attr "viewBox" "0 0 512 512"
+    , C.attr "xmlns" "http://www.w3.org/2000/svg"
+    , C.attr "style" "fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:20px;"
+    ]
+    [ C.elem (C.ElemName "g") [ C.attr "data-name" "Layer 2", C.attr "id" "Layer_2" ]
+        [ C.elem (C.ElemName "g")
+            [ C.attr "data-name" "E428, Control, media, multimedia, player, stop"
+            , C.attr "id" "E428_Control_media_multimedia_player_stop"
+            ]
+            [ C.elem (C.ElemName "rect")
+                [ C.attr "class" "cls-1"
+                , C.attr "height" "492"
+                , C.attr "rx" "50.2"
+                , C.attr "width" "492"
+                , C.attr "x" "10"
+                , C.attr "y" "10"
+                ]
+                []
+            , C.elem (C.ElemName "line")
+                [ C.attr "class" "cls-1"
+                , C.attr "x1" "87.59"
+                , C.attr "x2" "87.59"
+                , C.attr "y1" "391.67"
+                , C.attr "y2" "232.61"
+                ]
+                []
+            , C.elem (C.ElemName "line")
+                [ C.attr "class" "cls-1"
+                , C.attr "x1" "87.59"
+                , C.attr "x2" "87.59"
+                , C.attr "y1" "157.76"
+                , C.attr "y2" "120.33"
+                ]
+                []
+            , C.elem (C.ElemName "circle")
+                [ C.attr "class" "cls-1", C.attr "cx" "87.59", C.attr "cy" "195.18", C.attr "r" "37.42" ]
+                []
+            , C.elem (C.ElemName "line")
+                [ C.attr "class" "cls-1"
+                , C.attr "x1" "199.86"
+                , C.attr "x2" "199.86"
+                , C.attr "y1" "391.67"
+                , C.attr "y2" "351.39"
+                ]
+                []
+            , C.elem (C.ElemName "line")
+                [ C.attr "class" "cls-1"
+                , C.attr "x1" "199.86"
+                , C.attr "x2" "199.86"
+                , C.attr "y1" "276.54"
+                , C.attr "y2" "120.33"
+                ]
+                []
+            , C.elem (C.ElemName "circle")
+                [ C.attr "class" "cls-1", C.attr "cx" "199.86", C.attr "cy" "313.96", C.attr "r" "37.42" ]
+                []
+            , C.elem (C.ElemName "line")
+                [ C.attr "class" "cls-1"
+                , C.attr "x1" "312.14"
+                , C.attr "x2" "312.14"
+                , C.attr "y1" "391.67"
+                , C.attr "y2" "232.61"
+                ]
+                []
+            , C.elem (C.ElemName "line")
+                [ C.attr "class" "cls-1"
+                , C.attr "x1" "312.14"
+                , C.attr "x2" "312.14"
+                , C.attr "y1" "157.76"
+                , C.attr "y2" "120.33"
+                ]
+                []
+            , C.elem (C.ElemName "circle")
+                [ C.attr "class" "cls-1", C.attr "cx" "312.14", C.attr "cy" "195.18", C.attr "r" "37.42" ]
+                []
+            , C.elem (C.ElemName "line")
+                [ C.attr "class" "cls-1"
+                , C.attr "x1" "424.41"
+                , C.attr "x2" "424.41"
+                , C.attr "y1" "391.67"
+                , C.attr "y2" "305.75"
+                ]
+                []
+            , C.elem (C.ElemName "line")
+                [ C.attr "class" "cls-1"
+                , C.attr "x1" "424.41"
+                , C.attr "x2" "424.41"
+                , C.attr "y1" "230.9"
+                , C.attr "y2" "120.33"
+                ]
+                []
+            , C.elem (C.ElemName "circle")
+                [ C.attr "class" "cls-1", C.attr "cx" "424.41", C.attr "cy" "268.32", C.attr "r" "37.42" ]
+                []
+            ]
+        ]
+    ]
+
 viewLevelUp :: forall html msg. C.Html html => html msg
 viewLevelUp =
   C.elem (C.ElemName "svg")
