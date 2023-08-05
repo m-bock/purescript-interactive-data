@@ -1,4 +1,4 @@
-module InteractiveData.UI.Slider
+module InteractiveData.UI.NumberInput
   ( ViewCfg
   , class IsNumber
   , fromNumber
@@ -9,11 +9,10 @@ module InteractiveData.UI.Slider
 import Prelude
 
 import Chameleon as C
-import Chameleon.Styled (class HtmlStyled, declWith, styleLeaf, styleNode)
+import Chameleon.Styled (class HtmlStyled, styleLeaf, styleNode)
 import Data.Int as Int
 import Data.Maybe (Maybe(..))
 import Data.Number as Num
-import Data.Tuple.Nested ((/\))
 
 type ViewCfg num msg =
   { min :: num
@@ -26,35 +25,17 @@ type ViewCfg num msg =
 view :: forall html num msg. HtmlStyled html => IsNumber num => ViewCfg num msg -> html msg
 view { onChange, value, min, max, step } =
   let
-    thumbCommon =
-      [ "width: 20px"
-      , "height: 20px"
-      , "border: 1px solid #ccc"
-      , "border-radius: 50%"
-      , "background: #caf1ff"
-      , "cursor: pointer"
-      ]
 
     el =
       { container: styleNode C.div
           [ "" ]
-      , input: styleLeaf C.input $
+      , input: styleLeaf C.input
           [ "width: 100%"
-          , "-webkit-appearance: none"
-          , "height: 10px"
-          , "border-radius: 5px"
-          , "background: #efefef"
+          , "border-radius: 3px"
+          , "background: white"
           , "border: 1px solid #d5d5d5"
-          , "outline: none"
-          , "opacity: 0.7"
           ]
-            /\ declWith "::-webkit-slider-thumb"
-              ( [ "webkit-appearance: none"
-                , "appearance: none"
-                ] <> thumbCommon
-              )
-            /\ declWith "::-moz-range-thumb"
-              thumbCommon
+
       }
 
     handleInput :: String -> Maybe msg
@@ -70,7 +51,7 @@ view { onChange, value, min, max, step } =
     el.container []
       [ C.mapMaybe identity $
           el.input
-            [ C.type_ "range"
+            [ C.type_ "number"
             , C.min $ toNumber $ min
             , C.max $ toNumber max
             , C.value valueStr
