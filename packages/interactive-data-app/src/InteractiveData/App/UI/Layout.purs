@@ -43,6 +43,7 @@ viewLayout { viewHeader, viewSidebar, viewBody, viewFooter } = withCtx \ctx ->
             , "flex-direction: column"
             , "height: 100%"
             , "font-family: 'Signika Negative'"
+            , "background-color: white"
             ]
       , header: styleNode VD.div
           [ "min-height: 70px"

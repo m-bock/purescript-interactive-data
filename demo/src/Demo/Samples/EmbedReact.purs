@@ -81,6 +81,7 @@ reactComponent = do
             , padding: "50px"
             , boxSizing: "border-box"
             , overflow: "auto"
+            , backgroundColor: "#3375af"
             }
         , children:
             [ DOM.div
@@ -110,8 +111,7 @@ reactComponent = do
 
             , DOM.div
                 { style: css
-                    { border: "1px dashed #ccc"
-                    , maxHeight: "500px"
+                    { maxHeight: "500px"
                     , height: "500px"
                     , maxWidth: "900px"
                     , flexGrow: "0"
