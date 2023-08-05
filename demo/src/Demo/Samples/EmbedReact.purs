@@ -2,6 +2,8 @@ module Demo.Samples.EmbedReact where
 
 import Prelude
 
+import Chameleon.Impl.ReactBasic as RI
+import Chameleon.Impl.ReactBasic.Html (ReactHtml, defaultConfig, runReactHtml)
 import Data.Argonaut (encodeJson, stringifyWithIndent)
 import Data.Either (Either(..))
 import Data.Maybe (Maybe(..))
@@ -10,12 +12,10 @@ import InteractiveData (DataUI)
 import InteractiveData as ID
 import InteractiveData.Core (class IDHtml, IDSurface)
 import InteractiveData.Entry (InteractiveDataApp)
-import React.Basic.DOM (css)
+import React.Basic.DOM (CSS, css)
 import React.Basic.DOM as DOM
 import React.Basic.Hooks ((/\))
 import React.Basic.Hooks as React
-import Chameleon.Impl.ReactBasic as RI
-import Chameleon.Impl.ReactBasic.Html (ReactHtml, defaultConfig, runReactHtml)
 
 type Sample =
   { user ::
@@ -69,41 +69,13 @@ reactComponent = do
 
     pure $
       DOM.div
-        { style: css
-            { position: "fixed"
-            , top: "0"
-            , left: "0"
-            , right: "0"
-            , bottom: "0"
-            , display: "flex"
-            , flexDirection: "column"
-            , gap: "50px"
-            , padding: "50px"
-            , boxSizing: "border-box"
-            , overflow: "auto"
-            , backgroundColor: "#3375af"
-            }
+        { style: styles.root
         , children:
             [ DOM.div
-                { style: css
-                    { backgroundColor: "rgb(241 241 241)"
-                    , maxHeight: "200px"
-                    , maxWidth: "900px"
-                    , flexGrow: "0"
-                    , flexShrink: "0"
-                    , boxSizing: "border-box"
-                    , overflow: "auto"
-                    }
+                { style: styles.jsonBox
                 , children:
                     [ DOM.h3
-                        { style: css
-                            { position: "sticky"
-                            , top: "0"
-                            , margin: "0"
-                            , backgroundColor: "rgb(241 241 241)"
-                            , borderBottom: "1px solid #ccc"
-                            , padding: "5px"
-                            }
+                        { style: styles.jsonBoxHeader
                         , children: [ DOM.text "JSON encoded data:" ]
                         }
                     , case extract state of
@@ -115,28 +87,71 @@ reactComponent = do
                                 [ DOM.text $ stringifyWithIndent 2 $ encodeJson value
                                 ]
                             }
-
                     ]
                 }
 
             , DOM.div
-                { style: css
-                    { maxHeight: "500px"
-                    , height: "500px"
-                    , maxWidth: "900px"
-                    , flexGrow: "0"
-                    , flexShrink: "0"
-                    , boxSizing: "border-box"
-                    , padding: "3px"
-                    }
+                { style: styles.embedBox
                 , children:
                     [ runReactHtml { handler } defaultConfig
                         $ ui.view state
                     ]
                 }
-
             ]
         }
 
 main :: Effect Unit
 main = RI.mountAtId "root" reactComponent
+
+--------------------------------------------------------------------------------
+--- Styles
+--------------------------------------------------------------------------------
+
+styles
+  :: { embedBox :: CSS
+     , jsonBox :: CSS
+     , jsonBoxHeader :: CSS
+     , root :: CSS
+     }
+styles =
+  { root: css
+      { position: "fixed"
+      , top: "0"
+      , left: "0"
+      , right: "0"
+      , bottom: "0"
+      , display: "flex"
+      , flexDirection: "column"
+      , gap: "50px"
+      , padding: "50px"
+      , boxSizing: "border-box"
+      , overflow: "auto"
+      , backgroundColor: "#3375af"
+      }
+  , jsonBox: css
+      { backgroundColor: "rgb(241 241 241)"
+      , maxHeight: "200px"
+      , maxWidth: "900px"
+      , flexGrow: "0"
+      , flexShrink: "0"
+      , boxSizing: "border-box"
+      , overflow: "auto"
+      }
+  , jsonBoxHeader: css
+      { position: "sticky"
+      , top: "0"
+      , margin: "0"
+      , backgroundColor: "rgb(241 241 241)"
+      , borderBottom: "1px solid #ccc"
+      , padding: "5px"
+      }
+  , embedBox: css
+      { maxHeight: "500px"
+      , height: "500px"
+      , maxWidth: "900px"
+      , flexGrow: "0"
+      , flexShrink: "0"
+      , boxSizing: "border-box"
+      , padding: "3px"
+      }
+  }
