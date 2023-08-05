@@ -87,7 +87,6 @@ reactComponent = do
             [ DOM.div
                 { style: css
                     { backgroundColor: "rgb(241 241 241)"
-                    , padding: "10px"
                     , maxHeight: "200px"
                     , maxWidth: "900px"
                     , flexGrow: "0"
@@ -96,7 +95,18 @@ reactComponent = do
                     , overflow: "auto"
                     }
                 , children:
-                    [ case extract state of
+                    [ DOM.h3
+                        { style: css
+                            { position: "sticky"
+                            , top: "0"
+                            , margin: "0"
+                            , backgroundColor: "rgb(241 241 241)"
+                            , borderBottom: "1px solid #ccc"
+                            , padding: "5px"
+                            }
+                        , children: [ DOM.text "JSON encoded data:" ]
+                        }
+                    , case extract state of
                         Left errors -> DOM.text $ show errors
                         Right value ->
                           DOM.pre
@@ -117,7 +127,7 @@ reactComponent = do
                     , flexGrow: "0"
                     , flexShrink: "0"
                     , boxSizing: "border-box"
-
+                    , padding: "3px"
                     }
                 , children:
                     [ runReactHtml { handler } defaultConfig
