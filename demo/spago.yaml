@@ -2,16 +2,18 @@ package:
   name: interactive-data-demo
   dependencies:
     - argonaut
+    - chameleon-halogen
+    - chameleon-react-basic
     - console
     - effect
     - either
+    - foldable-traversable
+    - interactive-data
     - maybe
     - prelude
     - react-basic-dom
     - react-basic-hooks
-    - chameleon-halogen
-    - chameleon-react-basic
-    - interactive-data
+    - strings
   test:
     dependencies: []
     main: Test.Main

@@ -6,6 +6,7 @@ module Demo.Common.Features.Refinement.UserID
 
 import Prelude
 
+import Data.Argonaut (class DecodeJson, class EncodeJson)
 import Data.Char (toCharCode)
 import Data.Either (note)
 import Data.Foldable (all)
@@ -15,6 +16,10 @@ import InteractiveData (class IDHtml, DataError(..), DataErrorCase(..), DataUI, 
 import InteractiveData as ID
 
 newtype UserID = UserID String
+
+derive newtype instance EncodeJson UserID
+derive newtype instance DecodeJson UserID
+derive newtype instance Show UserID
 
 mkUserID :: String -> Maybe UserID
 mkUserID candidate =
