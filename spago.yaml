@@ -15,7 +15,7 @@ workspace:
         - tuples: '>=7.0.0 <8.0.0'
         - unordered-collections: '>=3.0.1 <4.0.0'
   package_set:
-    registry: 32.2.0
+    registry: 34.0.0
   build_opts:
     pedantic_packages: true
     persist_warnings: true
