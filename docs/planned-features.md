@@ -10,7 +10,6 @@
 - `Either`
 - Custom ADTs
 - `Variant`
-- refinements
 
 ## General
 

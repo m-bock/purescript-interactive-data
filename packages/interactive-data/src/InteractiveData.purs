@@ -31,11 +31,28 @@ import InteractiveData.Core
   , class IDHtml
   ) as Export
 
-import DataMVC.Types
-  ( DataUI
-  , DataUiInterface
-  ) as Export
-
 import InteractiveData.Entry
   ( toApp
+  ) as Export
+
+import DataMVC.Types
+  ( DataPath
+  , DataPathSegment(..)
+  , DataPathSegmentField(..)
+  , DataUI(..)
+  , DataUICtx(..)
+  , DataUiInterface(..)
+  ) as Export
+
+import DataMVC.Types.DataUI
+  ( refineDataUi
+  ) as Export
+
+import DataMVC.Types.DataError
+  ( DataError(..)
+  , DataErrorCase(..)
+  , DataResult
+  , scopeError
+  , scopeErrors
+  , scopeOpt
   ) as Export
