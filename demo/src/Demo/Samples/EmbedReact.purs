@@ -18,19 +18,32 @@ import Chameleon.Impl.ReactBasic as RI
 import Chameleon.Impl.ReactBasic.Html (ReactHtml, defaultConfig, runReactHtml)
 
 type Sample =
-  { firstName :: String
-  , lastName :: String
+  { user ::
+      { firstName :: String
+      , lastName :: String
+      , size :: Number
+      }
+  , meta ::
+      { description :: String
+      , headline :: String
+      }
   }
 
 sampleDataUi
   :: forall html
    . IDHtml html
   => DataUI (IDSurface html) _ _ _ _ Sample
-sampleDataUi =
-  ID.record_
-    { firstName: ID.string_
-    , lastName: ID.string_
-    }
+sampleDataUi = ID.record_
+  { user: ID.record_
+      { firstName: ID.string_
+      , lastName: ID.string_
+      , size: ID.number { min: 0.0, max: 100.0 }
+      }
+  , meta: ID.record_
+      { description: ID.string_
+      , headline: ID.string_
+      }
+  }
 
 sampleApp :: InteractiveDataApp ReactHtml _ _ Sample
 sampleApp =
@@ -66,29 +79,45 @@ reactComponent = do
             , flexDirection: "column"
             , gap: "50px"
             , padding: "50px"
+            , boxSizing: "border-box"
+            , overflow: "auto"
             }
         , children:
             [ DOM.div
                 { style: css
-                    { border: "1px solid black"
-                    , height: "50%"
-                    , flex: "1 1 0px"
+                    { backgroundColor: "rgb(241 241 241)"
+                    , padding: "10px"
+                    , maxHeight: "200px"
+                    , maxWidth: "900px"
+                    , flexGrow: "0"
+                    , flexShrink: "0"
+                    , boxSizing: "border-box"
+                    , overflow: "auto"
                     }
                 , children:
                     [ case extract state of
                         Left errors -> DOM.text $ show errors
                         Right value ->
-                          DOM.pre_
-                            [ DOM.text $ stringifyWithIndent 2 $ encodeJson value
-                            ]
+                          DOM.pre
+                            { style: css { margin: "0px" }
+                            , children:
+                                [ DOM.text $ stringifyWithIndent 2 $ encodeJson value
+                                ]
+                            }
+
                     ]
                 }
 
             , DOM.div
                 { style: css
-                    { border: "1px solid black"
-                    , height: "50%"
-                    , flex: "1 1 0px"
+                    { border: "1px dashed #ccc"
+                    , maxHeight: "500px"
+                    , height: "500px"
+                    , maxWidth: "900px"
+                    , flexGrow: "0"
+                    , flexShrink: "0"
+                    , boxSizing: "border-box"
+
                     }
                 , children:
                     [ runReactHtml { handler } defaultConfig
