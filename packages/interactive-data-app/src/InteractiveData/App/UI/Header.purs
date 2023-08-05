@@ -95,22 +95,6 @@ viewHeaderRoot { viewBreadcrumbs, viewTypeName: viewTypeName', right } =
           [ right ]
       ]
 
--- viewIcon :: forall html msg. IDHtml html => html msg -> html msg
--- viewIcon view =
---   let
---     el =
---       { root:
---           styleNode VD.div
---             $ declWith " > svg"
---                 [ "width:10px"
---                 , "height:10px"
---                 , "display:inline-block"
---                 ]
---       }
---   in
---     el.root []
---       [ view ]
-
 viewTypeName
   :: forall html msg
    . IDHtml html

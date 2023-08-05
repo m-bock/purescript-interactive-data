@@ -140,7 +140,7 @@ viewFound { global, selected } (AppState { showErrors, menu, showMenu }) =
         , onSelectPath: SetSelectedPath <<< dataPathToStrings
         , showMenu
         , onSetShowMenu: SetShowMenu
-        , typeName: global.meta.typeName
+        , typeName: selected.meta.typeName
         }
 
     sidebar :: html (AppSelfMsg msg)
