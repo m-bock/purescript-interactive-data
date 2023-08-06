@@ -1,7 +1,6 @@
 module InteractiveData.Core.FeatureFlags
   ( featureFlags
-  )
-  where
+  ) where
 
 import Prelude
 
