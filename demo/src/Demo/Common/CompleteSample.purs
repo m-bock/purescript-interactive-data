@@ -1,5 +1,6 @@
 module Demo.Common.CompleteSample where
 
+import Demo.Common.Features.CustomDataUI.Color (Color, color)
 import Demo.Common.Features.Refinement.UserID (UserID, userId_)
 import InteractiveData (class IDHtml, DataUI, IDSurface)
 import InteractiveData as ID
@@ -15,6 +16,11 @@ type Sample =
   , meta ::
       { description :: String
       , headline :: String
+      }
+  , theme ::
+      { backgroundColor :: Color
+      , foregroundColor :: Color
+      , textColor :: Color
       }
   }
 
@@ -33,5 +39,10 @@ sampleDataUi = ID.record_
   , meta: ID.record_
       { description: ID.string_
       , headline: ID.string_
+      }
+  , theme: ID.record_
+      { backgroundColor: color {}
+      , foregroundColor: color {}
+      , textColor: color {}
       }
   }
