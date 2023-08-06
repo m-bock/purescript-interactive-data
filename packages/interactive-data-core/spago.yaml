@@ -9,6 +9,7 @@ package:
     - data-mvc
     - dodo-printer
     - either
+    - foreign-object
     - heterogeneous
     - identity
     - maybe
@@ -17,6 +18,7 @@ package:
     - record
     - these
     - tuples
+    - typedenv
     - typelevel-prelude
   name: interactive-data-core
   test:

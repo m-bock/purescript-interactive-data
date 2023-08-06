@@ -6,16 +6,18 @@ module InteractiveData.App.WrapData
 
 import InteractiveData.Core.Prelude
 
+import Chameleon as VD
+import Chameleon.Transformers.OutMsg.Class (fromOutHtml)
 import Data.Array as Array
 import Data.Array.NonEmpty (NonEmptyArray)
 import Data.Tuple (fst)
 import InteractiveData.App.UI.ActionButton (viewActionButton)
 import InteractiveData.App.UI.Card as UI.Card
 import InteractiveData.App.UI.DataLabel as UI.DataLabel
+import InteractiveData.Core.FeatureFlags (featureFlags)
 import InteractiveData.Core.Types.DataPathExtra (dataPathToStrings, segmentToString)
+import InteractiveData.Core.Types.DataTree as DT
 import InteractiveData.Core.Types.IDSurface (runIdSurface)
-import Chameleon as VD
-import Chameleon.Transformers.OutMsg.Class (fromOutHtml)
 
 --------------------------------------------------------------------------------
 --- Types
@@ -261,6 +263,7 @@ type ViewDataTreeCfg html msg sta a =
   , extract ::
       sta -> DataResult a
   , typeName :: String
+  , path :: DataPath
   }
 
 viewDataTree
@@ -269,30 +272,55 @@ viewDataTree
   => ViewDataTreeCfg html msg sta a
   -> WrapState sta
   -> DataTree html (WrapMsg msg)
-viewDataTree { viewInner, viewHtml, extract, typeName } state@(WrapState { childState }) =
+viewDataTree { viewInner, viewHtml, extract, typeName, path } state@(WrapState { childState }) =
   let
-    (DataTree { actions, children }) = viewInner childState
+    tree@(DataTree { actions, children }) = viewInner childState
 
     extractResult :: DataResult a
     extractResult = extract childState
 
+    -- Important!
+    -- If meta is not set here, the app is useless.
     meta :: TreeMeta
     meta =
       { errored: map (const unit) extractResult
       , typeName
       }
+
+    children' :: DataTreeChildren html (WrapMsg msg)
+    children' = map ChildMsg $ children
+
+    trivialTrees :: Array (DataPath /\ DataTree html msg)
+    trivialTrees = DT.digTrivialTrees path tree
+
+    viewOld :: html (WrapMsg msg)
+    viewOld = viewHtml
+      { actions
+      , viewInner: viewInner >>> un DataTree >>> _.view
+      }
+      state
+
+    viewNew' :: html (WrapMsg msg)
+    viewNew' = map ChildMsg $ viewNew trivialTrees
+
+    view :: html (WrapMsg msg)
+    view =
+      if featureFlags."NEW_DATA_WRAP" then viewNew'
+      else viewOld
   in
     DataTree
-      { view:
-          viewHtml
-            { actions
-            , viewInner: viewInner >>> un DataTree >>> _.view
-            }
-            state
-      , children: map ChildMsg $ children
+      { view
+      , children: children'
       , actions: map ChildMsg <$> actions
       , meta: Just meta
       }
+
+viewNew
+  :: forall html msg
+   . IDHtml html
+  => Array (DataPath /\ DataTree html msg)
+  -> html msg
+viewNew _ = VD.text "new view"
 
 dataUiInterface
   :: forall html msg sta a
@@ -301,12 +329,13 @@ dataUiInterface
   -> DataUiInterface (IDSurface html) (WrapMsg msg) (WrapState sta) a
 dataUiInterface (DataUiInterface { name, extract, init, update, view }) = DataUiInterface
   { name
-  , view: \state -> IDSurface \ctx ->
+  , view: \state -> IDSurface \(ctx :: IDSurfaceCtx) ->
       viewDataTree
         { viewHtml: dataWrapperView { name, extract }
         , viewInner: view >>> runIdSurface ctx
         , extract
         , typeName: name
+        , path: ctx.path
         }
         state
   , extract: dataWrapperExtract extract

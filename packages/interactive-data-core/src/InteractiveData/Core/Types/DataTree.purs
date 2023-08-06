@@ -2,6 +2,7 @@ module InteractiveData.Core.Types.DataTree
   ( DataTree(..)
   , DataTreeChildren(..)
   , TreeMeta
+  , digTrivialTrees
   , find
   , hasNoChildren
   , mapMetadataAlongPath
@@ -44,6 +45,41 @@ data DataTreeChildren srf msg
       (Array (DataPathSegmentField /\ DataTree srf msg))
   | Case
       (String /\ DataTree srf msg)
+
+-- | A trivial tree is
+-- |   a) a tree with no children (leaf)
+-- |   b) a tree with a single "field" child
+-- |   c) a tree with a "case" child
+digTrivialTrees
+  :: forall srf msg
+   . DataPath
+  -> DataTree srf msg
+  -> Array (DataPath /\ DataTree srf msg)
+digTrivialTrees path tree@(DataTree { children }) = case children of
+  -- Case
+  Case case_ ->
+    let
+      (k /\ subTree) = case_
+
+      newPath :: DataPath
+      newPath = [ SegCase k ] <> path
+    in
+      [ path /\ tree ] <> digTrivialTrees newPath subTree
+
+  -- Leaf
+  Fields [] -> [ path /\ tree ]
+
+  -- Singleton field
+  Fields [ field ] ->
+    let
+      k /\ subTree = field
+
+      newPath :: DataPath
+      newPath = [ SegField k ] <> path
+    in
+      [ path /\ tree ] <> digTrivialTrees newPath subTree
+
+  Fields _ -> []
 
 --------------------------------------------------------------------------------
 
