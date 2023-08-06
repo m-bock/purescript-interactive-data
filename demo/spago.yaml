@@ -2,13 +2,16 @@ package:
   name: interactive-data-demo
   dependencies:
     - argonaut
+    - chameleon
     - chameleon-halogen
     - chameleon-react-basic
     - console
     - effect
     - either
     - foldable-traversable
+    - integers
     - interactive-data
+    - interactive-data-core
     - maybe
     - prelude
     - react-basic-dom
