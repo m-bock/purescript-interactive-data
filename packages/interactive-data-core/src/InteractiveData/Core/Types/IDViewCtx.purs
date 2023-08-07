@@ -23,6 +23,7 @@ type IDViewCtx =
   , root :: String /\ TreeMeta
   , mapMetaAlongPath :: PathInContext DataPathSegment -> PathInContext (DataPathSegment /\ TreeMeta)
   , fullscreen :: Boolean
+  , fastForward :: Boolean
   }
 
 type PathInContext a =
@@ -46,6 +47,7 @@ defaultViewCtx { label } =
   , root: label /\ { errored: Right unit, typeName: mempty }
   , mapMetaAlongPath: \_ -> mempty
   , fullscreen: true
+  , fastForward: true
   }
 
 --------------------------------------------------------------------------------

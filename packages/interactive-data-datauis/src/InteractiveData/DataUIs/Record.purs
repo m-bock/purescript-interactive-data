@@ -48,8 +48,9 @@ recordViewEntries { viewRow } entries =
       else
         case ctx.viewMode of
           Inline -> VD.noHtml
-          Standalone -> VD.div_
+          Standalone | ctx.fastForward -> VD.div_
             (entries # mapWithIndex viewRow)
+          _ -> VD.noHtml
 
 recordViewRow
   :: forall html msg

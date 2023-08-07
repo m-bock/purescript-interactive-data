@@ -1,8 +1,9 @@
-import select, { Separator } from "@inquirer/select";
-import { sampleValues } from "../output/Demo.EnvVars/index.js";
+import select from "@inquirer/select";
 import * as fs from "fs";
 
 const out = process.argv[2];
+
+const sampleValues = fs.readdirSync("demo/src/Demo/Samples");
 
 const choices = sampleValues.map((name) => {
   return {

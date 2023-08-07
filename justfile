@@ -62,7 +62,7 @@ run-example: build clean-parcel
     node scripts/run-example.js $FILE
     export SAMPLE=`cat $FILE`
     echo "Starting $SAMPLE"
-    parcel demo/static/index.html
+    parcel demo/src/Demo/Samples/$SAMPLE/index.html
 
 clean: clean-parcel clean-purs-output
 

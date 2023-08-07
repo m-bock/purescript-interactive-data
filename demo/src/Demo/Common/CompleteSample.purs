@@ -32,9 +32,15 @@ sampleDataUi = ID.record_
   { user: ID.record_
       { firstName: ID.string_
       , lastName: ID.string_
-      , size: ID.number { min: 0.0, max: 100.0 }
+      , size: ID.number
+          { min: 0.0
+          , max: 100.0
+          }
       , userId: userId_
-      , age: ID.int { min: 0, max: 150 }
+      , age: ID.int
+          { min: 0
+          , max: 150
+          }
       }
   , meta: ID.record_
       { description: ID.string_

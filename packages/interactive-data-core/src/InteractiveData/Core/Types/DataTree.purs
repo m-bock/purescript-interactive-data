@@ -62,7 +62,7 @@ digTrivialTrees path tree@(DataTree { children }) = case children of
       (k /\ subTree) = case_
 
       newPath :: DataPath
-      newPath = [ SegCase k ] <> path
+      newPath = path <> [ SegCase k ]
     in
       [ path /\ tree ] <> digTrivialTrees newPath subTree
 
@@ -75,11 +75,11 @@ digTrivialTrees path tree@(DataTree { children }) = case children of
       k /\ subTree = field
 
       newPath :: DataPath
-      newPath = [ SegField k ] <> path
+      newPath = path <> [ SegField k ]
     in
       [ path /\ tree ] <> digTrivialTrees newPath subTree
 
-  Fields _ -> []
+  Fields _ -> [ path /\ tree ]
 
 --------------------------------------------------------------------------------
 

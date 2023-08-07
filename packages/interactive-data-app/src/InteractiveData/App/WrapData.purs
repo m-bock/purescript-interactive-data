@@ -8,12 +8,16 @@ import InteractiveData.Core.Prelude
 
 import Chameleon as VD
 import Chameleon.Transformers.OutMsg.Class (fromOutHtml)
+import Data.Array (intersperse, take)
 import Data.Array as Array
 import Data.Array.NonEmpty (NonEmptyArray)
+import Data.FunctorWithIndex (mapWithIndex)
 import Data.Tuple (fst)
 import InteractiveData.App.UI.ActionButton (viewActionButton)
 import InteractiveData.App.UI.Card as UI.Card
 import InteractiveData.App.UI.DataLabel as UI.DataLabel
+import InteractiveData.App.WrapData.NewInline (viewNewInline)
+import InteractiveData.App.WrapData.NewStandalone (viewNewStandalone)
 import InteractiveData.Core.FeatureFlags (featureFlags)
 import InteractiveData.Core.Types.DataPathExtra (dataPathToStrings, segmentToString)
 import InteractiveData.Core.Types.DataTree as DT
@@ -51,6 +55,23 @@ instance Show sta => Show (WrapState sta) where
 
 instance Show msg => Show (WrapMsg msg) where
   show = genericShow
+
+--------------------------------------------------------------------------------
+---  View New
+--------------------------------------------------------------------------------
+
+viewNew
+  :: forall html msg
+   . IDHtml html
+  => Array (DataPath /\ DataTree html msg)
+  -> html msg
+viewNew items =
+  withCtx \ctx ->
+    case ctx.viewMode of
+      Inline ->
+        viewNewInline items
+      Standalone ->
+        viewNewStandalone items
 
 --------------------------------------------------------------------------------
 --- View
@@ -290,9 +311,6 @@ viewDataTree { viewInner, viewHtml, extract, typeName, path } state@(WrapState {
     children' :: DataTreeChildren html (WrapMsg msg)
     children' = map ChildMsg $ children
 
-    trivialTrees :: Array (DataPath /\ DataTree html msg)
-    trivialTrees = DT.digTrivialTrees path tree
-
     viewOld :: html (WrapMsg msg)
     viewOld = viewHtml
       { actions
@@ -301,7 +319,17 @@ viewDataTree { viewInner, viewHtml, extract, typeName, path } state@(WrapState {
       state
 
     viewNew' :: html (WrapMsg msg)
-    viewNew' = map ChildMsg $ viewNew trivialTrees
+    viewNew' = withCtx \ctx ->
+      let
+        trivialTrees :: Array (DataPath /\ DataTree html msg)
+        trivialTrees = DT.digTrivialTrees ctx.path tree
+      in
+        map ChildMsg $
+          withCtx \ctx ->
+            if ctx.fastForward then
+              viewNew trivialTrees
+            else
+              viewInner childState # un DataTree # _.view
 
     view :: html (WrapMsg msg)
     view =
@@ -314,13 +342,6 @@ viewDataTree { viewInner, viewHtml, extract, typeName, path } state@(WrapState {
       , actions: map ChildMsg <$> actions
       , meta: Just meta
       }
-
-viewNew
-  :: forall html msg
-   . IDHtml html
-  => Array (DataPath /\ DataTree html msg)
-  -> html msg
-viewNew _ = VD.text "new view"
 
 dataUiInterface
   :: forall html msg sta a
