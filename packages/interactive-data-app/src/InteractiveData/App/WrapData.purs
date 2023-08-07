@@ -291,7 +291,7 @@ viewDataTree
   => ViewDataTreeCfg html msg sta a
   -> WrapState sta
   -> DataTree html (WrapMsg msg)
-viewDataTree { viewInner, viewHtml, extract, typeName, path } state@(WrapState { childState }) =
+viewDataTree { viewInner, viewHtml, extract, typeName } state@(WrapState { childState }) =
   let
     tree@(DataTree { actions, children }) = viewInner childState
 
@@ -323,8 +323,8 @@ viewDataTree { viewInner, viewHtml, extract, typeName, path } state@(WrapState {
         trivialTrees = DT.digTrivialTrees ctx.path tree
       in
         map ChildMsg $
-          withCtx \ctx ->
-            if ctx.fastForward then
+          withCtx \ctx' ->
+            if ctx'.fastForward then
               viewNew trivialTrees
             else
               viewInner childState # un DataTree # _.view

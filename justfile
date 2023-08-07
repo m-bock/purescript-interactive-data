@@ -9,7 +9,7 @@ build:
 build-strict:
     spago build --json-errors | node scripts/filter-warnings.js
 
-ci: format gen build build-strict dist-examples check-git-clean
+ci: clean format gen build build-strict dist-examples check-git-clean
 
 dist-examples:
     #!/usr/bin/env bash
@@ -64,10 +64,10 @@ run-example: build clean-parcel
     echo "Starting $SAMPLE"
     parcel demo/src/Demo/Samples/$SAMPLE/index.html
 
-clean: clean-parcel clean-purs-output
+clean: clean-parcel clean-purs
 
 clean-purs-output:
-    rm -rf output
+    rm -rf .spago output
 
 clean-parcel:
     rm -rf .parcel-cache
