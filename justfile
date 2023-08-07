@@ -66,7 +66,7 @@ run-example: build clean-parcel
 
 clean: clean-parcel clean-purs
 
-clean-purs-output:
+clean-purs:
     rm -rf .spago output
 
 clean-parcel:
