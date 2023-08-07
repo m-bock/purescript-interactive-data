@@ -8,10 +8,8 @@ import InteractiveData.Core.Prelude
 
 import Chameleon as VD
 import Chameleon.Transformers.OutMsg.Class (fromOutHtml)
-import Data.Array (intersperse, take)
 import Data.Array as Array
 import Data.Array.NonEmpty (NonEmptyArray)
-import Data.FunctorWithIndex (mapWithIndex)
 import Data.Tuple (fst)
 import InteractiveData.App.UI.ActionButton (viewActionButton)
 import InteractiveData.App.UI.Card as UI.Card
