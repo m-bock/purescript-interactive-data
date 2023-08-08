@@ -29,12 +29,12 @@ type DataUiRecordCfg =
   { mkSegment :: Int -> String -> DataPathSegmentField
   }
 
-newView
+view
   :: forall html msg
    . IDHtml html
   => (Array (DataPathSegmentField /\ DataTree html msg))
   -> html msg
-newView fields =
+view fields =
   withCtx \ctx ->
     let
       el =
@@ -117,14 +117,9 @@ mkSurface { mkSegment } opts = IDSurface \ctx ->
     children :: DataTreeChildren html msg
     children = Fields fields
 
-    view :: html msg
-    view = newView fields
   in
     DataTree
-      { view
-      -- recordViewEntries
-      --   { viewRow: recordViewRow { mkSegment } }
-      --   opts'
+      { view: view fields
       , children
       , actions: []
       , meta: Nothing
@@ -155,14 +150,3 @@ record_ = record'
 mkSegmentStatic :: Int -> String -> DataPathSegmentField
 mkSegmentStatic _ = SegStaticKey
 
-type Opts' :: forall k. (k -> Type) -> k -> Type
-type Opts' html msg = Array
-  { key :: String
-  , viewValue :: html msg
-  }
-
-type Opt' :: forall k. (k -> Type) -> k -> Type
-type Opt' html msg =
-  { key :: String
-  , viewValue :: html msg
-  }

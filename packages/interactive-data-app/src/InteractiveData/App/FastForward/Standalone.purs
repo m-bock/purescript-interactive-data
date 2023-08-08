@@ -8,7 +8,7 @@ import Chameleon as VD
 import Chameleon.Transformers.OutMsg.Class (fromOutHtml)
 import Data.Array as Array
 import Data.FunctorWithIndex (mapWithIndex)
-import InteractiveData.App.UI.DataLabel as UI.DataLabel
+import InteractiveData.App.UI.DataLabel as UIDataLabel
 import InteractiveData.Core.Types.DataPathExtra (dataPathToStrings)
 
 viewFastForwardStandalone
@@ -59,12 +59,12 @@ viewItem { isLast, isFirst } (path /\ tree) =
       el.root []
         [ if isFirst then VD.noHtml
           else fromOutHtml
-            $ UI.DataLabel.viewDataLabel
+            $ UIDataLabel.view
                 { dataPath: { before: [], path }
-                , mkTitle: UI.DataLabel.mkTitleGoto
+                , mkTitle: UIDataLabel.mkTitleGoto
                 }
                 { onHit: Just (That $ GlobalSelectDataPath $ dataPathToStrings path)
-                , size: UI.DataLabel.Large
+                , size: UIDataLabel.Large
                 }
         , withCtx \_ -> putCtx ctx { fastForward = isLast, path = path } $ view
         ]

@@ -5,14 +5,15 @@ module InteractiveData.App.UI.Footer
 
 import InteractiveData.Core.Prelude
 
+import Chameleon as VD
 import Data.Array as Array
 import DataMVC.Types.DataError (DataError(..))
 import InteractiveData.App.UI.Assets as UI.Assets
 import InteractiveData.App.UI.Breadcrumbs as UI.Breadcrumbs
 import InteractiveData.App.UI.Card as UI.Card
 import InteractiveData.App.UI.DataLabel as UI.DataLabel
+import InteractiveData.App.UI.DataLabel as UIDataLabel
 import InteractiveData.Core.Types.Common (unPathInContext)
-import Chameleon as VD
 
 type ViewFooterCfg msg =
   { errors :: Array DataError
@@ -40,7 +41,7 @@ viewFooter { errors, onSelectPath, isExpanded, onChangeIsExpanded } =
                       path :: Array DataPathSegment
                       path = unPathInContext pathInCtx
                     in
-                      UI.DataLabel.viewDataLabel
+                      UIDataLabel.view
                         { dataPath: pathInCtx
                         , mkTitle: UI.DataLabel.mkTitleGoto
                         }

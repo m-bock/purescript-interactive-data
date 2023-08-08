@@ -14,6 +14,7 @@ import Data.Tuple (fst)
 import InteractiveData.App.UI.ActionButton (viewActionButton)
 import InteractiveData.App.UI.Card as UI.Card
 import InteractiveData.App.UI.DataLabel as UI.DataLabel
+import InteractiveData.App.UI.DataLabel as UIDataLabel
 import InteractiveData.Core.Types.DataPathExtra (dataPathToStrings, segmentToString)
 import InteractiveData.Core.Types.IDSurface (runIdSurface)
 
@@ -179,7 +180,7 @@ viewInline { viewContent, typeName } =
               { viewCaption = Just
                   $ fromOutHtml
                   $ el.caption []
-                      [ UI.DataLabel.viewDataLabel
+                      [ UIDataLabel.view
                           { dataPath: { before: [], path: ctx.path }
                           , mkTitle: UI.DataLabel.mkTitleGoto
                           }
