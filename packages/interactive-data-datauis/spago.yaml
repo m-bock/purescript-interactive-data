@@ -9,7 +9,6 @@ package:
     - interactive-data-core
     - maybe
     - mvc
-    - newtype
     - prelude
     - strings
     - tuples
