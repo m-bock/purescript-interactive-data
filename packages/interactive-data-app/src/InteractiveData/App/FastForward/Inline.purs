@@ -1,7 +1,6 @@
 module InteractiveData.App.FastForward.Inline
   ( viewFastForwardInline
-  )
-  where
+  ) where
 
 import InteractiveData.Core.Prelude
 

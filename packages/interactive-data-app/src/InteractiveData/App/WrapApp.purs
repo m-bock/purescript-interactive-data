@@ -164,7 +164,7 @@ viewFound { global, selected } (AppState { showErrors, menu, showMenu }) =
       selected.dataTree
 
     viewContent' :: html (AppSelfMsg msg)
-    viewContent' = withCtx \ctx -> 
+    viewContent' = withCtx \ctx ->
       case ctx.viewMode of
         Inline ->
           viewContent

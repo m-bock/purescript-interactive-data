@@ -1,7 +1,6 @@
 module InteractiveData.App.FastForward.Standalone
   ( viewFastForwardStandalone
-  )
-  where
+  ) where
 
 import InteractiveData.Core.Prelude
 
@@ -67,5 +66,5 @@ viewItem { isLast, isFirst } (path /\ tree) =
                 { onHit: Just (That $ GlobalSelectDataPath $ dataPathToStrings path)
                 , size: UI.DataLabel.Large
                 }
-        , withCtx \_ -> putCtx ctx {  fastForward = isLast, path = path } $ view
+        , withCtx \_ -> putCtx ctx { fastForward = isLast, path = path } $ view
         ]
