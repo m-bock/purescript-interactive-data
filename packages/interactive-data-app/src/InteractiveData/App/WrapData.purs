@@ -126,7 +126,7 @@ viewStandalone { viewContent, actions } =
         ]
 
 viewInline :: forall html msg. IDHtml html => ViewDataCfg html msg -> html msg
-viewInline { viewContent, typeName, actions } =
+viewInline { viewContent, typeName } =
   withCtx \ctx ->
     let
       el =
@@ -287,7 +287,7 @@ viewDataTree
   -> DataTree html (WrapMsg msg)
 viewDataTree { viewInner, viewHtml, extract, typeName } state@(WrapState { childState }) =
   let
-    tree@(DataTree { actions, children }) = viewInner childState
+    DataTree { actions, children } = viewInner childState
 
     extractResult :: DataResult a
     extractResult = extract childState

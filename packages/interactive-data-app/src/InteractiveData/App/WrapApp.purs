@@ -15,7 +15,7 @@ import Data.Either (either)
 import Data.Maybe (Maybe(..))
 import Data.Newtype (un)
 import Data.These (These(..))
-import Data.Tuple.Nested (type (/\), (/\))
+import Data.Tuple.Nested (type (/\))
 import DataMVC.Types (DataPathSegment, DataResult, DataUI(..), DataUiInterface(..))
 import DataMVC.Types.DataUI (applyWrap, runDataUi)
 import InteractiveData.App.UI.Body as UI.Body
@@ -27,7 +27,6 @@ import InteractiveData.App.UI.Menu as UI.Menu
 import InteractiveData.App.UI.NotFound as UI.NotFound
 import InteractiveData.App.UI.SideBar as UI.SideBar
 import InteractiveData.App.UI.Types.SumTree (SumTree, sumTree)
-import InteractiveData.App.FastForward.Inline (viewFastForwardInline)
 import InteractiveData.App.FastForward.Standalone (viewFastForwardStandalone)
 import InteractiveData.Core
   ( class IDHtml

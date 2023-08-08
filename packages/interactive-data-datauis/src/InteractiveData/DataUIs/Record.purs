@@ -14,7 +14,6 @@ import Chameleon.Transformers.Ctx.Class (putCtx, withCtx)
 import Data.Array (mapWithIndex)
 import Data.Array as Array
 import Data.Maybe (Maybe(..))
-import Data.Newtype (un)
 import Data.Tuple.Nested (type (/\), (/\))
 import DataMVC.Record.DataUI (class DataUiRecord)
 import DataMVC.Record.DataUI as R
@@ -79,7 +78,7 @@ viewRow
   => Int
   -> (DataPathSegmentField /\ DataTree html msg)
   -> html msg
-viewRow index (seg /\ tree@(DataTree { view })) = withCtx \ctx ->
+viewRow _ (seg /\ tree) = withCtx \ctx ->
   let
     newPath = ctx.path <> [ SegField seg ]
 
@@ -105,8 +104,6 @@ mkSurface
   -> IDSurface html msg
 mkSurface { mkSegment } opts = IDSurface \ctx ->
   let
-    opts' = map (\x -> x { viewValue = x.viewValue # runIdSurface ctx # un DataTree # _.view }) opts
-
     fields :: Array (DataPathSegmentField /\ DataTree html msg)
     fields = opts # mapWithIndex
       ( \ix x ->
