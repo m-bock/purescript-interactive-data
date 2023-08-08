@@ -15,6 +15,7 @@ type ViewCardCfg (html :: Type -> Type) msg =
 
 type ViewCardOpt (html :: Type -> Type) msg =
   { viewCaption :: Maybe (html msg)
+  , viewSubCaption :: Maybe (html msg)
   , backgroundColor :: String
   , borderColor :: String
   }
@@ -22,6 +23,7 @@ type ViewCardOpt (html :: Type -> Type) msg =
 defaultViewCardOpt :: forall html msg. ViewCardOpt html msg
 defaultViewCardOpt =
   { viewCaption: Nothing
+  , viewSubCaption: Nothing
   , backgroundColor: "#f8f8f8"
   , borderColor: "#ddd"
   }
@@ -32,7 +34,7 @@ viewCard
   => ViewCardCfg html msg
   -> ViewCardOpt html msg
   -> html msg
-viewCard { viewBody } { viewCaption, backgroundColor, borderColor } =
+viewCard { viewBody } { viewCaption, viewSubCaption, backgroundColor, borderColor } =
   let
     el =
 
@@ -41,20 +43,29 @@ viewCard { viewBody } { viewCaption, backgroundColor, borderColor } =
           , "margin-bottom: 20px"
           , "position: relative"
           , "border-radius: 5px"
-          , "padding-bottom: 5px"
-          , "padding-top: 5px"
           , "border: 1px solid " <> borderColor
+          , "height: 100%"
+          , "width: 100%"
+          , "display: flex"
+          , "flex-direction: column"
+          , "box-sizing: border-box"
           ]
       , caption: styleNode VD.div
-          [ "margin-bottom: 10px"
-          , "border-bottom: 1px solid " <> borderColor
-          , "padding-bottom: 5px"
-          , "padding-left: 5px"
-          , "padding-right: 5px"
+          [ "border-bottom: 1px solid " <> borderColor
+          , "padding: 5px"
+          , "height: 35px"
+          , "box-sizing: border-box"
+          ]
+      , subCaption: styleNode VD.div
+          [ "padding: 5px"
+          , "height: 25px"
+          , "box-sizing: border-box"
           ]
       , body: styleNode VD.div
           [ "padding-left: 5px"
           , "padding-right: 5px"
+          , "margin-top: 10px"
+          , "box-sizing: border-box"
           ]
       }
   in
@@ -62,6 +73,11 @@ viewCard { viewBody } { viewCaption, backgroundColor, borderColor } =
       [ case viewCaption of
           Just viewCaption' ->
             el.caption [] [ viewCaption' ]
+          Nothing ->
+            VD.noHtml
+      , case viewSubCaption of
+          Just viewSubCaption' ->
+            el.subCaption [] [ viewSubCaption' ]
           Nothing ->
             VD.noHtml
       , el.body []

@@ -356,7 +356,6 @@ viewChevronRight =
         [ C.attr "id" "Page-1"
         , C.attr "stroke" "none"
         , C.attr "stroke-width" "1"
-        , C.attr "fill" "none"
         , C.attr "fill-rule" "evenodd"
         , C.attr "sketch:type" "MSPage"
         ]
@@ -364,7 +363,6 @@ viewChevronRight =
             [ C.attr "id" "Icon-Set"
             , C.attr "sketch:type" "MSLayerGroup"
             , C.attr "transform" "translate(-473.000000, -1195.000000)"
-            , C.attr "fill" "#000000"
             ]
             [ C.elem (C.ElemName "path")
                 [ C.attr "d"

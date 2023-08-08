@@ -8,74 +8,94 @@ module InteractiveData.DataUIs.Record
 
 import Prelude
 
+import Chameleon as VD
+import Chameleon.Styled (styleNode)
+import Chameleon.Transformers.Ctx.Class (putCtx, withCtx)
 import Data.Array (mapWithIndex)
 import Data.Array as Array
 import Data.Maybe (Maybe(..))
 import Data.Newtype (un)
-import Data.Tuple.Nested ((/\))
+import Data.Tuple.Nested (type (/\), (/\))
 import DataMVC.Record.DataUI (class DataUiRecord)
 import DataMVC.Record.DataUI as R
 import DataMVC.Types (DataPathSegment(..), DataPathSegmentField(..), DataUI)
+import InteractiveData.App.FastForward.Inline (viewFastForwardInline)
 import InteractiveData.Core (class IDHtml, DataTree(..), DataTreeChildren(..), IDSurface(..), ViewMode(..))
+import InteractiveData.Core.Types.DataTree as DT
 import InteractiveData.Core.Types.IDSurface (runIdSurface)
 import MVC.Record (RecordMsg, RecordState) as Export
 import MVC.Record (RecordMsg, RecordState, ViewResult)
-import Chameleon as VD
-import Chameleon.Styled (styleNode)
-import Chameleon.Transformers.Ctx.Class (putCtx, withCtx)
-
-recordViewEntries
-  :: forall html msg
-   . IDHtml html
-  => { viewRow :: Int -> ViewResult html msg -> html msg }
-  -> Array (ViewResult html msg)
-  -> html msg
-recordViewEntries { viewRow } entries =
-  withCtx \ctx ->
-    let
-      el =
-        { noFields: styleNode VD.div
-            [ "font-style: italic"
-            , "font-size: 10px"
-            , "color: #999"
-            ]
-        }
-
-    in
-      if Array.null entries then
-        el.noFields []
-          [ VD.text "no fields" ]
-      else
-        case ctx.viewMode of
-          Inline -> VD.noHtml
-          Standalone | ctx.fastForward -> VD.div_
-            (entries # mapWithIndex viewRow)
-          _ -> VD.noHtml
-
-recordViewRow
-  :: forall html msg
-   . IDHtml html
-  => { mkSegment :: Int -> String -> DataPathSegmentField }
-  -> Int
-  -> ViewResult html msg
-  -> html msg
-recordViewRow { mkSegment } index { key, viewValue } =
-  withCtx \ctx ->
-    let
-      newSeg = SegField $ mkSegment index key
-      newPath = ctx.path <> [ newSeg ]
-
-      el =
-        { root: styleNode VD.div "margin-bottom: 30px"
-        }
-    in
-      putCtx ctx { path = newPath, viewMode = Inline } $
-        el.root []
-          [ viewValue ]
 
 type DataUiRecordCfg =
   { mkSegment :: Int -> String -> DataPathSegmentField
   }
+
+newView
+  :: forall html msg
+   . IDHtml html
+  => (Array (DataPathSegmentField /\ DataTree html msg))
+  -> html msg
+newView fields =
+  withCtx \ctx ->
+    let
+      el =
+        { fieldsCountInfo: styleNode VD.div
+            [ "font-style: italic"
+            , "font-size: 10px"
+            , "color: #999"
+            ]
+        , root: styleNode VD.div
+            [ "display: flex"
+            , "gap: 20px"
+            , "flex-direction: column"
+            ]
+        }
+
+      countFieldsText :: String
+      countFieldsText = case Array.length fields of
+        0 -> "no fields"
+        1 -> "1 field"
+        n -> show n <> " fields"
+
+    in
+      el.root []
+        if Array.null fields then
+          [ el.fieldsCountInfo []
+              [ VD.text countFieldsText ]
+          ]
+        else
+          case ctx.viewMode of
+            Inline ->
+              [ el.fieldsCountInfo []
+                  [ VD.text countFieldsText ]
+              ]
+            Standalone | not ctx.fastForward -> []
+            Standalone ->
+              (fields # mapWithIndex viewRow)
+
+viewRow
+  :: forall html msg
+   . IDHtml html
+  => Int
+  -> (DataPathSegmentField /\ DataTree html msg)
+  -> html msg
+viewRow index (seg /\ tree@(DataTree { view })) = withCtx \ctx ->
+  let
+    newPath = ctx.path <> [ SegField seg ]
+
+    el =
+      { root: VD.div
+      }
+
+    trivialTrees :: Array (Array DataPathSegment /\ DataTree html msg)
+    trivialTrees = DT.digTrivialTrees
+      newPath
+      tree
+  in
+    el.root []
+      [ putCtx ctx { path = newPath, viewMode = Inline } $
+          viewFastForwardInline trivialTrees
+      ]
 
 mkSurface
   :: forall html msg
@@ -87,23 +107,27 @@ mkSurface { mkSegment } opts = IDSurface \ctx ->
   let
     opts' = map (\x -> x { viewValue = x.viewValue # runIdSurface ctx # un DataTree # _.view }) opts
 
-    children :: DataTreeChildren html msg
-    children = Fields
-      ( opts # mapWithIndex
-          ( \ix x ->
-              let
-                newCtx = ctx { path = ctx.path <> [ SegField $ SegStaticKey x.key ] }
-              in
-                mkSegment ix x.key /\
-                  runIdSurface newCtx x.viewValue
-          )
+    fields :: Array (DataPathSegmentField /\ DataTree html msg)
+    fields = opts # mapWithIndex
+      ( \ix x ->
+          let
+            newCtx = ctx { path = ctx.path <> [ SegField $ SegStaticKey x.key ] }
+          in
+            mkSegment ix x.key /\
+              runIdSurface newCtx x.viewValue
       )
+
+    children :: DataTreeChildren html msg
+    children = Fields fields
+
+    view :: html msg
+    view = newView fields
   in
     DataTree
-      { view:
-          recordViewEntries
-            { viewRow: recordViewRow { mkSegment } }
-            opts'
+      { view
+      -- recordViewEntries
+      --   { viewRow: recordViewRow { mkSegment } }
+      --   opts'
       , children
       , actions: []
       , meta: Nothing

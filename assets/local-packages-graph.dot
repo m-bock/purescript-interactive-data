@@ -12,6 +12,7 @@ digraph G {
   
   datauis -> ui;
   datauis -> core;
+  datauis -> app;
   class -> datauis;
   run -> core;
   app -> core;

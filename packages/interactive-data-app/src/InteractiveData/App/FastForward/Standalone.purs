@@ -1,4 +1,7 @@
-module InteractiveData.App.WrapData.NewStandalone where
+module InteractiveData.App.FastForward.Standalone
+  ( viewFastForwardStandalone
+  )
+  where
 
 import InteractiveData.Core.Prelude
 
@@ -9,12 +12,12 @@ import Data.FunctorWithIndex (mapWithIndex)
 import InteractiveData.App.UI.DataLabel as UI.DataLabel
 import InteractiveData.Core.Types.DataPathExtra (dataPathToStrings)
 
-viewNewStandalone
+viewFastForwardStandalone
   :: forall html msg
    . IDHtml html
   => Array (DataPath /\ DataTree html msg)
   -> html msg
-viewNewStandalone items =
+viewFastForwardStandalone items =
   let
     el =
       { root: styleNode VD.div [ "" ]
@@ -34,17 +37,17 @@ viewNewStandalone items =
                     isFirst = index == 0
                   in
                     el.item []
-                      [ viewNewItemStandalone { isLast, isFirst } item ]
+                      [ viewItem { isLast, isFirst } item ]
               )
       )
 
-viewNewItemStandalone
+viewItem
   :: forall html msg
    . IDHtml html
   => { isLast :: Boolean, isFirst :: Boolean }
   -> DataPath /\ DataTree html msg
   -> html msg
-viewNewItemStandalone { isLast, isFirst } (path /\ tree) =
+viewItem { isLast, isFirst } (path /\ tree) =
   let
     el =
       { root: styleNode VD.div [ "margin-left: 20px" ]
@@ -64,6 +67,5 @@ viewNewItemStandalone { isLast, isFirst } (path /\ tree) =
                 { onHit: Just (That $ GlobalSelectDataPath $ dataPathToStrings path)
                 , size: UI.DataLabel.Large
                 }
-        , withCtx \_ -> putCtx ctx { fastForward = isLast, path = path } $ view
-        , VD.hr_
+        , withCtx \_ -> putCtx ctx {  fastForward = isLast, path = path } $ view
         ]

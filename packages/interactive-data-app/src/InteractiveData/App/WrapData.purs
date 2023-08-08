@@ -14,11 +14,7 @@ import Data.Tuple (fst)
 import InteractiveData.App.UI.ActionButton (viewActionButton)
 import InteractiveData.App.UI.Card as UI.Card
 import InteractiveData.App.UI.DataLabel as UI.DataLabel
-import InteractiveData.App.WrapData.NewInline (viewNewInline)
-import InteractiveData.App.WrapData.NewStandalone (viewNewStandalone)
-import InteractiveData.Core.FeatureFlags (featureFlags)
 import InteractiveData.Core.Types.DataPathExtra (dataPathToStrings, segmentToString)
-import InteractiveData.Core.Types.DataTree as DT
 import InteractiveData.Core.Types.IDSurface (runIdSurface)
 
 --------------------------------------------------------------------------------
@@ -53,23 +49,6 @@ instance Show sta => Show (WrapState sta) where
 
 instance Show msg => Show (WrapMsg msg) where
   show = genericShow
-
---------------------------------------------------------------------------------
----  View New
---------------------------------------------------------------------------------
-
-viewNew
-  :: forall html msg
-   . IDHtml html
-  => Array (DataPath /\ DataTree html msg)
-  -> html msg
-viewNew items =
-  withCtx \ctx ->
-    case ctx.viewMode of
-      Inline ->
-        viewNewInline items
-      Standalone ->
-        viewNewStandalone items
 
 --------------------------------------------------------------------------------
 --- View
@@ -153,17 +132,35 @@ viewInline { viewContent, typeName, actions } =
       el =
         { typeRow: styleNode VD.div
             [ "display: flex"
-            , "margin-bottom: 10px"
             , "align-items: center"
             , "justify-content: space-between"
+            , "height: 100%"
+            ]
+        , caption: styleNode VD.div
+            [ "display: flex"
+            , "align-items: center"
+            , "justify-content: space-between"
+            , "height: 100%"
             ]
         , typeName: styleNode VD.div
             [ "font-size: 13px"
             , "margin-right: 10px"
             , "font-weight: bold"
             ]
-        , actions: styleNode VD.div
-            [ "display: flex" ]
+        -- , actions: styleNode VD.div
+        --     [ "display: flex" ]
+        , root: styleNode VD.div
+            [ "height: 120px"
+            , "min-width: 120px"
+            ]
+        -- , bodyRoot: styleNode VD.div
+        --     [ "display: flex"
+        --     , "flex-direction: column"
+        --     , "gap: 10px"
+        --     ]
+        -- , content: styleNode VD.div
+        --     [ "overflow: auto"
+        --     ]
         }
 
       typeRow :: html msg
@@ -171,31 +168,28 @@ viewInline { viewContent, typeName, actions } =
         el.typeRow []
           [ el.typeName []
               [ VD.text typeName ]
-          , el.actions []
-              ( map
-                  (\dataAction -> viewActionButton { dataAction })
-                  actions
-              )
           ]
 
     in
-      UI.Card.viewCard
-        { viewBody: VD.div []
-            [ typeRow
-            , viewContent
-            ]
-        }
-        UI.Card.defaultViewCardOpt
-          { viewCaption = Just
-              $ fromOutHtml
-              $ UI.DataLabel.viewDataLabel
-                  { dataPath: { before: [], path: ctx.path }
-                  , mkTitle: UI.DataLabel.mkTitleGoto
-                  }
-                  { onHit: Just (That $ GlobalSelectDataPath $ dataPathToStrings ctx.path)
-                  , size: UI.DataLabel.Large
-                  }
-          }
+      el.root []
+        [ UI.Card.viewCard
+            { viewBody: viewContent
+            }
+            UI.Card.defaultViewCardOpt
+              { viewCaption = Just
+                  $ fromOutHtml
+                  $ el.caption []
+                      [ UI.DataLabel.viewDataLabel
+                          { dataPath: { before: [], path: ctx.path }
+                          , mkTitle: UI.DataLabel.mkTitleGoto
+                          }
+                          { onHit: Just (That $ GlobalSelectDataPath $ dataPathToStrings ctx.path)
+                          , size: UI.DataLabel.Large
+                          }
+                      ]
+              , viewSubCaption = Just typeRow
+              }
+        ]
 
 type ViewCfgStatic sta a =
   { name :: String
@@ -309,33 +303,13 @@ viewDataTree { viewInner, viewHtml, extract, typeName } state@(WrapState { child
     children' :: DataTreeChildren html (WrapMsg msg)
     children' = map ChildMsg $ children
 
-    viewOld :: html (WrapMsg msg)
-    viewOld = viewHtml
-      { actions
-      , viewInner: viewInner >>> un DataTree >>> _.view
-      }
-      state
-
-    viewNew' :: html (WrapMsg msg)
-    viewNew' = withCtx \ctx ->
-      let
-        trivialTrees :: Array (DataPath /\ DataTree html msg)
-        trivialTrees = DT.digTrivialTrees ctx.path tree
-      in
-        map ChildMsg $
-          withCtx \ctx' ->
-            if ctx'.fastForward then
-              viewNew trivialTrees
-            else
-              viewInner childState # un DataTree # _.view
-
-    view :: html (WrapMsg msg)
-    view =
-      if featureFlags."NEW_DATA_WRAP" then viewNew'
-      else viewOld
   in
     DataTree
-      { view
+      { view: viewHtml
+          { actions
+          , viewInner: viewInner >>> un DataTree >>> _.view
+          }
+          state
       , children: children'
       , actions: map ChildMsg <$> actions
       , meta: Just meta

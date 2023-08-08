@@ -1,7 +1,11 @@
 package:
   dependencies:
     - arrays
+    - chameleon
+    - chameleon-styled
+    - chameleon-transformers
     - data-mvc
+    - interactive-data-app
     - interactive-data-core
     - maybe
     - mvc
@@ -9,9 +13,6 @@ package:
     - prelude
     - strings
     - tuples
-    - chameleon
-    - chameleon-styled
-    - chameleon-transformers
   name: interactive-data-datauis
   test:
     dependencies: []
