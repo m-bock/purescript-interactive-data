@@ -74,10 +74,6 @@ viewHeaderRoot { viewBreadcrumbs, viewTypeName: viewTypeName', right } =
           , "align-items: center"
           , "grid-template-areas: 'a c' 'b d'"
           ]
-      , typeName: styleNode VD.div
-          [ "font-size: 20px"
-          , "grid-area: b"
-          ]
       , breadcrumbs: styleNode VD.div
           [ "width: 100%"
           , "grid-area: a"
@@ -90,8 +86,6 @@ viewHeaderRoot { viewBreadcrumbs, viewTypeName: viewTypeName', right } =
       [ el.breadcrumbs []
           [ viewBreadcrumbs
           ]
-      , el.typeName []
-          [ viewTypeName' ]
       , el.right []
           [ right ]
       ]

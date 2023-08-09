@@ -21,8 +21,10 @@ viewFastForwardStandalone items =
     el =
       { root: styleNode VD.div [ "" ]
       , item: styleNode VD.div
-          [ "margin-bottom: 20px"
-          ]
+          $ [ "margin-bottom: 20px"
+          ] /\ declWith ":not(:last-child)"
+            [ "border-bottom: 1px solid #ccc"
+            ]
       }
 
     countItems = Array.length items
@@ -49,7 +51,8 @@ viewItem
 viewItem { isLast, isFirst } (path /\ tree) =
   let
     el =
-      { root: styleNode VD.div [ "margin-left: 20px" ]
+      { root: styleNode VD.div
+          $ [ "margin-left: 20px" ]
       }
 
     DataTree { view } = tree
@@ -57,14 +60,5 @@ viewItem { isLast, isFirst } (path /\ tree) =
   in
     withCtx \(ctx :: IDViewCtx) ->
       el.root []
-        [ if isFirst then VD.noHtml
-          else fromOutHtml
-            $ UIDataLabel.view
-                { dataPath: { before: [], path }
-                , mkTitle: UIDataLabel.mkTitleGoto
-                }
-                { onHit: Just (That $ GlobalSelectDataPath $ dataPathToStrings path)
-                , size: UIDataLabel.Large
-                }
-        , withCtx \_ -> putCtx ctx { fastForward = isLast, path = path } $ view
+        [ withCtx \_ -> putCtx ctx { fastForward = isLast, path = path } $ view
         ]

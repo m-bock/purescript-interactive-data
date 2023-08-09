@@ -19,6 +19,10 @@ import InteractiveData.DataUIs
   , RecordMsg
   , RecordState
   , record_
+
+  , VariantMsg
+  , VariantState
+  , variant_
   ) as Export
 
 import InteractiveData.Run

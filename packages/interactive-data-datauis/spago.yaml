@@ -9,9 +9,12 @@ package:
     - interactive-data-core
     - maybe
     - mvc
+    - newtype
+    - partial
     - prelude
     - strings
     - tuples
+    - variant
   name: interactive-data-datauis
   test:
     dependencies: []

@@ -45,8 +45,8 @@ viewBreadcrumbs { dataPath, viewDataLabel, isAbsolute } =
 
     allSegments :: Array (html msg)
     allSegments =
-      if isAbsolute then [ rootSegment ] <> segments
-      else segments
+        if isAbsolute then [ rootSegment ] <> segments
+        else segments
   in
     el.root []
       ( allSegments

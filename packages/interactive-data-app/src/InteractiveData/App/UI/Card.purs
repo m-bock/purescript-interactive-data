@@ -40,7 +40,6 @@ viewCard { viewBody } { viewCaption, viewSubCaption, backgroundColor, borderColo
 
       { card: styleNode VD.div
           [ "background-color: " <> backgroundColor
-          , "margin-bottom: 20px"
           , "position: relative"
           , "border-radius: 5px"
           , "border: 1px solid " <> borderColor

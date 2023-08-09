@@ -1,5 +1,5 @@
 module InteractiveData.DataUIs.Variant
-  ( variant
+  ( variant_
   , module Export
   ) where
 
@@ -17,7 +17,7 @@ import InteractiveData.Core.Types.IDSurface (runIdSurface)
 import MVC.Variant (CaseKey(..), VariantMsg, VariantState, ViewArgs)
 import MVC.Variant (VariantMsg, VariantState) as Export
 import Partial.Unsafe (unsafePartial)
-import Type.Proxy (Proxy)
+import Type.Proxy (Proxy(..))
 
 view :: forall html msg. IDHtml html => ViewArgs html msg -> html msg
 view { viewCase, mkMsg, caseKey, caseKeys } =
@@ -38,7 +38,10 @@ view { viewCase, mkMsg, caseKey, caseKeys } =
       el =
         { caseLabels: styleNode C.div
             [ "display: flex"
-            , "flex-direction: row"
+            , "flex-direction: column"
+            , case ctx.viewMode of
+                Inline -> "flex-direction: column"
+                Standalone -> "flex-direction: row"
             , "gap: 5px"
             , "margin-bottom: 15px"
             ]
@@ -67,6 +70,7 @@ view { viewCase, mkMsg, caseKey, caseKeys } =
               )
           , case ctx.viewMode of
               Inline -> C.noHtml
+              Standalone | not ctx.fastForward -> C.noHtml
               Standalone ->
                 putCtx ctx
                   { path = newPath
@@ -75,17 +79,11 @@ view { viewCase, mkMsg, caseKey, caseKeys } =
                   viewCase
           ]
 
-type Cfg :: forall k. k -> Type
-type Cfg initsym =
-  { init :: Proxy initsym
-  }
-
-variant
-  :: forall datauis html initsym rcase rmsg rsta r
+variant_
+  :: forall datauis html @initsym rcase rmsg rsta r
    . DataUiVariant datauis WrapMsg WrapState (IDSurface html) initsym rcase rmsg rsta r
   => IDHtml html
-  => Cfg initsym
-  -> Record datauis
+  => Record datauis
   -> DataUI
        (IDSurface html)
        WrapMsg
@@ -93,10 +91,10 @@ variant
        (VariantMsg rcase rmsg)
        (VariantState rsta)
        (Variant r)
-variant cfg dataUis =
+variant_ dataUis =
   V.dataUiVariant
     dataUis
-    cfg.init
+    (Proxy :: Proxy initsym)
     { view: \(opts :: ViewArgs (IDSurface html) _) ->
         IDSurface \(ctx :: IDSurfaceCtx) ->
           let

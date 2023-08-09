@@ -1,9 +1,11 @@
 module Demo.Common.CompleteSample where
 
+import Data.Variant (Variant)
 import Demo.Common.Features.CustomDataUI.Color (Color, color)
 import Demo.Common.Features.Refinement.UserID (UserID, userId_)
 import InteractiveData (class IDHtml, DataUI, IDSurface)
 import InteractiveData as ID
+import Type.Proxy (Proxy(..))
 
 type Sample =
   { user ::
@@ -16,6 +18,11 @@ type Sample =
   , meta ::
       { description :: String
       , headline :: String
+      , info ::
+          Variant
+            ( name :: String
+            , age :: Int
+            )
       }
   , theme ::
       { backgroundColor :: Color
@@ -45,6 +52,11 @@ sampleDataUi = ID.record_
   , meta: ID.record_
       { description: ID.string_
       , headline: ID.string_
+      , info:
+          ID.variant_ @"name"
+            { name: ID.string_
+            , age: ID.int { min: 0, max: 150 }
+            }
       }
   , theme: ID.record_
       { backgroundColor: color {}
