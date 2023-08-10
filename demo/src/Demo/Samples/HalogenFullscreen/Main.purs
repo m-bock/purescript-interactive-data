@@ -1,4 +1,7 @@
-module Demo.Samples.HalogenFullscreen where
+module Demo.Samples.HalogenFullscreen.Main
+  ( main
+  )
+  where
 
 import Prelude
 

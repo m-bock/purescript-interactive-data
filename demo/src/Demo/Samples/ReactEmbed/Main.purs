@@ -1,4 +1,7 @@
-module Demo.Samples.ReactEmbed where
+module Demo.Samples.ReactEmbed.Main
+  ( main
+  )
+  where
 
 import Prelude
 

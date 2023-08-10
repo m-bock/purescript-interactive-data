@@ -92,3 +92,6 @@ suggest-list:
 
 suggest-apply:
     spago build --json-errors | node scripts/filter-warnings.js | ps-suggest --apply
+
+lint:
+    node scripts/lint.js

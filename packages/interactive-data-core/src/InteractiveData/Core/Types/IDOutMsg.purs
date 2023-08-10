@@ -1,4 +1,7 @@
-module InteractiveData.Core.Types.IDOutMsg where
+module InteractiveData.Core.Types.IDOutMsg
+  ( IDOutMsg(..)
+  )
+  where
 
 import Prelude
 

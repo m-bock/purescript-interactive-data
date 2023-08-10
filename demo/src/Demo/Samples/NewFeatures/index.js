@@ -1,3 +1,3 @@
-import { main } from "../../../../../output/Demo.Samples.NewFeatues/index.js";
+import { main } from "../../../../../output/Demo.Samples.NewFeatures.Main/index.js";
 
 main();

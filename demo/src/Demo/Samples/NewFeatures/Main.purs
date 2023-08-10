@@ -1,4 +1,7 @@
-module Demo.Samples.NewFeatues where
+module Demo.Samples.NewFeatures.Main
+  ( main
+  )
+  where
 
 import Prelude
 

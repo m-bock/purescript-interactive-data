@@ -1,4 +1,8 @@
-module Demo.Common.CompleteSample where
+module Demo.Common.CompleteSample
+  ( Sample
+  , sampleDataUi
+  )
+  where
 
 import Prelude
 

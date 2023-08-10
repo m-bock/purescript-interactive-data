@@ -1,3 +1,3 @@
-import { main } from "../../../../../output/Demo.Samples.ReactEmbed/index.js";
+import { main } from "../../../../../output/Demo.Samples.ReactEmbed.Main/index.js";
 
 main();
