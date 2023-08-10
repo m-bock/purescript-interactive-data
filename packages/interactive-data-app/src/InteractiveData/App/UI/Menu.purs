@@ -10,7 +10,7 @@ module InteractiveData.App.UI.Menu
 
 import InteractiveData.Core.Prelude
 
-import Chameleon as VD
+import Chameleon as C
 import Data.Array (mapWithIndex)
 import Data.Array as Array
 import Data.Map (Map)
@@ -85,7 +85,7 @@ viewLabel
 viewLabel { onSelectPath } { path, label } =
   let
     el =
-      { label: styleNode VD.div
+      { label: styleNode C.div
           [ "cursor: pointer"
           , "display: flex"
           , "gap: 4px"
@@ -145,10 +145,10 @@ viewTree cfg { path, tree } =
   let
     SumTree { children } = tree
     el =
-      { item: VD.div
-      , sub: styleNode VD.div
+      { item: C.div
+      , sub: styleNode C.div
           [ "padding-left: 15px" ]
-      , root: styleNode VD.div
+      , root: styleNode C.div
           [ "padding: 5px" ]
       }
 
@@ -176,7 +176,7 @@ viewTree cfg { path, tree } =
                       [ viewTree cfg { path: newPath, tree: tree' }
                       ]
                   else
-                    VD.noHtml
+                    C.noHtml
                 ]
 
       )
@@ -202,12 +202,12 @@ viewRow
 viewRow { onSetExpanded } opts@{ path, isExpanded, isLeaf } =
   let
     el =
-      { row: styleNode VD.div
+      { row: styleNode C.div
           [ "display: flex; "
           , "align-items: center"
           , "padding: 5px"
           ]
-      , icon: styleNode VD.div
+      , icon: styleNode C.div
           [ "cursor: pointer"
           , "width: 20px"
           , "height: 20px"
@@ -217,12 +217,12 @@ viewRow { onSetExpanded } opts@{ path, isExpanded, isLeaf } =
           , "align-items: center"
           , "justify-content: center"
           ]
-      , iconInner: styleNode VD.div
+      , iconInner: styleNode C.div
           [ "height: 24px"
           , "width: 14px"
           , "scale: 0.4"
           ]
-      , iconDash: styleNode VD.div
+      , iconDash: styleNode C.div
           [ "height: 20px"
           , "width: 24px"
           , "scale: 0.6"
@@ -232,8 +232,8 @@ viewRow { onSetExpanded } opts@{ path, isExpanded, isLeaf } =
   in
     el.row []
       [ el.icon
-          [ if isLeaf then VD.noProp
-            else VD.onClick (onSetExpanded path (not isExpanded))
+          [ if isLeaf then C.noProp
+            else C.onClick (onSetExpanded path (not isExpanded))
           ]
           [ if isLeaf then
               el.iconDash

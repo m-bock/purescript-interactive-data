@@ -14,7 +14,7 @@ import Data.String as Str
 import Data.Tuple (fst)
 import InteractiveData.App.UI.Assets as UI.Assets
 import InteractiveData.Core.Types.DataPathExtra (segmentToString)
-import Chameleon as VD
+import Chameleon as C
 
 type ViewDataLabelCfg =
   { dataPath :: PathInContext DataPathSegment
@@ -66,7 +66,7 @@ viewDataLabel' { dataPath, mkTitle } { onHit, isSelected } = withCtx \ctx ->
   let
     el =
       { datalabel:
-          styleNode VD.div
+          styleNode C.div
             $
               [ "border: 1px solid rgb(232,232,232)"
               , "display: inline-flex"
@@ -123,11 +123,11 @@ viewDataLabel' { dataPath, mkTitle } { onHit, isSelected } = withCtx \ctx ->
   in
 
     el.datalabel
-      [ maybe VD.noProp (\_ -> VD.title title') onHit
-      , maybe VD.noProp VD.onClick onHit
+      [ maybe C.noProp (\_ -> C.title title') onHit
+      , maybe C.noProp C.onClick onHit
       ]
       [ icon
-      , VD.span_ [ VD.text label ]
+      , C.span_ [ C.text label ]
       ]
 
 view

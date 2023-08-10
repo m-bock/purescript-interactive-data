@@ -4,7 +4,7 @@ module InteractiveData.App.UI.Breadcrumbs
 
 import InteractiveData.Core.Prelude
 
-import Chameleon as VD
+import Chameleon as C
 import Data.Array (intersperse)
 import Data.Array as Array
 import InteractiveData.App.UI.Assets as UI.Assets
@@ -21,11 +21,11 @@ viewBreadcrumbs { dataPath, viewDataLabel, isAbsolute } =
   let
 
     el =
-      { root: styleNode VD.div
+      { root: styleNode C.div
           [ "display: flex"
           , "align-items: center"
           ]
-      , iconArrow: styleNode VD.div
+      , iconArrow: styleNode C.div
           [ "height: 24px"
           , "width: 14px"
           , "scale: 0.3"
@@ -51,7 +51,7 @@ viewBreadcrumbs { dataPath, viewDataLabel, isAbsolute } =
     el.root []
       ( allSegments
           # intersperse
-              ( VD.div_
+              ( C.div_
                   [ el.iconArrow
                       []
                       [ UI.Assets.viewChevronRight ]

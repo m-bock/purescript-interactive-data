@@ -4,7 +4,7 @@ module InteractiveData.App.FastForward.Inline
 
 import InteractiveData.Core.Prelude
 
-import Chameleon as VD
+import Chameleon as C
 import Data.Array (intersperse)
 import Data.Array as Array
 import Data.FunctorWithIndex (mapWithIndex)
@@ -18,21 +18,21 @@ viewFastForwardInline
 viewFastForwardInline items =
   let
     el =
-      { root: styleNode VD.div
+      { root: styleNode C.div
           [ "display: flex"
           , "flex-direction: row"
           , "margin-bottom: 20px"
           , "justify-content: space-between"
           , "align-items: center"
           ]
-      , spacer: styleNode VD.div
+      , spacer: styleNode C.div
           [ "width: 15px"
           ]
-      , item: styleNode VD.div
+      , item: styleNode C.div
           [ "" ]
-      , lastItem: styleNode VD.div
+      , lastItem: styleNode C.div
           [ "flex-grow: 1" ]
-      , iconArrow: styleNode VD.div
+      , iconArrow: styleNode C.div
           [ "height: 24px"
           , "width: 14px"
           , "scale: 0.3"

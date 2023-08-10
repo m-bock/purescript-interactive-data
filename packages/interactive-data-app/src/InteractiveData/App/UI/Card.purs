@@ -7,7 +7,7 @@ module InteractiveData.App.UI.Card
 
 import InteractiveData.Core.Prelude
 
-import Chameleon as VD
+import Chameleon as C
 
 type ViewCardCfg (html :: Type -> Type) msg =
   { viewBody :: html msg
@@ -38,7 +38,7 @@ viewCard { viewBody } { viewCaption, viewSubCaption, backgroundColor, borderColo
   let
     el =
 
-      { card: styleNode VD.div
+      { card: styleNode C.div
           [ "background-color: " <> backgroundColor
           , "position: relative"
           , "border-radius: 5px"
@@ -49,18 +49,18 @@ viewCard { viewBody } { viewCaption, viewSubCaption, backgroundColor, borderColo
           , "flex-direction: column"
           , "box-sizing: border-box"
           ]
-      , caption: styleNode VD.div
+      , caption: styleNode C.div
           [ "border-bottom: 1px solid " <> borderColor
           , "padding: 5px"
           , "height: 35px"
           , "box-sizing: border-box"
           ]
-      , subCaption: styleNode VD.div
+      , subCaption: styleNode C.div
           [ "padding: 5px"
           , "height: 25px"
           , "box-sizing: border-box"
           ]
-      , body: styleNode VD.div
+      , body: styleNode C.div
           [ "padding-left: 5px"
           , "padding-right: 5px"
           , "margin-top: 10px"
@@ -73,12 +73,12 @@ viewCard { viewBody } { viewCaption, viewSubCaption, backgroundColor, borderColo
           Just viewCaption' ->
             el.caption [] [ viewCaption' ]
           Nothing ->
-            VD.noHtml
+            C.noHtml
       , case viewSubCaption of
           Just viewSubCaption' ->
             el.subCaption [] [ viewSubCaption' ]
           Nothing ->
-            VD.noHtml
+            C.noHtml
       , el.body []
           [ viewBody ]
       ]

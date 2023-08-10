@@ -5,7 +5,7 @@ module InteractiveData.App.UI.Header
 
 import InteractiveData.Core.Prelude
 
-import Chameleon as VD
+import Chameleon as C
 import InteractiveData.App.UI.Assets as UI.Assets
 import InteractiveData.App.UI.Breadcrumbs as UI.Breadcrumbs
 import InteractiveData.App.UI.DataLabel as UI.DataLabel
@@ -63,7 +63,7 @@ viewHeaderRoot
 viewHeaderRoot { viewBreadcrumbs, right } =
   let
     el =
-      { header: styleNode VD.div
+      { header: styleNode C.div
           [ "background-color: #F8F8F8"
           , "padding: 5px"
           , "display: grid"
@@ -74,15 +74,15 @@ viewHeaderRoot { viewBreadcrumbs, right } =
           , "align-items: center"
           , "grid-template-areas: 'a c' 'b d'"
           ]
-      , breadcrumbs: styleNode VD.div
+      , breadcrumbs: styleNode C.div
           [ "width: 100%"
           , "grid-area: a"
           ]
-      , right: styleNode VD.div
+      , right: styleNode C.div
           [ "grid-area: c" ]
       }
   in
-    el.header [ VD.id "header" ]
+    el.header [ C.id "header" ]
       [ el.breadcrumbs []
           [ viewBreadcrumbs
           ]
@@ -100,21 +100,21 @@ viewTypeName { typeName } =
 
     el =
       { typeName:
-          styleNode VD.div
+          styleNode C.div
             [ "font-size: 16px"
             , "font-weight: bold"
             ]
       }
   in
     el.typeName []
-      [ VD.text typeName ]
+      [ C.text typeName ]
 
 viewRightCorner :: forall html msg. IDHtml html => { showMenu :: Boolean, setShowMenu :: Boolean -> msg } -> html msg
 viewRightCorner { showMenu, setShowMenu } =
   let
     el =
       { menuIcon:
-          styleNode VD.div
+          styleNode C.div
             [ "cursor: pointer"
             , "width: 25px"
             , "height: 25px"
@@ -126,8 +126,8 @@ viewRightCorner { showMenu, setShowMenu } =
 
   in
     el.menuIcon
-      [ VD.title (if showMenu then "hide menu" else "show menu")
-      , VD.onClick $ setShowMenu (not showMenu)
+      [ C.title (if showMenu then "hide menu" else "show menu")
+      , C.onClick $ setShowMenu (not showMenu)
       ]
       [ if showMenu then UI.Assets.viewDotMenuSolid
         else UI.Assets.viewDotMenu

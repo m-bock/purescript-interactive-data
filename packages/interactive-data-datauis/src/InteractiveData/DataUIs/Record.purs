@@ -8,7 +8,7 @@ module InteractiveData.DataUIs.Record
 
 import Prelude
 
-import Chameleon as VD
+import Chameleon as C
 import Chameleon.Styled (styleNode)
 import Chameleon.Transformers.Ctx.Class (putCtx, withCtx)
 import Data.Array (mapWithIndex)
@@ -38,12 +38,12 @@ view fields =
   withCtx \ctx ->
     let
       el =
-        { fieldsCountInfo: styleNode VD.div
+        { fieldsCountInfo: styleNode C.div
             [ "font-style: italic"
             , "font-size: 10px"
             , "color: #999"
             ]
-        , root: styleNode VD.div
+        , root: styleNode C.div
             [ "display: flex"
             , "gap: 20px"
             , "flex-direction: column"
@@ -60,13 +60,13 @@ view fields =
       el.root []
         if Array.null fields then
           [ el.fieldsCountInfo []
-              [ VD.text countFieldsText ]
+              [ C.text countFieldsText ]
           ]
         else
           case ctx.viewMode of
             Inline ->
               [ el.fieldsCountInfo []
-                  [ VD.text countFieldsText ]
+                  [ C.text countFieldsText ]
               ]
             Standalone | not ctx.fastForward -> []
             Standalone ->
@@ -83,7 +83,7 @@ viewRow _ (seg /\ tree) = withCtx \ctx ->
     newPath = ctx.path <> [ SegField seg ]
 
     el =
-      { root: VD.div
+      { root: C.div
       }
 
     trivialTrees :: Array (Array DataPathSegment /\ DataTree html msg)

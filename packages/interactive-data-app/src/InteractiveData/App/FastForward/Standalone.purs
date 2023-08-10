@@ -4,7 +4,7 @@ module InteractiveData.App.FastForward.Standalone
 
 import InteractiveData.Core.Prelude
 
-import Chameleon as VD
+import Chameleon as C
 import Data.Array as Array
 import Data.FunctorWithIndex (mapWithIndex)
 
@@ -16,8 +16,8 @@ view
 view items =
   let
     el =
-      { root: styleNode VD.div [ "" ]
-      , item: styleNode VD.div
+      { root: styleNode C.div [ "" ]
+      , item: styleNode C.div
           $
             [ "margin-bottom: 20px"
             ]
@@ -50,7 +50,7 @@ viewItem
 viewItem { isLast } (path /\ tree) =
   let
     el =
-      { root: styleNode VD.div
+      { root: styleNode C.div
           $ [ "margin-left: 20px" ]
       }
 

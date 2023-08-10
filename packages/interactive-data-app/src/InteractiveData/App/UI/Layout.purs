@@ -5,7 +5,7 @@ module InteractiveData.App.UI.Layout
 
 import InteractiveData.Core.Prelude
 
-import Chameleon as VD
+import Chameleon as C
 import Chameleon.HTML.Elements as VDE
 
 type ViewLayoutCfg (html :: Type -> Type) msg =
@@ -18,7 +18,7 @@ type ViewLayoutCfg (html :: Type -> Type) msg =
 -- TODO: Find a better way to load the font
 viewEmbedFont :: forall html msg. IDHtml html => html msg
 viewEmbedFont = VDE.style []
-  [ VD.text "@import url('https://fonts.googleapis.com/css2?family=Signika+Negative:wght@300&display=swap')" ]
+  [ C.text "@import url('https://fonts.googleapis.com/css2?family=Signika+Negative:wght@300&display=swap')" ]
 
 viewLayout :: forall html msg. IDHtml html => ViewLayoutCfg html msg -> html msg
 viewLayout { viewHeader, viewSidebar, viewBody, viewFooter } = withCtx \ctx ->
@@ -27,7 +27,7 @@ viewLayout { viewHeader, viewSidebar, viewBody, viewFooter } = withCtx \ctx ->
     showSidebar = isJust viewSidebar
 
     el =
-      { layout: styleNode VD.div
+      { layout: styleNode C.div
           $
             ( if ctx.fullscreen then
                 [ "position: fixed"
@@ -45,19 +45,19 @@ viewLayout { viewHeader, viewSidebar, viewBody, viewFooter } = withCtx \ctx ->
             , "font-family: 'Signika Negative'"
             , "background-color: white"
             ]
-      , header: styleNode VD.div
+      , header: styleNode C.div
           [ "min-height: 70px"
           , "position: sticky"
           , "top: 0"
           , "z-index: 99"
           ]
-      , root: styleNode VD.div
+      , root: styleNode C.div
           [ "width: 100%"
           , "overflow-y: auto"
           , "display: flex"
           , "height: 100%"
           ]
-      , sidebar: styleNode VD.div
+      , sidebar: styleNode C.div
           $
             ( if showSidebar then
                 [ "width: 250px"
@@ -69,7 +69,7 @@ viewLayout { viewHeader, viewSidebar, viewBody, viewFooter } = withCtx \ctx ->
           /\
             [ "transition: width 100ms ease-in-out"
             ]
-      , body: styleNode VD.div
+      , body: styleNode C.div
           [ "width: 100%"
           , "height: 100%"
           , "overflow: none"
@@ -77,16 +77,16 @@ viewLayout { viewHeader, viewSidebar, viewBody, viewFooter } = withCtx \ctx ->
           , "flex-direction: column"
 
           ]
-      , main: styleNode VD.div
+      , main: styleNode C.div
           [ "overflow-y: auto"
           , "display: flex"
           , "flex-direction: column"
           , "height: 100%"
           ]
-      , footer: styleNode VD.div
+      , footer: styleNode C.div
           [ "width: 100%"
           ]
-      , content: styleNode VD.div
+      , content: styleNode C.div
           "flex-grow: 1"
       }
   in
@@ -97,7 +97,7 @@ viewLayout { viewHeader, viewSidebar, viewBody, viewFooter } = withCtx \ctx ->
               [ case viewSidebar of
                   Just view ->
                     view
-                  Nothing -> VD.noHtml
+                  Nothing -> C.noHtml
               ]
           , el.body []
               [ el.main []
@@ -110,7 +110,7 @@ viewLayout { viewHeader, viewSidebar, viewBody, viewFooter } = withCtx \ctx ->
                   Just view ->
                     el.footer []
                       [ view ]
-                  Nothing -> VD.noHtml
+                  Nothing -> C.noHtml
               ]
           ]
       ]

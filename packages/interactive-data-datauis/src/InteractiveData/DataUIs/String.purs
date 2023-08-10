@@ -9,7 +9,7 @@ module InteractiveData.DataUIs.String
 
 import InteractiveData.Core.Prelude
 
-import Chameleon as VD
+import Chameleon as C
 import Data.String as Str
 
 -------------------------------------------------------------------------------
@@ -67,20 +67,20 @@ view
   withCtx \ctx ->
     let
       el =
-        { root: VD.div
-        , input: styleLeaf VD.input
+        { root: C.div
+        , input: styleLeaf C.input
             [ "width: 100%"
             , "border: 1px solid #ccc"
             , "border-radius: 3px"
             ]
-        , textarea: styleNode VD.textarea
+        , textarea: styleNode C.textarea
             [ "width: 100%"
             , "height: 200px"
             , "font-family: 'Signika Negative'"
             , "border: 1px solid #ccc"
             , "border-radius: 3px"
             ]
-        , details: styleNode VD.div
+        , details: styleNode C.div
             [ "font-size: 10px"
             , "margin-top: 5px"
             ]
@@ -89,19 +89,19 @@ view
       multiLineInput :: html StringMsg
       multiLineInput =
         el.textarea
-          [ VD.onInput SetString
-          , VD.value state
-          , maybe VD.noProp VD.maxlength maxLength
+          [ C.onInput SetString
+          , C.value state
+          , maybe C.noProp C.maxlength maxLength
           ]
           []
 
       singleLineInput :: html StringMsg
       singleLineInput =
         el.input
-          [ VD.type_ "text"
-          , VD.onInput SetString
-          , VD.value state
-          , maybe VD.noProp VD.maxlength maxLength
+          [ C.type_ "text"
+          , C.onInput SetString
+          , C.value state
+          , maybe C.noProp C.maxlength maxLength
           ]
 
       getLineInput :: Boolean -> html StringMsg
@@ -114,7 +114,7 @@ view
           el.root []
             [ getLineInput multilineStandalone
             , el.details []
-                [ VD.text ("Length: " <> show (Str.length state)) ]
+                [ C.text ("Length: " <> show (Str.length state)) ]
             ]
         Inline ->
           el.root []

@@ -9,7 +9,7 @@ module InteractiveData.DataUIs.Int
 
 import InteractiveData.Core.Prelude
 
-import Chameleon as VD
+import Chameleon as C
 import InteractiveData.UI.NumberInput as UI.NumberInput
 import InteractiveData.UI.Slider as UI.Slider
 
@@ -76,7 +76,7 @@ view
   withCtx \_ ->
     let
       el =
-        { root: styleNode VD.div
+        { root: styleNode C.div
             [ "margin-top: 10px"
             , "margin-bottom: 5px"
             , "display: flex"
@@ -85,9 +85,9 @@ view
             , "justify-content: space-between"
             , "gap: 10px"
             ]
-        , slider: styleNode VD.div
+        , slider: styleNode C.div
             [ "flex: 3" ]
-        , input: styleNode VD.div
+        , input: styleNode C.div
             [ "flex: 1" ]
         }
 

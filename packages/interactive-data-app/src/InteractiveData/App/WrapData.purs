@@ -6,7 +6,7 @@ module InteractiveData.App.WrapData
 
 import InteractiveData.Core.Prelude
 
-import Chameleon as VD
+import Chameleon as C
 import Chameleon.Transformers.OutMsg.Class (fromOutHtml)
 import Data.Array as Array
 import Data.Array.NonEmpty (NonEmptyArray)
@@ -69,7 +69,7 @@ viewStandalone { viewContent, actions, typeName } =
   withCtx \(ctx :: IDViewCtx) ->
     let
       el =
-        { data_: styleNode VD.div
+        { data_: styleNode C.div
             [ case ctx.viewMode of
                 Inline ->
                   "background-color: #f8f8f8"
@@ -86,12 +86,12 @@ viewStandalone { viewContent, actions, typeName } =
                 Standalone ->
                   mempty
             ]
-        , content: VD.div
+        , content: C.div
         , actions:
-            styleNode VD.div
+            styleNode C.div
               [ "display: flex" ]
         , item:
-            styleNode VD.div
+            styleNode C.div
               case ctx.viewMode of
                 Inline ->
                   [ "padding-left: 10px"
@@ -100,13 +100,13 @@ viewStandalone { viewContent, actions, typeName } =
                 Standalone -> []
 
         , subRow:
-            styleNode VD.div
+            styleNode C.div
               [ "display: flex"
               , "margin-bottom: 10px"
               , "align-items: center"
               , "justify-content: space-between"
               ]
-        , typeName: styleNode VD.div
+        , typeName: styleNode C.div
             [ "font-size: 20px"
             , "grid-area: b"
             ]
@@ -117,7 +117,7 @@ viewStandalone { viewContent, actions, typeName } =
         []
         [ el.item []
             [ el.subRow []
-                [ el.typeName [] [ VD.text typeName ]
+                [ el.typeName [] [ C.text typeName ]
                 , el.actions []
                     ( map
                         (\dataAction -> viewActionButton { dataAction })
@@ -135,36 +135,36 @@ viewInline { viewContent, typeName } =
   withCtx \ctx ->
     let
       el =
-        { typeRow: styleNode VD.div
+        { typeRow: styleNode C.div
             [ "display: flex"
             , "align-items: center"
             , "justify-content: space-between"
             , "height: 100%"
             ]
-        , caption: styleNode VD.div
+        , caption: styleNode C.div
             [ "display: flex"
             , "align-items: center"
             , "justify-content: space-between"
             , "height: 100%"
             ]
-        , typeName: styleNode VD.div
+        , typeName: styleNode C.div
             [ "font-size: 13px"
             , "margin-right: 10px"
             , "font-weight: bold"
             ]
-        -- , actions: styleNode VD.div
+        -- , actions: styleNode C.div
         --     [ "display: flex" ]
-        , root: styleNode VD.div
+        , root: styleNode C.div
             [ "min-height: 120px"
             , "min-width: 120px"
             , "display: grid"
             ]
-        -- , bodyRoot: styleNode VD.div
+        -- , bodyRoot: styleNode C.div
         --     [ "display: flex"
         --     , "flex-direction: column"
         --     , "gap: 10px"
         --     ]
-        -- , content: styleNode VD.div
+        -- , content: styleNode C.div
         --     [ "overflow: auto"
         --     ]
         }
@@ -173,7 +173,7 @@ viewInline { viewContent, typeName } =
       typeRow =
         el.typeRow []
           [ el.typeName []
-              [ VD.text typeName ]
+              [ C.text typeName ]
           ]
 
     in

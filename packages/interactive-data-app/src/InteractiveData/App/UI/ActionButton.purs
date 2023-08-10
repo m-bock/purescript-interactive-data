@@ -5,7 +5,7 @@ module InteractiveData.App.UI.ActionButton
 
 import InteractiveData.Core.Prelude
 
-import Chameleon as VD
+import Chameleon as C
 import Chameleon.Transformers.OutMsg.Class (fromOutHtml)
 
 type ViewActionButtonCfg msg =
@@ -19,7 +19,7 @@ viewActionButton { dataAction } =
 
     el =
 
-      { actionButton: styleNode VD.div
+      { actionButton: styleNode C.div
           $
             [ declWith ":hover"
                 [ "background-color: #c1ebfa" ]
@@ -39,7 +39,7 @@ viewActionButton { dataAction } =
       }
   in
     fromOutHtml $ el.actionButton
-      [ VD.onClick msg
-      , VD.title description
+      [ C.onClick msg
+      , C.title description
       ]
-      [ VD.text label ]
+      [ C.text label ]

@@ -7,7 +7,7 @@ import InteractiveData.Core.Prelude
 
 import Data.String as Str
 import InteractiveData.App.UI.Assets as UI.Assets
-import Chameleon as VD
+import Chameleon as C
 
 type ViewNotFoundCfg msg =
   { onBackToHome :: msg
@@ -19,7 +19,7 @@ viewNotFound { onBackToHome, path } =
   let
     el =
 
-      { notfound: styleNode VD.div
+      { notfound: styleNode C.div
           [ "display: flex"
           , "flex-direction: column"
           , "justify-content: center"
@@ -27,11 +27,11 @@ viewNotFound { onBackToHome, path } =
           , "height: 100%"
           , "gap: 20px"
           ]
-      , text: styleNode VD.div
+      , text: styleNode C.div
           [ "font-size: 12px"
           , "cursor: pointer"
           ]
-      , icon: styleNode VD.div
+      , icon: styleNode C.div
           $ decl
               [ "width: 100px"
               , "animation: $anim 400ms ease-out"
@@ -45,9 +45,9 @@ viewNotFound { onBackToHome, path } =
               , "100%" /\
                   [ "transform: rotate(0deg) scale(1)" ]
               ]
-      , headline: styleNode VD.div
+      , headline: styleNode C.div
           [ "font-size: 20px" ]
-      , path: styleNode VD.span
+      , path: styleNode C.span
           [ "font-weight: bold" ]
       }
   in
@@ -56,11 +56,11 @@ viewNotFound { onBackToHome, path } =
           [ UI.Assets.viewPageNotFound
           ]
       , el.headline []
-          [ VD.text "Not Found: "
-          , el.path [] [ VD.text (printPath path) ]
+          [ C.text "Not Found: "
+          , el.path [] [ C.text (printPath path) ]
           ]
-      , el.text [ VD.onClick onBackToHome ]
-          [ VD.text "Back to Home"
+      , el.text [ C.onClick onBackToHome ]
+          [ C.text "Back to Home"
           ]
       ]
 

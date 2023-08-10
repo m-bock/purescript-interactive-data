@@ -5,7 +5,7 @@ module InteractiveData.App.UI.SideBar
 
 import InteractiveData.Core.Prelude
 
-import Chameleon as VD
+import Chameleon as C
 import InteractiveData.App.UI.Assets as UI.Assets
 
 type ViewCfg :: (Type -> Type) -> Type -> Type
@@ -15,14 +15,14 @@ view :: forall html msg. IDHtml html => ViewCfg html msg -> html msg
 view { menu } =
   let
     el =
-      { root: styleNode VD.div
+      { root: styleNode C.div
           """
             height: 100%;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
           """
-      , poweredBy: styleNode VD.div
+      , poweredBy: styleNode C.div
           [ decl $ pure
               """
                 font-size: 0.8em;
@@ -43,14 +43,14 @@ view { menu } =
               """
           ]
 
-      , logo: styleNode VD.div
+      , logo: styleNode C.div
           [ decl $ pure
               """
                 width: 50px;
                 height: 50px;
               """
           ]
-      , link: styleNode VD.a
+      , link: styleNode C.a
           [ declWith ":link" [ "text-decoration : none" ]
           , declWith ":visited" [ "text-decoration : none" ]
           , declWith ":hover" [ "text-decoration : none" ]
@@ -63,16 +63,16 @@ view { menu } =
     el.root []
       [ menu
       , if showBranding then
-          el.link [ VD.href "https://github.com/thought2/purescript-interactive-data" ]
+          el.link [ C.href "https://github.com/thought2/purescript-interactive-data" ]
             [ el.poweredBy []
                 [ el.logo []
                     [ UI.Assets.viewLogo ]
-                , VD.div []
-                    [ VD.span_ [ VD.text "powered by " ]
-                    , VD.span []
-                        [ VD.text "interactive-data" ]
+                , C.div []
+                    [ C.span_ [ C.text "powered by " ]
+                    , C.span []
+                        [ C.text "interactive-data" ]
                     ]
                 ]
             ]
-        else VD.noHtml
+        else C.noHtml
       ]

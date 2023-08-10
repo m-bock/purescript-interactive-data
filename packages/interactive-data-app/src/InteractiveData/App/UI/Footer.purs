@@ -5,7 +5,7 @@ module InteractiveData.App.UI.Footer
 
 import InteractiveData.Core.Prelude
 
-import Chameleon as VD
+import Chameleon as C
 import Data.Array as Array
 import DataMVC.Types.DataError (DataError(..))
 import InteractiveData.App.UI.Assets as UI.Assets
@@ -66,14 +66,14 @@ footerRoot
 footerRoot { errors, viewError, isExpanded, onChangeIsExpanded } =
   let
     el =
-      { footerRoot: styleNode VD.div
+      { footerRoot: styleNode C.div
           [ "display: flex"
           , "flex-direction: column"
           , "align-items: stretch"
           , "background-color: #ffede3"
           , "border-top: 1px solid #eee"
           ]
-      , errors: styleNode VD.div
+      , errors: styleNode C.div
           $
             [ "overflow-y: auto"
             , "flex-grow: 1"
@@ -91,13 +91,13 @@ footerRoot { errors, viewError, isExpanded, onChangeIsExpanded } =
             else
               [ "max-height: 0px"
               ]
-      , headline: styleNode VD.div
+      , headline: styleNode C.div
           [ "display: flex"
           , "flex-direction: row"
           , "justify-content: space-between"
           , "padding: 5px"
           ]
-      , expandIcon: styleNode VD.div
+      , expandIcon: styleNode C.div
           [ "cursor: pointer"
           , "width: 20px"
           ]
@@ -114,9 +114,9 @@ footerRoot { errors, viewError, isExpanded, onChangeIsExpanded } =
   in
     el.footerRoot []
       [ el.headline []
-          [ VD.text textCountErrors
+          [ C.text textCountErrors
           , el.expandIcon
-              [ VD.onClick $ onChangeIsExpanded (not isExpanded) ]
+              [ C.onClick $ onChangeIsExpanded (not isExpanded) ]
               [ if isExpanded then UI.Assets.viewExpandDown
                 else UI.Assets.viewExpandUp
               ]
@@ -135,7 +135,7 @@ footerViewError
 footerViewError { viewDataPath } (DataError dataPath errorCase_) = withCtx \_ ->
   UI.Card.viewCard
     { viewBody:
-        VD.text $ printErrorCase errorCase_
+        C.text $ printErrorCase errorCase_
     }
     UI.Card.defaultViewCardOpt
       { viewCaption =

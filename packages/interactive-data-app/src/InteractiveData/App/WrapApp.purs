@@ -7,7 +7,7 @@ module InteractiveData.App.WrapApp
 
 import Prelude
 
-import Chameleon as VD
+import Chameleon as C
 import Chameleon.Transformers.Ctx.Class (class Ctx, putCtx, withCtx)
 import Chameleon.Transformers.OutMsg.Class (runOutMsg)
 import Data.Array.NonEmpty as NEA
@@ -117,7 +117,7 @@ viewNotFound
   -> html (AppSelfMsg msg)
 viewNotFound { selectedPath } =
   UI.Layout.viewLayout
-    { viewHeader: VD.noHtml
+    { viewHeader: C.noHtml
     , viewBody:
         UI.NotFound.viewNotFound
           { path: selectedPath
