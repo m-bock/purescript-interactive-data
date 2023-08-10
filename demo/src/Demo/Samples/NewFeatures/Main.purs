@@ -1,7 +1,6 @@
 module Demo.Samples.NewFeatures.Main
   ( main
-  )
-  where
+  ) where
 
 import Prelude
 

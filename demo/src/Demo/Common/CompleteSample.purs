@@ -1,8 +1,7 @@
 module Demo.Common.CompleteSample
   ( Sample
   , sampleDataUi
-  )
-  where
+  ) where
 
 import Prelude
 

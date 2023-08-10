@@ -1,7 +1,6 @@
 module InteractiveData.Core.Types.IDOutMsg
   ( IDOutMsg(..)
-  )
-  where
+  ) where
 
 import Prelude
 

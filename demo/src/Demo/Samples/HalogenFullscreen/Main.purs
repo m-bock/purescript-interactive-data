@@ -1,7 +1,6 @@
 module Demo.Samples.HalogenFullscreen.Main
   ( main
-  )
-  where
+  ) where
 
 import Prelude
 

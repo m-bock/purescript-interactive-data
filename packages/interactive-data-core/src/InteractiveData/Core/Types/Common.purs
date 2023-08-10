@@ -1,8 +1,7 @@
 module InteractiveData.Core.Types.Common
   ( PathInContext
   , unPathInContext
-  )
-  where
+  ) where
 
 import Prelude
 

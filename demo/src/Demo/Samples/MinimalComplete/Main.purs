@@ -1,7 +1,6 @@
 module Demo.Samples.MinimalComplete.Main
   ( main
-  )
-  where
+  ) where
 
 import Prelude
 
