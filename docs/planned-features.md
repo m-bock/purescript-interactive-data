@@ -9,10 +9,10 @@
 - `Maybe`
 - `Either`
 - Custom ADTs
-- `Variant`
 
 ## General
 
 - Description text per type
 - Description text per value
 - Routing for standalone apps
+- Render Error messages directly below input fields 

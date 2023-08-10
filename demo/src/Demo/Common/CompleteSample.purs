@@ -1,11 +1,12 @@
 module Demo.Common.CompleteSample where
 
-import Data.Variant (Variant)
+import Prelude
+
 import Demo.Common.Features.CustomDataUI.Color (Color, color)
 import Demo.Common.Features.Refinement.UserID (UserID, userId_)
+import Demo.Common.VariantJ (VariantJ)
 import InteractiveData (class IDHtml, DataUI, IDSurface)
 import InteractiveData as ID
-import Type.Proxy (Proxy(..))
 
 type Sample =
   { user ::
@@ -19,7 +20,7 @@ type Sample =
       { description :: String
       , headline :: String
       , info ::
-          Variant
+          VariantJ
             ( name :: String
             , age :: Int
             )
@@ -53,10 +54,11 @@ sampleDataUi = ID.record_
       { description: ID.string_
       , headline: ID.string_
       , info:
-          ID.variant_ @"name"
-            { name: ID.string_
-            , age: ID.int { min: 0, max: 150 }
-            }
+          ID.newtype_ $
+            ID.variant_ @"name"
+              { name: ID.string_
+              , age: ID.int { min: 0, max: 150 }
+              }
       }
   , theme: ID.record_
       { backgroundColor: color {}

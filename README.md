@@ -68,7 +68,9 @@ The following types are supported out of the box:
 - `Int`
 - `Number`
 - `Record`
-- Refinement of existing types (for smart constructor pattern)
+- `Variant`
+- Newtypes
+- Refinement of existing types (smart constructor pattern)
 
 ## Getting started
 

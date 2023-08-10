@@ -23,6 +23,8 @@ import InteractiveData.DataUIs
   , VariantMsg
   , VariantState
   , variant_
+
+  , newtype_
   ) as Export
 
 import InteractiveData.Run

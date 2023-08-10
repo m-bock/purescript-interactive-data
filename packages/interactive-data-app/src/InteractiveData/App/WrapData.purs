@@ -104,12 +104,12 @@ viewStandalone { viewContent, actions, typeName } =
               [ "display: flex"
               , "margin-bottom: 10px"
               , "align-items: center"
-              , "justify-content: space-between"              
+              , "justify-content: space-between"
               ]
-      , typeName: styleNode VD.div
-          [ "font-size: 20px"
-          , "grid-area: b"
-          ]
+        , typeName: styleNode VD.div
+            [ "font-size: 20px"
+            , "grid-area: b"
+            ]
         }
 
     in
@@ -117,8 +117,8 @@ viewStandalone { viewContent, actions, typeName } =
         []
         [ el.item []
             [ el.subRow []
-                [ el.typeName [] [VD.text typeName]
-                  , el.actions []
+                [ el.typeName [] [ VD.text typeName ]
+                , el.actions []
                     ( map
                         (\dataAction -> viewActionButton { dataAction })
                         actions

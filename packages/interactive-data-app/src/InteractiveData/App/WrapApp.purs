@@ -18,6 +18,7 @@ import Data.These (These(..))
 import Data.Tuple.Nested (type (/\))
 import DataMVC.Types (DataPathSegment, DataResult, DataUI(..), DataUiInterface(..))
 import DataMVC.Types.DataUI (applyWrap, runDataUi)
+import InteractiveData.App.FastForward.Standalone as FastForwardStandalone
 import InteractiveData.App.UI.Body as UI.Body
 import InteractiveData.App.UI.Footer as UI.Footer
 import InteractiveData.App.UI.Header as UI.Header
@@ -27,7 +28,6 @@ import InteractiveData.App.UI.Menu as UI.Menu
 import InteractiveData.App.UI.NotFound as UI.NotFound
 import InteractiveData.App.UI.SideBar as UI.SideBar
 import InteractiveData.App.UI.Types.SumTree (SumTree, sumTree)
-import InteractiveData.App.FastForward.Standalone (viewFastForwardStandalone)
 import InteractiveData.Core
   ( class IDHtml
   , DataTree(..)
@@ -168,7 +168,7 @@ viewFound { global, selected } (AppState { showErrors, menu, showMenu }) =
         Inline ->
           viewContent
         Standalone ->
-          map DataMsg $ viewFastForwardStandalone trivialTrees
+          map DataMsg $ FastForwardStandalone.view trivialTrees
 
     viewContent :: html (AppSelfMsg msg)
     viewContent = selected.dataTree # un DataTree # _.view # map DataMsg

@@ -32,3 +32,8 @@ import InteractiveData.DataUIs.Variant
   , VariantState
   , variant_
   ) as Export
+
+import InteractiveData.DataUIs.Newtype
+  ( newtype_
+  ) as Export
+

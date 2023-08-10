@@ -13,10 +13,12 @@ package:
     - interactive-data
     - interactive-data-core
     - maybe
+    - newtype
     - prelude
     - react-basic-dom
     - react-basic-hooks
     - strings
+    - variant
   test:
     dependencies: []
     main: Test.Main

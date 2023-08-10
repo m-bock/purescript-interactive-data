@@ -1,28 +1,27 @@
 module InteractiveData.App.FastForward.Standalone
-  ( viewFastForwardStandalone
+  ( view
   ) where
 
 import InteractiveData.Core.Prelude
 
 import Chameleon as VD
-import Chameleon.Transformers.OutMsg.Class (fromOutHtml)
 import Data.Array as Array
 import Data.FunctorWithIndex (mapWithIndex)
-import InteractiveData.App.UI.DataLabel as UIDataLabel
-import InteractiveData.Core.Types.DataPathExtra (dataPathToStrings)
 
-viewFastForwardStandalone
+view
   :: forall html msg
    . IDHtml html
   => Array (DataPath /\ DataTree html msg)
   -> html msg
-viewFastForwardStandalone items =
+view items =
   let
     el =
       { root: styleNode VD.div [ "" ]
       , item: styleNode VD.div
-          $ [ "margin-bottom: 20px"
-          ] /\ declWith ":not(:last-child)"
+          $
+            [ "margin-bottom: 20px"
+            ]
+          /\ declWith ":not(:last-child)"
             [ "border-bottom: 1px solid #ccc"
             ]
       }
@@ -48,7 +47,7 @@ viewItem
   => { isLast :: Boolean, isFirst :: Boolean }
   -> DataPath /\ DataTree html msg
   -> html msg
-viewItem { isLast, isFirst } (path /\ tree) =
+viewItem { isLast } (path /\ tree) =
   let
     el =
       { root: styleNode VD.div

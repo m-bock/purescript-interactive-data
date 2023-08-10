@@ -5,6 +5,7 @@ package:
     - chameleon-styled
     - chameleon-transformers
     - data-mvc
+    - either
     - interactive-data-app
     - interactive-data-core
     - maybe

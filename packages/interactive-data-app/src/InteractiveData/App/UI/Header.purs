@@ -60,7 +60,7 @@ viewHeaderRoot
      , right :: html msg
      }
   -> html msg
-viewHeaderRoot { viewBreadcrumbs, viewTypeName: viewTypeName', right } =
+viewHeaderRoot { viewBreadcrumbs, right } =
   let
     el =
       { header: styleNode VD.div
