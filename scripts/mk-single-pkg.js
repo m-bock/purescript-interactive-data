@@ -58,7 +58,7 @@ const spagoEnsureRanges = (cwd) => {
 const readVersion = () => {
   const content = fs.readFileSync("version.json", "utf8").toString();
   const json = JSON.parse(content);
-  return json.next;
+  return { version: json.next, extra: json.extra };
 };
 
 const main = () => {
@@ -112,7 +112,7 @@ const main = () => {
 
   const wsConfig = readSpagoConfig("spago.yaml");
 
-  const version = readVersion();
+  const { version, extra } = readVersion();
 
   const mainCfg = {
     package: {
