@@ -95,3 +95,6 @@ suggest-apply:
 
 lint:
     node scripts/lint.js
+
+open-all-files:
+    code $(node scripts/modules.js)

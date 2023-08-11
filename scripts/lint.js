@@ -19,6 +19,14 @@ const main = () => {
     );
     const { moduleName, exports } = res.groups;
 
+    const imports = [...source.matchAll(/\nimport\s+([A-Za-z0-9.]+)/g)].map(
+      (x) => x[1]
+    );
+
+    console.log(modulePath);
+    console.log(imports);
+    console.log("\n");
+
     const moduleNameByPath = modulePath
       .split("src/")[1]
       .replace(".purs", "")
