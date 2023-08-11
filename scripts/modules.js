@@ -62,34 +62,32 @@ const getModList = (graph) => {
   const out = [];
   const visited = new Set();
 
-  const entries = Object.values(graph).filter(
-    ({ importedBy }) => importedBy.length === 0
+  const leaves = Object.values(graph).filter(
+    ({ localImports }) => localImports.length === 0
   );
 
   const visitModule = (mod) => {
-    if (!visited.has(mod.moduleName)) {
-      out.push(mod);
-      visited.add(mod.moduleName);
-    }
-
-    for (const dependancy of mod.localImports) {
-      const dep = graph[dependancy];
-
-      if (!visited.has(dep.moduleName)) {
-        out.push(dep);
-        visited.add(dep.moduleName);
-      }
-    }
 
     for (const dependancy of mod.localImports) {
       const dep = graph[dependancy];
 
       visitModule(dep);
     }
+
+    if (visited.has(mod.moduleName)) return;
+
+    out.push(mod);
+    visited.add(mod.moduleName);
+
+    for (const dependant of mod.importedBy) {
+      const dep = graph[dependant];
+
+      visitModule(dep);
+    }
   };
 
-  for (const entry of entries) {
-    visitModule(entry);
+  for (const leaf of leaves) {
+    visitModule(leaf);
   }
   return out;
 };
@@ -106,18 +104,20 @@ const main = () => {
 
   const mods = getModList(graph);
 
-//   for (let i = 0; i < mods.length; i++) {
-//     const mod = mods[i];
-//     console.log(`${i + 1}. ${mod.modulePath}`);
-//     for (const localImport of mod.localImports) {
-//       console.log(`      - ${graph[localImport].modulePath}`);
-//     }
-//     console.log(``);
-//   }
+    // for (let i = 0; i < mods.length; i++) {
+    //   const mod = mods[i];
+    //   console.log(`${i + 1}. ${mod.modulePath}`);
+    //   for (const dep of mod.importedBy) {
+    //     console.log(`      - ${graph[dep].modulePath}`);
+    //   }
+    //   console.log(``);
+    // }
 
   for (let mod of mods) {
-    console.log(mod.modulePath)
+    console.log(mod.modulePath);
   }
+
+  // console.log(mods.length)
 };
 
 main();

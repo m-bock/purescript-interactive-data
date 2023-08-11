@@ -3,9 +3,7 @@ export const envVars = (() => {
   if (typeof process === "undefined") return {};
   if (typeof process.env === "undefined") return {};
 
-  const envVars = {
-    NEW_DATA_WRAP: process.env.NEW_DATA_WRAP,
-  };
+  const envVars = {};
 
   // Filter out undefined values:
   for (const key in envVars) {
