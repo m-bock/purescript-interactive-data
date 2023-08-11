@@ -33,7 +33,7 @@ format:
     purs-tidy format-in-place "demo/src/**/*.purs"
     purs-tidy format-in-place "demo/test/**/*.purs"
 
-gen: gen-graph gen-readme gen-extra-packages gen-assets
+gen: gen-graph gen-readme gen-assets
 
 gen-graph:
     dot -Tsvg assets/local-packages-graph.dot -o assets/local-packages-graph.svg
@@ -41,9 +41,6 @@ gen-graph:
 gen-readme:
     node scripts/gen-readme.js
     doctoc README.md
-
-gen-extra-packages:
-    node scripts/gen-extra-packages.js
 
 gen-assets:
     purs-virtual-dom-assets \
@@ -78,7 +75,7 @@ purs-docs:
     purs docs $(spago sources)
 
 check-git-clean:
-    [ " M docs/extra-packages.yaml" = "$(git status --porcelain)" ]
+    [ "" = "$(git status --porcelain)" ]
 
 mk-single-pkg:
     node scripts/mk-single-pkg.js
