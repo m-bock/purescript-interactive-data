@@ -209,6 +209,7 @@ import Chameleon.Styled
   , styleLeaf
   , styleNode
   , toStyle
+  , mergeDecl
   ) as Export
 
 import Chameleon.Transformers.Ctx.Class

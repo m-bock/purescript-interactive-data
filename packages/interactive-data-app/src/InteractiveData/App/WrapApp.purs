@@ -19,14 +19,14 @@ import Data.Tuple.Nested (type (/\))
 import DataMVC.Types (DataPathSegment, DataResult, DataUI(..), DataUiInterface(..))
 import DataMVC.Types.DataUI (applyWrap, runDataUi)
 import InteractiveData.App.FastForward.Standalone as FastForwardStandalone
-import InteractiveData.App.UI.Body as UI.Body
-import InteractiveData.App.UI.Footer as UI.Footer
-import InteractiveData.App.UI.Header as UI.Header
-import InteractiveData.App.UI.Layout as UI.Layout
+import InteractiveData.App.UI.Body as UIBody
+import InteractiveData.App.UI.Footer as UIFooter
+import InteractiveData.App.UI.Header as UIHeader
+import InteractiveData.App.UI.Layout as UILayout
 import InteractiveData.App.UI.Menu (MenuSelfMsg)
-import InteractiveData.App.UI.Menu as UI.Menu
-import InteractiveData.App.UI.NotFound as UI.NotFound
-import InteractiveData.App.UI.SideBar as UI.SideBar
+import InteractiveData.App.UI.Menu as UIMenu
+import InteractiveData.App.UI.NotFound as UINotFound
+import InteractiveData.App.UI.SideBar as UISideBar
 import InteractiveData.App.UI.Types.SumTree (SumTree, sumTree)
 import InteractiveData.Core
   ( class IDHtml
@@ -48,7 +48,7 @@ import InteractiveData.Core.Types.IDSurface (runIdSurface)
 
 newtype AppState sta = AppState
   { selectedPath :: Array String
-  , menu :: UI.Menu.MenuState
+  , menu :: UIMenu.MenuState
   , dataState :: sta
   , showMenu :: Boolean
   , showErrors :: Boolean
@@ -59,7 +59,7 @@ type AppMsg msg = These (AppSelfMsg msg) IDOutMsg
 data AppSelfMsg msg
   = SetSelectedPath (Array String)
   | DataMsg msg
-  | MenuMsg (UI.Menu.MenuMsg (AppSelfMsg msg))
+  | MenuMsg (UIMenu.MenuMsg (AppSelfMsg msg))
   | SetShowMenu Boolean
   | SetShowErrors Boolean
 
@@ -80,20 +80,20 @@ type DataTrees html msg =
 --- View
 --------------------------------------------------------------------------------
 
-viewApp
+view
   :: forall html msg sta
    . Ctx IDViewCtx html
   => IDHtml html
   => (sta -> DataTree html msg)
   -> AppState sta
   -> DataTree html (AppMsg msg)
-viewApp view' state@(AppState { selectedPath }) =
+view view' state@(AppState { selectedPath }) =
   let
     maybeDataTrees :: Maybe (DataTrees html msg)
     maybeDataTrees = getDataTrees view' state
 
-    view :: html (AppSelfMsg msg)
-    view = case maybeDataTrees of
+    view'' :: html (AppSelfMsg msg)
+    view'' = case maybeDataTrees of
       Nothing ->
         viewNotFound { selectedPath }
 
@@ -101,7 +101,7 @@ viewApp view' state@(AppState { selectedPath }) =
         viewFound dataTrees state
 
     viewOut :: html (AppMsg msg)
-    viewOut = runOutMsg view
+    viewOut = runOutMsg view''
   in
     DataTree
       { view: viewOut
@@ -116,10 +116,10 @@ viewNotFound
   => { selectedPath :: Array String }
   -> html (AppSelfMsg msg)
 viewNotFound { selectedPath } =
-  UI.Layout.viewLayout
+  UILayout.view
     { viewHeader: C.noHtml
     , viewBody:
-        UI.NotFound.viewNotFound
+        UINotFound.view
           { path: selectedPath
           , onBackToHome: SetSelectedPath mempty
           }
@@ -138,7 +138,7 @@ viewFound { global, selected } (AppState { showErrors, menu, showMenu }) =
   let
     header :: html (AppSelfMsg msg)
     header =
-      UI.Header.viewHeader
+      UIHeader.view
         { dataPath: global.selectedDataPath
         , onSelectPath: SetSelectedPath <<< dataPathToStrings
         , showMenu
@@ -148,9 +148,9 @@ viewFound { global, selected } (AppState { showErrors, menu, showMenu }) =
 
     sidebar :: html (AppSelfMsg msg)
     sidebar =
-      UI.SideBar.view
+      UISideBar.view
         { menu: map MenuMsg $
-            UI.Menu.viewMenu
+            UIMenu.view
               { onSelectPath: SetSelectedPath
               , tree: global.sumTree
               }
@@ -174,12 +174,12 @@ viewFound { global, selected } (AppState { showErrors, menu, showMenu }) =
     viewContent = selected.dataTree # un DataTree # _.view # map DataMsg
 
     body :: html (AppSelfMsg msg)
-    body = UI.Body.viewBody
+    body = UIBody.view
       { viewContent: viewContent' }
 
     footer :: html (AppSelfMsg msg)
     footer =
-      UI.Footer.viewFooter
+      UIFooter.view
         { errors: either NEA.toArray (\_ -> []) global.meta.errored
         , onSelectPath: SetSelectedPath <<< dataPathToStrings
         , isExpanded: showErrors
@@ -189,7 +189,6 @@ viewFound { global, selected } (AppState { showErrors, menu, showMenu }) =
   in
     withCtx \(ctx :: IDViewCtx) ->
       let
-
         viewCtx :: IDViewCtx
         viewCtx =
           ctx
@@ -198,9 +197,8 @@ viewFound { global, selected } (AppState { showErrors, menu, showMenu }) =
             , viewMode = Standalone
             }
       in
-
         putCtx viewCtx
-          $ UI.Layout.viewLayout
+          $ UILayout.view
               { viewHeader: header
               , viewSidebar: if showMenu then Just sidebar else Nothing
               , viewBody: body
@@ -262,7 +260,6 @@ update update' =
     updateThat
 
   where
-
   updateThis :: AppSelfMsg msg -> AppState sta -> AppState sta
   updateThis msg st@(AppState state) = case msg of
     SetSelectedPath path ->
@@ -274,7 +271,7 @@ update update' =
     MenuMsg msg' ->
       updateThese
         ( \(msg'' :: MenuSelfMsg) (AppState st') ->
-            AppState st' { menu = UI.Menu.updateMenu msg'' st'.menu }
+            AppState st' { menu = UIMenu.update msg'' st'.menu }
         )
         (\(msg'' :: AppSelfMsg msg) -> update update' (This msg''))
         msg'
@@ -299,7 +296,7 @@ init :: forall sta a. (Maybe a -> sta) -> Maybe a -> AppState sta
 init init' opt = AppState
   { selectedPath: []
   , dataState: init' opt
-  , menu: UI.Menu.initMenu
+  , menu: UIMenu.init
   , showMenu: false
   , showErrors: false
   }
@@ -332,15 +329,15 @@ wrapApp dataUi' =
 
       DataUiInterface itf = itf_
 
-      view :: AppState (fs sta) -> IDSurface html (AppMsg (fm msg))
-      view state = IDSurface \idSurfaceCtx ->
-        viewApp
+      view' :: AppState (fs sta) -> IDSurface html (AppMsg (fm msg))
+      view' state = IDSurface \idSurfaceCtx ->
+        view
           (itf.view >>> runIdSurface idSurfaceCtx)
           state
     in
       DataUiInterface
         { name: itf.name
-        , view
+        , view: view'
         , update: update itf.update
         , init: init itf.init
         , extract: extract itf.extract

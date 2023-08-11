@@ -8,7 +8,11 @@ module InteractiveData.Core.Classes.OptArgs
 
 import Prelude
 
-import ConvertableOptions (class ConvertOption, class ConvertOptionsWithDefaults, convertOptionsWithDefaults)
+import ConvertableOptions
+  ( class ConvertOption
+  , class ConvertOptionsWithDefaults
+  , convertOptionsWithDefaults
+  )
 
 data NoConvert = NoConvert
 

@@ -24,7 +24,10 @@ import InteractiveData.Core.Types.IDOutMsg
   ) as Export
 
 import InteractiveData.Core.Types.IDViewCtx
-  ( PathInContext
-  , IDViewCtx
+  ( IDViewCtx
   , ViewMode(..)
+  ) as Export
+
+import InteractiveData.Core.Types.Common
+  ( PathInContext
   ) as Export

@@ -1,18 +1,17 @@
 module InteractiveData.App.UI.Header
-  ( ViewHeaderCfg
-  , viewHeader
+  ( ViewCfg
+  , view
   ) where
 
 import InteractiveData.Core.Prelude
 
 import Chameleon as C
 import InteractiveData.App.UI.Assets as UI.Assets
-import InteractiveData.App.UI.Breadcrumbs as UI.Breadcrumbs
-import InteractiveData.App.UI.DataLabel as UI.DataLabel
+import InteractiveData.App.UI.Breadcrumbs as UIBreadcrumbs
 import InteractiveData.App.UI.DataLabel as UIDataLabel
 import InteractiveData.Core.Types.Common (unPathInContext)
 
-type ViewHeaderCfg msg =
+type ViewCfg msg =
   { dataPath :: Array DataPathSegment
   , onSelectPath :: Array DataPathSegment -> msg
   , showMenu :: Boolean
@@ -20,13 +19,13 @@ type ViewHeaderCfg msg =
   , typeName :: String
   }
 
-viewHeader :: forall html msg. IDHtml html => ViewHeaderCfg msg -> html msg
-viewHeader { dataPath, typeName, onSelectPath, showMenu, onSetShowMenu } =
-  viewHeaderRoot
+view :: forall html msg. IDHtml html => ViewCfg msg -> html msg
+view { dataPath, typeName, onSelectPath, showMenu, onSetShowMenu } =
+  viewRoot
     { viewTypeName: viewTypeName { typeName }
 
     , viewBreadcrumbs:
-        UI.Breadcrumbs.viewBreadcrumbs
+        UIBreadcrumbs.view
           { dataPath:
               { before: []
               , path: dataPath
@@ -38,7 +37,7 @@ viewHeader { dataPath, typeName, onSelectPath, showMenu, onSetShowMenu } =
               in
                 UIDataLabel.view
                   { dataPath: dataPath'
-                  , mkTitle: UI.DataLabel.mkTitleGoto
+                  , mkTitle: UIDataLabel.mkTitleGoto
                   }
                   { onHit: Just $ onSelectPath path
                   , isSelected: true
@@ -52,7 +51,7 @@ viewHeader { dataPath, typeName, onSelectPath, showMenu, onSetShowMenu } =
           }
     }
 
-viewHeaderRoot
+viewRoot
   :: forall html msg
    . IDHtml html
   => { viewBreadcrumbs :: html msg
@@ -60,7 +59,7 @@ viewHeaderRoot
      , right :: html msg
      }
   -> html msg
-viewHeaderRoot { viewBreadcrumbs, right } =
+viewRoot { viewBreadcrumbs, right } =
   let
     el =
       { header: styleNode C.div
@@ -82,7 +81,7 @@ viewHeaderRoot { viewBreadcrumbs, right } =
           [ "grid-area: c" ]
       }
   in
-    el.header [ C.id "header" ]
+    el.header []
       [ el.breadcrumbs []
           [ viewBreadcrumbs
           ]
@@ -109,7 +108,11 @@ viewTypeName { typeName } =
     el.typeName []
       [ C.text typeName ]
 
-viewRightCorner :: forall html msg. IDHtml html => { showMenu :: Boolean, setShowMenu :: Boolean -> msg } -> html msg
+viewRightCorner
+  :: forall html msg
+   . IDHtml html
+  => { showMenu :: Boolean, setShowMenu :: Boolean -> msg }
+  -> html msg
 viewRightCorner { showMenu, setShowMenu } =
   let
     el =

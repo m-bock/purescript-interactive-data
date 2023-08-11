@@ -1,6 +1,6 @@
 module InteractiveData.App.UI.Layout
-  ( ViewLayoutCfg
-  , viewLayout
+  ( ViewCfg
+  , view
   ) where
 
 import InteractiveData.Core.Prelude
@@ -8,7 +8,7 @@ import InteractiveData.Core.Prelude
 import Chameleon as C
 import Chameleon.HTML.Elements as VDE
 
-type ViewLayoutCfg (html :: Type -> Type) msg =
+type ViewCfg (html :: Type -> Type) msg =
   { viewHeader :: html msg
   , viewSidebar :: Maybe (html msg)
   , viewBody :: html msg
@@ -20,8 +20,8 @@ viewEmbedFont :: forall html msg. IDHtml html => html msg
 viewEmbedFont = VDE.style []
   [ C.text "@import url('https://fonts.googleapis.com/css2?family=Signika+Negative:wght@300&display=swap')" ]
 
-viewLayout :: forall html msg. IDHtml html => ViewLayoutCfg html msg -> html msg
-viewLayout { viewHeader, viewSidebar, viewBody, viewFooter } = withCtx \ctx ->
+view :: forall html msg. IDHtml html => ViewCfg html msg -> html msg
+view { viewHeader, viewSidebar, viewBody, viewFooter } = withCtx \ctx ->
   let
     showSidebar :: Boolean
     showSidebar = isJust viewSidebar
@@ -75,7 +75,6 @@ viewLayout { viewHeader, viewSidebar, viewBody, viewFooter } = withCtx \ctx ->
           , "overflow: none"
           , "display: flex"
           , "flex-direction: column"
-
           ]
       , main: styleNode C.div
           [ "overflow-y: auto"
@@ -95,8 +94,8 @@ viewLayout { viewHeader, viewSidebar, viewBody, viewFooter } = withCtx \ctx ->
       , el.root []
           [ el.sidebar []
               [ case viewSidebar of
-                  Just view ->
-                    view
+                  Just view' ->
+                    view'
                   Nothing -> C.noHtml
               ]
           , el.body []
@@ -107,9 +106,9 @@ viewLayout { viewHeader, viewSidebar, viewBody, viewFooter } = withCtx \ctx ->
                       [ viewBody ]
                   ]
               , case viewFooter of
-                  Just view ->
+                  Just view' ->
                     el.footer []
-                      [ view ]
+                      [ view' ]
                   Nothing -> C.noHtml
               ]
           ]

@@ -1,7 +1,7 @@
 module InteractiveData.App.UI.DataLabel
   ( Size(..)
-  , ViewDataLabelCfg
-  , ViewDataLabelOpt
+  , ViewCfg
+  , ViewOpt
   , mkTitleGoto
   , mkTitleSelect
   , view
@@ -16,7 +16,7 @@ import InteractiveData.App.UI.Assets as UI.Assets
 import InteractiveData.Core.Types.DataPathExtra (segmentToString)
 import Chameleon as C
 
-type ViewDataLabelCfg =
+type ViewCfg =
   { dataPath :: PathInContext DataPathSegment
   , mkTitle :: PathInContext DataPathSegment -> String
   }
@@ -51,17 +51,15 @@ mkTitleSelect dataPath =
   in
     fromMaybe "" maybeTitle
 
-type ViewDataLabelOpt msg =
+type ViewOpt msg =
   { onHit :: Maybe msg
   , isSelected :: Boolean
   , size :: Size
   }
 
----
-
 data Size = Small | Medium | Large
 
-viewDataLabel' :: forall html msg. IDHtml html => ViewDataLabelCfg -> ViewDataLabelOpt msg -> html msg
+viewDataLabel' :: forall html msg. IDHtml html => ViewCfg -> ViewOpt msg -> html msg
 viewDataLabel' { dataPath, mkTitle } { onHit, isSelected } = withCtx \ctx ->
   let
     el =
@@ -131,11 +129,11 @@ viewDataLabel' { dataPath, mkTitle } { onHit, isSelected } = withCtx \ctx ->
       ]
 
 view
-  :: forall opt html msg. OptArgs (ViewDataLabelOpt msg) opt => IDHtml html => ViewDataLabelCfg -> opt -> html msg
+  :: forall opt html msg. OptArgs (ViewOpt msg) opt => IDHtml html => ViewCfg -> opt -> html msg
 view cfg = getAllArgs defaults >>> viewDataLabel' cfg
   where
 
-  defaults :: ViewDataLabelOpt msg
+  defaults :: ViewOpt msg
   defaults =
     { onHit: Nothing
     , isSelected: false

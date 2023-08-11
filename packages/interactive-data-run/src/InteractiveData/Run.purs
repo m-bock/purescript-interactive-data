@@ -33,18 +33,28 @@ run { name, context, fullscreen } dataUi =
     # flip runDataUi context
     # hoistSrf (runHtml { name, fullscreen })
 
-getUi :: forall html msg sta a. { initData :: Maybe a } -> DataUiInterface html msg sta a -> UI html msg sta
+getUi
+  :: forall html msg sta a
+   . { initData :: Maybe a }
+  -> DataUiInterface html msg sta a
+  -> UI html msg sta
 getUi { initData } (DataUiInterface { view, init, update }) =
   { view
   , init: init initData
   , update
   }
 
-getExtract :: forall html msg sta a. DataUiInterface html msg sta a -> (sta -> DataResult a)
+getExtract
+  :: forall html msg sta a
+   . DataUiInterface html msg sta a
+  -> (sta -> DataResult a)
 getExtract (DataUiInterface { extract }) = extract
 
 hoistSrf
-  :: forall srf1 srf2 msg sta a. (srf1 ~> srf2) -> DataUiInterface srf1 msg sta a -> DataUiInterface srf2 msg sta a
+  :: forall srf1 srf2 msg sta a
+   . (srf1 ~> srf2)
+  -> DataUiInterface srf1 msg sta a
+  -> DataUiInterface srf2 msg sta a
 hoistSrf nat (DataUiInterface itf) = DataUiInterface itf
   { view = itf.view >>> nat
   }

@@ -2,7 +2,7 @@ workspace:
   extra_packages:
     chameleon-styled:
       git: "https://github.com/thought2/purescript-chameleon-styled.git"
-      ref: v1.0.0
+      ref: v2.0.0-rc.2
   package_set:
     registry: 34.0.0
   build_opts:

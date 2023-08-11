@@ -103,10 +103,6 @@ view :: forall html. IDHtml html => ColorState -> html ColorMsg
 view (ColorState selectedColor) =
   withCtx \_ ->
     let
-      el =
-        { root: C.div
-        }
-
       handleColorChange :: String -> ColorMsg
       handleColorChange hexStr =
         let
@@ -121,7 +117,7 @@ view (ColorState selectedColor) =
       colorValue :: String
       colorValue = colorToHexStr selectedColor
     in
-      el.root []
+      C.div_
         [ C.input
             [ C.type_ "color"
             , C.onChange handleColorChange

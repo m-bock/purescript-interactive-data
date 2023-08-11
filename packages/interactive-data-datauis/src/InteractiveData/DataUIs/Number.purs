@@ -63,13 +63,13 @@ update { min, max } msg _ =
 --- View
 -------------------------------------------------------------------------------
 
-type CfgNumberView =
+type CfgView =
   { min :: Number
   , max :: Number
   , step :: Number
   }
 
-view :: forall html. IDHtml html => CfgNumberView -> NumberState -> html NumberMsg
+view :: forall html. IDHtml html => CfgView -> NumberState -> html NumberMsg
 view
   { min, max, step }
   (NumberState value) =
@@ -163,7 +163,6 @@ number opt =
   let
     cfg :: CfgNumber
     cfg = getAllArgs defaultCfgNumber opt
-
   in
     DataUI \_ -> DataUiInterface
       { name: "Number"

@@ -16,14 +16,12 @@ view
 view items =
   let
     el =
-      { root: styleNode C.div [ "" ]
+      { root: C.div
       , item: styleNode C.div
           $
-            [ "margin-bottom: 20px"
-            ]
+            [ "margin-bottom: 20px" ]
           /\ declWith ":not(:last-child)"
-            [ "border-bottom: 1px solid #ccc"
-            ]
+            [ "border-bottom: 1px solid #ccc" ]
       }
 
     countItems = Array.length items
@@ -59,5 +57,4 @@ viewItem { isLast } (path /\ tree) =
   in
     withCtx \(ctx :: IDViewCtx) ->
       el.root []
-        [ withCtx \_ -> putCtx ctx { fastForward = isLast, path = path } $ view
-        ]
+        [ withCtx \_ -> putCtx ctx { fastForward = isLast, path = path } $ view ]

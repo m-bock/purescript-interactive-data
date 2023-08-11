@@ -11,9 +11,8 @@ import Chameleon.Transformers.OutMsg.Class (fromOutHtml)
 import Data.Array as Array
 import Data.Array.NonEmpty (NonEmptyArray)
 import Data.Tuple (fst)
-import InteractiveData.App.UI.ActionButton (viewActionButton)
-import InteractiveData.App.UI.Card as UI.Card
-import InteractiveData.App.UI.DataLabel as UI.DataLabel
+import InteractiveData.App.UI.ActionButton as UIActionButton
+import InteractiveData.App.UI.Card as UICard
 import InteractiveData.App.UI.DataLabel as UIDataLabel
 import InteractiveData.Core.Types.DataPathExtra (dataPathToStrings, segmentToString)
 import InteractiveData.Core.Types.IDSurface (runIdSurface)
@@ -120,7 +119,7 @@ viewStandalone { viewContent, actions, typeName } =
                 [ el.typeName [] [ C.text typeName ]
                 , el.actions []
                     ( map
-                        (\dataAction -> viewActionButton { dataAction })
+                        (\dataAction -> UIActionButton.view { dataAction })
                         actions
                     )
                 ]
@@ -152,21 +151,11 @@ viewInline { viewContent, typeName } =
             , "margin-right: 10px"
             , "font-weight: bold"
             ]
-        -- , actions: styleNode C.div
-        --     [ "display: flex" ]
         , root: styleNode C.div
             [ "min-height: 120px"
             , "min-width: 120px"
             , "display: grid"
             ]
-        -- , bodyRoot: styleNode C.div
-        --     [ "display: flex"
-        --     , "flex-direction: column"
-        --     , "gap: 10px"
-        --     ]
-        -- , content: styleNode C.div
-        --     [ "overflow: auto"
-        --     ]
         }
 
       typeRow :: html msg
@@ -178,19 +167,19 @@ viewInline { viewContent, typeName } =
 
     in
       el.root []
-        [ UI.Card.viewCard
+        [ UICard.view
             { viewBody: viewContent
             }
-            UI.Card.defaultViewCardOpt
+            UICard.defaultViewOpt
               { viewCaption = Just
                   $ fromOutHtml
                   $ el.caption []
                       [ UIDataLabel.view
                           { dataPath: { before: [], path: ctx.path }
-                          , mkTitle: UI.DataLabel.mkTitleGoto
+                          , mkTitle: UIDataLabel.mkTitleGoto
                           }
                           { onHit: Just (That $ GlobalSelectDataPath $ dataPathToStrings ctx.path)
-                          , size: UI.DataLabel.Large
+                          , size: UIDataLabel.Large
                           }
                       ]
               , viewSubCaption = Just typeRow
@@ -207,14 +196,14 @@ type ViewCfgDynamic html msg sta =
   , viewInner :: sta -> html msg
   }
 
-dataWrapperView
+view
   :: forall html msg sta a
    . IDHtml html
   => ViewCfgStatic sta a
   -> ViewCfgDynamic html msg sta
   -> WrapState sta
   -> html (WrapMsg msg)
-dataWrapperView cfgStatic cfgDynamic@{ viewInner } (WrapState { childState }) =
+view cfgStatic cfgDynamic@{ viewInner } (WrapState { childState }) =
   withCtx \(ctx :: IDViewCtx) ->
     let
       rootLabel :: String
@@ -239,13 +228,13 @@ dataWrapperView cfgStatic cfgDynamic@{ viewInner } (WrapState { childState }) =
 --- Update
 --------------------------------------------------------------------------------
 
-dataWrapperUpdate
+update
   :: forall msg sta
    . (msg -> sta -> sta)
   -> WrapMsg msg
   -> WrapState sta
   -> WrapState sta
-dataWrapperUpdate update' msg (WrapState sta) = WrapState case msg of
+update update' msg (WrapState sta) = WrapState case msg of
   ChildMsg childMsg -> sta
     { childState = update' childMsg sta.childState
     }
@@ -254,19 +243,19 @@ dataWrapperUpdate update' msg (WrapState sta) = WrapState case msg of
 --- Extract
 --------------------------------------------------------------------------------
 
-dataWrapperExtract
+extract
   :: forall sta a
    . (sta -> DataResult a)
   -> WrapState sta
   -> DataResult a
-dataWrapperExtract ext (WrapState state) = ext state.childState
+extract ext (WrapState state) = ext state.childState
 
 --------------------------------------------------------------------------------
 --- Init
 --------------------------------------------------------------------------------
 
-dataWrapperInit :: forall sta a. (Maybe a -> sta) -> Maybe a -> (WrapState sta)
-dataWrapperInit ini opta = WrapState
+init :: forall sta a. (Maybe a -> sta) -> Maybe a -> (WrapState sta)
+init ini opta = WrapState
   { childState: ini opta
   }
 
@@ -291,12 +280,12 @@ viewDataTree
   => ViewDataTreeCfg html msg sta a
   -> WrapState sta
   -> DataTree html (WrapMsg msg)
-viewDataTree { viewInner, viewHtml, extract, typeName } state@(WrapState { childState }) =
+viewDataTree { viewInner, viewHtml, extract: extract', typeName } state@(WrapState { childState }) =
   let
     DataTree { actions, children } = viewInner childState
 
     extractResult :: DataResult a
-    extractResult = extract childState
+    extractResult = extract' childState
 
     -- Important!
     -- If meta is not set here, the app is useless.
@@ -326,20 +315,20 @@ dataUiInterface
    . IDHtml html
   => DataUiInterface (IDSurface html) msg sta a
   -> DataUiInterface (IDSurface html) (WrapMsg msg) (WrapState sta) a
-dataUiInterface (DataUiInterface { name, extract, init, update, view }) = DataUiInterface
-  { name
+dataUiInterface (DataUiInterface itf) = DataUiInterface
+  { name: itf.name
   , view: \state -> IDSurface \(ctx :: IDSurfaceCtx) ->
       viewDataTree
-        { viewHtml: dataWrapperView { name, extract }
-        , viewInner: view >>> runIdSurface ctx
-        , extract
-        , typeName: name
+        { viewHtml: view { name: itf.name, extract: itf.extract }
+        , viewInner: itf.view >>> runIdSurface ctx
+        , extract: itf.extract
+        , typeName: itf.name
         , path: ctx.path
         }
         state
-  , extract: dataWrapperExtract extract
-  , update: dataWrapperUpdate update
-  , init: dataWrapperInit init
+  , extract: extract itf.extract
+  , update: update itf.update
+  , init: init itf.init
   }
 
 --------------------------------------------------------------------------------

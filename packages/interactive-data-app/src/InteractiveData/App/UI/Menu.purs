@@ -2,10 +2,10 @@ module InteractiveData.App.UI.Menu
   ( MenuMsg
   , MenuSelfMsg(..)
   , MenuState(..)
-  , ViewMenuCfg
-  , initMenu
-  , updateMenu
-  , viewMenu
+  , ViewCfg
+  , init
+  , update
+  , view
   ) where
 
 import InteractiveData.Core.Prelude
@@ -38,8 +38,8 @@ data MenuSelfMsg = SetExpandend Unit DataPath Boolean
 --- Update
 -------------------------------------------------------------------------------
 
-updateMenu :: MenuSelfMsg -> MenuState -> MenuState
-updateMenu msg (MenuState state) = case msg of
+update :: MenuSelfMsg -> MenuState -> MenuState
+update msg (MenuState state) = case msg of
   SetExpandend _ path val ->
     MenuState state { expandMap = Map.insert path val state.expandMap }
 
@@ -47,20 +47,20 @@ updateMenu msg (MenuState state) = case msg of
 --- Init
 -------------------------------------------------------------------------------
 
-initMenu :: MenuState
-initMenu = MenuState { expandMap: Map.empty }
+init :: MenuState
+init = MenuState { expandMap: Map.empty }
 
 -------------------------------------------------------------------------------
 --- View
 -------------------------------------------------------------------------------
 
-type ViewMenuCfg msg =
+type ViewCfg msg =
   { onSelectPath :: Array String -> msg
   , tree :: SumTree
   }
 
-viewMenu :: forall html msg. IDHtml html => ViewMenuCfg msg -> MenuState -> html (MenuMsg msg)
-viewMenu props@{ onSelectPath } state =
+view :: forall html msg. IDHtml html => ViewCfg msg -> MenuState -> html (MenuMsg msg)
+view props@{ onSelectPath } state =
   viewTree
     { viewRow:
         viewRow

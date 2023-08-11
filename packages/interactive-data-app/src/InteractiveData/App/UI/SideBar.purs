@@ -23,7 +23,7 @@ view { menu } =
             justify-content: space-between;
           """
       , poweredBy: styleNode C.div
-          [ decl $ pure
+          [ decl
               """
                 font-size: 0.8em;
                 color: #999;
@@ -36,7 +36,7 @@ view { menu } =
                 stroke:#dfdfdf;
                 margin-bottom: 10px;
               """
-          , declWith ":hover" $ pure
+          , declWith ":hover"
               """
                 stroke: #30ffc4;
                 color: #30ffc4; 
@@ -44,7 +44,7 @@ view { menu } =
           ]
 
       , logo: styleNode C.div
-          [ decl $ pure
+          [ decl
               """
                 width: 50px;
                 height: 50px;

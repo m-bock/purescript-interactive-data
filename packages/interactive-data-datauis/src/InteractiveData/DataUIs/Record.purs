@@ -18,7 +18,7 @@ import Data.Tuple.Nested (type (/\), (/\))
 import DataMVC.Record.DataUI (class DataUiRecord)
 import DataMVC.Record.DataUI as R
 import DataMVC.Types (DataPathSegment(..), DataPathSegmentField(..), DataUI)
-import InteractiveData.App.FastForward.Inline (viewFastForwardInline)
+import InteractiveData.App.FastForward.Inline as FastForwardInline
 import InteractiveData.Core (class IDHtml, DataTree(..), DataTreeChildren(..), IDSurface(..), ViewMode(..))
 import InteractiveData.Core.Types.DataTree as DT
 import InteractiveData.Core.Types.IDSurface (runIdSurface)
@@ -55,7 +55,6 @@ view fields =
         0 -> "no fields"
         1 -> "1 field"
         n -> show n <> " fields"
-
     in
       el.root []
         if Array.null fields then
@@ -93,7 +92,7 @@ viewRow _ (seg /\ tree) = withCtx \ctx ->
   in
     el.root []
       [ putCtx ctx { path = newPath, viewMode = Inline } $
-          viewFastForwardInline trivialTrees
+          FastForwardInline.view trivialTrees
       ]
 
 mkSurface

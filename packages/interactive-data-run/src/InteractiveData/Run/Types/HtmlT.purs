@@ -37,12 +37,11 @@ derive instance Functor html => Functor (IDHtmlT html)
 
 derive newtype instance Html html => HtmlStyled (IDHtmlT html)
 
-instance (Html html) => IDHtml (IDHtmlT html)
+instance Html html => IDHtml (IDHtmlT html)
 
 runIDHtmlT
   :: forall html msg
-   . Functor html
-  => Html html
+   . Html html
   => IDViewCtx
   -> IDHtmlT html msg
   -> html msg

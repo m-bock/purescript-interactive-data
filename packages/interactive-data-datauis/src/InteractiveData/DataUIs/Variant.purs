@@ -45,12 +45,10 @@ view { viewCase, mkMsg, caseKey, caseKeys } =
             , "gap: 5px"
             , "margin-bottom: 15px"
             ]
-        , caseLabel: styleNode C.div
-            ""
+        , caseLabel: C.div
         }
 
     in
-
       putCtx ctx { path = newPath } $
         C.div_
           [ el.caseLabels []

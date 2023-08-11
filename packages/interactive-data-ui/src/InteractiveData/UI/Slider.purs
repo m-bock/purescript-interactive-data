@@ -9,7 +9,7 @@ module InteractiveData.UI.Slider
 import Prelude
 
 import Chameleon as C
-import Chameleon.Styled (class HtmlStyled, declWith, styleLeaf, styleNode)
+import Chameleon.Styled (class HtmlStyled, declWith, mergeDecl, styleLeaf)
 import Data.Int as Int
 import Data.Maybe (Maybe(..))
 import Data.Number as Num
@@ -36,25 +36,25 @@ view { onChange, value, min, max, step } =
       ]
 
     el =
-      { container: styleNode C.div
-          [ "" ]
-      , input: styleLeaf C.input $
-          [ "width: 100%"
-          , "-webkit-appearance: none"
-          , "height: 10px"
-          , "border-radius: 5px"
-          , "background: #efefef"
-          , "border: 1px solid #d5d5d5"
-          , "outline: none"
-          , "opacity: 0.7"
-          ]
-            /\ declWith "::-webkit-slider-thumb"
-              ( [ "webkit-appearance: none"
+      { container: C.div
+      , input:
+          styleLeaf C.input $
+            [ "width: 100%"
+            , "-webkit-appearance: none"
+            , "height: 10px"
+            , "border-radius: 5px"
+            , "background: #efefef"
+            , "border: 1px solid #d5d5d5"
+            , "outline: none"
+            , "opacity: 0.7"
+            ]
+              /\ declWith "::-webkit-slider-thumb"
+                [ "webkit-appearance: none"
                 , "appearance: none"
-                ] <> thumbCommon
-              )
-            /\ declWith "::-moz-range-thumb"
-              thumbCommon
+                , mergeDecl thumbCommon
+                ]
+              /\ declWith "::-moz-range-thumb"
+                thumbCommon
       }
 
     handleInput :: String -> Maybe msg

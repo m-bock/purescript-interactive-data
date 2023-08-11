@@ -1,5 +1,6 @@
 module InteractiveData.App.UI.Breadcrumbs
-  ( viewBreadcrumbs
+  ( ViewCfg
+  , view
   ) where
 
 import InteractiveData.Core.Prelude
@@ -9,15 +10,18 @@ import Data.Array (intersperse)
 import Data.Array as Array
 import InteractiveData.App.UI.Assets as UI.Assets
 
-viewBreadcrumbs
+type ViewCfg (html :: Type -> Type) msg =
+  { viewDataLabel :: PathInContext DataPathSegment -> html msg
+  , dataPath :: PathInContext DataPathSegment
+  , isAbsolute :: Boolean
+  }
+
+view
   :: forall html msg
    . IDHtml html
-  => { viewDataLabel :: PathInContext DataPathSegment -> html msg
-     , dataPath :: PathInContext DataPathSegment
-     , isAbsolute :: Boolean
-     }
+  => ViewCfg html msg
   -> html msg
-viewBreadcrumbs { dataPath, viewDataLabel, isAbsolute } =
+view { dataPath, viewDataLabel, isAbsolute } =
   let
 
     el =
@@ -52,8 +56,7 @@ viewBreadcrumbs { dataPath, viewDataLabel, isAbsolute } =
       ( allSegments
           # intersperse
               ( C.div_
-                  [ el.iconArrow
-                      []
+                  [ el.iconArrow []
                       [ UI.Assets.viewChevronRight ]
                   ]
               )

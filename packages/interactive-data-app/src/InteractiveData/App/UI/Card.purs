@@ -1,40 +1,40 @@
 module InteractiveData.App.UI.Card
-  ( ViewCardCfg
-  , ViewCardOpt
-  , defaultViewCardOpt
-  , viewCard
+  ( ViewCfg
+  , ViewOpt
+  , defaultViewOpt
+  , view
   ) where
 
 import InteractiveData.Core.Prelude
 
 import Chameleon as C
 
-type ViewCardCfg (html :: Type -> Type) msg =
+type ViewCfg (html :: Type -> Type) msg =
   { viewBody :: html msg
   }
 
-type ViewCardOpt (html :: Type -> Type) msg =
+type ViewOpt (html :: Type -> Type) msg =
   { viewCaption :: Maybe (html msg)
   , viewSubCaption :: Maybe (html msg)
   , backgroundColor :: String
   , borderColor :: String
   }
 
-defaultViewCardOpt :: forall html msg. ViewCardOpt html msg
-defaultViewCardOpt =
+defaultViewOpt :: forall html msg. ViewOpt html msg
+defaultViewOpt =
   { viewCaption: Nothing
   , viewSubCaption: Nothing
   , backgroundColor: "#f8f8f8"
   , borderColor: "#ddd"
   }
 
-viewCard
+view
   :: forall html msg
    . IDHtml html
-  => ViewCardCfg html msg
-  -> ViewCardOpt html msg
+  => ViewCfg html msg
+  -> ViewOpt html msg
   -> html msg
-viewCard { viewBody } { viewCaption, viewSubCaption, backgroundColor, borderColor } =
+view { viewBody } { viewCaption, viewSubCaption, backgroundColor, borderColor } =
   let
     el =
 

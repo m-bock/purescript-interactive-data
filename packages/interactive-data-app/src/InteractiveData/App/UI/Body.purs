@@ -1,18 +1,18 @@
 module InteractiveData.App.UI.Body
-  ( ViewBodyCfg
-  , viewBody
+  ( ViewCfg
+  , view
   ) where
 
 import InteractiveData.Core.Prelude
 
 import Chameleon as C
 
-type ViewBodyCfg (html :: Type -> Type) msg =
+type ViewCfg (html :: Type -> Type) msg =
   { viewContent :: html msg
   }
 
-viewBody :: forall html msg. IDHtml html => ViewBodyCfg html msg -> html msg
-viewBody { viewContent } =
+view :: forall html msg. IDHtml html => ViewCfg html msg -> html msg
+view { viewContent } =
   let
     el =
       { body: styleNode C.div unit

@@ -1,6 +1,6 @@
 module InteractiveData.App.UI.NotFound
-  ( ViewNotFoundCfg
-  , viewNotFound
+  ( ViewCfg
+  , view
   ) where
 
 import InteractiveData.Core.Prelude
@@ -9,16 +9,15 @@ import Data.String as Str
 import InteractiveData.App.UI.Assets as UI.Assets
 import Chameleon as C
 
-type ViewNotFoundCfg msg =
+type ViewCfg msg =
   { onBackToHome :: msg
   , path :: Array String
   }
 
-viewNotFound :: forall html msg. IDHtml html => ViewNotFoundCfg msg -> html msg
-viewNotFound { onBackToHome, path } =
+view :: forall html msg. IDHtml html => ViewCfg msg -> html msg
+view { onBackToHome, path } =
   let
     el =
-
       { notfound: styleNode C.div
           [ "display: flex"
           , "flex-direction: column"

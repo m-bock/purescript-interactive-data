@@ -1,5 +1,5 @@
 module InteractiveData.App.FastForward.Inline
-  ( viewFastForwardInline
+  ( view
   ) where
 
 import InteractiveData.Core.Prelude
@@ -10,12 +10,12 @@ import Data.Array as Array
 import Data.FunctorWithIndex (mapWithIndex)
 import InteractiveData.App.UI.Assets as UI.Assets
 
-viewFastForwardInline
+view
   :: forall html msg
    . IDHtml html
   => Array (DataPath /\ DataTree html msg)
   -> html msg
-viewFastForwardInline items =
+view items =
   let
     el =
       { root: styleNode C.div
@@ -26,10 +26,8 @@ viewFastForwardInline items =
           , "align-items: center"
           ]
       , spacer: styleNode C.div
-          [ "width: 15px"
-          ]
-      , item: styleNode C.div
-          [ "" ]
+          [ "width: 15px" ]
+      , item: C.div
       , lastItem: styleNode C.div
           [ "flex-grow: 1" ]
       , iconArrow: styleNode C.div
@@ -43,7 +41,6 @@ viewFastForwardInline items =
     itemsCount :: Int
     itemsCount =
       Array.length items
-
   in
     el.root []
       ( mapWithIndex
@@ -70,5 +67,5 @@ viewItem
    . IDHtml html
   => DataPath /\ DataTree html msg
   -> html msg
-viewItem (path /\ DataTree { view }) =
-  withCtx \ctx -> putCtx ctx { path = path } $ view
+viewItem (path /\ DataTree { view: view' }) =
+  withCtx \ctx -> putCtx ctx { path = path } $ view'

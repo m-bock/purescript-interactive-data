@@ -10,8 +10,8 @@ module InteractiveData.DataUIs.Int
 import InteractiveData.Core.Prelude
 
 import Chameleon as C
-import InteractiveData.UI.NumberInput as UI.NumberInput
-import InteractiveData.UI.Slider as UI.Slider
+import InteractiveData.UI.NumberInput as UINumberInput
+import InteractiveData.UI.Slider as UISlider
 
 -------------------------------------------------------------------------------
 --- Types
@@ -63,13 +63,13 @@ update { min, max } msg _ =
 --- View
 -------------------------------------------------------------------------------
 
-type CfgIntView =
+type CfgView =
   { min :: Int
   , max :: Int
   , step :: Int
   }
 
-view :: forall html. IDHtml html => CfgIntView -> IntState -> html IntMsg
+view :: forall html. IDHtml html => CfgView -> IntState -> html IntMsg
 view
   { min, max, step }
   (IntState value) =
@@ -94,7 +94,7 @@ view
     in
       el.root []
         [ el.slider []
-            [ UI.Slider.view
+            [ UISlider.view
                 { min
                 , max
                 , step
@@ -103,7 +103,7 @@ view
                 }
             ]
         , el.input []
-            [ UI.NumberInput.view
+            [ UINumberInput.view
                 { min
                 , max
                 , step

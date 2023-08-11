@@ -54,13 +54,13 @@ update msg (StringState state) =
 --- View
 -------------------------------------------------------------------------------
 
-type CfgStringView =
+type CfgView =
   { multilineInline :: Boolean
   , multilineStandalone :: Boolean
   , maxLength :: Maybe Int
   }
 
-view :: forall html. IDHtml html => CfgStringView -> StringState -> html StringMsg
+view :: forall html. IDHtml html => CfgView -> StringState -> html StringMsg
 view
   { multilineInline, multilineStandalone, maxLength }
   (StringState state) =

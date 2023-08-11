@@ -16,7 +16,6 @@ import InteractiveData.Core.Types.DataTree (DataTree(..), DataTreeChildren(..))
 dataPathFromStrings :: forall srf msg. Array String -> DataTree srf msg -> Maybe DataPath
 dataPathFromStrings = loop []
   where
-
   loop :: Array DataPathSegment -> Array String -> DataTree srf msg -> Maybe (Array DataPathSegment)
   loop accum strPath (DataTree { children }) =
     let
