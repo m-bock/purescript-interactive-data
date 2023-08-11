@@ -146,7 +146,7 @@ const main = () => {
   cp.execSync(`git commit -m "v${version}"`, {
     cwd: tgtRepoDir,
   });
-  cp.execSync(`git tag v${version}`, { cwd: tgtRepoDir });
+  cp.execSync(`git tag v${version}-${extra}`, { cwd: tgtRepoDir });
 };
 
 main();
