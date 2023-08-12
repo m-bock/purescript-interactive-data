@@ -17,7 +17,8 @@ type Sample =
       { firstName :: String
       , lastName :: String
       , size :: Number
-      , userId :: UserID
+      , userId1 :: UserID
+      , userId2 :: UserID
       , age :: Int
       }
   , meta ::
@@ -51,7 +52,8 @@ sampleDataUi = ID.record_
             { min: 0.0
             , max: 100.0
             }
-        , userId: userId_
+        , userId1: userId_
+        , userId2: userId_
         , age: ID.int
             { text: Just "The Age"
             , min: 0

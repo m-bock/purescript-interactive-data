@@ -81,7 +81,6 @@ footerRoot { errors, viewError, isExpanded, onChangeIsExpanded } =
             , "transition: max-height 100ms ease-in-out"
             , "padding-left: 5px"
             , "padding-right: 5px"
-
             ]
           <>
             if isExpanded then
@@ -132,18 +131,23 @@ footerViewError
   -> DataError
   -> html msg
 footerViewError { viewDataPath } (DataError dataPath errorCase_) = withCtx \_ ->
-  UICard.view
-    UICard.defaultViewOpt
-      { viewCaption =
-          if Array.null dataPath then Nothing
-          else Just $
-            viewDataPath dataPath
-      , viewBody = Just
-          $ C.text
-          $ printErrorCase errorCase_
-      , backgroundColor = "#ffd4bc"
-      , borderColor = "#ffb2b2"
-      }
+  let
+    el = { root: styleNode C.div [ "margin-bottom: 5px" ] }
+  in
+    el.root []
+      [ UICard.view
+          UICard.defaultViewOpt
+            { viewCaption =
+                if Array.null dataPath then Nothing
+                else Just $
+                  viewDataPath dataPath
+            , viewBody = Just
+                $ C.text
+                $ printErrorCase errorCase_
+            , backgroundColor = "#ffd4bc"
+            , borderColor = "#ffb2b2"
+            }
+      ]
 
 printErrorCase :: DataErrorCase -> String
 printErrorCase = case _ of

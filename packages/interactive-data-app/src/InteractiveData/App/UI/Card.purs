@@ -12,6 +12,7 @@ type ViewCfg (html :: Type -> Type) msg =
   { viewCaption :: Maybe (html msg)
   , viewSubCaption :: Maybe (html msg)
   , viewBody :: Maybe (html msg)
+  , viewFooter :: Maybe (html msg)
   , backgroundColor :: String
   , borderColor :: String
   }
@@ -21,6 +22,7 @@ defaultViewOpt =
   { viewCaption: Nothing
   , viewSubCaption: Nothing
   , viewBody: Nothing
+  , viewFooter: Nothing
   , backgroundColor: "#f8f8f8"
   , borderColor: "#ddd"
   }
@@ -30,7 +32,14 @@ view
    . IDHtml html
   => ViewCfg html msg
   -> html msg
-view { viewCaption, viewSubCaption, viewBody, backgroundColor, borderColor } =
+view
+  { viewCaption
+  , viewSubCaption
+  , viewBody
+  , viewFooter
+  , backgroundColor
+  , borderColor
+  } =
   let
     el =
 
@@ -57,10 +66,13 @@ view { viewCaption, viewSubCaption, viewBody, backgroundColor, borderColor } =
           , "box-sizing: border-box"
           ]
       , body: styleNode C.div
-          [ "padding-left: 5px"
-          , "padding-right: 5px"
+          [ "padding: 5px"
           , "margin-top: 10px"
           , "box-sizing: border-box"
+          ]
+      , footer: styleNode C.div
+          [ "border-top: 1px solid " <> borderColor
+          , "padding: 5px"
           ]
       }
   in
@@ -81,6 +93,12 @@ view { viewCaption, viewSubCaption, viewBody, backgroundColor, borderColor } =
           Just viewBody' ->
             el.body []
               [ viewBody' ]
+          Nothing ->
+            C.noHtml
+      , case viewFooter of
+          Just viewFooter' ->
+            el.footer []
+              [ viewFooter' ]
           Nothing ->
             C.noHtml
       ]

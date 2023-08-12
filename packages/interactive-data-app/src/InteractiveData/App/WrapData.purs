@@ -8,9 +8,12 @@ import InteractiveData.Core.Prelude
 
 import Chameleon as C
 import Chameleon.Transformers.OutMsg.Class (fromOutHtml)
+import Data.Array (mapMaybe)
 import Data.Array as Array
 import Data.Array.NonEmpty (NonEmptyArray)
+import Data.Array.NonEmpty as NEA
 import Data.Tuple (fst)
+import DataMVC.Types.DataError (DataError(..))
 import InteractiveData.App.UI.ActionButton as UIActionButton
 import InteractiveData.App.UI.Card as UICard
 import InteractiveData.App.UI.DataLabel as UIDataLabel
@@ -102,7 +105,6 @@ viewStandalone { viewContent, actions, typeName } =
             , "grid-area: b"
             ]
         }
-
     in
       el.data_
         []
@@ -122,7 +124,7 @@ viewStandalone { viewContent, actions, typeName } =
         ]
 
 viewInline :: forall html msg. IDHtml html => ViewDataCfg html msg -> html msg
-viewInline { viewContent, typeName, text } =
+viewInline { viewContent, typeName, text, error } =
   withCtx \ctx ->
     let
       el =
@@ -152,7 +154,35 @@ viewInline { viewContent, typeName, text } =
             , "min-width: 120px"
             , "display: grid"
             ]
+        , content: styleNode C.div
+            [ ""
+            ]
+        , errors: styleNode C.div
+            [ "color: red"
+            , "display: flex"
+            , "flex-direction: column"
+            , "gap: 3px"
+            ]
+        , error: styleNode C.div
+            [ "font-size: 11px" ]
         }
+
+      filteredErrors :: Array DataErrorCase
+      filteredErrors =
+        error
+          # either NEA.toArray (const [])
+          # mapMaybe
+              ( \(DataError path errorCase) ->
+                  if predPath path then Just errorCase
+                  else Nothing
+              )
+
+      predPath :: DataPath -> Boolean
+      predPath dataPath = dataPath == []
+
+      showErrors :: Boolean
+      showErrors =
+        Array.length filteredErrors > 0
 
       typeRow :: html msg
       typeRow =
@@ -183,7 +213,22 @@ viewInline { viewContent, typeName, text } =
                           }
                       ]
               , viewSubCaption = Just typeRow
-              , viewBody = Just viewContent
+              , viewBody = Just $ C.div []
+                  [ el.content []
+                      [ viewContent ]
+                  ]
+              , viewFooter =
+                  if showErrors then
+                    Just $
+                      el.errors []
+                        ( filteredErrors
+                            # map \error' ->
+                                el.error []
+                                  [ C.text $ printErrorCase error' ]
+                        )
+                  else
+                    Nothing
+
               }
         ]
 
@@ -355,3 +400,12 @@ dataUiCtx
    . IDHtml html
   => DataUICtx (IDSurface html) WrapMsg WrapState
 dataUiCtx = DataUICtx { wrap: dataUiInterface }
+
+--------------------------------------------------------------------------------
+--- Util
+--------------------------------------------------------------------------------
+
+printErrorCase :: DataErrorCase -> String
+printErrorCase = case _ of
+  DataErrNotYetDefined -> "Value not yet defined"
+  DataErrMsg msg -> msg
