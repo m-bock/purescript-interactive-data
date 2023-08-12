@@ -1,7 +1,7 @@
 module InteractiveData.App.WrapApp
-  ( AppMsg
-  , AppState
-  , AppSelfMsg
+  ( AppMsg(..)
+  , AppState(..)
+  , AppSelfMsg(..)
   , wrapApp
   ) where
 

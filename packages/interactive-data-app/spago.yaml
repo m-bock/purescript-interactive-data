@@ -11,6 +11,7 @@ package:
     - newtype
     - ordered-collections
     - prelude
+    - routing-duplex
     - strings
     - these
     - tuples
