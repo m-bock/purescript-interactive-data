@@ -1,15 +1,23 @@
 export PATH := "node_modules/.bin:" + env_var('PATH')
 
-build-ide:
-    spago build --json-errors | node scripts/filter-warnings.js
-
 build:
     spago build
 
 build-strict:
     spago build --json-errors | node scripts/filter-warnings.js
 
-ci: clean format gen build build-strict dist-examples check-git-clean
+
+mk-single-pkg:
+    node scripts/mk-single-pkg.js
+
+install-git-hooks:
+    rm -rf .git/hooks
+    ln -s ../git-hooks .git/hooks
+
+lint:
+    node scripts/lint.js
+
+# Dist
 
 dist-examples:
     #!/usr/bin/env bash
@@ -24,14 +32,43 @@ dist-examples:
         parcel build --dist-dir dist/$main_dir/$name --public-url /$main_dir/$name/ $dir/index.html ; \
     done
 
-run-dist:
-    http-server dist
+# Fix
 
 format:
     purs-tidy format-in-place "packages/*/src/**/*.purs"
     purs-tidy format-in-place "packages/*/test/**/*.purs"
     purs-tidy format-in-place "demo/src/**/*.purs"
     purs-tidy format-in-place "demo/test/**/*.purs"
+
+# Dev
+
+dev: clean-parcel
+    #!/bin/bash
+    export SAMPLE=SimpleHalogen
+    parcel demo/static/index.html
+
+run-example: build clean-parcel
+    #!/bin/bash
+    FILE=`mktemp`
+    node scripts/run-example.js $FILE
+    export SAMPLE=`cat $FILE`
+    echo "Starting $SAMPLE"
+    parcel demo/src/Demo/Samples/$SAMPLE/index.html
+
+run-dist:
+    http-server dist
+
+# Clean
+
+clean: clean-parcel clean-purs
+
+clean-purs:
+    rm -rf .spago output
+
+clean-parcel:
+    rm -rf .parcel-cache
+
+# Generate
 
 gen: gen-graph gen-readme gen-assets
 
@@ -48,41 +85,12 @@ gen-assets:
       --dstPath packages/interactive-data-app/src/InteractiveData/App/UI/Assets \
       --baseModule 'InteractiveData.App.UI.Assets'
 
-dev: clean-parcel
-    #!/bin/bash
-    export SAMPLE=SimpleHalogen
-    parcel demo/static/index.html
-
-run-example: build clean-parcel
-    #!/bin/bash
-    FILE=`mktemp`
-    node scripts/run-example.js $FILE
-    export SAMPLE=`cat $FILE`
-    echo "Starting $SAMPLE"
-    parcel demo/src/Demo/Samples/$SAMPLE/index.html
-
-clean: clean-parcel clean-purs
-
-clean-purs:
-    rm -rf .spago output
-
-clean-parcel:
-    rm -rf .parcel-cache
-
 purs-docs:
     #!/bin/bash
     shopt -s globstar;
     purs docs $(spago sources)
 
-check-git-clean:
-    [ "" = "$(git status --porcelain)" ]
-
-mk-single-pkg:
-    node scripts/mk-single-pkg.js
-
-install-git-hooks:
-    rm -rf .git/hooks
-    ln -s ../git-hooks .git/hooks
+# Fix
 
 suggest-list:
     spago build --json-errors | node scripts/filter-warnings.js | ps-suggest --list
@@ -90,8 +98,17 @@ suggest-list:
 suggest-apply:
     spago build --json-errors | node scripts/filter-warnings.js | ps-suggest --apply
 
-lint:
-    node scripts/lint.js
+# CI
+
+ci: clean format gen build build-strict dist-examples check-git-clean
+
+check-git-clean:
+    [ "" = "$(git status --porcelain)" ]
+
+# IDE
+
+build-ide:
+    spago build --json-errors | node scripts/filter-warnings.js
 
 open-all-files:
     code $(node scripts/modules.js)

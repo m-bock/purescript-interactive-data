@@ -1,6 +1,8 @@
 module InteractiveData.DataUIs.Variant
-  ( variant_
+  ( mkSurface
   , module Export
+  , variant_
+  , view
   ) where
 
 import InteractiveData.Core.Prelude
@@ -77,6 +79,34 @@ view { viewCase, mkMsg, caseKey, caseKeys } =
                   viewCase
           ]
 
+mkSurface :: forall html msg. IDHtml html => ViewArgs (IDSurface html) msg -> IDSurface html msg
+mkSurface opts =
+  IDSurface \(ctx :: IDSurfaceCtx) ->
+    let
+      opts' :: ViewArgs html _
+      opts' = opts
+        { viewCase = opts.viewCase
+            # runIdSurface ctx
+            # un DataTree
+            # _.view
+        }
+
+      children :: DataTreeChildren html _
+      children = Case
+        (un CaseKey opts.caseKey /\ runIdSurface ctx opts.viewCase)
+
+    in
+      DataTree
+        { view: view opts'
+        , children
+        , actions: dataActions
+            { caseKey: opts.caseKey
+            , caseKeys: opts.caseKeys
+            , mkMsg: opts.mkMsg
+            }
+        , meta: Nothing
+        }
+
 variant_
   :: forall datauis html @initsym rcase rmsg rsta r
    . DataUiVariant datauis WrapMsg WrapState (IDSurface html) initsym rcase rmsg rsta r
@@ -93,33 +123,7 @@ variant_ dataUis =
   V.dataUiVariant
     dataUis
     (Proxy :: Proxy initsym)
-    { view: \(opts :: ViewArgs (IDSurface html) _) ->
-        IDSurface \(ctx :: IDSurfaceCtx) ->
-          let
-            opts' :: ViewArgs html _
-            opts' = opts
-              { viewCase = opts.viewCase
-                  # runIdSurface ctx
-                  # un DataTree
-                  # _.view
-              }
-
-            children :: DataTreeChildren html _
-            children = Case
-              (un CaseKey opts.caseKey /\ runIdSurface ctx opts.viewCase)
-
-          in
-            DataTree
-              { view: view opts'
-              , children
-              , actions: dataActions
-                  { caseKey: opts.caseKey
-                  , caseKeys: opts.caseKeys
-                  , mkMsg: opts.mkMsg
-                  }
-              , meta: Nothing
-              }
-
+    { view: mkSurface
     }
 
 indexMod :: forall a. Int -> Array a -> a

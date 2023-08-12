@@ -1,5 +1,4 @@
 import * as fs from "fs";
-import * as cp from "child_process";
 
 const getStdin = async () => {
   const data = await fs.readFileSync(0, "utf-8");
@@ -25,8 +24,19 @@ const main = async () => {
     warnings: warningsFiltered,
   };
 
-  console.log("Filtered warnings:");
   console.log(JSON.stringify(problemsFiltered));
+
+  console.error(``)
+
+  for (const warning of problemsFiltered.warnings) {
+    console.error(`WARN  ${warning.filename}:${warning.position.startLine}:${warning.position.startColumn}`);
+  }
+
+  for (const error of problemsFiltered.errors) {
+    console.error(`ERROR ${error.filename}:${error.position.startLine}:${error.position.startColumn}`);
+  }
+
+  console.error(``)
 
   console.error(`Errors: ${problemsFiltered.errors.length}`);
   console.error(`Warnings: ${problemsFiltered.warnings.length}`);
