@@ -100,7 +100,10 @@ suggest-apply:
 
 # CI
 
-ci: clean format gen build build-strict dist-examples check-git-clean
+ci_: format gen build build-strict dist-examples check-git-clean
+
+ci: clean
+    just ci_
 
 check-git-clean:
     [ "" = "$(git status --porcelain)" ]

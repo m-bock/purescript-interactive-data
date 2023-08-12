@@ -2,19 +2,15 @@ package:
   dependencies:
     - arrays
     - chameleon
-    - chameleon-styled
-    - chameleon-transformers
     - data-mvc
     - either
     - interactive-data-app
     - interactive-data-core
-    - maybe
     - mvc
     - newtype
     - partial
     - prelude
     - strings
-    - tuples
     - variant
   name: interactive-data-datauis
   test:
