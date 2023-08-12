@@ -9,7 +9,7 @@ import Prelude
 
 import Chameleon (class Html)
 import Data.Identity (Identity(..))
-import Data.Maybe (Maybe(..))
+import Data.Maybe (Maybe)
 import Data.Newtype (un)
 import DataMVC.Types (DataResult, DataUI, DataUICtx(..), DataUiInterface(..))
 import DataMVC.Types.DataUI (runDataUi)
