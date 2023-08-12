@@ -17,6 +17,9 @@ install-git-hooks:
 lint:
     node scripts/lint.js
 
+install:
+    npm ci
+
 # Dist
 
 dist-examples:
@@ -100,11 +103,19 @@ suggest-apply:
 
 # CI
 
-ci_: format gen build build-strict dist-examples check-git-clean
+ci_: install format gen build build-strict dist-examples check-git-clean
 
 ci: clean
     just ci_
 
+ci-tmp:
+    HERE=$(pwd); \
+    DIR=$(mktemp -d); \
+    echo $DIR; \
+    cd $DIR; \
+    git clone $HERE .; \
+    nix develop --command just ci
+    
 check-git-clean:
     [ "" = "$(git status --porcelain)" ]
 
