@@ -141,14 +141,16 @@ actions =
 -------------------------------------------------------------------------------
 
 type CfgInt =
-  { min :: Int
+  { text :: Maybe String
+  , min :: Int
   , max :: Int
   , step :: Int
   }
 
 defaultCfgInt :: CfgInt
 defaultCfgInt =
-  { min: -100
+  { text: Nothing
+  , min: -100
   , max: 100
   , step: 1
   }
@@ -173,6 +175,7 @@ int opt =
             , actions
             , children: Fields []
             , meta: Nothing
+            , text: cfg.text
             }
       , extract
       , update: update (pick cfg)

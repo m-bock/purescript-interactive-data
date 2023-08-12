@@ -149,13 +149,15 @@ actions =
 -------------------------------------------------------------------------------
 
 type CfgColor =
-  { lightenStep :: Int
+  { text :: Maybe String
+  , lightenStep :: Int
   , darkenStep :: Int
   }
 
 defaultCfgColor :: CfgColor
 defaultCfgColor =
-  { lightenStep: 10
+  { text: Nothing
+  , lightenStep: 10
   , darkenStep: 10
   }
 
@@ -179,6 +181,7 @@ color opt =
             , actions
             , children: Fields []
             , meta: Nothing
+            , text: cfg.text
             }
       , extract
       , update: update cfg

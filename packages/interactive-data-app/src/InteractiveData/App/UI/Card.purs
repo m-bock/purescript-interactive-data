@@ -1,6 +1,5 @@
 module InteractiveData.App.UI.Card
   ( ViewCfg
-  , ViewOpt
   , defaultViewOpt
   , view
   ) where
@@ -10,20 +9,18 @@ import InteractiveData.Core.Prelude
 import Chameleon as C
 
 type ViewCfg (html :: Type -> Type) msg =
-  { viewBody :: html msg
-  }
-
-type ViewOpt (html :: Type -> Type) msg =
   { viewCaption :: Maybe (html msg)
   , viewSubCaption :: Maybe (html msg)
+  , viewBody :: Maybe (html msg)
   , backgroundColor :: String
   , borderColor :: String
   }
 
-defaultViewOpt :: forall html msg. ViewOpt html msg
+defaultViewOpt :: forall html msg. ViewCfg html msg
 defaultViewOpt =
   { viewCaption: Nothing
   , viewSubCaption: Nothing
+  , viewBody: Nothing
   , backgroundColor: "#f8f8f8"
   , borderColor: "#ddd"
   }
@@ -32,9 +29,8 @@ view
   :: forall html msg
    . IDHtml html
   => ViewCfg html msg
-  -> ViewOpt html msg
   -> html msg
-view { viewBody } { viewCaption, viewSubCaption, backgroundColor, borderColor } =
+view { viewCaption, viewSubCaption, viewBody, backgroundColor, borderColor } =
   let
     el =
 
@@ -57,7 +53,7 @@ view { viewBody } { viewCaption, viewSubCaption, backgroundColor, borderColor } 
           ]
       , subCaption: styleNode C.div
           [ "padding: 5px"
-          , "height: 25px"
+          , "height: 35px"
           , "box-sizing: border-box"
           ]
       , body: styleNode C.div
@@ -71,14 +67,21 @@ view { viewBody } { viewCaption, viewSubCaption, backgroundColor, borderColor } 
     el.card []
       [ case viewCaption of
           Just viewCaption' ->
-            el.caption [] [ viewCaption' ]
+            el.caption []
+              [ viewCaption' ]
           Nothing ->
             C.noHtml
       , case viewSubCaption of
           Just viewSubCaption' ->
-            el.subCaption [] [ viewSubCaption' ]
+            el.subCaption []
+              [ viewSubCaption' ]
           Nothing ->
             C.noHtml
-      , el.body []
-          [ viewBody ]
+      , case viewBody of
+          Just viewBody' ->
+            el.body []
+              [ viewBody' ]
+          Nothing ->
+            C.noHtml
       ]
+

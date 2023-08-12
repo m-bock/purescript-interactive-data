@@ -9,6 +9,7 @@ import Prelude
 
 import Data.Array.NonEmpty (NonEmptyArray)
 import Data.Bifunctor (lmap)
+import Data.Maybe (Maybe)
 import Data.Newtype (class Newtype)
 import DataMVC.Types (DataPath, DataUI(..), DataUiInterface(..))
 import DataMVC.Types.DataError (DataError)
@@ -22,7 +23,8 @@ newtype IDSurface html msg =
   IDSurface (IDSurfaceCtx -> DataTree html msg)
 
 type IDSurfaceCtx =
-  { path :: DataPath }
+  { path :: DataPath
+  }
 
 --------------------------------------------------------------------------------
 --- Destructors

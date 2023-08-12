@@ -1,33 +1,24 @@
 module InteractiveData.DataUIs.Record
-  ( mkSegmentStatic
+  ( CfgRecord
+  , mkSegmentStatic
   , mkSurface
   , module Export
-  , record'
+  , record
   , record_
   ) where
 
-import Prelude
+import InteractiveData.Core.Prelude
 
 import Chameleon as C
-import Chameleon.Styled (styleNode)
-import Chameleon.Transformers.Ctx.Class (putCtx, withCtx)
 import Data.Array (mapWithIndex)
 import Data.Array as Array
-import Data.Maybe (Maybe(..))
-import Data.Tuple.Nested (type (/\), (/\))
 import DataMVC.Record.DataUI (class DataUiRecord)
 import DataMVC.Record.DataUI as R
-import DataMVC.Types (DataPathSegment(..), DataPathSegmentField(..), DataUI)
 import InteractiveData.App.FastForward.Inline as FastForwardInline
-import InteractiveData.Core (class IDHtml, DataTree(..), DataTreeChildren(..), IDSurface(..), ViewMode(..))
 import InteractiveData.Core.Types.DataTree as DT
 import InteractiveData.Core.Types.IDSurface (runIdSurface)
 import MVC.Record (RecordMsg, RecordState) as Export
 import MVC.Record (RecordMsg, RecordState, ViewResult)
-
-type DataUiRecordCfg =
-  { mkSegment :: Int -> String -> DataPathSegmentField
-  }
 
 view
   :: forall html msg
@@ -98,10 +89,12 @@ viewRow _ (seg /\ tree) = withCtx \ctx ->
 mkSurface
   :: forall html msg
    . IDHtml html
-  => { mkSegment :: Int -> String -> DataPathSegmentField }
+  => { text :: Maybe String
+     , mkSegment :: Int -> String -> DataPathSegmentField
+     }
   -> Array (ViewResult (IDSurface html) msg)
   -> IDSurface html msg
-mkSurface { mkSegment } opts = IDSurface \ctx ->
+mkSurface { mkSegment, text } opts = IDSurface \ctx ->
   let
     fields :: Array (DataPathSegmentField /\ DataTree html msg)
     fields = opts # mapWithIndex
@@ -122,19 +115,39 @@ mkSurface { mkSegment } opts = IDSurface \ctx ->
       , children
       , actions: []
       , meta: Nothing
+      , text
       }
 
-record'
-  :: forall datauis html fm fs rmsg rsta r
+type CfgRecord =
+  { text :: Maybe String
+  , mkSegment :: Int -> String -> DataPathSegmentField
+  }
+
+defaultCfgRecord :: CfgRecord
+defaultCfgRecord =
+  { text: Nothing
+  , mkSegment: mkSegmentStatic
+  }
+
+record
+  :: forall opt datauis html fm fs rmsg rsta r
    . DataUiRecord datauis fm fs (IDSurface html) rmsg rsta r
   => IDHtml html
-  => DataUiRecordCfg
+  => OptArgs CfgRecord opt
+  => opt
   -> Record datauis
   -> DataUI (IDSurface html) fm fs (RecordMsg rmsg) (RecordState rsta) (Record r)
-record' { mkSegment } =
-  R.dataUiRecord
-    { viewEntries: mkSurface { mkSegment }
-    }
+record opt =
+  let
+    cfg :: CfgRecord
+    cfg = getAllArgs defaultCfgRecord opt
+  in
+    R.dataUiRecord
+      { viewEntries: mkSurface
+          { mkSegment: cfg.mkSegment
+          , text: cfg.text
+          }
+      }
 
 record_
   :: forall datauis html fm fs rmsg rsta r
@@ -142,9 +155,7 @@ record_
   => IDHtml html
   => Record datauis
   -> DataUI (IDSurface html) fm fs (RecordMsg rmsg) (RecordState rsta) (Record r)
-record_ = record'
-  { mkSegment: mkSegmentStatic
-  }
+record_ = record {}
 
 mkSegmentStatic :: Int -> String -> DataPathSegmentField
 mkSegmentStatic _ = SegStaticKey

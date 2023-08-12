@@ -24,12 +24,14 @@ import InteractiveData.DataUIs.Int
 import InteractiveData.DataUIs.Record
   ( RecordMsg
   , RecordState
+  , record
   , record_
   ) as Export
 
 import InteractiveData.DataUIs.Variant
   ( VariantMsg
   , VariantState
+  , variant
   , variant_
   ) as Export
 

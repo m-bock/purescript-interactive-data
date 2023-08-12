@@ -141,14 +141,16 @@ actions =
 -------------------------------------------------------------------------------
 
 type CfgNumber =
-  { min :: Number
+  { text :: Maybe String
+  , min :: Number
   , max :: Number
   , step :: Number
   }
 
 defaultCfgNumber :: CfgNumber
 defaultCfgNumber =
-  { min: -100.0
+  { text: Nothing
+  , min: -100.0
   , max: 100.0
   , step: 1.0
   }
@@ -172,6 +174,7 @@ number opt =
             , actions
             , children: Fields []
             , meta: Nothing
+            , text: cfg.text
             }
       , extract
       , update: update (pick cfg)

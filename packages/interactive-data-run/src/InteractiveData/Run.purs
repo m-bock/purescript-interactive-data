@@ -7,8 +7,9 @@ module InteractiveData.Run
 
 import Prelude
 
+import Chameleon (class Html)
 import Data.Identity (Identity(..))
-import Data.Maybe (Maybe)
+import Data.Maybe (Maybe(..))
 import Data.Newtype (un)
 import DataMVC.Types (DataResult, DataUI, DataUICtx(..), DataUiInterface(..))
 import DataMVC.Types.DataUI (runDataUi)
@@ -17,7 +18,6 @@ import InteractiveData.Core.Types.IDSurface (runIdSurface)
 import InteractiveData.Core.Types.IDViewCtx (defaultViewCtx)
 import InteractiveData.Run.Types.HtmlT (IDHtmlT, runIDHtmlT)
 import MVC.Types (UI)
-import Chameleon (class Html)
 
 run
   :: forall html fm fs msg sta a

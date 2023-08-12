@@ -144,7 +144,8 @@ actions =
 -------------------------------------------------------------------------------
 
 type CfgString msg =
-  { multilineInline :: Boolean
+  { text :: Maybe String
+  , multilineInline :: Boolean
   , multilineStandalone :: Boolean
   , actions :: Array (DataAction msg)
   , maxLength :: Maybe Int
@@ -152,7 +153,8 @@ type CfgString msg =
 
 defaultCfgString :: CfgString StringMsg
 defaultCfgString =
-  { multilineInline: false
+  { text: Nothing
+  , multilineInline: false
   , multilineStandalone: true
   , actions
   , maxLength: Nothing
@@ -178,6 +180,7 @@ string opt =
             , actions
             , children: Fields []
             , meta: Nothing
+            , text: cfg.text
             }
       , extract
       , update

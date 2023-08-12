@@ -1,6 +1,8 @@
 module InteractiveData.DataUIs.Variant
-  ( mkSurface
+  ( CfgVariant
+  , mkSurface
   , module Export
+  , variant
   , variant_
   , view
   ) where
@@ -79,8 +81,14 @@ view { viewCase, mkMsg, caseKey, caseKeys } =
                   viewCase
           ]
 
-mkSurface :: forall html msg. IDHtml html => ViewArgs (IDSurface html) msg -> IDSurface html msg
-mkSurface opts =
+mkSurface
+  :: forall html msg
+   . IDHtml html
+  => { text :: Maybe String
+     }
+  -> ViewArgs (IDSurface html) msg
+  -> IDSurface html msg
+mkSurface { text } opts =
   IDSurface \(ctx :: IDSurfaceCtx) ->
     let
       opts' :: ViewArgs html _
@@ -105,7 +113,41 @@ mkSurface opts =
             , mkMsg: opts.mkMsg
             }
         , meta: Nothing
+        , text
         }
+
+type CfgVariant =
+  { text :: Maybe String
+  }
+
+defaultCfgVariant :: CfgVariant
+defaultCfgVariant = { text: Nothing }
+
+variant
+  :: forall opt datauis html @initsym rcase rmsg rsta r
+   . OptArgs CfgVariant opt
+  => DataUiVariant datauis WrapMsg WrapState (IDSurface html) initsym rcase rmsg rsta r
+  => IDHtml html
+  => opt
+  -> Record datauis
+  -> DataUI
+       (IDSurface html)
+       WrapMsg
+       WrapState
+       (VariantMsg rcase rmsg)
+       (VariantState rsta)
+       (Variant r)
+variant opt dataUis =
+  let
+    cfg :: CfgVariant
+    cfg = getAllArgs defaultCfgVariant opt
+
+  in
+    V.dataUiVariant
+      dataUis
+      (Proxy :: Proxy initsym)
+      { view: mkSurface { text: cfg.text }
+      }
 
 variant_
   :: forall datauis html @initsym rcase rmsg rsta r
@@ -119,12 +161,7 @@ variant_
        (VariantMsg rcase rmsg)
        (VariantState rsta)
        (Variant r)
-variant_ dataUis =
-  V.dataUiVariant
-    dataUis
-    (Proxy :: Proxy initsym)
-    { view: mkSurface
-    }
+variant_ = variant {}
 
 indexMod :: forall a. Int -> Array a -> a
 indexMod idx items =

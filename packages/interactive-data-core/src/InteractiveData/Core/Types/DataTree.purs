@@ -38,6 +38,7 @@ newtype DataTree srf msg = DataTree
   , children :: DataTreeChildren srf msg
   , actions :: Array (DataAction msg)
   , meta :: Maybe TreeMeta
+  , text :: Maybe String
   }
 
 data DataTreeChildren srf msg

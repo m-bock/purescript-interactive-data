@@ -133,14 +133,14 @@ footerViewError
   -> html msg
 footerViewError { viewDataPath } (DataError dataPath errorCase_) = withCtx \_ ->
   UICard.view
-    { viewBody:
-        C.text $ printErrorCase errorCase_
-    }
     UICard.defaultViewOpt
       { viewCaption =
           if Array.null dataPath then Nothing
           else Just $
             viewDataPath dataPath
+      , viewBody = Just
+          $ C.text
+          $ printErrorCase errorCase_
       , backgroundColor = "#ffd4bc"
       , borderColor = "#ffb2b2"
       }

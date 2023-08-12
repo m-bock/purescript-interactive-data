@@ -108,6 +108,7 @@ view view' state@(AppState { selectedPath }) =
       , actions: []
       , children: Fields []
       , meta: Nothing
+      , text: Nothing
       }
 
 viewNotFound

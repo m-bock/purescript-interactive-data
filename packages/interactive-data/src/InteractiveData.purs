@@ -18,10 +18,12 @@ import InteractiveData.DataUIs
 
   , RecordMsg
   , RecordState
+  , record
   , record_
 
   , VariantMsg
   , VariantState
+  , variant
   , variant_
 
   , newtype_
