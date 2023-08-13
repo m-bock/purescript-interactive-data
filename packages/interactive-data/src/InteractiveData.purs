@@ -31,7 +31,7 @@ import InteractiveData.DataUIs
   , variant
   , variant_
 
-  , genericDataUI
+  , generic
   , class GenericDataUI
   , Product
   , type (~)

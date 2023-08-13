@@ -5,7 +5,7 @@ module InteractiveData.DataUIs.Generic
   , Product(..)
   , class GenericDataUI
   , class HlistToRecord
-  , genericDataUI
+  , generic
   , hlistToRecord
   , type (~)
   ) where
@@ -50,7 +50,7 @@ class
     (a :: Type)
   | datauis -> initcase html fm fs datauis msg sta a
   where
-  genericDataUI :: Cfg -> { | datauis } -> DataUI (IDSurface html) fm fs msg sta a
+  generic :: Cfg -> { | datauis } -> DataUI (IDSurface html) fm fs msg sta a
 
 instance
   ( DataUiVariant datauis fm fs (IDSurface html) initcase rcase rmsg rsta r
@@ -68,9 +68,9 @@ instance
     (VariantState rsta)
     a
   where
-  genericDataUI
+  generic
     :: Cfg -> { | datauisHlist } -> DataUI (IDSurface html) fm fs (VariantMsg rcase rmsg) (VariantState rsta) a
-  genericDataUI { typeName } uisHlist =
+  generic { typeName } uisHlist =
     uisHlist
       # hmap MappingHlistToRecord
       # VUI.variant_ @initcase

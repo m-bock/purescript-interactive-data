@@ -147,7 +147,7 @@ customADT
    . ID.GenericDataUI html fm fs "Foo" datauis msg sta CustomADT
   => { | datauis }
   -> DataUI (IDSurface html) fm fs msg sta CustomADT
-customADT = ID.genericDataUI
+customADT = ID.generic
   { typeName: "CustomADT"
   }
 

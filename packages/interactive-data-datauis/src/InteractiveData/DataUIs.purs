@@ -47,7 +47,7 @@ import InteractiveData.DataUIs.Newtype
   ) as Export
 
 import InteractiveData.DataUIs.Generic
-  ( genericDataUI
+  ( generic
   , class GenericDataUI
   , Product
   , type (~)
