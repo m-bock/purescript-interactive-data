@@ -22,6 +22,7 @@ type IDViewCtx =
   , root :: String /\ TreeMeta
   , fullscreen :: Boolean
   , fastForward :: Boolean
+  , showLogo :: Boolean
   }
 
 data ViewMode
@@ -40,6 +41,7 @@ defaultViewCtx { label } =
   , root: label /\ { errored: Right unit, typeName: mempty }
   , fullscreen: true
   , fastForward: true
+  , showLogo: true
   }
 
 --------------------------------------------------------------------------------

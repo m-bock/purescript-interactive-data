@@ -24,6 +24,7 @@ sampleApp =
     { name: "Sample"
     , initData: Nothing
     , fullscreen: false
+    , showLogo: true
     }
     sampleDataUi
 

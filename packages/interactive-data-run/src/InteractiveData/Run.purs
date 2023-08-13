@@ -25,13 +25,14 @@ run
   => { name :: String
      , context :: DataUICtx (IDSurface (IDHtmlT html)) fm fs
      , fullscreen :: Boolean
+     , showLogo :: Boolean
      }
   -> DataUI (IDSurface (IDHtmlT html)) fm fs msg sta a
   -> DataUiInterface html msg sta a
-run { name, context, fullscreen } dataUi =
+run { name, context, fullscreen, showLogo } dataUi =
   dataUi
     # flip runDataUi context
-    # hoistSrf (runHtml { name, fullscreen })
+    # hoistSrf (runHtml { name, fullscreen, showLogo })
 
 getUi
   :: forall html msg sta a
@@ -62,10 +63,10 @@ hoistSrf nat (DataUiInterface itf) = DataUiInterface itf
 runHtml
   :: forall html msg
    . Html html
-  => { name :: String, fullscreen :: Boolean }
+  => { name :: String, fullscreen :: Boolean, showLogo :: Boolean }
   -> IDSurface (IDHtmlT html) msg
   -> html msg
-runHtml { name, fullscreen } =
+runHtml { name, fullscreen, showLogo } =
   let
     runSurface :: (IDSurface (IDHtmlT html)) msg -> (IDHtmlT html) msg
     runSurface = runIdSurface { path: [] } >>> un DataTree >>> _.view
@@ -73,7 +74,9 @@ runHtml { name, fullscreen } =
     viewCtx :: IDViewCtx
     viewCtx =
       (defaultViewCtx { label: name })
-        { fullscreen = fullscreen }
+        { fullscreen = fullscreen
+        , showLogo = showLogo
+        }
 
   in
     runSurface >>> runIDHtmlT viewCtx

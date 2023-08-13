@@ -45,6 +45,7 @@ type ToAppMandatory r =
 type ToAppOptional a r =
   ( initData :: Maybe a
   , fullscreen :: Boolean
+  , showLogo :: Boolean
   | r
   )
 
@@ -52,6 +53,7 @@ defaultToAppCfg :: forall a. Record (ToAppOptional a ())
 defaultToAppCfg =
   { initData: Nothing
   , fullscreen: false
+  , showLogo: true
   }
 
 toApp
@@ -69,7 +71,7 @@ toApp given dataUi =
     cfg :: ToAppCfg a
     cfg = getAllArgsMixed defaultToAppCfg given
 
-    { name, fullscreen, initData } = cfg
+    { name, fullscreen, initData, showLogo } = cfg
 
     interface :: DataUiInterface html (AppMsg (WrapMsg msg)) (AppState (WrapState sta)) a
     interface =
@@ -77,6 +79,7 @@ toApp given dataUi =
         { name
         , context: App.WrapData.dataUiCtx
         , fullscreen
+        , showLogo
         }
         $ App.wrapApp dataUi
 

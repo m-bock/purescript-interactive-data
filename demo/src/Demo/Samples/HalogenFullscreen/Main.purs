@@ -22,6 +22,7 @@ main = do
         { name: "Sample"
         , initData: Nothing
         , fullscreen: true
+        , showLogo: true
         }
         sampleDataUi
 
