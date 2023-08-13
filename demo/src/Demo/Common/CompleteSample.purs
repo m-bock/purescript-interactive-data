@@ -6,34 +6,16 @@ module Demo.Common.CompleteSample
 
 import Prelude
 
+import Data.Argonaut (class EncodeJson)
 import Data.Generic.Rep (class Generic)
 import Data.Maybe (Maybe(..))
+import Data.Show.Generic (genericShow)
 import Demo.Common.Features.CustomDataUI.Color (Color, color)
 import Demo.Common.Features.Refinement.UserID (UserID, userId_)
 import Demo.Common.VariantJ (VariantJ)
 import InteractiveData (class IDHtml, DataUI, IDSurface)
 import InteractiveData as ID
-
---------------------------------------------------------------------------------
---- Custom ADT
---------------------------------------------------------------------------------
-
-data CustomADT
-  = Foo Int
-  | Bar String
-
-derive instance Generic CustomADT _
-
-customADT
-  :: forall html fm fs datauis msg sta
-   . ID.GenericDataUI html fm fs "Foo" datauis msg sta CustomADT
-  => { | datauis }
-  -> DataUI (IDSurface html) fm fs msg sta CustomADT
-customADT = ID.genericDataUI
-  { typeName: "CustomADT"
-  }
-
---------------------------------------------------------------------------------
+import Data.Argonaut.Encode.Generic (genericEncodeJson)
 
 type Sample =
   { user ::
@@ -120,3 +102,30 @@ sampleDataUi = ID.record_
       , textColor: color {}
       }
   }
+
+--------------------------------------------------------------------------------
+--- Custom ADT
+--------------------------------------------------------------------------------
+
+data CustomADT
+  = Foo Int
+  | Bar String
+
+derive instance Generic CustomADT _
+
+instance Show CustomADT where
+  show = genericShow
+
+instance EncodeJson CustomADT where
+  encodeJson = genericEncodeJson
+
+customADT
+  :: forall html fm fs datauis msg sta
+   . ID.GenericDataUI html fm fs "Foo" datauis msg sta CustomADT
+  => { | datauis }
+  -> DataUI (IDSurface html) fm fs msg sta CustomADT
+customADT = ID.genericDataUI
+  { typeName: "CustomADT"
+  }
+
+--------------------------------------------------------------------------------

@@ -16,9 +16,10 @@ import DataMVC.Types (DataUI)
 import DataMVC.Types.DataUI (refineDataUi)
 import DataMVC.Variant.DataUI (class DataUiVariant)
 import Heterogeneous.Mapping (class HMap, class Mapping, hmap)
-import InteractiveData.DataUIs.Record (RecordMsg, RecordState, record_)
-import InteractiveData.DataUIs.Variant as VUI
 import InteractiveData.Core (class IDHtml, IDSurface)
+import InteractiveData.DataUIs.Record (RecordMsg, RecordState, record, record_)
+import InteractiveData.DataUIs.Record as R
+import InteractiveData.DataUIs.Variant as VUI
 import LabeledData.TransformEntry.Transforms (ArgsToRecord, NoTransform)
 import LabeledData.VariantLike.Generic (class GenericVariantLike)
 import LabeledData.VariantLike.Generic as LD
@@ -108,7 +109,7 @@ instance
   mapping
     :: MappingHlistToRecord -> hlist -> DataUI (IDSurface html) fm fs (RecordMsg rmsg) (RecordState rsta) (Record row)
   mapping MappingHlistToRecord hlist =
-    record_ rec
+    record { mode: R.Indices } rec
     where
     rec :: Record datauis
     rec = hlistToRecord (Proxy :: _ 1) hlist

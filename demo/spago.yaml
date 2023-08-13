@@ -2,6 +2,7 @@ package:
   name: interactive-data-demo
   dependencies:
     - argonaut
+    - argonaut-generic
     - chameleon
     - chameleon-halogen
     - chameleon-react-basic

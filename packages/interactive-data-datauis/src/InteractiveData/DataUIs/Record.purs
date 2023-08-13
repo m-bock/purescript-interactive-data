@@ -1,6 +1,6 @@
 module InteractiveData.DataUIs.Record
   ( CfgRecord
-  , mkSegmentStatic
+  , RecordMode(..)
   , mkSurface
   , module Export
   , record
@@ -14,6 +14,7 @@ import Data.Array (mapWithIndex)
 import Data.Array as Array
 import DataMVC.Record.DataUI (class DataUiRecord)
 import DataMVC.Record.DataUI as R
+import DataMVC.Types.DataUI (refineDataUi)
 import InteractiveData.App.FastForward.Inline as FastForwardInline
 import InteractiveData.Core.Types.DataTree as DT
 import InteractiveData.Core.Types.IDSurface (runIdSurface)
@@ -118,15 +119,17 @@ mkSurface { mkSegment, text } opts = IDSurface \ctx ->
       , text
       }
 
+data RecordMode = Keys | Indices
+
 type CfgRecord =
   { text :: Maybe String
-  , mkSegment :: Int -> String -> DataPathSegmentField
+  , mode :: RecordMode
   }
 
 defaultCfgRecord :: CfgRecord
 defaultCfgRecord =
   { text: Nothing
-  , mkSegment: mkSegmentStatic
+  , mode: Keys
   }
 
 record
@@ -137,17 +140,27 @@ record
   => opt
   -> Record datauis
   -> DataUI (IDSurface html) fm fs (RecordMsg rmsg) (RecordState rsta) (Record r)
-record opt =
+record opt dataUis =
   let
     cfg :: CfgRecord
     cfg = getAllArgs defaultCfgRecord opt
   in
     R.dataUiRecord
       { viewEntries: mkSurface
-          { mkSegment: cfg.mkSegment
+          { mkSegment: case cfg.mode of
+              Keys -> mkSegmentKey
+              Indices -> mkSegmentIndex
           , text: cfg.text
           }
       }
+      dataUis
+      # refineDataUi
+          { typeName: case cfg.mode of
+              Keys -> "Record"
+              Indices -> "Arguments"
+          , refine: Right
+          , unrefine: identity
+          }
 
 record_
   :: forall datauis html fm fs rmsg rsta r
@@ -157,6 +170,8 @@ record_
   -> DataUI (IDSurface html) fm fs (RecordMsg rmsg) (RecordState rsta) (Record r)
 record_ = record {}
 
-mkSegmentStatic :: Int -> String -> DataPathSegmentField
-mkSegmentStatic _ = SegStaticKey
+mkSegmentKey :: Int -> String -> DataPathSegmentField
+mkSegmentKey _ = SegStaticKey
 
+mkSegmentIndex :: Int -> String -> DataPathSegmentField
+mkSegmentIndex ix _ = SegStaticIndex ix
