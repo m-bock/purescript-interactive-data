@@ -26,7 +26,12 @@ import InteractiveData.DataUIs
   , variant
   , variant_
 
+  , genericDataUI
+  , class GenericDataUI
+
   , newtype_
+
+  , maybe
   ) as Export
 
 import InteractiveData.Run

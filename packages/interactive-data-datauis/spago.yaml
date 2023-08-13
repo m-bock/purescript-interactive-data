@@ -8,6 +8,7 @@ package:
     - interactive-data-app
     - interactive-data-core
     - labeled-data
+    - maybe
     - mvc
     - newtype
     - partial

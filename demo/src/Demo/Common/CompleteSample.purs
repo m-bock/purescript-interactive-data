@@ -1,16 +1,40 @@
 module Demo.Common.CompleteSample
-  ( Sample
+  ( CustomADT(..)
+  , Sample
   , sampleDataUi
-  ) where
+  )
+  where
 
 import Prelude
 
+import Data.Generic.Rep (class Generic)
 import Data.Maybe (Maybe(..))
 import Demo.Common.Features.CustomDataUI.Color (Color, color)
 import Demo.Common.Features.Refinement.UserID (UserID, userId_)
 import Demo.Common.VariantJ (VariantJ)
 import InteractiveData (class IDHtml, DataUI, IDSurface)
 import InteractiveData as ID
+
+--------------------------------------------------------------------------------
+--- Custom ADT
+--------------------------------------------------------------------------------
+
+data CustomADT
+  = Foo Int
+  | Bar String
+
+derive instance Generic CustomADT _
+
+customADT
+  :: forall html fm fs datauis msg sta
+   . ID.GenericDataUI html fm fs "Foo" datauis msg sta CustomADT
+  => { | datauis }
+  -> DataUI (IDSurface html) fm fs msg sta CustomADT
+customADT = ID.genericDataUI
+  { typeName: "CustomADT"
+  }
+
+--------------------------------------------------------------------------------
 
 type Sample =
   { user ::
@@ -20,6 +44,8 @@ type Sample =
       , userId1 :: UserID
       , userId2 :: UserID
       , age :: Int
+      , decription :: Maybe String
+      , custom :: CustomADT
       }
   , meta ::
       { description :: String
@@ -58,6 +84,14 @@ sampleDataUi = ID.record_
             { text: Just "The Age"
             , min: 0
             , max: 150
+            }
+        , decription: ID.maybe
+            { "Just": ID.string_
+            , "Nothing": unit
+            }
+        , custom : customADT
+            { "Foo": ID.int_
+            , "Bar": ID.string_
             }
         }
   , meta: ID.record

@@ -39,3 +39,13 @@ import InteractiveData.DataUIs.Newtype
   ( newtype_
   ) as Export
 
+
+import InteractiveData.DataUIs.Generic
+  ( genericDataUI
+  , class GenericDataUI
+  ) as Export
+
+import InteractiveData.DataUIs.Common
+  ( maybe
+  ) as Export
+
