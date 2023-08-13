@@ -57,7 +57,7 @@ digTrivialTrees
   -> DataTree srf msg
   -> Array (DataPath /\ DataTree srf msg)
 digTrivialTrees path tree@(DataTree { children }) = case children of
-  Case (_ /\ (DataTree { children: Fields [] })) ->
+  Case (_ /\ (DataTree { meta: Just { typeName: "Arguments" }, children: Fields [] })) ->
     [ path /\ tree ]
 
   -- Case
