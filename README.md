@@ -136,6 +136,7 @@ main = do
         { name: "Sample"
         , initData: Nothing
         , fullscreen: true
+        , showLogo: false
         }
         sampleDataUi
 
