@@ -1,15 +1,20 @@
 module InteractiveData.App.Routing
-  ( route
+  ( getRouteIO
   , routeSpec
   ) where
 
 import Prelude
 
 import Data.These (These(..))
+import Effect (Effect)
+import Foreign (unsafeToForeign)
 import InteractiveData.App.WrapApp (AppMsg, AppSelfMsg(..), AppState(..))
 import InteractiveData.Core (IDOutMsg(..))
 import Routing.Duplex (RouteDuplex')
 import Routing.Duplex as RD
+import Routing.PushState (PushStateInterface)
+import Routing.PushState as R
+import Routing.PushState as Routing
 import Type.Proxy (Proxy(..))
 
 type Route =
@@ -56,3 +61,38 @@ routeSpec =
   { mkRoute
   , updateStateFromRoute
   }
+
+getRouteIO :: Effect (RouteIO Route)
+getRouteIO = getRouteIO_ route
+
+--------------------------------------------------------------------------------
+--- Route IO
+--------------------------------------------------------------------------------
+
+type RouteIO route =
+  { pushRoute :: route -> Effect Unit
+  , listen :: (route -> Effect Unit) -> Effect (Effect Unit)
+  }
+
+getRouteIO_ :: forall route. RouteDuplex' route -> Effect (RouteIO route)
+getRouteIO_ routeDuplex = do
+  routeInterface :: PushStateInterface <- Routing.makeInterface
+
+  let
+    pushRoute :: route -> Effect Unit
+    pushRoute route' =
+      routeInterface.pushState
+        (unsafeToForeign {})
+        (RD.print routeDuplex route')
+
+    listen :: (route -> Effect Unit) -> Effect (Effect Unit)
+    listen emitRoute =
+      R.matchesWith
+        (RD.parse routeDuplex)
+        (\_ newRoute -> emitRoute newRoute)
+        routeInterface
+
+  pure
+    { pushRoute
+    , listen
+    }

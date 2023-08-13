@@ -4,13 +4,16 @@ package:
     - chameleon
     - chameleon-transformers
     - data-mvc
+    - effect
     - either
     - foldable-traversable
+    - foreign
     - interactive-data-core
     - maybe
     - newtype
     - ordered-collections
     - prelude
+    - routing
     - routing-duplex
     - strings
     - these

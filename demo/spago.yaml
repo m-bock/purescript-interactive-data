@@ -11,6 +11,7 @@ package:
     - foldable-traversable
     - integers
     - interactive-data
+    - interactive-data-app
     - interactive-data-core
     - maybe
     - newtype

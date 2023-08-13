@@ -47,7 +47,7 @@ view { onChange, value, min, max, step } =
     valueStr = toString value
   in
     el.container []
-      [ C.mapMaybe identity $
+      [ C.fromMaybeMsg $
           el.input
             [ C.type_ "number"
             , C.min $ toNumber $ min
