@@ -19,7 +19,7 @@ import Data.Newtype (class Newtype, over)
 import Data.Ord (class Ord1)
 import Data.Tuple (fst)
 import Data.Tuple.Nested (type (/\), (/\))
-import DataMVC.Types (DataPath, DataPathSegment(..), DataPathSegmentField, DataResult)
+import DataMVC.Types (DataPath, DataPathSegment(..), DataPathSegmentField(..), DataResult)
 import Dodo (Doc)
 import Dodo as Dodo
 import InteractiveData.Core.Types.DataAction (DataAction)
@@ -57,6 +57,9 @@ digTrivialTrees
   -> DataTree srf msg
   -> Array (DataPath /\ DataTree srf msg)
 digTrivialTrees path tree@(DataTree { children }) = case children of
+  Case (_ /\ (DataTree {children: Fields []})) ->
+    [ path /\ tree ]
+  
   -- Case
   Case case_ ->
     let
@@ -66,6 +69,14 @@ digTrivialTrees path tree@(DataTree { children }) = case children of
       newPath = path <> [ SegCase k ]
     in
       [ path /\ tree ] <> digTrivialTrees newPath subTree
+
+  -- Singleton "Arguments"
+  Fields [ SegStaticIndex ix /\ subTree ] ->
+    let
+      newPath :: DataPath
+      newPath = path <> [ SegField $ SegStaticIndex ix ]
+    in
+      digTrivialTrees newPath subTree
 
   -- Leaf
   Fields [] -> [ path /\ tree ]

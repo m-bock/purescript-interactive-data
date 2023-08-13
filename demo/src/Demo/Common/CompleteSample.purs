@@ -73,6 +73,7 @@ sampleDataUi = ID.record_
         , custom: customADT
             { "Foo": ID.int_
             , "Bar": ID.string_
+            , "Baz": ID.number_
             }
         }
   , meta: ID.record
@@ -110,6 +111,7 @@ sampleDataUi = ID.record_
 data CustomADT
   = Foo Int
   | Bar String
+  | Baz Number
 
 derive instance Generic CustomADT _
 
