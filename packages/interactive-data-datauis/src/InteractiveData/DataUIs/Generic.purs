@@ -17,7 +17,7 @@ import DataMVC.Types.DataUI (refineDataUi)
 import DataMVC.Variant.DataUI (class DataUiVariant)
 import Heterogeneous.Mapping (class HMap, class Mapping, hmap)
 import InteractiveData.Core (class IDHtml, IDSurface)
-import InteractiveData.DataUIs.Record (RecordMsg, RecordState, record, record_)
+import InteractiveData.DataUIs.Record (RecordMsg, RecordState, record)
 import InteractiveData.DataUIs.Record as R
 import InteractiveData.DataUIs.Variant as VUI
 import LabeledData.TransformEntry.Transforms (ArgsToRecord, NoTransform)
