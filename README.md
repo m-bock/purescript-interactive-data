@@ -11,7 +11,6 @@ Composable UIs for interactive data.
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-- [Discaimer ⚠](#discaimer-)
 - [Live Demo](#live-demo)
 - [Features](#features)
 - [Use cases](#use-cases)
@@ -25,13 +24,10 @@ Composable UIs for interactive data.
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-## Discaimer ⚠
-
-This library is in early development and the API is not stable yet. Things may not yet work as expected.
 
 ## Live Demo
 
-<img src="https://github.com/thought2/assets/blob/ae1e971611b02c4a6bcd42124e4e1d43aa2e537e/interactive-data/demo1.png" width="200">
+<img src="https://github.com/thought2/assets/blob/744109caf1feb639b6aff8388f4598e66a3f66bd/interactive-data/demo2.png" width="400">
 
 [Halogen Fullscreen](https://thought2.github.io/purescript-interactive-data/HalogenFullscreen)
 
