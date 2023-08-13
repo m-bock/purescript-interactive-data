@@ -1,5 +1,14 @@
 workspace:
   extra_packages:
+    chameleon:
+      git: "https://github.com/thought2/purescript-chameleon.git"
+      ref: v1.0.0
+    chameleon-react-basic:
+      git: "https://github.com/thought2/purescript-chameleon-react-basic.git"
+      ref: v1.0.0
+    chameleon-halogen:
+      git: "https://github.com/thought2/purescript-chameleon-halogen.git"
+      ref: v1.0.0
     chameleon-styled:
       git: "https://github.com/thought2/purescript-chameleon-styled.git"
       ref: v2.0.0-rc.2
