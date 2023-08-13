@@ -23,7 +23,7 @@ view items =
           , "flex-direction: row"
           , "margin-bottom: 20px"
           , "justify-content: space-between"
-          , "align-items: center"
+          , "align-items: start"
           ]
       , spacer: styleNode C.div
           [ "width: 15px" ]
