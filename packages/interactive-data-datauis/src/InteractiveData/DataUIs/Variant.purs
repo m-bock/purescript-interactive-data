@@ -16,7 +16,6 @@ import Data.Variant (Variant)
 import DataMVC.Variant.DataUI (class DataUiVariant)
 import DataMVC.Variant.DataUI as V
 import InteractiveData.App.UI.DataLabel as UIDataLabel
-import InteractiveData.App.WrapData (WrapMsg, WrapState)
 import InteractiveData.Core.Types.IDSurface (runIdSurface)
 import MVC.Variant (CaseKey(..), VariantMsg, VariantState, ViewArgs)
 import MVC.Variant (VariantMsg, VariantState) as Export
@@ -124,16 +123,16 @@ defaultCfgVariant :: CfgVariant
 defaultCfgVariant = { text: Nothing }
 
 variant
-  :: forall opt datauis html @initsym rcase rmsg rsta r
+  :: forall opt datauis html fm fs @initsym rcase rmsg rsta r
    . OptArgs CfgVariant opt
-  => DataUiVariant datauis WrapMsg WrapState (IDSurface html) initsym rcase rmsg rsta r
+  => DataUiVariant datauis fm fs (IDSurface html) initsym rcase rmsg rsta r
   => IDHtml html
   => opt
   -> Record datauis
   -> DataUI
        (IDSurface html)
-       WrapMsg
-       WrapState
+       fm
+       fs
        (VariantMsg rcase rmsg)
        (VariantState rsta)
        (Variant r)
@@ -150,14 +149,14 @@ variant opt dataUis =
       }
 
 variant_
-  :: forall datauis html @initsym rcase rmsg rsta r
-   . DataUiVariant datauis WrapMsg WrapState (IDSurface html) initsym rcase rmsg rsta r
+  :: forall datauis html fm fs @initsym rcase rmsg rsta r
+   . DataUiVariant datauis fm fs (IDSurface html) initsym rcase rmsg rsta r
   => IDHtml html
   => Record datauis
   -> DataUI
        (IDSurface html)
-       WrapMsg
-       WrapState
+       fm
+       fs
        (VariantMsg rcase rmsg)
        (VariantState rsta)
        (Variant r)

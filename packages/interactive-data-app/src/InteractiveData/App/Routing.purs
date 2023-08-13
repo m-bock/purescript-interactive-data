@@ -10,6 +10,7 @@ import Data.String as Str
 import Data.These (These(..))
 import Effect (Effect)
 import Foreign (unsafeToForeign)
+import InteractiveData.App.EnvVars (envVars)
 import InteractiveData.App.WrapApp (AppMsg, AppSelfMsg(..), AppState(..))
 import InteractiveData.Core (IDOutMsg(..))
 import Routing.Duplex (RouteDuplex')
@@ -72,8 +73,6 @@ getRouteIO = getRouteIO_ route
 --- Route IO
 --------------------------------------------------------------------------------
 
-foreign import envPrefix :: String
-
 type RouteIO route =
   { pushRoute :: route -> Effect Unit
   , listen :: (route -> Effect Unit) -> Effect (Effect Unit)
@@ -85,11 +84,11 @@ getRouteIO_ routeDuplex = do
 
   let
     stripPrefix :: String -> String
-    stripPrefix str = Str.stripPrefix (Str.Pattern envPrefix) str
+    stripPrefix str = Str.stripPrefix (Str.Pattern envVars.prefix) str
       # fromMaybe str
 
     addPrefix :: String -> String
-    addPrefix str = envPrefix <> str
+    addPrefix str = envVars.prefix <> str
 
     pushRoute :: route -> Effect Unit
     pushRoute route' =

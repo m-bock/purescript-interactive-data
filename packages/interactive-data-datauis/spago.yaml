@@ -4,12 +4,15 @@ package:
     - chameleon
     - data-mvc
     - either
+    - heterogeneous
     - interactive-data-app
     - interactive-data-core
+    - labeled-data
     - mvc
     - newtype
     - partial
     - prelude
+    - record
     - strings
     - variant
   name: interactive-data-datauis

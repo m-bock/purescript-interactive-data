@@ -29,9 +29,10 @@ dist-examples:
     rm -rf .parcel-cache
     rm -rf dist
     main_dir="purescript-interactive-data"; \
-    for dir in demo/src/Demo/Samples/HalogenFullscreen/; do \
+    export VERSION=$(git rev-parse HEAD); \
+    for dir in demo/src/Demo/Samples/*/; do \
         name=$(basename $dir); \
-        echo Building $name; \
+        echo Building $name $VERSION; \
         export PREFIX="/$main_dir/$name"; \
         parcel build --dist-dir dist/$main_dir/$name --public-url /$main_dir/$name/ $dir/index.html ; \
     done

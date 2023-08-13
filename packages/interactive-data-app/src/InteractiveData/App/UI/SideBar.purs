@@ -68,7 +68,7 @@ view { menu } =
                 [ el.logo []
                     [ UI.Assets.viewLogo ]
                 , C.div []
-                    [ C.span_ [ C.text "powered by " ]
+                    [ C.span_ [ C.text "built with " ]
                     , C.span []
                         [ C.text "interactive-data" ]
                     ]

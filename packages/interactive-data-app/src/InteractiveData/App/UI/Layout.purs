@@ -7,6 +7,7 @@ import InteractiveData.Core.Prelude
 
 import Chameleon as C
 import Chameleon.HTML.Elements as VDE
+import InteractiveData.App.EnvVars (envVars)
 
 type ViewCfg (html :: Type -> Type) msg =
   { viewHeader :: html msg
@@ -89,7 +90,8 @@ view { viewHeader, viewSidebar, viewBody, viewFooter } = withCtx \ctx ->
           "flex-grow: 1"
       }
   in
-    el.layout []
+    el.layout
+      [ C.attr "data-version" envVars.version ]
       [ viewEmbedFont
       , el.root []
           [ el.sidebar []
