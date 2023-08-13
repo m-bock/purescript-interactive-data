@@ -5,8 +5,7 @@ module InteractiveData.DataUIs.Generic
   , class HlistToRecord
   , hlistToRecord
   , genericDataUI
-  )
-  where
+  ) where
 
 import Prelude
 

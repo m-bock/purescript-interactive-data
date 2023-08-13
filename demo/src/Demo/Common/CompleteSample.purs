@@ -2,8 +2,7 @@ module Demo.Common.CompleteSample
   ( CustomADT(..)
   , Sample
   , sampleDataUi
-  )
-  where
+  ) where
 
 import Prelude
 
@@ -89,7 +88,7 @@ sampleDataUi = ID.record_
             { "Just": ID.string_
             , "Nothing": unit
             }
-        , custom : customADT
+        , custom: customADT
             { "Foo": ID.int_
             , "Bar": ID.string_
             }
