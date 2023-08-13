@@ -16,6 +16,11 @@ import InteractiveData.DataUIs
   , int
   , int_
 
+  , BooleanMsg
+  , BooleanState
+  , boolean
+  , boolean_
+
   , RecordMsg
   , RecordState
   , record

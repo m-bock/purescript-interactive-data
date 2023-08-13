@@ -64,7 +64,7 @@ Any part of a web app that need to handle user input of nested structured data. 
 
 The following types are supported out of the box:
 
-- Primitives like `String`, `Int`, `Number`
+- Primitives like `String`, `Int`, `Number`, `Boolean`
 - `Record`
 - `Variant`
 - Common ADTs like `Maybe`, `Either`, `Tuple`
@@ -187,6 +187,12 @@ parcel static/index.html
 ```
 
 Go to http://localhost:1234
+
+
+## Limitations
+
+- No implementation for `Array` yet. This will be provided in the future though.
+- Currently no support for recursive types.
 
 ## Contributing
 

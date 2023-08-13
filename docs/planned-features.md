@@ -3,5 +3,4 @@
 ## Types
 
 - `Char`
-- `Boolean`
 - `Array`

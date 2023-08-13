@@ -21,6 +21,13 @@ import InteractiveData.DataUIs.Int
   , int_
   ) as Export
 
+import InteractiveData.DataUIs.Boolean
+  ( BooleanMsg
+  , BooleanState
+  , boolean
+  , boolean_
+  ) as Export
+
 import InteractiveData.DataUIs.Record
   ( RecordMsg
   , RecordState

@@ -32,6 +32,7 @@ type Sample =
       , custom :: CustomADT
       , tuple :: Tuple String Int
       , result :: Either String Int
+      , switch :: Boolean
       }
   , meta ::
       { description :: String
@@ -94,6 +95,7 @@ sampleDataUi = ID.record_
             { "Left": ID.string_
             , "Right": ID.int_
             }
+        , switch: ID.boolean_
         }
   , meta: ID.record
       { text: Just "Some sample meta data"
