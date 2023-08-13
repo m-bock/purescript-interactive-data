@@ -95,7 +95,7 @@ sampleDataUi = ID.record_
             { "Left": ID.string_
             , "Right": ID.int_
             }
-        , switch: ID.boolean_
+        , switch: ID.boolean { text: Just "Switch it!" }
         }
   , meta: ID.record
       { text: Just "Some sample meta data"

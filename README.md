@@ -20,6 +20,7 @@ Composable UIs for interactive data.
   - [Installation](#installation)
   - [Minimal complete example](#minimal-complete-example)
   - [Run](#run)
+- [Limitations](#limitations)
 - [Contributing](#contributing)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
