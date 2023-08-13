@@ -1,0 +1,1 @@
+export const envPrefix = process.env.PREFIX || "";

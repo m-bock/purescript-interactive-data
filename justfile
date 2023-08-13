@@ -29,11 +29,15 @@ dist-examples:
     rm -rf .parcel-cache
     rm -rf dist
     main_dir="purescript-interactive-data"; \
-    for dir in demo/src/Demo/Samples/*/; do \
+    for dir in demo/src/Demo/Samples/HalogenFullscreen/; do \
         name=$(basename $dir); \
         echo Building $name; \
+        export PREFIX="/$main_dir/$name"; \
         parcel build --dist-dir dist/$main_dir/$name --public-url /$main_dir/$name/ $dir/index.html ; \
     done
+
+serve-dist:
+    http-server dist
 
 # Fix
 

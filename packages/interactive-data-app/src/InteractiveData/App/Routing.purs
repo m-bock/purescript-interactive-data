@@ -5,6 +5,8 @@ module InteractiveData.App.Routing
 
 import Prelude
 
+import Data.Maybe (fromMaybe)
+import Data.String as Str
 import Data.These (These(..))
 import Effect (Effect)
 import Foreign (unsafeToForeign)
@@ -48,8 +50,9 @@ mkRoute msg _ = case msg of
     That msg
 
 route :: RouteDuplex' Route
-route = RD.root $ RD.record
-  # RD.prop (Proxy :: Proxy "state") (RD.many RD.segment)
+route =
+  RD.root $ RD.record
+    # RD.prop (Proxy :: Proxy "state") (RD.many RD.segment)
 
 type RouteSpec route msg sta =
   { updateStateFromRoute :: route -> sta -> sta
@@ -69,6 +72,8 @@ getRouteIO = getRouteIO_ route
 --- Route IO
 --------------------------------------------------------------------------------
 
+foreign import envPrefix :: String
+
 type RouteIO route =
   { pushRoute :: route -> Effect Unit
   , listen :: (route -> Effect Unit) -> Effect (Effect Unit)
@@ -79,16 +84,23 @@ getRouteIO_ routeDuplex = do
   routeInterface :: PushStateInterface <- Routing.makeInterface
 
   let
+    stripPrefix :: String -> String
+    stripPrefix str = Str.stripPrefix (Str.Pattern envPrefix) str
+      # fromMaybe str
+
+    addPrefix :: String -> String
+    addPrefix str = envPrefix <> str
+
     pushRoute :: route -> Effect Unit
     pushRoute route' =
       routeInterface.pushState
         (unsafeToForeign {})
-        (RD.print routeDuplex route')
+        (RD.print routeDuplex route' # addPrefix)
 
     listen :: (route -> Effect Unit) -> Effect (Effect Unit)
     listen emitRoute =
       R.matchesWith
-        (RD.parse routeDuplex)
+        (stripPrefix >>> RD.parse routeDuplex)
         (\_ newRoute -> emitRoute newRoute)
         routeInterface
 

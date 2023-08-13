@@ -56,7 +56,7 @@ view { onBackToHome, path } =
           ]
       , el.headline []
           [ C.text "Not Found: "
-          , el.path [] [ C.text (printPath path) ]
+          , el.path [] [ C.text ("/" <> printPath path) ]
           ]
       , el.text [ C.onClick onBackToHome ]
           [ C.text "Back to Home"
