@@ -20,6 +20,7 @@ package:
     - react-basic-dom
     - react-basic-hooks
     - strings
+    - tuples
     - variant
   test:
     dependencies: []

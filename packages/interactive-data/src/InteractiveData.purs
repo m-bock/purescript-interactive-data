@@ -28,10 +28,15 @@ import InteractiveData.DataUIs
 
   , genericDataUI
   , class GenericDataUI
+  , Product
+  , type (~)
+  , (~)
 
   , newtype_
 
-  , maybe
+  , maybe_
+  , either_
+  , tuple_
   ) as Export
 
 import InteractiveData.Run

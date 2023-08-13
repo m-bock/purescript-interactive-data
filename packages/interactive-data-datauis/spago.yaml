@@ -9,6 +9,7 @@ package:
     - interactive-data-core
     - labeled-data
     - maybe
+    - tuples
     - mvc
     - newtype
     - partial

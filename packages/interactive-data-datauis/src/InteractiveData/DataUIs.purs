@@ -42,9 +42,14 @@ import InteractiveData.DataUIs.Newtype
 import InteractiveData.DataUIs.Generic
   ( genericDataUI
   , class GenericDataUI
+  , Product
+  , type (~)
+  , (~)
   ) as Export
 
 import InteractiveData.DataUIs.Common
-  ( maybe
+  ( maybe_
+  , either_
+  , tuple_
   ) as Export
 

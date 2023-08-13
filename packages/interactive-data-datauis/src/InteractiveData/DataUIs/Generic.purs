@@ -1,10 +1,13 @@
 module InteractiveData.DataUIs.Generic
-  ( DefaultTransform
+  ( (~)
+  , DefaultTransform
   , MappingHlistToRecord(..)
+  , Product(..)
   , class GenericDataUI
   , class HlistToRecord
-  , hlistToRecord
   , genericDataUI
+  , hlistToRecord
+  , type (~)
   ) where
 
 import Prelude

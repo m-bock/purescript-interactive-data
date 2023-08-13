@@ -5,5 +5,3 @@
 - `Char`
 - `Boolean`
 - `Array`
-- `Tuple`
-- `Either`

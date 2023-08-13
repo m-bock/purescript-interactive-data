@@ -64,11 +64,10 @@ Any part of a web app that need to handle user input of nested structured data. 
 
 The following types are supported out of the box:
 
-- `String`
-- `Int`
-- `Number`
+- Primitives like `String`, `Int`, `Number`
 - `Record`
 - `Variant`
+- Common ADTs like `Maybe`, `Either`, `Tuple`
 - Newtypes
 - Refinement of existing types (smart constructor pattern)
 - Custom ADTs

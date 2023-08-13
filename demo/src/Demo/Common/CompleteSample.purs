@@ -7,15 +7,17 @@ module Demo.Common.CompleteSample
 import Prelude
 
 import Data.Argonaut (class EncodeJson)
+import Data.Argonaut.Encode.Generic (genericEncodeJson)
+import Data.Either (Either)
 import Data.Generic.Rep (class Generic)
 import Data.Maybe (Maybe(..))
 import Data.Show.Generic (genericShow)
+import Data.Tuple (Tuple)
 import Demo.Common.Features.CustomDataUI.Color (Color, color)
 import Demo.Common.Features.Refinement.UserID (UserID, userId_)
 import Demo.Common.VariantJ (VariantJ)
-import InteractiveData (class IDHtml, DataUI, IDSurface)
+import InteractiveData (class IDHtml, DataUI, IDSurface, (~))
 import InteractiveData as ID
-import Data.Argonaut.Encode.Generic (genericEncodeJson)
 
 type Sample =
   { user ::
@@ -28,6 +30,8 @@ type Sample =
       , decription :: Maybe String
       , nestedMaybe :: Maybe (Maybe String)
       , custom :: CustomADT
+      , tuple :: Tuple String Int
+      , result :: Either String Int
       }
   , meta ::
       { description :: String
@@ -67,12 +71,12 @@ sampleDataUi = ID.record_
             , min: 0
             , max: 150
             }
-        , decription: ID.maybe
+        , decription: ID.maybe_
             { "Just": ID.string_
             , "Nothing": unit
             }
-        , nestedMaybe: ID.maybe
-            { "Just": ID.maybe
+        , nestedMaybe: ID.maybe_
+            { "Just": ID.maybe_
                 { "Just": ID.string_
                 , "Nothing": unit
                 }
@@ -82,6 +86,13 @@ sampleDataUi = ID.record_
             { "Foo": ID.int_
             , "Bar": ID.string_
             , "Baz": ID.number_
+            }
+        , tuple: ID.tuple_
+            { "Tuple": ID.string_ ~ ID.int_
+            }
+        , result: ID.either_
+            { "Left": ID.string_
+            , "Right": ID.int_
             }
         }
   , meta: ID.record
