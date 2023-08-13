@@ -6,6 +6,4 @@
 - `Boolean`
 - `Array`
 - `Tuple`
-- `Maybe`
 - `Either`
-- Custom ADTs

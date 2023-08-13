@@ -71,6 +71,7 @@ The following types are supported out of the box:
 - `Variant`
 - Newtypes
 - Refinement of existing types (smart constructor pattern)
+- Custom ADTs
 
 ## Getting started
 
