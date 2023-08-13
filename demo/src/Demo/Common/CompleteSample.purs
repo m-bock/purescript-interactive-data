@@ -26,6 +26,7 @@ type Sample =
       , userId2 :: UserID
       , age :: Int
       , decription :: Maybe String
+      , nestedMaybe :: Maybe (Maybe String)
       , custom :: CustomADT
       }
   , meta ::
@@ -68,6 +69,13 @@ sampleDataUi = ID.record_
             }
         , decription: ID.maybe
             { "Just": ID.string_
+            , "Nothing": unit
+            }
+        , nestedMaybe: ID.maybe
+            { "Just": ID.maybe
+                { "Just": ID.string_
+                , "Nothing": unit
+                }
             , "Nothing": unit
             }
         , custom: customADT
