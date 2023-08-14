@@ -76,19 +76,19 @@ The following types are supported out of the box:
 
 1. Install the library
 
-   ```sh
+   ```
    spago install interactive-data
    ```
 
 2. Install a virtual dom implementation, e.g.:
 
-   ```sh
+   ```
    spago install chameleon-halogen
    ```
 
 3. Install a bundler, e.g.:
 
-   ```sh
+   ```
    npm install --dev --save parcel
    ```
 
