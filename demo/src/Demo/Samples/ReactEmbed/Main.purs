@@ -104,7 +104,7 @@ styles =
       }
   , jsonBox: css
       { backgroundColor: "rgb(241 241 241)"
-      , maxHeight: "200px"
+      , height: "200px"
       , maxWidth: "900px"
       , flexGrow: "0"
       , flexShrink: "0"
