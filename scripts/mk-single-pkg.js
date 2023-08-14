@@ -143,9 +143,13 @@ const main = () => {
   spagoEnsureRanges(tgtRepoDir);
 
   cp.execSync(`git add '*'`, { cwd: tgtRepoDir });
-  cp.execSync(`git commit -m "v${version}${extra}"`, {
-    cwd: tgtRepoDir,
-  });
+
+  try {
+    cp.execSync(`git commit -m "v${version}${extra}"`, {
+      cwd: tgtRepoDir,
+    });
+  } catch (e) {}
+
   cp.execSync(`git tag v${version}-${extra}`, { cwd: tgtRepoDir });
 };
 
