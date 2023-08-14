@@ -7,7 +7,6 @@ import InteractiveData.Core.Prelude
 
 import Chameleon as C
 import Data.Array as Array
-import DataMVC.Types.DataError (DataError(..))
 import InteractiveData.App.UI.Assets as UIAssets
 import InteractiveData.App.UI.Breadcrumbs as UIBreadcrumbs
 import InteractiveData.App.UI.Card as UICard

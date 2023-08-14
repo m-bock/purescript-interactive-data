@@ -13,7 +13,6 @@ import Data.Array as Array
 import Data.Array.NonEmpty (NonEmptyArray)
 import Data.Array.NonEmpty as NEA
 import Data.Tuple (fst)
-import DataMVC.Types.DataError (DataError(..))
 import InteractiveData.App.UI.ActionButton as UIActionButton
 import InteractiveData.App.UI.Card as UICard
 import InteractiveData.App.UI.DataLabel as UIDataLabel
