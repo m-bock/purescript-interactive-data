@@ -150,7 +150,7 @@ const main = () => {
     });
   } catch (e) {}
 
-  cp.execSync(`git tag v${version}-${extra}`, { cwd: tgtRepoDir });
+  cp.execSync(`git tag v${version}${extra}`, { cwd: tgtRepoDir });
 };
 
 main();
