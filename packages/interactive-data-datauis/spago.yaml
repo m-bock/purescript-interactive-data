@@ -1,6 +1,8 @@
 package:
   dependencies:
+    - argonaut
     - arrays
+    - bifunctors
     - chameleon
     - data-mvc
     - either
@@ -9,13 +11,13 @@ package:
     - interactive-data-core
     - labeled-data
     - maybe
-    - tuples
     - mvc
     - newtype
     - partial
     - prelude
     - record
     - strings
+    - tuples
     - variant
   name: interactive-data-datauis
   test:
