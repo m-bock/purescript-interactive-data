@@ -1,19 +1,7 @@
 workspace:
-  extra_packages:
-    chameleon:
-      git: "https://github.com/thought2/purescript-chameleon.git"
-      ref: v1.0.0
-    chameleon-react-basic:
-      git: "https://github.com/thought2/purescript-chameleon-react-basic.git"
-      ref: v1.0.0
-    chameleon-halogen:
-      git: "https://github.com/thought2/purescript-chameleon-halogen.git"
-      ref: v1.0.1
-    chameleon-styled:
-      git: "https://github.com/thought2/purescript-chameleon-styled.git"
-      ref: v2.0.0
+  extra_packages: {}
   package_set:
-    registry: 34.0.0
+    registry: 36.0.0
   build_opts:
     pedantic_packages: true
     persist_warnings: true
