@@ -21,6 +21,7 @@ view { menu } = withCtx \{ showLogo } ->
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            overflow: auto;
           """
       , poweredBy: styleNode C.div
           [ decl
