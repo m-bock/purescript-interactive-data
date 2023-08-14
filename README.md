@@ -24,15 +24,15 @@ Composable UIs for interactive data.
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-
 ## Live Demo
 
-<img src="https://github.com/thought2/assets/blob/744109caf1feb639b6aff8388f4598e66a3f66bd/interactive-data/demo2.png" width="400">
+<a href="https://thought2.github.io/purescript-interactive-data/HalogenFullscreen">
+  <img src="https://github.com/thought2/assets/blob/744109caf1feb639b6aff8388f4598e66a3f66bd/interactive-data/demo2.png" width="400">
+</a>
 
 [Halogen Fullscreen](https://thought2.github.io/purescript-interactive-data/HalogenFullscreen)
 
 [React Embedded](https://thought2.github.io/purescript-interactive-data/ReactEmbed)
-
 
 ## Features
 
@@ -53,9 +53,9 @@ Composable UIs for interactive data.
 
 Any part of a web app that need to handle user input of nested structured data. E.g:
 
-- settings panel 
-- back office tools
-- user input forms
+- Settings panel
+- Back office tools
+- User input forms
 
 ## Supported types
 
@@ -68,6 +68,7 @@ The following types are supported out of the box:
 - Newtypes
 - Refinement of existing types (smart constructor pattern)
 - Custom ADTs
+- Generic Json inputs for not yet supported types
 
 ## Getting started
 
@@ -114,6 +115,7 @@ main :: Effect Unit
 main = do
   let
     -- 1. Compose a "Data UI" for a specific type
+    --    (see demo/src/Demo/Common/CompleteSample.purs for more options)
     sampleDataUi = ID.record_
       { user: ID.record_
           { firstName: ID.string_
@@ -186,11 +188,11 @@ parcel static/index.html
 
 Go to http://localhost:1234
 
-
 ## Limitations
 
-- No implementation for `Array` yet. This will be provided in the future though.
+- No implementation for `Array` yet. This will be provided in the future though. Until then you can use the generic `Json` Data UI.
 - Currently no support for recursive types.
+- Data UIs cannot have side effects other than user input. A Data UI that fetches data from a server is currently not possible.
 
 ## Contributing
 
@@ -200,12 +202,12 @@ The codebase is split into several local packages organized in a spago monorepo.
 
 | Package name                             | Description                                                     |
 | ---------------------------------------- | --------------------------------------------------------------- |
-| interactive-data-[core][link-core]       | Core types that are used by most other packages                 |
-| interactive-data-[app][link-app]         | UI for App layer that adds general navigation and data wrapping |
-| interactive-data-[datauis][link-datauis] | UIs for specific data types                                     |
-| interactive-data-[ui][link-ui]           | Reusable UI components                                          |
-| interactive-data-[run][link-run]         | Machinery that turns data UIs into a regualar UI components     |
-| interactive-data-[class][link-class]     | Type class for generic Data UI creation                         |
+| [interactive-data-core][link-core]       | Core types that are used by most other packages                 |
+| [interactive-data-app][link-app]         | UI for App layer that adds general navigation and data wrapping |
+| [interactive-data-datauis][link-datauis] | UIs for specific data types                                     |
+| [interactive-data-ui][link-ui]           | Reusable UI components                                          |
+| [interactive-data-run][link-run]         | Machinery that turns data UIs into a regualar UI components     |
+| [interactive-data-class][link-class]     | Type class for generic Data UI creation                         |
 
 Due to a limitation of the current spago@next release local packages are not yet published separately. Instead they are published as a single package located in a generated [mirror repo](https://github.com/thought2/purescript-interactive-data.all).
 

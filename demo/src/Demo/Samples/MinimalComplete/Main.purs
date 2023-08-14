@@ -14,6 +14,7 @@ main :: Effect Unit
 main = do
   let
     -- 1. Compose a "Data UI" for a specific type
+    --    (see demo/src/Demo/Common/CompleteSample.purs for more options)
     sampleDataUi = ID.record_
       { user: ID.record_
           { firstName: ID.string_

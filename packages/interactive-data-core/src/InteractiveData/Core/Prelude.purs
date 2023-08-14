@@ -228,9 +228,12 @@ import InteractiveData.Core.Classes.OptArgs
   , getAllArgsMixed
   ) as Export
 
+import DataMVC.Types.DataError
+  ( DataError(..)
+  ) as Export
+
 import DataMVC.Types
-  ( DataError
-  , DataErrorCase(..)
+  ( DataErrorCase(..)
   , DataPath
   , DataPathSegment(..)
   , DataPathSegmentField(..)

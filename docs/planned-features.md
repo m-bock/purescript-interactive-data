@@ -4,3 +4,4 @@
 
 - `Char`
 - `Array`
+- `Map`

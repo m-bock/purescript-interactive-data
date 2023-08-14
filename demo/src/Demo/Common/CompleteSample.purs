@@ -33,6 +33,7 @@ type Sample =
       , tuple :: Tuple String Int
       , result :: Either String Int
       , switch :: Boolean
+      , items :: Array { x :: Int, y :: Int }
       }
   , meta ::
       { description :: String
@@ -96,6 +97,11 @@ sampleDataUi = ID.record_
             , "Right": ID.int_
             }
         , switch: ID.boolean { text: Just "Switch it!" }
+        , items: ID.json
+            { init: []
+            , typeName: "Array { x :: Int, y :: Int }"
+            , text: Just "For types that don't have a Data UI implementation (yet) one can use the generic Json Data UI"
+            }
         }
   , meta: ID.record
       { text: Just "Some sample meta data"
