@@ -174,4 +174,4 @@ mkSegmentKey :: Int -> String -> DataPathSegmentField
 mkSegmentKey _ = SegStaticKey
 
 mkSegmentIndex :: Int -> String -> DataPathSegmentField
-mkSegmentIndex ix _ = SegStaticIndex ix
+mkSegmentIndex ix _ = SegStaticIndex (ix + 1)
