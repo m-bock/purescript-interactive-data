@@ -131,7 +131,7 @@ sampleDataUi = ID.record_
       , foregroundColor: color {}
       , textColor: color {}
       , coordinate: ID.dataUi
-      , size: ID.newtype_ ID.dataUi 
+      , size: ID.newtype_ ID.dataUi
       }
   }
 
