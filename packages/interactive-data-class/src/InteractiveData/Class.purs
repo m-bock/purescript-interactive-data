@@ -1,5 +1,5 @@
 module InteractiveData.Class
-  ( Tok(..)
+  ( Tok
   , class IDDataUI
   , dataUi
   , recordPartial_

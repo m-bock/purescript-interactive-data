@@ -1,10 +1,7 @@
 module InteractiveData.Class.Defaults.Generic where
 
-import Prelude
-
 import DataMVC.Types (DataUI)
 import InteractiveData.Core (IDSurface)
-import InteractiveData.Class.Init (hinit)
 
 class
   DefaultVariant
