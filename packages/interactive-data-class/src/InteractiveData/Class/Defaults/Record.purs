@@ -1,17 +1,15 @@
 module InteractiveData.Class.Defaults.Record
   ( class DefaultRecord
   , defaultRecord
-  , class GetDataUIs
   ) where
 
 import DataMVC.Record.DataUI (class DataUiRecord)
 import DataMVC.Types (DataUI)
-import InteractiveData.DataUIs as D
+import InteractiveData.Class.Defaults.GetDataUIs (class GetDataUIs)
 import InteractiveData.Class.Init (class HInit, hinit)
 import InteractiveData.Core (class IDHtml, IDSurface)
-import Prim.Row as Row
-import Prim.RowList (class RowToList, RowList)
-import Prim.RowList as RL
+import InteractiveData.DataUIs as D
+import Prim.RowList (class RowToList)
 
 --------------------------------------------------------------------------------
 --- DefaultRecord
@@ -46,23 +44,3 @@ instance
     in
       D.record_ dataUis
 
---------------------------------------------------------------------------------
---- GetDataUIs
---------------------------------------------------------------------------------
-
-class
-  GetDataUIs
-    (rmsg :: Row Type)
-    (rsta :: Row Type)
-    (rowlist :: RowList Type)
-    (datauis :: Row Type)
-  | rowlist rmsg rsta -> datauis
-
-instance GetDataUIs rmsg rsta RL.Nil ()
-
-instance
-  ( GetDataUIs rmsg rsta rowlistPrev datauisPrev
-  , Row.Cons sym (DataUI srf fm fs msg sta typ) datauisPrev datauis
-  , Row.Lacks sym datauisPrev
-  ) =>
-  GetDataUIs rmsg rsta (RL.Cons sym typ rowlistPrev) datauis

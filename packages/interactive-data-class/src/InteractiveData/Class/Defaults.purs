@@ -5,6 +5,11 @@ import InteractiveData.Class.Defaults.Record
   , defaultRecord
   ) as Export
 
+import InteractiveData.Class.Defaults.Partial
+  ( class DefaultRecordPartial
+  , defaultRecordPartial_
+  ) as Export
+
 import InteractiveData.Class.Defaults.Variant
   ( class DefaultVariant
   , defaultVariant

@@ -2,11 +2,19 @@ module InteractiveData.Class
   ( Tok(..)
   , class IDDataUI
   , dataUi
+  , recordPartial_
   ) where
 
 import Data.Variant (Variant)
 import DataMVC.Types (DataUI)
-import InteractiveData.Class.Defaults (class DefaultRecord, class DefaultVariant, defaultRecord, defaultVariant)
+import InteractiveData.Class.Defaults
+  ( class DefaultRecord
+  , class DefaultVariant
+  , class DefaultRecordPartial
+  , defaultRecord
+  , defaultRecordPartial_
+  , defaultVariant
+  )
 import InteractiveData.Class.Init (class Init)
 import InteractiveData.Core (class IDHtml, IDSurface)
 import InteractiveData.DataUIs as D
@@ -60,6 +68,17 @@ instance
   IDDataUI (IDSurface html) fm fs (D.VariantMsg rcase rmsg) (D.VariantState rsta) (Variant row)
   where
   dataUi = defaultVariant Tok
+
+--------------------------------------------------------------------------------
+--- Partial
+--------------------------------------------------------------------------------
+
+recordPartial_
+  :: forall html fm fs rmsg rsta row datauisGiven
+   . DefaultRecordPartial Tok datauisGiven html fm fs rmsg rsta row
+  => Record datauisGiven
+  -> DataUI (IDSurface html) fm fs (D.RecordMsg rmsg) (D.RecordState rsta) (Record row)
+recordPartial_ = defaultRecordPartial_ Tok
 
 --------------------------------------------------------------------------------
 --- Tok

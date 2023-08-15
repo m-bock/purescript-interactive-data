@@ -13,6 +13,7 @@ import Prim.RowList (class RowToList, RowList)
 import Prim.RowList as RL
 import Record as Record
 import Type.Proxy (Proxy(..))
+import InteractiveData.DataUIs.Generic (Product(..))
 
 class
   HInit
@@ -39,6 +40,15 @@ class
     (a :: Type)
   where
   init :: token -> a
+
+instance
+  ( Init token a
+  , Init token b
+  ) =>
+  Init token (Product a b)
+  where
+  init :: token -> Product a b
+  init token = Product (init token) (init token)
 
 --------------------------------------------------------------------------------
 --- HInitRecordRL

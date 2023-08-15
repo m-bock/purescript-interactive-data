@@ -18,6 +18,8 @@ import Demo.Common.Features.Refinement.UserID (UserID, userId_)
 import Demo.Common.VariantJ (VariantJ)
 import InteractiveData (class IDHtml, DataUI, IDSurface, (~))
 import InteractiveData as ID
+import InteractiveData.Class (Tok(..))
+import InteractiveData.Class.Defaults (defaultRecordPartial_)
 
 type Sample =
   { user ::
@@ -130,7 +132,9 @@ sampleDataUi = ID.record_
       { backgroundColor: color {}
       , foregroundColor: color {}
       , textColor: color {}
-      , coordinate: ID.dataUi
+      , coordinate: ID.recordPartial_
+          { x: ID.int {}
+          }
       , size: ID.newtype_ ID.dataUi
       }
   }

@@ -1,6 +1,5 @@
 module InteractiveData.Class.Defaults.Variant
   ( class DefaultVariant
-  , class GetDataUIs
   , class GetInitSym
   , defaultVariant
   ) where
@@ -8,10 +7,10 @@ module InteractiveData.Class.Defaults.Variant
 import Data.Variant (Variant)
 import DataMVC.Types (DataUI)
 import DataMVC.Variant.DataUI (class DataUiVariant)
+import InteractiveData.Class.Defaults.GetDataUIs (class GetDataUIs)
 import InteractiveData.Class.Init (class HInit, hinit)
 import InteractiveData.Core (class IDHtml, IDSurface)
 import InteractiveData.DataUIs as D
-import Prim.Row as Row
 import Prim.RowList (class RowToList, RowList)
 import Prim.RowList as RL
 
@@ -49,27 +48,6 @@ instance
       dataUis = hinit token
     in
       D.variant_ dataUis
-
---------------------------------------------------------------------------------
---- GetDataUIs
---------------------------------------------------------------------------------
-
-class
-  GetDataUIs
-    (rmsg :: Row Type)
-    (rsta :: Row Type)
-    (rowlist :: RowList Type)
-    (datauis :: Row Type)
-  | rowlist rmsg rsta -> datauis
-
-instance GetDataUIs rmsg rsta RL.Nil ()
-
-instance
-  ( GetDataUIs rmsg rsta rowlistPrev datauisPrev
-  , Row.Cons sym (DataUI srf fm fs msg sta typ) datauisPrev datauis
-  , Row.Lacks sym datauisPrev
-  ) =>
-  GetDataUIs rmsg rsta (RL.Cons sym typ rowlistPrev) datauis
 
 --------------------------------------------------------------------------------
 --- GetInitSym
