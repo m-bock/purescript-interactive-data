@@ -50,7 +50,7 @@ type Sample =
       , textColor :: Color
       , coordinate :: { x :: Int, y :: Int }
       , item :: Maybe Int
-      --, size :: VariantJ (width :: Int, height :: Int, depth :: Int)
+      , size :: VariantJ (width :: Int, height :: Int, depth :: Int)
       }
   }
 
@@ -133,7 +133,9 @@ sampleDataUi = ID.record_
       , textColor: color {}
       , coordinate: ID.dataUi
       , item: ID.dataUi
-      --, size: ID.newtype_ ID.dataUi
+      , size: ID.newtype_ $ ID.variantPartial_ @"width"
+          { width: ID.int { min: 0 }
+          }
       }
   }
 

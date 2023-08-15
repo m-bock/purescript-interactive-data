@@ -3,6 +3,7 @@ module InteractiveData.Class
   , class IDDataUI
   , dataUi
   , recordPartial_
+  , variantPartial_
   ) where
 
 import Data.Maybe (Maybe)
@@ -13,11 +14,13 @@ import InteractiveData.Class.Defaults
   , class DefaultRecord
   , class DefaultRecordPartial
   , class DefaultVariant
+  , class DefaultVariantPartial
   , defaultGeneric_
   , defaultRecord
   , defaultRecordPartial_
   , defaultVariant
   )
+import InteractiveData.Class.Defaults.Variant (defaultVariantPartial_)
 import InteractiveData.Class.InitDataUI (class Init)
 import InteractiveData.Core (class IDHtml, IDSurface)
 import InteractiveData.DataUIs as D
@@ -94,6 +97,13 @@ recordPartial_
   => Record datauisGiven
   -> DataUI (IDSurface html) fm fs (D.RecordMsg rmsg) (D.RecordState rsta) (Record row)
 recordPartial_ = defaultRecordPartial_ Tok
+
+variantPartial_
+  :: forall html fm fs @initsym rcase rmsg rsta row datauisGiven
+   . DefaultVariantPartial Tok datauisGiven html fm fs initsym rcase rmsg rsta row
+  => Record datauisGiven
+  -> DataUI (IDSurface html) fm fs (D.VariantMsg rcase rmsg) (D.VariantState rsta) (Variant row)
+variantPartial_ = defaultVariantPartial_ Tok (Proxy :: Proxy initsym)
 
 --------------------------------------------------------------------------------
 --- Tok

@@ -10,6 +10,7 @@ import InteractiveData.Class.Defaults.Record
 import InteractiveData.Class.Defaults.Variant
   ( class DefaultVariant
   , defaultVariant
+  , class DefaultVariantPartial
   ) as Export
 
 import InteractiveData.Class.Defaults.Generic
