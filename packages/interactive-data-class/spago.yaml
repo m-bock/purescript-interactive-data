@@ -3,6 +3,7 @@ package:
     [
       data-mvc,
       either,
+      heterogeneous,
       interactive-data-core,
       interactive-data-datauis,
       labeled-data,

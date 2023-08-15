@@ -16,4 +16,6 @@ import InteractiveData.Class.Defaults.Variant
 import InteractiveData.Class.Defaults.Generic
   ( class DefaultGeneric
   , defaultGeneric_
+  , class DefaultGenericPartial
+  , defaultGenericPartial_
   ) as Export
