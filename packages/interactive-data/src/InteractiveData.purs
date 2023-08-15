@@ -61,7 +61,10 @@ import InteractiveData.Core
 import InteractiveData.Class
   ( class IDDataUI
   , dataUi
-  , recordPartial_
+  ) as Export
+
+import InteractiveData.Class.Partial
+  ( recordPartial_
   , variantPartial_
   , genericPartial_
   ) as Export
