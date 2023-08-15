@@ -131,10 +131,7 @@ sampleDataUi = ID.record_
       { backgroundColor: color {}
       , foregroundColor: color {}
       , textColor: color {}
-      , coordinate: ID.recordPartial_
-          { x: ID.int_
-          , y: ID.int_
-          }
+      , coordinate: ID.dataUi
       , item: ID.dataUi
       --, size: ID.newtype_ ID.dataUi
       }

@@ -17,7 +17,8 @@ import Data.Symbol (class IsSymbol)
 import DataMVC.Record.DataUI (class DataUiRecord)
 import DataMVC.Types (DataUI)
 import InteractiveData.Core (class IDHtml, IDSurface)
-import InteractiveData.DataUIs (record_)
+import InteractiveData.DataUIs (record, record_)
+import InteractiveData.DataUIs.Record as R
 import MVC.Record (RecordMsg, RecordState)
 import Prim.Row as Row
 import Prim.RowList (class RowToList, RowList)
@@ -160,7 +161,7 @@ instance
     headVal = initRecord @token @typ token Proxy
 
     headVal' :: DataUI (IDSurface html) fm fs (RecordMsg rmsg) (RecordState rsta) (Record r)
-    headVal' = record_ headVal
+    headVal' = record { mode: R.Indices } headVal
 
     prxSym :: Proxy sym
     prxSym = Proxy
