@@ -1,5 +1,12 @@
 package:
-  dependencies: []
+  dependencies:
+    [
+      data-mvc,
+      interactive-data-core,
+      interactive-data-datauis,
+      prelude,
+      record
+    ]
   name: interactive-data-class
   test:
     dependencies: []

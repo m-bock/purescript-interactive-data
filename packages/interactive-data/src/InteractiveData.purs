@@ -58,6 +58,11 @@ import InteractiveData.Core
   , class IDHtml
   ) as Export
 
+import InteractiveData.Class
+  ( class IDDataUI
+  , dataUi
+  ) as Export
+
 import InteractiveData.Entry
   ( toApp
   ) as Export

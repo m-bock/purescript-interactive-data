@@ -48,6 +48,7 @@ type Sample =
       { backgroundColor :: Color
       , foregroundColor :: Color
       , textColor :: Color
+      , coordinate :: { x :: Int, y :: Int }
       }
   }
 
@@ -128,6 +129,7 @@ sampleDataUi = ID.record_
       { backgroundColor: color {}
       , foregroundColor: color {}
       , textColor: color {}
+      , coordinate: ID.dataUi
       }
   }
 
