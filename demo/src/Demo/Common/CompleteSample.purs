@@ -13,6 +13,7 @@ import Data.Generic.Rep (class Generic)
 import Data.Maybe (Maybe(..))
 import Data.Show.Generic (genericShow)
 import Data.Tuple (Tuple)
+import Data.Variant (Variant)
 import Demo.Common.Features.CustomDataUI.Color (Color, color)
 import Demo.Common.Features.Refinement.UserID (UserID, userId_)
 import Demo.Common.VariantJ (VariantJ)
@@ -49,6 +50,7 @@ type Sample =
       , foregroundColor :: Color
       , textColor :: Color
       , coordinate :: { x :: Int, y :: Int }
+      , size :: VariantJ (width :: Int, height :: Int)
       }
   }
 
@@ -130,6 +132,7 @@ sampleDataUi = ID.record_
       , foregroundColor: color {}
       , textColor: color {}
       , coordinate: ID.dataUi
+      , size: ID.newtype_ ID.dataUi
       }
   }
 

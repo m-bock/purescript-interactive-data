@@ -5,7 +5,8 @@ package:
       interactive-data-core,
       interactive-data-datauis,
       prelude,
-      record
+      record,
+      variant
     ]
   name: interactive-data-class
   test:

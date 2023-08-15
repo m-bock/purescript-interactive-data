@@ -4,10 +4,11 @@ module InteractiveData.Class
   , dataUi
   ) where
 
+import Data.Variant (Variant)
 import DataMVC.Types (DataUI)
-import InteractiveData.Core (class IDHtml, IDSurface)
-import InteractiveData.Class.Defaults (class DefaultRecord, defaultRecord)
+import InteractiveData.Class.Defaults (class DefaultRecord, class DefaultVariant, defaultRecord, defaultVariant)
 import InteractiveData.Class.Init (class Init)
+import InteractiveData.Core (class IDHtml, IDSurface)
 import InteractiveData.DataUIs as D
 
 class
@@ -52,6 +53,13 @@ instance
   IDDataUI (IDSurface html) fm fs (D.RecordMsg rmsg) (D.RecordState rsta) (Record row)
   where
   dataUi = defaultRecord Tok
+
+instance
+  ( DefaultVariant Tok html fm fs rcase rmsg rsta row
+  ) =>
+  IDDataUI (IDSurface html) fm fs (D.VariantMsg rcase rmsg) (D.VariantState rsta) (Variant row)
+  where
+  dataUi = defaultVariant Tok
 
 --------------------------------------------------------------------------------
 --- Tok

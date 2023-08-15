@@ -2,6 +2,10 @@ module InteractiveData.Class.Defaults (module Export) where
 
 import InteractiveData.Class.Defaults.Record
   ( class DefaultRecord
-  , class GetDataUIs
   , defaultRecord
+  ) as Export
+
+import InteractiveData.Class.Defaults.Variant
+  ( class DefaultVariant
+  , defaultVariant
   ) as Export
