@@ -17,7 +17,7 @@ import Data.Symbol (class IsSymbol)
 import DataMVC.Record.DataUI (class DataUiRecord)
 import DataMVC.Types (DataUI)
 import InteractiveData.Core (class IDHtml, IDSurface)
-import InteractiveData.DataUIs (record, record_)
+import InteractiveData.DataUIs (record)
 import InteractiveData.DataUIs.Record as R
 import MVC.Record (RecordMsg, RecordState)
 import Prim.Row as Row
