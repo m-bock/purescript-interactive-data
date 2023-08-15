@@ -2,8 +2,12 @@ package:
   dependencies:
     [
       data-mvc,
+      either,
       interactive-data-core,
       interactive-data-datauis,
+      labeled-data,
+      maybe,
+      mvc,
       prelude,
       record,
       variant

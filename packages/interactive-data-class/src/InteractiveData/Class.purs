@@ -5,19 +5,23 @@ module InteractiveData.Class
   , recordPartial_
   ) where
 
+import Data.Maybe (Maybe)
 import Data.Variant (Variant)
 import DataMVC.Types (DataUI)
 import InteractiveData.Class.Defaults
-  ( class DefaultRecord
-  , class DefaultVariant
+  ( class DefaultGeneric
+  , class DefaultRecord
   , class DefaultRecordPartial
+  , class DefaultVariant
+  , defaultGeneric_
   , defaultRecord
   , defaultRecordPartial_
   , defaultVariant
   )
-import InteractiveData.Class.Init (class Init)
+import InteractiveData.Class.InitDataUI (class Init)
 import InteractiveData.Core (class IDHtml, IDSurface)
 import InteractiveData.DataUIs as D
+import Type.Proxy (Proxy(..))
 
 class
   IDDataUI
@@ -68,6 +72,17 @@ instance
   IDDataUI (IDSurface html) fm fs (D.VariantMsg rcase rmsg) (D.VariantState rsta) (Variant row)
   where
   dataUi = defaultVariant Tok
+
+-------------------------------------------------------------------------------
+--- Maybe
+-------------------------------------------------------------------------------
+
+instance
+  ( DefaultGeneric "Nothing" Tok html fm fs msg sta (Maybe a)
+  ) =>
+  IDDataUI (IDSurface html) fm fs msg sta (Maybe a)
+  where
+  dataUi = defaultGeneric_ @"Nothing" Tok Proxy "Maybe"
 
 --------------------------------------------------------------------------------
 --- Partial

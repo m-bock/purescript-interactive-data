@@ -49,7 +49,8 @@ type Sample =
       , foregroundColor :: Color
       , textColor :: Color
       , coordinate :: { x :: Int, y :: Int }
-      , size :: VariantJ (width :: Int, height :: Int, depth :: Int)
+      , item :: Maybe Int
+      --, size :: VariantJ (width :: Int, height :: Int, depth :: Int)
       }
   }
 
@@ -131,9 +132,11 @@ sampleDataUi = ID.record_
       , foregroundColor: color {}
       , textColor: color {}
       , coordinate: ID.recordPartial_
-          { x: ID.int {}
+          { x: ID.int_
+          , y: ID.int_
           }
-      , size: ID.newtype_ ID.dataUi
+      , item: ID.dataUi
+      --, size: ID.newtype_ ID.dataUi
       }
   }
 

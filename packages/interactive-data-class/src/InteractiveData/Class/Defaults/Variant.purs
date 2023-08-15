@@ -1,18 +1,15 @@
 module InteractiveData.Class.Defaults.Variant
   ( class DefaultVariant
-  , class GetInitSym
   , defaultVariant
   ) where
 
 import Data.Variant (Variant)
 import DataMVC.Types (DataUI)
 import DataMVC.Variant.DataUI (class DataUiVariant)
-import InteractiveData.Class.Defaults.GetDataUIs (class GetDataUIs)
-import InteractiveData.Class.Init (class HInit, hinit)
+import InteractiveData.Class.InitDataUI (class GetInitSym, class InitRecord, initRecord)
 import InteractiveData.Core (class IDHtml, IDSurface)
 import InteractiveData.DataUIs as D
-import Prim.RowList (class RowToList, RowList)
-import Prim.RowList as RL
+import Type.Proxy (Proxy(..))
 
 --------------------------------------------------------------------------------
 --- DefaultVariant
@@ -34,10 +31,8 @@ class
 instance
   ( IDHtml html
   , DataUiVariant datauis fm fs (IDSurface html) initSym rcase rmsg rsta row
-  , HInit token (Record datauis)
-  , RowToList row rowlist
-  , GetDataUIs rmsg rsta rowlist datauis
-  , GetInitSym rowlist initSym
+  , InitRecord token row datauis
+  , GetInitSym row initSym
   ) =>
   DefaultVariant token html fm fs rcase rmsg rsta row
   where
@@ -45,18 +40,7 @@ instance
   defaultVariant token =
     let
       dataUis :: Record datauis
-      dataUis = hinit token
+      dataUis = initRecord @token @row token Proxy
     in
       D.variant_ dataUis
 
---------------------------------------------------------------------------------
---- GetInitSym
---------------------------------------------------------------------------------
-
-class
-  GetInitSym
-    (rowlist :: RowList Type)
-    (initSym :: Symbol)
-  | rowlist -> initSym
-
-instance GetInitSym (RL.Cons initSym typ rowlistPrev) initSym
