@@ -4,7 +4,9 @@ module InteractiveData.Class
   , dataUi
   ) where
 
+import Data.Either (Either)
 import Data.Maybe (Maybe)
+import Data.Tuple (Tuple)
 import Data.Variant (Variant)
 import DataMVC.Types (DataUI)
 import InteractiveData.Class.Defaults
@@ -32,11 +34,19 @@ class
   where
   dataUi :: DataUI srf fm fs msg sta a
 
+-------------------------------------------------------------------------------
+--- String
+-------------------------------------------------------------------------------
+
 instance
   IDHtml html =>
   IDDataUI (IDSurface html) fm fs D.StringMsg D.StringState String
   where
   dataUi = D.string_
+
+-------------------------------------------------------------------------------
+--- Int
+-------------------------------------------------------------------------------
 
 instance
   IDHtml html =>
@@ -44,11 +54,19 @@ instance
   where
   dataUi = D.int_
 
+-------------------------------------------------------------------------------
+--- Boolean
+-------------------------------------------------------------------------------
+
 instance
   IDHtml html =>
   IDDataUI (IDSurface html) fm fs D.BooleanMsg D.BooleanState Boolean
   where
   dataUi = D.boolean_
+
+-------------------------------------------------------------------------------
+--- Number
+-------------------------------------------------------------------------------
 
 instance
   IDHtml html =>
@@ -56,12 +74,20 @@ instance
   where
   dataUi = D.number_
 
+-------------------------------------------------------------------------------
+--- Record
+-------------------------------------------------------------------------------
+
 instance
   ( DefaultRecord Tok html fm fs rmsg rsta row
   ) =>
   IDDataUI (IDSurface html) fm fs (D.RecordMsg rmsg) (D.RecordState rsta) (Record row)
   where
   dataUi = defaultRecord Tok
+
+-------------------------------------------------------------------------------
+--- Variant
+-------------------------------------------------------------------------------
 
 instance
   ( DefaultVariant Tok html fm fs rcase rmsg rsta row
@@ -80,6 +106,28 @@ instance
   IDDataUI (IDSurface html) fm fs msg sta (Maybe a)
   where
   dataUi = defaultGeneric_ @"Nothing" Tok Proxy "Maybe"
+
+-------------------------------------------------------------------------------
+--- Either
+-------------------------------------------------------------------------------
+
+instance
+  ( DefaultGeneric "Left" Tok html fm fs msg sta (Either a b)
+  ) =>
+  IDDataUI (IDSurface html) fm fs msg sta (Either a b)
+  where
+  dataUi = defaultGeneric_ @"Left" Tok Proxy "Either"
+
+--------------------------------------------------------------------------------
+--- Tuple
+--------------------------------------------------------------------------------
+
+instance
+  ( DefaultGeneric "Tuple" Tok html fm fs msg sta (Tuple a b)
+  ) =>
+  IDDataUI (IDSurface html) fm fs msg sta (Tuple a b)
+  where
+  dataUi = defaultGeneric_ @"Tuple" Tok Proxy "Tuple"
 
 --------------------------------------------------------------------------------
 --- Tok
