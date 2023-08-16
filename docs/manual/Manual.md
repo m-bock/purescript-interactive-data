@@ -7,8 +7,8 @@
 ## Table of Contents
 
 - Composing Data UIs
-  - [Primitives](Ch01ComposingDataUIs/Primitives.md)
-  - [Records](Ch01ComposingDataUIs/Records.md)
+  - [Primitives](Ch01ComposingDataUIs/Ch01Primitives.md)
+  - [Records](Ch01ComposingDataUIs/Ch02Records.md)
   - Custom ADTs
   - Refinement
 - Writing custom Data UIs
