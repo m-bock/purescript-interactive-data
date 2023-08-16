@@ -3,7 +3,7 @@
 
 <!-- START hide -->
 -}
-module InteractiveData.Manual.Ch01ComposingDataUIs.Ch01Records where
+module Manual.Ch01ComposingDataUIs.Ch01Records where
 
 {-
 <!-- END hide -->

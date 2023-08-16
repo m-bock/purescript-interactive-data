@@ -97,7 +97,7 @@ gen-manual: clean-manual
 
 gen-manual_:
     #!/bin/bash
-    PURS_PATH=manual/src/InteractiveData
+    PURS_PATH=demo/src
     MD_PATH=docs/manual
 
     FILE=Manual
