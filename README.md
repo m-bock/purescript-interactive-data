@@ -15,6 +15,7 @@ Composable UIs for interactive data.
 - [Features](#features)
 - [Use cases](#use-cases)
 - [Supported types](#supported-types)
+- [Documentation](#documentation)
 - [Getting started](#getting-started)
   - [Installation](#installation)
   - [Minimal complete example](#minimal-complete-example)
@@ -69,6 +70,11 @@ The following types are supported out of the box:
 - Refinement of existing types (smart constructor pattern)
 - Custom ADTs
 - Generic Json inputs for not yet supported types
+
+## Documentation
+
+- [API docs on Pursuit](https://pursuit.purescript.org/packages/purescript-interactive-data)
+- [Library Manual](docs/manual/Manual.md)
 
 ## Getting started
 

@@ -8,6 +8,13 @@ module InteractiveData.Manual where
 
 # Manual
 
+This is a work in progress manual for the `interactive-data` library.
+Not every chapter is written yet.
+However, you'll find examples for most features in the demo folder of this repo.
+
+The code samples in the following documents are type checked.
+At the top of each page you'll find the imports that are needed to run the samples.
+
 ## Table of Contents
 
 - Composing Data UIs
