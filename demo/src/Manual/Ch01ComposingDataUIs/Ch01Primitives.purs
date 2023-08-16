@@ -73,7 +73,7 @@ Some configuration options are applicable to every Data UI (e.g. `text`),
 others a specific for each type. Refer to the API docs to see which ones are
 available.
 
-## X
+## For the lazy people...
 
 There is also a polymorphic way to create primitive Data UIs. In this case no configuration options can be provided.
 -}
