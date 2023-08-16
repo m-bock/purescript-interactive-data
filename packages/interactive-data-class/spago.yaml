@@ -11,6 +11,7 @@ package:
       mvc,
       prelude,
       record,
+      tuples,
       variant
     ]
   name: interactive-data-class
