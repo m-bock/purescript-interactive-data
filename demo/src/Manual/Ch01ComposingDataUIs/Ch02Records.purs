@@ -11,7 +11,7 @@ module Manual.Ch01ComposingDataUIs.Ch01Records where
 -}
 
 import Data.Maybe (Maybe(..))
-import InteractiveData (SimpleDataUI)
+import InteractiveData (DataUI')
 import InteractiveData as ID
 
 {-
@@ -32,7 +32,7 @@ type User =
 Now we can create a Data UI with the `record_` function like this:
 -}
 
-sampleRecord :: SimpleDataUI _ _ User
+sampleRecord :: DataUI' _ _ User
 sampleRecord =
   ID.record_
     { name: ID.string_
@@ -47,7 +47,7 @@ works exactly like the configuration for the primitive types:
 
 -}
 
-sampleRecordOpts :: SimpleDataUI _ _ User
+sampleRecordOpts :: DataUI' _ _ User
 sampleRecordOpts =
   ID.record
     { text: Just "A sample User"
@@ -63,5 +63,5 @@ general `dataUi` function. The actual Data UI will be derived by the type.
 This example is equivalent to the `sampleRecord` value above.
 -}
 
-sampleRecord' :: SimpleDataUI _ _ User
+sampleRecord' :: DataUI' _ _ User
 sampleRecord' = ID.dataUi

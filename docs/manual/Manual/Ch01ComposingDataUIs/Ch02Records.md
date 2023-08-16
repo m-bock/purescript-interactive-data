@@ -9,7 +9,7 @@
 
 ```hs
 import Data.Maybe (Maybe(..))
-import InteractiveData (SimpleDataUI)
+import InteractiveData (DataUI')
 import InteractiveData as ID
 ```
 
@@ -33,7 +33,7 @@ Now we can create a Data UI with the `record_` function like this:
 
 
 ```hs
-sampleRecord :: SimpleDataUI _ _ User
+sampleRecord :: DataUI' _ _ User
 sampleRecord =
   ID.record_
     { name: ID.string_
@@ -49,7 +49,7 @@ works exactly like the configuration for the primitive types:
 
 
 ```hs
-sampleRecordOpts :: SimpleDataUI _ _ User
+sampleRecordOpts :: DataUI' _ _ User
 sampleRecordOpts =
   ID.record
     { text: Just "A sample User"
@@ -66,6 +66,6 @@ This example is equivalent to the `sampleRecord` value above.
 
 
 ```hs
-sampleRecord' :: SimpleDataUI _ _ User
+sampleRecord' :: DataUI' _ _ User
 sampleRecord' = ID.dataUi
 ```

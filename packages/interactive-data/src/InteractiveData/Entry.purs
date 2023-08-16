@@ -1,6 +1,6 @@
 module InteractiveData.Entry
   ( InteractiveDataApp
-  , SimpleDataUI
+  , DataUI'
   , ToAppCfg
   , ToAppMandatory
   , ToAppOptional
@@ -32,7 +32,7 @@ type InteractiveDataApp html msg sta a =
   , extract :: sta -> DataResult a
   }
 
-type SimpleDataUI msg sta typ =
+type DataUI' msg sta typ =
   forall html
    . IDHtml html
   => DataUI (IDSurface html) WrapMsg WrapState msg sta typ
