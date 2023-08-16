@@ -11,8 +11,8 @@ module InteractiveData.Manual where
 ## Table of Contents
 
 - Composing Data UIs
-  - [Primitives](Ch01ComposingDataUIs/Ch01Primitives.md)
-  - [Records](Ch01ComposingDataUIs/Ch02Records.md)
+  - [Primitives](Manual/Ch01ComposingDataUIs/Ch01Primitives.md)
+  - [Records](Manual/Ch01ComposingDataUIs/Ch02Records.md)
   - Custom ADTs
   - Refinement
 - Writing custom Data UIs
