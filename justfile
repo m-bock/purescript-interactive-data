@@ -78,7 +78,7 @@ clean-parcel:
 
 # Generate
 
-gen: gen-graph gen-readme gen-assets
+gen: gen-graph gen-readme gen-assets gen-manual
 
 gen-graph:
     dot -Tsvg assets/local-packages-graph.dot -o assets/local-packages-graph.svg
@@ -86,6 +86,34 @@ gen-graph:
 gen-readme:
     node scripts/gen-readme.js
     doctoc README.md
+
+clean-manual:
+    #!/bin/bash
+    MD_PATH=docs/manual
+    rm -rf $MD_PATH
+    
+gen-manual: clean-manual
+    just gen-manual_
+
+gen-manual_:
+    #!/bin/bash
+    PURS_PATH=manual/src/InteractiveData
+    MD_PATH=docs/manual
+
+    FILE=Manual
+    mkdir -p $MD_PATH/$(dirname $FILE)
+    purs-to-md --input-purs $PURS_PATH/$FILE.purs --output-md $MD_PATH/$FILE.md
+    node scripts/postprocess-manual-page.js $MD_PATH/$FILE.md
+
+    FILE=Manual/Ch01ComposingDataUIs/Ch01Primitives
+    mkdir -p $MD_PATH/$(dirname $FILE)
+    purs-to-md --input-purs $PURS_PATH/$FILE.purs --output-md $MD_PATH/$FILE.md
+    node scripts/postprocess-manual-page.js $MD_PATH/$FILE.md
+
+    FILE=Manual/Ch01ComposingDataUIs/Ch02Records
+    mkdir -p $MD_PATH/$(dirname $FILE)
+    purs-to-md --input-purs $PURS_PATH/$FILE.purs --output-md $MD_PATH/$FILE.md
+    node scripts/postprocess-manual-page.js $MD_PATH/$FILE.md
 
 gen-assets:
     purs-virtual-dom-assets \

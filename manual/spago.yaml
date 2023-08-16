@@ -1,0 +1,27 @@
+package:
+  name: interactive-data-manual
+  dependencies:
+    - argonaut
+    - argonaut-generic
+    - chameleon
+    - chameleon-halogen
+    - chameleon-react-basic
+    - console
+    - effect
+    - either
+    - foldable-traversable
+    - integers
+    - interactive-data
+    - interactive-data-app
+    - interactive-data-core
+    - maybe
+    - newtype
+    - prelude
+    - react-basic-dom
+    - react-basic-hooks
+    - strings
+    - tuples
+    - variant
+  test:
+    dependencies: []
+    main: Test.Main

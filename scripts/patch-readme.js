@@ -1,12 +1,16 @@
 const patchSection = (name, patch) => (source) => {
   const regex = mkRegex(name);
-  const replace = mkReplace(name)(patch);
+  const replace = (_, content) => {
+    const newContent = typeof patch === "function" ? patch(content) : patch;
+
+    return mkReplace(name)(newContent);
+  };
 
   return source.replace(regex, replace);
 };
 
 const mkRegex = (name) =>
-  new RegExp(`<!-- START ${name} -->[\\s\\S]*<!-- END ${name} -->`, "g");
+  new RegExp(`<!-- START ${name} -->([\\s\\S]*)<!-- END ${name} -->`, "g");
 
 const mkReplace = (name) => (patch) =>
   `<!-- START ${name} -->\n${patch.trim()}\n<!-- END ${name} -->`;

@@ -71,6 +71,7 @@ import InteractiveData.Class.Partial
 
 import InteractiveData.Entry
   ( toApp
+  , SimpleDataUI
   ) as Export
 
 import DataMVC.Types
