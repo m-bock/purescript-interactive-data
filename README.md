@@ -106,9 +106,7 @@ The following example renders with `Halogen`. Have a look at the demo folder for
 <!-- START demoApp -->
 *src/Main.purs:*
 ```hs
-module Main
-  ( main
-  ) where
+module Main (main) where
 
 import Prelude
 
