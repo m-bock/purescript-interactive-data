@@ -22,12 +22,16 @@ install:
 
 # Dist
 
+clean-dist:
+    rm -rf dist
+
+dist: clean-dist dist-examples dist-mdbook
+
 dist-examples:
     #!/usr/bin/env bash
     set -euxo pipefail
     rm -f output/package.json
     rm -rf .parcel-cache
-    rm -rf dist
     main_dir="purescript-interactive-data"; \
     export VERSION=$(git rev-parse HEAD); \
     for dir in demo/src/Demo/Samples/*/; do \
@@ -78,7 +82,7 @@ clean-parcel:
 
 # Generate
 
-gen: gen-graph gen-readme gen-assets gen-manual
+gen: gen-graph gen-readme gen-assets gen-mdbook
 
 gen-graph:
     dot -Tsvg assets/local-packages-graph.dot -o assets/local-packages-graph.svg
@@ -87,14 +91,11 @@ gen-readme:
     node scripts/gen-readme.js
     doctoc README.md
 
-clean-manual:
-    #!/bin/bash
-    MD_PATH=docs/manual
-    rm -rf $MD_PATH
-
-gen-manual:
+gen-mdbook:
     #!/bin/bash
     node scripts/gen-mdbook.js
+
+dist-mdbook:
     mdbook build mdbook --dest-dir ../dist/purescript-interactive-data/manual
 
 gen-assets:
@@ -118,7 +119,7 @@ suggest-apply:
 
 # CI
 
-ci_: install format gen build build-strict dist-examples check-git-clean
+ci_: install format gen build build-strict dist check-git-clean
 
 ci: clean
     just ci_

@@ -86,7 +86,7 @@ The following types are supported out of the box:
    spago install interactive-data
    ```
 
-2. Install a virtual dom implementation, e.g. on of the following:
+2. Install a virtual dom implementation, e.g. one of the following:
 
    ```
    spago install chameleon-halogen

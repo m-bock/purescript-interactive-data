@@ -17,7 +17,7 @@ dummy = 1
    spago install interactive-data
    ```
 
-2. Install a virtual dom implementation, e.g. on of the following:
+2. Install a virtual dom implementation, e.g. one of the following:
 
    ```
    spago install chameleon-halogen
