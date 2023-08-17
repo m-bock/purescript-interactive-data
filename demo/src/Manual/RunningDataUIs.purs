@@ -11,5 +11,5 @@ dummy = 1
 
 # Running Data UIs
 
-* coming soon *
+*coming soon*
 -}

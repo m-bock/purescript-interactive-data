@@ -3,4 +3,12 @@ authors = ["Michael Bock"]
 language = "en"
 multilingual = false
 src = "src"
-title = "Manual"
+title = "interactive-data library manual"
+
+[build]
+create-missing = false
+
+[output.html]
+git-repository-url = "https://github.com/thought2/purescript-interactive-data"
+git-repository-icon = "fa-github"
+site-url = "/purescript-interactive-data/"

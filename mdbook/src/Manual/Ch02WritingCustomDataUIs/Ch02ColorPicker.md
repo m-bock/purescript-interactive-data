@@ -1,1 +1,0 @@
-# Example: A color picker

@@ -91,29 +91,11 @@ clean-manual:
     #!/bin/bash
     MD_PATH=docs/manual
     rm -rf $MD_PATH
-    
-gen-manual: clean-manual
-    just gen-manual_
 
-gen-manual_:
+gen-manual:
     #!/bin/bash
-    PURS_PATH=demo/src
-    MD_PATH=mdbook/src
-
-    FILE=Manual
-    mkdir -p $MD_PATH/$(dirname $FILE)
-    purs-to-md --input-purs $PURS_PATH/$FILE.purs --output-md $MD_PATH/$FILE.md
-    node scripts/postprocess-manual-page.js $MD_PATH/$FILE.md
-
-    FILE=Manual/Ch01ComposingDataUIs/Ch01Primitives
-    mkdir -p $MD_PATH/$(dirname $FILE)
-    purs-to-md --input-purs $PURS_PATH/$FILE.purs --output-md $MD_PATH/$FILE.md
-    node scripts/postprocess-manual-page.js $MD_PATH/$FILE.md
-
-    FILE=Manual/Ch01ComposingDataUIs/Ch02Records
-    mkdir -p $MD_PATH/$(dirname $FILE)
-    purs-to-md --input-purs $PURS_PATH/$FILE.purs --output-md $MD_PATH/$FILE.md
-    node scripts/postprocess-manual-page.js $MD_PATH/$FILE.md
+    node scripts/gen-mdbook.js
+    mdbook build mdbook --dest-dir ../dist/purescript-interactive-data/manual
 
 gen-assets:
     purs-virtual-dom-assets \

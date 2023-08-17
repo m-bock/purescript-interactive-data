@@ -11,3 +11,5 @@
 /.parcel-cache
 /dist
 /tmp
+/mdbook/book
+/mdbook/src/generated
