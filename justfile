@@ -41,6 +41,9 @@ dist-examples:
         parcel build --dist-dir dist/$main_dir/$name --public-url /$main_dir/$name/ $dir/index.html ; \
     done
 
+dist-mdbook:
+    mdbook build mdbook --dest-dir ../dist/purescript-interactive-data/manual
+
 serve-dist:
     http-server dist
 
@@ -94,9 +97,6 @@ gen-readme:
 gen-mdbook:
     #!/bin/bash
     node scripts/gen-mdbook.js
-
-dist-mdbook:
-    mdbook build mdbook --dest-dir ../dist/purescript-interactive-data/manual
 
 gen-assets:
     purs-virtual-dom-assets \

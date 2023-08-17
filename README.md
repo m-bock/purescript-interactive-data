@@ -74,7 +74,7 @@ The following types are supported out of the box:
 ## Documentation
 
 - [API docs on Pursuit](https://pursuit.purescript.org/packages/purescript-interactive-data)
-- [Library Manual](docs/manual/Manual.md)
+- [Library Manual](https://thought2.github.io/purescript-interactive-data/manual)
 
 ## Getting started
 
@@ -94,9 +94,10 @@ The following types are supported out of the box:
    ```
 
 3. Install a bundler, e.g.:
-
+   
    ```
-   npm in
+   npm install --dev --save parcel
+   ```
 
 ### Minimal complete example
 
