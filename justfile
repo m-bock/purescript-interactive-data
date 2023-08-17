@@ -98,7 +98,7 @@ gen-manual: clean-manual
 gen-manual_:
     #!/bin/bash
     PURS_PATH=demo/src
-    MD_PATH=docs/manual
+    MD_PATH=mdbook/src
 
     FILE=Manual
     mkdir -p $MD_PATH/$(dirname $FILE)

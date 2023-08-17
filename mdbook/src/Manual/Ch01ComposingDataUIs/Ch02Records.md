@@ -29,6 +29,8 @@ type User =
   }
 ```
 
+
+## Without configuration
 Now we can create a Data UI with the `record_` function like this:
 
 
@@ -43,6 +45,7 @@ sampleRecord =
 ```
 
 
+## With configuration
 If the `_` is omitted configuration options can be provided for the record. This
 works exactly like the configuration for the primitive types:
 
@@ -59,6 +62,9 @@ sampleRecordOpts =
     , address: ID.string_
     }
 ```
+
+
+## Using the general `dataUi` function
 
 If you just want to use the default options for each field, you can also use the
 general `dataUi` function. The actual Data UI will be derived by the type.

@@ -40,6 +40,7 @@
             pkgs.just
             pkgs.purescript
             pkgs.graphviz
+            pkgs.mdbook
           ];
         };
       }

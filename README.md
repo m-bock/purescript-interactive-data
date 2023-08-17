@@ -86,17 +86,17 @@ The following types are supported out of the box:
    spago install interactive-data
    ```
 
-2. Install a virtual dom implementation, e.g.:
+2. Install a virtual dom implementation, e.g. on of the following:
 
    ```
    spago install chameleon-halogen
+   spago install chameleon-react-basic
    ```
 
 3. Install a bundler, e.g.:
 
    ```
-   npm install --dev --save parcel
-   ```
+   npm in
 
 ### Minimal complete example
 
