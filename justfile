@@ -156,7 +156,7 @@ dev-manual:
 
     trap "echo cleanup...; pkill -P "$$"; exit" SIGINT SIGTERM EXIT
 
-    chokidar "demo/Manual/**/*.purs" -c "node scripts/gen-mdbook.js --file {path}" &
+    chokidar "demo/src/Manual/**/*.purs" -c "node scripts/gen-mdbook.js --file {path}" &
 
     mdbook serve mdbook &
 

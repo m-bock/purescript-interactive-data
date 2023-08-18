@@ -3,7 +3,6 @@
 -}
 module Manual.ComposingDataUIs where
 
-import Data.Argonaut ((.!=))
 
 dummy :: Int
 dummy = 1

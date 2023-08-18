@@ -71,3 +71,32 @@ This example is equivalent to the `sampleRecord` value above.
 
 sampleRecord' :: DataUI' _ _ User
 sampleRecord' = ID.dataUi
+
+{-
+
+## Using the `recordPartial_` function
+
+For now we have seen two ways to create Data UIs for Records.
+The first one is to use the `record_` function.
+It is the most flexible way to create a Data UI for a Record.
+But it is also the most verbose one.
+Then there is the `dataUi` function.
+It is the most concise way to create a Data UI for a Record.
+But also there is no way to configure the Data UI.
+
+Can we get the best of both worlds?
+-}
+
+sampleRecord'' :: DataUI' _ _ User
+sampleRecord'' =
+  ID.recordPartial_
+    { name: ID.string_
+    , age: ID.int_
+    }
+
+{-
+As you can see, we can make use of the `recordPartial_` function.
+It is similar to the `record_` function, but it allows us to omit some fields.
+Here we have omitted the `address` field.
+The omitted fields will be derived by the defaults for the type.
+-}
