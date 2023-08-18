@@ -19,7 +19,11 @@ import InteractiveData as ID
 
 In the previous chapter we've seen how to create Data UIs for primitive data types.
 
-Data UIs can also be created for Records. Let's assume we have defined the following Record type alias:
+Data UIs can also be created for Records. 
+
+## Defining a Record type alias
+
+Let's assume we have defined the following Record type alias:
 -}
 
 type User =
@@ -30,7 +34,7 @@ type User =
 
 {-
 
-## Without configuration
+## Simple Data UIs without configuration
 Now we can create a Data UI with the `record_` function like this:
 -}
 
@@ -44,7 +48,7 @@ sampleRecord =
 
 {-
 
-## With configuration
+## Adding configuration to the Data UIs
 If the `_` is omitted configuration options can be provided for the record. This
 works exactly like the configuration for the primitive types:
 
