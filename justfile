@@ -146,7 +146,7 @@ open-all-files:
 # Spelling
 
 spell:
-    cspell lint --config cspell.config.yaml
+    cspell lint --no-progress --config cspell.config.yaml
 
 # Dev
 

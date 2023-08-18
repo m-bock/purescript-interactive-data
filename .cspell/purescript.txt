@@ -20,3 +20,4 @@ signum
 hmap
 combinators
 unsnoc
+snoc
