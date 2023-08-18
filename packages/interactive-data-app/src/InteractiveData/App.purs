@@ -6,3 +6,8 @@ import InteractiveData.App.WrapApp
   , AppSelfMsg
   , wrapApp
   ) as Export
+
+import InteractiveData.App.WrapData
+  ( WrapMsg
+  , WrapState
+  ) as Export

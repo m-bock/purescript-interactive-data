@@ -57,8 +57,8 @@ and the UI is limited to only create integer values between `0` and `100`.
 
 -}
 
-sampleIntWithOpts :: DataUI' _ _ Int
-sampleIntWithOpts = ID.int
+sampleInt2 :: DataUI' _ _ Int
+sampleInt2 = ID.int
   { text: Just "The Age of a person"
   , min: 0
   , max: 100
@@ -78,5 +78,16 @@ available.
 There is also a polymorphic way to create primitive Data UIs. In this case no configuration options can be provided.
 -}
 
-sampleInt' :: DataUI' _ _ Int
-sampleInt' = ID.dataUi
+sampleInt3 :: DataUI' _ _ Int
+sampleInt3 = ID.dataUi
+
+{-
+
+## What's behind the wildcards?
+
+Each Data UI has a message type and a state type.
+The two type arguments which are omitted above look like this if they are not hidden:
+-}
+
+sampleInt4 :: DataUI' ID.IntMsg ID.IntState Int
+sampleInt4 = ID.int_

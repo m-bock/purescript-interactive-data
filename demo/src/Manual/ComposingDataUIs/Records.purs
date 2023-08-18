@@ -38,8 +38,8 @@ type User =
 Now we can create a Data UI with the `record_` function like this:
 -}
 
-sampleRecord :: DataUI' _ _ User
-sampleRecord =
+sampleRecord1 :: DataUI' _ _ User
+sampleRecord1 =
   ID.record_
     { name: ID.string_
     , age: ID.int_
@@ -54,8 +54,8 @@ works exactly like the configuration for the primitive types:
 
 -}
 
-sampleRecordOpts :: DataUI' _ _ User
-sampleRecordOpts =
+sampleRecord2 :: DataUI' _ _ User
+sampleRecord2 =
   ID.record
     { text: Just "A sample User"
     }
@@ -73,8 +73,8 @@ general `dataUi` function. The actual Data UI will be derived by the type.
 This example is equivalent to the `sampleRecord` value above.
 -}
 
-sampleRecord' :: DataUI' _ _ User
-sampleRecord' = ID.dataUi
+sampleRecord3 :: DataUI' _ _ User
+sampleRecord3 = ID.dataUi
 
 {-
 
@@ -91,8 +91,8 @@ But also there is no way to configure the Data UI.
 Can we get the best of both worlds?
 -}
 
-sampleRecord'' :: DataUI' _ _ User
-sampleRecord'' =
+sampleRecord4 :: DataUI' _ _ User
+sampleRecord4 =
   ID.recordPartial_
     { name: ID.string_
     , age: ID.int_
@@ -103,4 +103,31 @@ As you can see, we can make use of the `recordPartial_` function.
 It is similar to the `record_` function, but it allows us to omit some fields.
 Here we have omitted the `address` field.
 The omitted fields will be derived by the defaults for the type.
+
+## What's behind the wildcards?
+
+The wildcards contain the computed types for the `Msg` and `State` of the Data UI.
+Usually you don't need to care about these types.
+The larger your Data UIs get, the more nested these types will be.
+So generally it's a good idea to either use the wildcards
+or keep the final UI composition in a `let` or `where` clause.
+
+Here's the same example as above, but with the wildcards expanded:
 -}
+
+sampleRecord5
+  :: DataUI'
+       ( ID.RecordMsg
+           ( address :: ID.WrapMsg ID.StringMsg
+           , age :: ID.WrapMsg ID.IntMsg
+           , name :: ID.WrapMsg ID.StringMsg
+           )
+       )
+       ( ID.RecordState
+           ( address :: ID.WrapState ID.StringState
+           , age :: ID.WrapState ID.IntState
+           , name :: ID.WrapState ID.StringState
+           )
+       )
+       User
+sampleRecord5 = ID.dataUi

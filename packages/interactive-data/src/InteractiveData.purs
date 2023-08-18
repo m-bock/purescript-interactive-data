@@ -95,3 +95,8 @@ import DataMVC.Types.DataError
   , scopeErrors
   , scopeOpt
   ) as Export
+
+import InteractiveData.App
+  ( WrapMsg
+  , WrapState
+  ) as Export
