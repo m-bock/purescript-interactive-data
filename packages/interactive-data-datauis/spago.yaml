@@ -6,6 +6,7 @@ package:
     - chameleon
     - data-mvc
     - either
+    - foldable-traversable
     - heterogeneous
     - interactive-data-app
     - interactive-data-core

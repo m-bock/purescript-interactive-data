@@ -59,8 +59,8 @@ format:
 
 dev: clean-parcel
     #!/bin/bash
-    export SAMPLE=SimpleHalogen
-    parcel demo/static/index.html
+    export SAMPLE=HalogenFullscreen
+    parcel demo/src/Demo/Samples/$SAMPLE/index.html
 
 run-example: build clean-parcel
     #!/bin/bash
