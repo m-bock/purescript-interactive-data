@@ -3,7 +3,6 @@
 -}
 module Manual.ComposingDataUIs where
 
-
 dummy :: Int
 dummy = 1
 
