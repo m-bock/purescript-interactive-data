@@ -84,7 +84,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="generated/Introduction.html">Introduction</a></li><li class="chapter-item expanded affix "><a href="generated/Installation.html">Installation</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">User Guide</li><li class="chapter-item expanded "><div><strong aria-hidden="true">1.</strong> Composing Data UIs</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="generated/ComposingDataUIs/Primitives.html"><strong aria-hidden="true">1.1.</strong> Primitives</a></li><li class="chapter-item expanded "><a href="generated/ComposingDataUIs/Records.html"><strong aria-hidden="true">1.2.</strong> Records</a></li><li class="chapter-item expanded "><div><strong aria-hidden="true">1.3.</strong> Custom ADTs</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">1.4.</strong> Refinement</div></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">2.</strong> Writing custom Data UIs</div></li><li><ol class="section"><li class="chapter-item expanded "><div><strong aria-hidden="true">2.1.</strong> Example: A color picker</div></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.</strong> Running Data UIs</div></li><li><ol class="section"><li class="chapter-item expanded "><div><strong aria-hidden="true">3.1.</strong> Halogen</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.2.</strong> React Basic</div></li></ol></li><li class="chapter-item expanded "><li class="part-title">Appendix</li><li class="chapter-item expanded "><a href="generated/Glossary.html"><strong aria-hidden="true">4.</strong> Glossary</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="generated/Introduction.html">Introduction</a></li><li class="chapter-item expanded affix "><a href="generated/Installation.html">Installation</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">User Guide</li><li class="chapter-item expanded "><a href="generated/ComposingDataUIs.html"><strong aria-hidden="true">1.</strong> Composing Data UIs</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="generated/ComposingDataUIs/Primitives.html"><strong aria-hidden="true">1.1.</strong> Primitives</a></li><li class="chapter-item expanded "><a href="generated/ComposingDataUIs/Records.html"><strong aria-hidden="true">1.2.</strong> Records</a></li><li class="chapter-item expanded "><div><strong aria-hidden="true">1.3.</strong> Custom ADTs</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">1.4.</strong> Refinement</div></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">2.</strong> Writing custom Data UIs</div></li><li><ol class="section"><li class="chapter-item expanded "><div><strong aria-hidden="true">2.1.</strong> Example: A color picker</div></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.</strong> Running Data UIs</div></li><li><ol class="section"><li class="chapter-item expanded "><div><strong aria-hidden="true">3.1.</strong> Halogen</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.2.</strong> React Basic</div></li></ol></li><li class="chapter-item expanded "><li class="part-title">Appendix</li><li class="chapter-item expanded "><a href="generated/Glossary.html"><strong aria-hidden="true">4.</strong> Glossary</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -201,6 +201,19 @@ you need an adapter that will turn it into framework specific views.</p>
 </code></pre>
 </li>
 </ol>
+<div style="break-before: page; page-break-before: always;"></div><!-- START hide -->
+<!-- END hide -->
+<h1 id="composing-data-uis"><a class="header" href="#composing-data-uis">Composing Data UIs</a></h1>
+<p>In the following sections we will look at how to compose Data UIs.
+They'll appear in the following form:</p>
+<pre><code class="language-hs">DataUI' _ _ SomeType
+</code></pre>
+<p>The <code>DataUI'</code> type is a simplified version of <code>DataUI</code>.
+It hides some details which are not relevant here.</p>
+<p>Most of the time the first two type parameters are omitted.
+We do so by using the <code>_</code> wildcard.
+It may be helpful o disable the wildcard warnings and completions in your editor.
+Refer to the manual of the PureScript IDE plugin for more information.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="data-uis-for-primitive-types"><a class="header" href="#data-uis-for-primitive-types">Data UIs for Primitive types</a></h1>
 <!-- START hide -->
 <!-- END hide -->
@@ -271,14 +284,16 @@ import InteractiveData as ID
 </details><hr><br>
 <!-- END imports -->
 <p>In the previous chapter we've seen how to create Data UIs for primitive data types.</p>
-<p>Data UIs can also be created for Records. Let's assume we have defined the following Record type alias:</p>
+<p>Data UIs can also be created for Records. </p>
+<h2 id="defining-a-record-type-alias"><a class="header" href="#defining-a-record-type-alias">Defining a Record type alias</a></h2>
+<p>Let's assume we have defined the following Record type alias:</p>
 <pre><code class="language-hs">type User =
   { name :: String
   , age :: Int
   , address :: String
   }
 </code></pre>
-<h2 id="without-configuration"><a class="header" href="#without-configuration">Without configuration</a></h2>
+<h2 id="simple-data-uis-without-configuration"><a class="header" href="#simple-data-uis-without-configuration">Simple Data UIs without configuration</a></h2>
 <p>Now we can create a Data UI with the <code>record_</code> function like this:</p>
 <pre><code class="language-hs">sampleRecord :: DataUI' _ _ User
 sampleRecord =
@@ -288,7 +303,7 @@ sampleRecord =
     , address: ID.string_
     }
 </code></pre>
-<h2 id="with-configuration"><a class="header" href="#with-configuration">With configuration</a></h2>
+<h2 id="adding-configuration-to-the-data-uis"><a class="header" href="#adding-configuration-to-the-data-uis">Adding configuration to the Data UIs</a></h2>
 <p>If the <code>_</code> is omitted configuration options can be provided for the record. This
 works exactly like the configuration for the primitive types:</p>
 <pre><code class="language-hs">sampleRecordOpts :: DataUI' _ _ User
@@ -308,6 +323,26 @@ This example is equivalent to the <code>sampleRecord</code> value above.</p>
 <pre><code class="language-hs">sampleRecord' :: DataUI' _ _ User
 sampleRecord' = ID.dataUi
 </code></pre>
+<h2 id="using-the-recordpartial_-function"><a class="header" href="#using-the-recordpartial_-function">Using the <code>recordPartial_</code> function</a></h2>
+<p>For now we have seen two ways to create Data UIs for Records.
+The first one is to use the <code>record_</code> function.
+It is the most flexible way to create a Data UI for a Record.
+But it is also the most verbose one.
+Then there is the <code>dataUi</code> function.
+It is the most concise way to create a Data UI for a Record.
+But also there is no way to configure the Data UI.</p>
+<p>Can we get the best of both worlds?</p>
+<pre><code class="language-hs">sampleRecord'' :: DataUI' _ _ User
+sampleRecord'' =
+  ID.recordPartial_
+    { name: ID.string_
+    , age: ID.int_
+    }
+</code></pre>
+<p>As you can see, we can make use of the <code>recordPartial_</code> function.
+It is similar to the <code>record_</code> function, but it allows us to omit some fields.
+Here we have omitted the <code>address</code> field.
+The omitted fields will be derived by the defaults for the type.</p>
 <div style="break-before: page; page-break-before: always;"></div><!-- START hide -->
 <!-- END hide -->
 <h1 id="glossary"><a class="header" href="#glossary">Glossary</a></h1>
