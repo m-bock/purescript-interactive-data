@@ -84,7 +84,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="generated/Introduction.html">Introduction</a></li><li class="chapter-item expanded affix "><a href="generated/Installation.html">Installation</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">User Guide</li><li class="chapter-item expanded "><div><strong aria-hidden="true">1.</strong> Composing Data UIs</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="generated/ComposingDataUIs/Primitives.html"><strong aria-hidden="true">1.1.</strong> Primitives</a></li><li class="chapter-item expanded "><a href="generated/ComposingDataUIs/Records.html"><strong aria-hidden="true">1.2.</strong> Records</a></li><li class="chapter-item expanded "><div><strong aria-hidden="true">1.3.</strong> Custom ADTs</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">1.4.</strong> Refinement</div></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">2.</strong> Writing custom Data UIs</div></li><li><ol class="section"><li class="chapter-item expanded "><div><strong aria-hidden="true">2.1.</strong> Example: A color picker</div></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.</strong> Running Data UIs</div></li><li><ol class="section"><li class="chapter-item expanded "><div><strong aria-hidden="true">3.1.</strong> Halogen</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.2.</strong> React Basic</div></li></ol></li><li class="chapter-item expanded "><li class="part-title">Appendix</li><li class="chapter-item expanded "><div><strong aria-hidden="true">4.</strong> Glossary</div></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="generated/Introduction.html">Introduction</a></li><li class="chapter-item expanded affix "><a href="generated/Installation.html">Installation</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">User Guide</li><li class="chapter-item expanded "><div><strong aria-hidden="true">1.</strong> Composing Data UIs</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="generated/ComposingDataUIs/Primitives.html"><strong aria-hidden="true">1.1.</strong> Primitives</a></li><li class="chapter-item expanded "><a href="generated/ComposingDataUIs/Records.html"><strong aria-hidden="true">1.2.</strong> Records</a></li><li class="chapter-item expanded "><div><strong aria-hidden="true">1.3.</strong> Custom ADTs</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">1.4.</strong> Refinement</div></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">2.</strong> Writing custom Data UIs</div></li><li><ol class="section"><li class="chapter-item expanded "><div><strong aria-hidden="true">2.1.</strong> Example: A color picker</div></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.</strong> Running Data UIs</div></li><li><ol class="section"><li class="chapter-item expanded "><div><strong aria-hidden="true">3.1.</strong> Halogen</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.2.</strong> React Basic</div></li></ol></li><li class="chapter-item expanded "><li class="part-title">Appendix</li><li class="chapter-item expanded "><a href="generated/Glossary.html"><strong aria-hidden="true">4.</strong> Glossary</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -308,6 +308,85 @@ This example is equivalent to the <code>sampleRecord</code> value above.</p>
 <pre><code class="language-hs">sampleRecord' :: DataUI' _ _ User
 sampleRecord' = ID.dataUi
 </code></pre>
+<div style="break-before: page; page-break-before: always;"></div><!-- START hide -->
+<!-- END hide -->
+<h1 id="glossary"><a class="header" href="#glossary">Glossary</a></h1>
+<h2 id="common-types"><a class="header" href="#common-types">Common Types</a></h2>
+<table>
+    <tr>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+<tr></tr>
+<!-- ---------------------------------------------------------- -->
+<tr valign="top">
+<td>
+<!-- START removeType -->
+<pre><code class="language-hs">DataUI' msg sta a
+</code></pre>
+<!-- END removeType -->
+</td>
+<td>
+<p>Simplified version of the <code>DataUI</code> type</p>
+<ul>
+<li><code>msg</code> is the type of messages that can be sent to the UI</li>
+<li><code>sta</code> is the type of the state of the UI</li>
+<li><code>a</code> is the type of the data that the UI is about</li>
+</ul>
+</td>
+</tr>
+<tr></tr>
+<!-- ---------------------------------------------------------- -->
+<tr valign="top">
+<td>
+<!-- START removeType -->
+<pre><code class="language-hs">DataUI
+  srf
+  fm
+  fs
+  msg
+  sta
+  a
+</code></pre>
+<!-- END removeType -->
+</td>
+<td>
+<p>General type for Data UIs</p>
+<ul>
+<li><code>srf</code> is the type of the surface of the UI (Typically some HTML)</li>
+<li><code>fm</code> is the type of a wrapping functor applied to the messages of each Data UI layer</li>
+<li><code>fs</code> is the type of a wrapping functor applied to the state of each Data UI layer</li>
+<li><code>msg</code> is the type of messages that can be sent to the UI</li>
+<li><code>sta</code> is the type of the state of the UI</li>
+<li><code>a</code> is the type of the data that the UI is about</li>
+</ul>
+</td>
+</tr>
+<tr></tr>
+<!-- ---------------------------------------------------------- -->
+<tr valign="top">
+<td>
+<!-- START removeType -->
+<pre><code class="language-hs">ViewMode
+</code></pre>
+<!-- END removeType -->
+</td>
+<td>
+<p>Each Data UI can render itself in two modes:</p>
+<ul>
+<li><code>Standalone</code>: The UI is rendered as a standalone page</li>
+<li><code>Inline</code>: The UI is rendered as an inline embed inside a parent UI</li>
+</ul>
+<p>Usually the inline rendering is a subset of the standalone rendering.
+And it's UI is much more compact.</p>
+<p>Taking <code>String</code> as an example:
+The standalone rendering of a <code>String</code> will appear as a multiline text box.
+The inline rendering of a <code>String</code> will appear as a single line text box.</p>
+</td>
+</tr>
+<tr></tr>
+<!-- ---------------------------------------------------------- -->
+</table>
 
                     </main>
 
