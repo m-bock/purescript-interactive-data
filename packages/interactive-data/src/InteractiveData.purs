@@ -6,6 +6,11 @@ import InteractiveData.DataUIs
   , string
   , string_
 
+  , ArrayMsg
+  , ArrayState
+  , array
+  , array_
+
   , NumberMsg
   , NumberState
   , number

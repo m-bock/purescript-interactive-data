@@ -11,7 +11,7 @@ import Chameleon as C
 import Chameleon.Transformers.Ctx.Class (class Ctx, putCtx, withCtx)
 import Chameleon.Transformers.OutMsg.Class (runOutMsg)
 import Data.Array.NonEmpty as NEA
-import Data.Either (either)
+import Data.Either (Either(..), either, note)
 import Data.Maybe (Maybe(..))
 import Data.Newtype (un)
 import Data.These (These(..))
@@ -89,15 +89,15 @@ view
   -> DataTree html (AppMsg msg)
 view view' state@(AppState { selectedPath }) =
   let
-    maybeDataTrees :: Maybe (DataTrees html msg)
-    maybeDataTrees = getDataTrees view' state
+    eitherDataTrees :: Either String (DataTrees html msg)
+    eitherDataTrees = getDataTrees view' state
 
     view'' :: html (AppSelfMsg msg)
-    view'' = case maybeDataTrees of
-      Nothing ->
-        viewNotFound { selectedPath }
+    view'' = case eitherDataTrees of
+      Left reason ->
+        viewNotFound { selectedPath, reason }
 
-      Just dataTrees ->
+      Right dataTrees ->
         viewFound dataTrees state
 
     viewOut :: html (AppMsg msg)
@@ -114,15 +114,16 @@ view view' state@(AppState { selectedPath }) =
 viewNotFound
   :: forall html msg
    . IDHtml html
-  => { selectedPath :: Array String }
+  => { selectedPath :: Array String, reason :: String }
   -> html (AppSelfMsg msg)
-viewNotFound { selectedPath } =
+viewNotFound { selectedPath, reason } =
   UILayout.view
     { viewHeader: C.noHtml
     , viewBody:
         UINotFound.view
           { path: selectedPath
           , onBackToHome: SetSelectedPath mempty
+          , reason
           }
     , viewSidebar: Nothing
     , viewFooter: Nothing
@@ -212,7 +213,7 @@ getDataTrees
   => IDHtml html
   => (sta -> DataTree html msg)
   -> AppState sta
-  -> Maybe (DataTrees html msg)
+  -> Either String (DataTrees html msg)
 getDataTrees view' (AppState { dataState, selectedPath }) = do
 
   -- Global
@@ -223,19 +224,24 @@ getDataTrees view' (AppState { dataState, selectedPath }) = do
 
   selectedDataPath :: Array DataPathSegment <-
     dataPathFromStrings selectedPath globalDataTree
+      # note "Selected path not found"
 
   globalMeta :: TreeMeta <-
     globalDataTree # un DataTree # _.meta
+      # note "Global meta not found"
 
   sumTree <- sumTree globalDataTree <#> _.tree
+    # note "Sum tree not found"
 
   -- Selected
 
   selectedDataTree :: DataTree html msg <-
     DT.find selectedDataPath globalDataTree
+      # note "Selected data tree not found"
 
   selectedMeta :: TreeMeta <-
     selectedDataTree # un DataTree # _.meta
+      # note "Selected meta not found"
 
   pure
     { global:

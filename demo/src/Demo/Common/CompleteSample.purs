@@ -34,6 +34,8 @@ type Sample =
       , result :: Either String Int
       , switch :: Boolean
       , items :: Array { x :: Int, y :: Int }
+      , items2 :: Array { x :: Int, y :: Int }
+      , items3 :: Array String
       }
   , meta ::
       { description :: String
@@ -105,6 +107,8 @@ sampleDataUi = ID.record_
             , typeName: "Array { x :: Int, y :: Int }"
             , text: Just "For types that don't have a Data UI implementation (yet) one can use the generic Json Data UI"
             }
+        , items2: ID.array_ ID.dataUi
+        , items3: ID.array_ ID.string_
         }
   , meta: ID.record
       { text: Just "Some sample meta data"

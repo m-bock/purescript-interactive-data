@@ -13,7 +13,9 @@ import Chameleon as C
 import Data.Array as Array
 import Data.FunctorWithIndex (mapWithIndex)
 import Data.Traversable (traverse)
-import DataMVC.Types.DataUI (runDataUi)
+import DataMVC.Types.DataUI (applyWrap, runDataUi)
+import InteractiveData.App.UI.ActionButton as UIActionButton
+import InteractiveData.Core.Types.DataTree as DT
 import InteractiveData.Core.Types.IDSurface (runIdSurface)
 
 -------------------------------------------------------------------------------
@@ -98,7 +100,11 @@ view cfg (ArrayState items) =
   withCtx \ctx ->
     let
       el =
-        { root: C.div
+        { root: styleNode C.div
+            [ "display: flex"
+            , "flex-direction: column"
+            , "gap: 20px"
+            ]
         , item: C.div
         }
 
@@ -111,8 +117,7 @@ view cfg (ArrayState items) =
             ( items #
                 mapWithIndex \index item ->
                   el.item []
-                    [ C.text (show index <> ": ")
-                    , viewItem (pick cfg) index item
+                    [ viewItem (pick cfg) index item
                     ]
             )
         Inline ->
@@ -128,21 +133,43 @@ viewItem
   -> sta
   -> html (ArrayMsg msg)
 viewItem item index state =
-  withCtx \_ ->
+  withCtx \ctx ->
     let
       el =
-        { root: C.div
-        , delete: C.button
+        { root: styleNode C.div
+            [ "display: flex"
+            , "align-items: flex-start"
+            , "justify-content: space-between"
+            ]
+        , item: styleNode C.div
+            [ "width: 100%"
+            ]
+        , actions: C.div
         }
+
+      newPath = ctx.path <> [ SegField $ SegDynamicIndex index ]
+
+    -- trivialTrees :: Array (Array DataPathSegment /\ DataTree html msg)
+    -- trivialTrees = DT.digTrivialTrees
+    --   newPath
+    --   tree
 
     in
       el.root []
-        [ C.text (show index)
-        , EntryMsg index <$> item.view state
-        , el.delete
-            [ C.onClick (Delete index)
+        [ el.item []
+            [ putCtx ctx { path = newPath, viewMode = Inline }
+                $ EntryMsg index
+                <$> item.view state
             ]
-            [ C.text "Delete" ]
+        , el.actions []
+            [ UIActionButton.view
+                { dataAction: DataAction
+                    { label: "Delete"
+                    , msg: This $ Delete index
+                    , description: "Delete an item from the Array"
+                    }
+                }
+            ]
         ]
 
 printItemsString :: Int -> String
@@ -194,11 +221,14 @@ array
   => IDHtml html
   => opt
   -> DataUI (IDSurface html) fm fs msg sta a
-  -> DataUI (IDSurface html) fm fs (ArrayMsg msg) (ArrayState sta) (Array a)
-array opt dataUi' =
+  -> DataUI (IDSurface html) fm fs (ArrayMsg (fm msg)) (ArrayState (fs sta)) (Array a)
+array opt dataUi =
   let
     cfg :: CfgArray ArrayMsg
     cfg = getAllArgs defaultCfgArray opt
+
+    dataUi' :: DataUI (IDSurface html) fm fs (fm msg) (fs sta) a
+    dataUi' = applyWrap dataUi
 
   in
     DataUI \ctx ->
@@ -209,20 +239,20 @@ array opt dataUi' =
           { name: "Array"
           , view: \state@(ArrayState items) -> IDSurface \srfCtx ->
               let
-                view' :: sta -> html msg
+                view' :: fs sta -> html (fm msg)
                 view' state' =
                   let
-                    dataTree :: DataTree html msg
+                    dataTree :: DataTree html (fm msg)
                     dataTree = runIdSurface srfCtx $ itf.view state'
 
                     DataTree { view } = dataTree
                   in
                     view
 
-                mkChildren :: Int -> sta -> DataPathSegmentField /\ (DataTree html (ArrayMsg msg))
+                mkChildren :: Int -> fs sta -> DataPathSegmentField /\ (DataTree html (ArrayMsg (fm msg)))
                 mkChildren index state' =
                   let
-                    dataTree :: DataTree html msg
+                    dataTree :: DataTree html (fm msg)
                     dataTree = runIdSurface srfCtx $ itf.view state'
                   in
                     SegDynamicIndex index /\ map (EntryMsg index) dataTree
@@ -243,5 +273,5 @@ array_
   :: forall html fm fs msg sta a
    . IDHtml html
   => DataUI (IDSurface html) fm fs msg sta a
-  -> DataUI (IDSurface html) fm fs (ArrayMsg msg) (ArrayState sta) (Array a)
+  -> DataUI (IDSurface html) fm fs (ArrayMsg (fm msg)) (ArrayState (fs sta)) (Array a)
 array_ = array {}

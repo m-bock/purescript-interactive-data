@@ -12,10 +12,11 @@ import Chameleon as C
 type ViewCfg msg =
   { onBackToHome :: msg
   , path :: Array String
+  , reason :: String
   }
 
 view :: forall html msg. IDHtml html => ViewCfg msg -> html msg
-view { onBackToHome, path } =
+view { onBackToHome, path, reason } =
   let
     el =
       { notfound: styleNode C.div
@@ -57,6 +58,7 @@ view { onBackToHome, path } =
       , el.headline []
           [ C.text "Not Found: "
           , el.path [] [ C.text ("/" <> printPath path) ]
+          , C.text $ " (" <> reason <> ")"
           ]
       , el.text [ C.onClick onBackToHome ]
           [ C.text "Back to Home"

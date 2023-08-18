@@ -81,8 +81,18 @@ digTrivialTrees path tree@(DataTree { children }) = case children of
   -- Leaf
   Fields [] -> [ path /\ tree ]
 
-  -- Singleton field
-  Fields [ field ] ->
+  -- Singleton static field
+  Fields [ field@(SegStaticKey _ /\ _) ] ->
+    let
+      k /\ subTree = field
+
+      newPath :: DataPath
+      newPath = path <> [ SegField k ]
+    in
+      [ path /\ tree ] <> digTrivialTrees newPath subTree
+
+  -- Singleton static index
+  Fields [ field@(SegStaticIndex _ /\ _) ] ->
     let
       k /\ subTree = field
 
