@@ -150,7 +150,7 @@ spell:
 
 # Dev
 
-dev-manual:
+dev-manual: gen-mdbook
     #!/bin/bash
     set -euxo pipefail
 
