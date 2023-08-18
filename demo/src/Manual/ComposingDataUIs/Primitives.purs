@@ -46,7 +46,7 @@ sampleNumber = ID.number_
 
 `DataUI'` is a simplification of the `DataUI` type.
 It hides some type arguments and constraints
-which are not so important in the beginnig.
+which are not so important in the beginning.
 It will be used in most of the examples.
 
 ## Configure options, example for `Int`
@@ -65,7 +65,7 @@ sampleIntWithOpts = ID.int
   }
 
 {-
-Note that this boundaries are only existant on the UI level.
+Note that this boundaries are only existent on the UI level.
 In one of the following chapters you'll see how you can go a step further
 and add restrictions on the type level with a smart constructor refinement.
 

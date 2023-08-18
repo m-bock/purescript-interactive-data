@@ -6,6 +6,7 @@
   "license": "MIT",
   "dependencies": {
     "@inquirer/select": "^1.2.6",
+    "cspell": "^7.0.0",
     "doctoc": "^2.2.1",
     "glob": "^10.3.3",
     "js-yaml": "^4.1.0",

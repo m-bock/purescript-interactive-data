@@ -32,7 +32,7 @@ newtype MenuState = MenuState
 
 type MenuMsg msg = These MenuSelfMsg msg
 
-data MenuSelfMsg = SetExpandend Unit DataPath Boolean
+data MenuSelfMsg = SetExpanded Unit DataPath Boolean
 
 -------------------------------------------------------------------------------
 --- Update
@@ -40,7 +40,7 @@ data MenuSelfMsg = SetExpandend Unit DataPath Boolean
 
 update :: MenuSelfMsg -> MenuState -> MenuState
 update msg (MenuState state) = case msg of
-  SetExpandend _ path val ->
+  SetExpanded _ path val ->
     MenuState state { expandMap = Map.insert path val state.expandMap }
 
 -------------------------------------------------------------------------------
@@ -65,7 +65,7 @@ view props@{ onSelectPath } state =
     { viewRow:
         viewRow
           { onSetExpanded: \path val ->
-              This $ SetExpandend unit path val
+              This $ SetExpanded unit path val
           }
     , viewLabel: viewLabel { onSelectPath: onSelectPath >>> That }
     , pathIsExpanded: pathIsExpanded state

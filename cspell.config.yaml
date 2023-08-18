@@ -1,0 +1,17 @@
+version: "0.2"
+ignorePaths:
+ - packages/interactive-data-app/src/InteractiveData/App/UI/Assets.purs
+files:
+  - "demo/**/*.purs"
+  - "packages/*/**/*.purs"
+dictionaryDefinitions:
+  - name: purescript
+    path: ".cspell/purescript.txt"
+  - name: interactive-data
+    path: ".cspell/interactive-data.txt"
+dictionaries:
+  - purescript
+  - interactive-data
+words: []
+ignoreWords: []
+import: []

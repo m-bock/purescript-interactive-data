@@ -119,7 +119,7 @@ suggest-apply:
 
 # CI
 
-ci_: install format gen build build-strict dist check-git-clean
+ci_: install spell format gen build build-strict dist check-git-clean
 
 ci: clean
     just ci_
@@ -142,3 +142,8 @@ build-ide:
 
 open-all-files:
     code $(node scripts/modules.js)
+
+# Spelling
+
+spell:
+    cspell lint --config cspell.config.yaml

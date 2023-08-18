@@ -27,7 +27,7 @@ type Sample =
       , userId1 :: UserID
       , userId2 :: UserID
       , age :: Int
-      , decription :: Maybe String
+      , description :: Maybe String
       , nestedMaybe :: Maybe (Maybe String)
       , custom :: CustomADT
       , tuple :: Tuple String Int
@@ -76,7 +76,7 @@ sampleDataUi = ID.record_
             , min: 0
             , max: 150
             }
-        , decription: ID.maybe_
+        , description: ID.maybe_
             { "Just": ID.string_
             , "Nothing": unit
             }

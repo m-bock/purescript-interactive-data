@@ -200,11 +200,11 @@ color_ = color {}
 
 hexStrToColor :: String -> Maybe Color
 hexStrToColor str = do
-  hexStrs :: String <- Str.stripPrefix (Str.Pattern "#") str
+  hexStrings :: String <- Str.stripPrefix (Str.Pattern "#") str
 
-  let r_str = hexStrs # Str.drop 0 # Str.take 2
-  let g_str = hexStrs # Str.drop 2 # Str.take 2
-  let b_str = hexStrs # Str.drop 4 # Str.take 2
+  let r_str = hexStrings # Str.drop 0 # Str.take 2
+  let g_str = hexStrings # Str.drop 2 # Str.take 2
+  let b_str = hexStrings # Str.drop 4 # Str.take 2
 
   r :: Int <- Int.fromStringAs Int.hexadecimal r_str
   g :: Int <- Int.fromStringAs Int.hexadecimal g_str
