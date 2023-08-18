@@ -175,6 +175,8 @@
 <h1 id="introduction"><a class="header" href="#introduction">Introduction</a></h1>
 <p>This manual is intended to be a comprehensive guide to the <code>interactive-data</code> library.</p>
 <p>It's still a work in progress, many sections are still missing.</p>
+<h2 id="what-is-interactive-data"><a class="header" href="#what-is-interactive-data">What is <code>interactive-data</code>?</a></h2>
+<p><code>interactive-data</code> is a library for creating type safe UIs for data editing.</p>
 <div style="break-before: page; page-break-before: always;"></div><!-- START hide -->
 <!-- END hide -->
 <h1 id="installation"><a class="header" href="#installation">Installation</a></h1>
@@ -189,6 +191,9 @@
 <pre><code>spago install chameleon-halogen
 spago install chameleon-react-basic
 </code></pre>
+<p>This is needed because <code>interactive-data</code> itself is framework-agnostic.
+And if you want to run the resulting UI or embed it in an existing app,
+you need an adapter that will turn it into framework specific views.</p>
 </li>
 <li>
 <p>Install a bundler, e.g.:</p>
