@@ -40,6 +40,7 @@ const runAll = async () => {
 const postProcessFile = (source) => {
   const patchData = {
     hide: "",
+    removeType: (content) => content.replace(/type [^=]+= /g, ""),
     imports: (content) =>
       `<details><summary>Imports for the code samples</summary>${content}</details><hr><br>`,
   };

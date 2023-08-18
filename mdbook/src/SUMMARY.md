@@ -21,4 +21,4 @@
 
 # Appendix
 
-- [Glossary]()
+- [Glossary](./generated/Glossary.md)
