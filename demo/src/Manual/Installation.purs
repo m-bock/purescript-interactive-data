@@ -24,6 +24,10 @@ dummy = 1
    spago install chameleon-react-basic
    ```
 
+   This is needed because `interactive-data` itself is framework-agnostic.
+   And if you want to run the resulting UI or embed it in an existing app,
+   you need an adapter that will turn it into framework specific views.
+
 3. Install a bundler, e.g.:
 
    ```

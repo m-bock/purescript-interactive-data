@@ -6,6 +6,8 @@
   "license": "MIT",
   "dependencies": {
     "@inquirer/select": "^1.2.6",
+    "chokidar-cli": "^3.0.0",
+    "commander": "^11.0.0",
     "cspell": "^7.0.0",
     "doctoc": "^2.2.1",
     "glob": "^10.3.3",

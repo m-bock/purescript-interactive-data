@@ -3,31 +3,37 @@ import * as fs from "fs";
 import * as path from "path";
 import { patchAll } from "./patch-readme.js";
 import * as cp from "child_process";
+import { program } from "commander";
 
 const pursSrc = "demo/src/Manual";
 const mdDest = "mdbook/src/generated";
 
-const main = async () => {
+const runFile = async (absFile) => {
+  console.log(absFile);
+  const file = path.relative(pursSrc, absFile);
+
+  const dir = path.dirname(file);
+
+  fs.mkdirSync(path.join(mdDest, dir), { recursive: true });
+
+  const md = await pursToMd(path.join(pursSrc, file));
+
+  const mdPatched = postProcessFile(md);
+
+  const fileParsed = path.parse(file);
+  const mdFilePath = path.join(fileParsed.dir, fileParsed.name + ".md");
+
+  fs.writeFileSync(path.join(mdDest, mdFilePath), mdPatched, "utf8");
+};
+
+const runAll = async () => {
   fs.rmSync(mdDest, { recursive: true, force: true });
   fs.mkdirSync(mdDest, { recursive: true });
 
-  const manualFiles = globSync(`**/*.purs`, { cwd: pursSrc });
+  const manualFiles = globSync(`${pursSrc}/**/*.purs`);
 
   for (const file of manualFiles) {
-    console.log(file);
-
-    const dir = path.dirname(file);
-
-    fs.mkdirSync(path.join(mdDest, dir), { recursive: true });
-
-    const md = await pursToMd(path.join(pursSrc, file));
-
-    const mdPatched = postProcessFile(md);
-
-    const fileParsed = path.parse(file);
-    const mdFilePath = path.join(fileParsed.dir, fileParsed.name + ".md");
-
-    fs.writeFileSync(path.join(mdDest, mdFilePath), mdPatched, "utf8");
+    runFile(file);
   }
 };
 
@@ -74,6 +80,18 @@ const runCommand = async (command, args) => {
   }
 
   return stdout;
+};
+
+const main = async () => {
+  program.option("--file <string>");
+
+  const opts = program.parse(process.argv).opts();
+
+  if (opts.file) {
+    await runFile(opts.file);
+  } else {
+    await runAll();
+  }
 };
 
 main();
