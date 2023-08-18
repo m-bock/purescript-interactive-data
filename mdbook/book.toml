@@ -13,3 +13,4 @@ extra-watch-dirs = ["src/generated"]
 git-repository-url = "https://github.com/thought2/purescript-interactive-data"
 git-repository-icon = "fa-github"
 site-url = "/purescript-interactive-data/"
+preferred-dark-theme = "coal"
