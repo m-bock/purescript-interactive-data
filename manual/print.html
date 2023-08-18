@@ -254,8 +254,8 @@ It will be used in most of the examples.</p>
 <p>Otherwise if the <code>_</code> is omitted some configuration options can be provided.
 Int the following example a descriptive text is added
 and the UI is limited to only create integer values between <code>0</code> and <code>100</code>.</p>
-<pre><code class="language-hs">sampleIntWithOpts :: DataUI' _ _ Int
-sampleIntWithOpts = ID.int
+<pre><code class="language-hs">sampleInt2 :: DataUI' _ _ Int
+sampleInt2 = ID.int
   { text: Just &quot;The Age of a person&quot;
   , min: 0
   , max: 100
@@ -269,8 +269,14 @@ others a specific for each type. Refer to the API docs to see which ones are
 available.</p>
 <h2 id="for-the-lazy-people"><a class="header" href="#for-the-lazy-people">For the lazy people...</a></h2>
 <p>There is also a polymorphic way to create primitive Data UIs. In this case no configuration options can be provided.</p>
-<pre><code class="language-hs">sampleInt' :: DataUI' _ _ Int
-sampleInt' = ID.dataUi
+<pre><code class="language-hs">sampleInt3 :: DataUI' _ _ Int
+sampleInt3 = ID.dataUi
+</code></pre>
+<h2 id="whats-behind-the-wildcards"><a class="header" href="#whats-behind-the-wildcards">What's behind the wildcards?</a></h2>
+<p>Each Data UI has a message type and a state type.
+The two type arguments which are omitted above look like this if they are not hidden:</p>
+<pre><code class="language-hs">sampleInt4 :: DataUI' ID.IntMsg ID.IntState Int
+sampleInt4 = ID.int_
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="data-uis-for-record-types"><a class="header" href="#data-uis-for-record-types">Data UIs for Record types</a></h1>
 <!-- START hide -->
@@ -295,8 +301,8 @@ import InteractiveData as ID
 </code></pre>
 <h2 id="simple-data-uis-without-configuration"><a class="header" href="#simple-data-uis-without-configuration">Simple Data UIs without configuration</a></h2>
 <p>Now we can create a Data UI with the <code>record_</code> function like this:</p>
-<pre><code class="language-hs">sampleRecord :: DataUI' _ _ User
-sampleRecord =
+<pre><code class="language-hs">sampleRecord1 :: DataUI' _ _ User
+sampleRecord1 =
   ID.record_
     { name: ID.string_
     , age: ID.int_
@@ -306,8 +312,8 @@ sampleRecord =
 <h2 id="adding-configuration-to-the-data-uis"><a class="header" href="#adding-configuration-to-the-data-uis">Adding configuration to the Data UIs</a></h2>
 <p>If the <code>_</code> is omitted configuration options can be provided for the record. This
 works exactly like the configuration for the primitive types:</p>
-<pre><code class="language-hs">sampleRecordOpts :: DataUI' _ _ User
-sampleRecordOpts =
+<pre><code class="language-hs">sampleRecord2 :: DataUI' _ _ User
+sampleRecord2 =
   ID.record
     { text: Just &quot;A sample User&quot;
     }
@@ -320,8 +326,8 @@ sampleRecordOpts =
 <p>If you just want to use the default options for each field, you can also use the
 general <code>dataUi</code> function. The actual Data UI will be derived by the type.
 This example is equivalent to the <code>sampleRecord</code> value above.</p>
-<pre><code class="language-hs">sampleRecord' :: DataUI' _ _ User
-sampleRecord' = ID.dataUi
+<pre><code class="language-hs">sampleRecord3 :: DataUI' _ _ User
+sampleRecord3 = ID.dataUi
 </code></pre>
 <h2 id="using-the-recordpartial_-function"><a class="header" href="#using-the-recordpartial_-function">Using the <code>recordPartial_</code> function</a></h2>
 <p>For now we have seen two ways to create Data UIs for Records.
@@ -332,8 +338,8 @@ Then there is the <code>dataUi</code> function.
 It is the most concise way to create a Data UI for a Record.
 But also there is no way to configure the Data UI.</p>
 <p>Can we get the best of both worlds?</p>
-<pre><code class="language-hs">sampleRecord'' :: DataUI' _ _ User
-sampleRecord'' =
+<pre><code class="language-hs">sampleRecord4 :: DataUI' _ _ User
+sampleRecord4 =
   ID.recordPartial_
     { name: ID.string_
     , age: ID.int_
@@ -343,6 +349,30 @@ sampleRecord'' =
 It is similar to the <code>record_</code> function, but it allows us to omit some fields.
 Here we have omitted the <code>address</code> field.
 The omitted fields will be derived by the defaults for the type.</p>
+<h2 id="whats-behind-the-wildcards-1"><a class="header" href="#whats-behind-the-wildcards-1">What's behind the wildcards?</a></h2>
+<p>The wildcards contain the computed types for the <code>Msg</code> and <code>State</code> of the Data UI.
+Usually you don't need to care about these types.
+The larger your Data UIs get, the more nested these types will be.
+So generally it's a good idea to either use the wildcards
+or keep the final UI composition in a <code>let</code> or <code>where</code> clause.</p>
+<p>Here's the same example as above, but with the wildcards expanded:</p>
+<pre><code class="language-hs">sampleRecord5
+  :: DataUI'
+       ( ID.RecordMsg
+           ( address :: ID.WrapMsg ID.StringMsg
+           , age :: ID.WrapMsg ID.IntMsg
+           , name :: ID.WrapMsg ID.StringMsg
+           )
+       )
+       ( ID.RecordState
+           ( address :: ID.WrapState ID.StringState
+           , age :: ID.WrapState ID.IntState
+           , name :: ID.WrapState ID.StringState
+           )
+       )
+       User
+sampleRecord5 = ID.dataUi
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><!-- START hide -->
 <!-- END hide -->
 <h1 id="glossary"><a class="header" href="#glossary">Glossary</a></h1>
