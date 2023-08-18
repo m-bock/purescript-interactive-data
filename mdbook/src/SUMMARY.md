@@ -8,7 +8,7 @@
 
 # User Guide
 
-- [Composing Data UIs]()
+- [Composing Data UIs](./generated/ComposingDataUIs.md)
   - [Primitives](./generated/ComposingDataUIs/Primitives.md)
   - [Records](./generated/ComposingDataUIs/Records.md)
   - [Custom ADTs]()
