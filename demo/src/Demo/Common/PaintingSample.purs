@@ -1,6 +1,5 @@
 module Demo.Common.PaintingSample
-  ( Color
-  , Image
+  ( Image
   , Meta
   , Painting
   , Shape(..)
@@ -14,6 +13,7 @@ import Prelude
 import Data.Argonaut (class EncodeJson)
 import Data.Maybe (Maybe(..))
 import Data.Newtype (class Newtype)
+import Demo.Common.Features.CustomDataUI.Color (Color, color)
 import Demo.Common.Features.Refinement.ArchiveID (ArchiveID, archiveID)
 import InteractiveData (class IDDataUI, class IDHtml, IDSurface, IntMsg, IntState, DataUI', dataUi, newtype_)
 import InteractiveData as ID
@@ -40,12 +40,6 @@ import InteractiveData as ID
 --- Types
 --------------------------------------------------------------------------------
 
-data Color = Color
-  { red :: Int
-  , green :: Int
-  , blue :: Int
-  }
-
 newtype USD = USD Int
 
 type Meta =
@@ -60,14 +54,14 @@ type Meta =
 type Image =
   { width :: Number
   , height :: Number
-  --   , frame :: Number
-  --   , background :: Color
+  , frame :: Number
+  , background :: Color
   , shapes ::
       Array
         {
           -- shape :: Shape
-          --, color :: Color
-          outline :: Boolean
+          color :: Color
+        , outline :: Boolean
         }
   }
 
@@ -151,6 +145,13 @@ paintingDataUi = ID.record_
           , min: 0.0
           , max: 100.0
           }
+      , frame: ID.number
+          { text: Just "The width of the frame around the image"
+          , min: 0.0
+          , max: 20.0
+          }
+      , background: color
+          { text: Just "The background color of the image" }
       }
   }
 

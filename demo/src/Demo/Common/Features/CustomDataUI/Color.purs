@@ -1,11 +1,12 @@
 module Demo.Common.Features.CustomDataUI.Color
   ( CfgColor
-  , Color
+  , Color(..)
   , ColorMsg(..)
   , ColorState(..)
   , color
   , color_
   , defaultCfgColor
+  , toHex
   ) where
 
 import InteractiveData.Core.Prelude
@@ -14,6 +15,7 @@ import Chameleon as C
 import Data.Argonaut (class DecodeJson, class EncodeJson)
 import Data.Int as Int
 import Data.String as Str
+import InteractiveData (class IDDataUI)
 
 -------------------------------------------------------------------------------
 --- Data Type
@@ -115,7 +117,7 @@ view (ColorState selectedColor) =
           SetColor color'
 
       colorValue :: String
-      colorValue = colorToHexStr selectedColor
+      colorValue = toHex selectedColor
     in
       C.div_
         [ C.input
@@ -212,8 +214,8 @@ hexStrToColor str = do
 
   pure $ Color { red: r, green: g, blue: b }
 
-colorToHexStr :: Color -> String
-colorToHexStr (Color { red, green, blue }) =
+toHex :: Color -> String
+toHex (Color { red, green, blue }) =
   "#"
     <> intToHexStr red
     <> intToHexStr green
@@ -229,3 +231,13 @@ intToHexStr n =
       "0" <> result
     else
       result
+
+-------------------------------------------------------------------------------
+--- Instances
+-------------------------------------------------------------------------------
+
+instance
+  IDHtml html =>
+  IDDataUI (IDSurface html) fm fs ColorMsg ColorState Color
+  where
+  dataUi = color_

@@ -15,6 +15,8 @@ import Data.Argonaut as JSON
 import Data.Array (intercalate)
 import Data.Either (Either(..))
 import Data.Maybe (Maybe(..), maybe)
+import Demo.Common.Features.CustomDataUI.Color (Color(..))
+import Demo.Common.Features.CustomDataUI.Color as Color
 import Demo.Common.Features.Refinement.ArchiveID (sampleArchiveID)
 import Demo.Common.Features.Refinement.ArchiveID as ArchiveID
 import Demo.Common.PaintingSample (Image, Meta, Painting, USD(..), paintingDataUi, printUSD)
@@ -45,8 +47,8 @@ initPainting =
   , image:
       { width: 100.0
       , height: 100.0
-      -- , frame: 0.0
-      -- , background: Color { red: 0, green: 0, blue: 0 }
+      , frame: 0.0
+      , background: Color { red: 0, green: 0, blue: 0 }
       , shapes: []
       }
   }
@@ -77,7 +79,7 @@ view { viewInteractiveData } dataResult =
     }
 
 viewImage :: forall html msg. HtmlStyled html => Image -> html msg
-viewImage { width, height } =
+viewImage { width, height, background, frame } =
   let
     el =
       { root: styleNode C.div
@@ -86,15 +88,24 @@ viewImage { width, height } =
           , "width: 100%"
           , "height: 100%"
           ]
+      , svg: styleNode S.svg
+          [ "width: " <> show width <> "px"
+          , "height: " <> show height <> "px"
+          , "outline: " <> show frame <> "px solid #996633"
+          ]
       }
   in
     el.root []
-      [ S.svg
+      [ el.svg
           [ SA.width $ show width <> "px"
           , SA.height $ show height <> "px"
-          , C.style "border: 1px solid black"
           ]
-          []
+          [ S.rect
+              [ SA.fill $ Color.toHex background
+              , SA.width "100%"
+              , SA.height "100%"
+              ]
+          ]
       ]
 
 viewRoot
