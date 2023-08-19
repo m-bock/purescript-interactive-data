@@ -36,22 +36,17 @@ import InteractiveData as ID
  - [ ] Json
 -}
 
-data Color = Color { red :: Int, green :: Int, blue :: Int }
+--------------------------------------------------------------------------------
+--- Types
+--------------------------------------------------------------------------------
+
+data Color = Color
+  { red :: Int
+  , green :: Int
+  , blue :: Int
+  }
 
 newtype USD = USD Int
-
-printUSD :: USD -> String
-printUSD (USD n) = "$" <> show n
-
-derive instance Newtype USD _
-
-instance
-  IDHtml html =>
-  IDDataUI (IDSurface html) fm fs IntMsg IntState USD
-  where
-  dataUi = newtype_ dataUi
-
-derive newtype instance EncodeJson USD
 
 type Meta =
   { title :: Maybe String
@@ -67,12 +62,13 @@ type Image =
   , height :: Number
   --   , frame :: Number
   --   , background :: Color
-  --   , shapes ::
-  --       Array
-  --         { shape :: Shape
-  --         , color :: Color
-  --         , outline :: Boolean
-  --         }
+  , shapes ::
+      Array
+        {
+          -- shape :: Shape
+          --, color :: Color
+          outline :: Boolean
+        }
   }
 
 type Painting =
@@ -99,7 +95,9 @@ data Shape
       , yEnd :: Number
       }
 
----
+--------------------------------------------------------------------------------
+--- Data UI
+--------------------------------------------------------------------------------
 
 paintingDataUi :: DataUI' _ _ Painting
 paintingDataUi = ID.record_
@@ -155,3 +153,24 @@ paintingDataUi = ID.record_
           }
       }
   }
+
+--------------------------------------------------------------------------------
+--- Utils
+--------------------------------------------------------------------------------
+
+printUSD :: USD -> String
+printUSD (USD n) = "$" <> show n
+
+--------------------------------------------------------------------------------
+--- Instances
+--------------------------------------------------------------------------------
+
+derive instance Newtype USD _
+
+instance
+  IDHtml html =>
+  IDDataUI (IDSurface html) fm fs IntMsg IntState USD
+  where
+  dataUi = newtype_ dataUi
+
+derive newtype instance EncodeJson USD

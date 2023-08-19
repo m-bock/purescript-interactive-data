@@ -47,7 +47,7 @@ initPainting =
       , height: 100.0
       -- , frame: 0.0
       -- , background: Color { red: 0, green: 0, blue: 0 }
-      -- , shapes: []
+      , shapes: []
       }
   }
 
