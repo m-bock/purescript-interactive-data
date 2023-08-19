@@ -149,21 +149,25 @@ shapeDataUi = shape
           { text: Just "The x coordinate of the start point"
           , min: 0.0
           , max: 100.0
+          , init: Just 40.0
           }
       , yStart: ID.number
           { text: Just "The y coordinate of the start point"
           , min: 0.0
           , max: 100.0
+          , init: Just 40.0
           }
       , xEnd: ID.number
           { text: Just "The x coordinate of the end point"
           , min: 0.0
           , max: 100.0
+          , init: Just 60.0
           }
       , yEnd: ID.number
           { text: Just "The y coordinate of the end point"
           , min: 0.0
           , max: 100.0
+          , init: Just 60.0
           }
       }
   , "Rect": ID.record
@@ -173,21 +177,25 @@ shapeDataUi = shape
           { text: Just "The x coordinate of the top left corner"
           , min: 0.0
           , max: 100.0
+          , init: Just 40.0
           }
       , y: ID.number
           { text: Just "The y coordinate of the top left corner"
           , min: 0.0
           , max: 100.0
+          , init: Just 40.0
           }
       , width: ID.number
           { text: Just "The width of the rectangle"
           , min: 0.0
           , max: 100.0
+          , init: Just 20.0
           }
       , height: ID.number
           { text: Just "The height of the rectangle"
           , min: 0.0
           , max: 100.0
+          , init: Just 20.0
           }
       }
   , "Circle": ID.record
@@ -197,16 +205,19 @@ shapeDataUi = shape
           { text: Just "The x coordinate of the center"
           , min: 0.0
           , max: 100.0
+          , init: Just 50.0
           }
       , y: ID.number
           { text: Just "The y coordinate of the center"
           , min: 0.0
           , max: 100.0
+          , init: Just 50.0
           }
       , radius: ID.number
           { text: Just "The radius of the circle"
           , min: 0.0
           , max: 100.0
+          , init: Just 10.0
           }
       }
   }
