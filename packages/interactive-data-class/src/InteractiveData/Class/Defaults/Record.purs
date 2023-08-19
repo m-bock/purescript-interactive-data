@@ -2,14 +2,16 @@ module InteractiveData.Class.Defaults.Record
   ( class DefaultRecord
   , class DefaultRecordPartial
   , defaultRecord
-  , defaultRecordPartial_
+  , defaultRecordPartial
   ) where
 
 import DataMVC.Record.DataUI (class DataUiRecord)
 import DataMVC.Types (DataUI)
 import InteractiveData.Class.InitDataUI (class InitRecord, initRecord)
 import InteractiveData.Core (class IDHtml, IDSurface)
+import InteractiveData.Core.Classes.OptArgs (class OptArgs)
 import InteractiveData.DataUIs as D
+import InteractiveData.DataUIs.Record (CfgRecord)
 import Prim.Row as Row
 import Record as Record
 import Type.Proxy (Proxy(..))
@@ -52,6 +54,7 @@ instance
 class
   DefaultRecordPartial
     (token :: Type)
+    (opt :: Type)
     (datauisPart :: Row Type)
     (html :: Type -> Type)
     (fm :: Type -> Type)
@@ -60,8 +63,9 @@ class
     (rsta :: Row Type)
     (row :: Row Type)
   where
-  defaultRecordPartial_
+  defaultRecordPartial
     :: token
+    -> opt
     -> Record datauisPart
     -> DataUI (IDSurface html) fm fs (D.RecordMsg rmsg) (D.RecordState rsta) (Record row)
 
@@ -71,14 +75,16 @@ instance
   , DataUiRecord datauis fm fs (IDSurface html) rmsg rsta row
   , IDHtml html
   , Row.Nub datauisAll datauis
+  , OptArgs CfgRecord opt
   ) =>
-  DefaultRecordPartial token datauisGiven html fm fs rmsg rsta row
+  DefaultRecordPartial token opt datauisGiven html fm fs rmsg rsta row
   where
-  defaultRecordPartial_
+  defaultRecordPartial
     :: token
+    -> opt
     -> Record datauisGiven
     -> DataUI (IDSurface html) fm fs (D.RecordMsg rmsg) (D.RecordState rsta) (Record row)
-  defaultRecordPartial_ token datauisGiven =
+  defaultRecordPartial token opt datauisGiven =
     let
       dataUisInit :: Record datauis
       dataUisInit = initRecord @token @row token Proxy
@@ -86,4 +92,4 @@ instance
       dataUis :: Record datauis
       dataUis = Record.merge datauisGiven dataUisInit
     in
-      D.record_ dataUis
+      D.record opt dataUis

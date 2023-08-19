@@ -1,7 +1,8 @@
 module InteractiveData.Class.Partial
-  ( recordPartial_
+  ( genericPartial_
+  , recordPartial
+  , recordPartial_
   , variantPartial_
-  , genericPartial_
   ) where
 
 import Data.Variant (Variant)
@@ -12,7 +13,7 @@ import InteractiveData.Class.Defaults
   , class DefaultRecordPartial
   , class DefaultVariantPartial
   , defaultGenericPartial_
-  , defaultRecordPartial_
+  , defaultRecordPartial
   )
 import InteractiveData.Class.Defaults.Variant (defaultVariantPartial_)
 import InteractiveData.Core (IDSurface)
@@ -23,12 +24,20 @@ import Type.Proxy (Proxy(..))
 --- Partial
 --------------------------------------------------------------------------------
 
+recordPartial
+  :: forall opt html fm fs rmsg rsta row datauisGiven
+   . DefaultRecordPartial Tok opt datauisGiven html fm fs rmsg rsta row
+  => opt
+  -> Record datauisGiven
+  -> DataUI (IDSurface html) fm fs (D.RecordMsg rmsg) (D.RecordState rsta) (Record row)
+recordPartial = defaultRecordPartial Tok
+
 recordPartial_
   :: forall html fm fs rmsg rsta row datauisGiven
-   . DefaultRecordPartial Tok datauisGiven html fm fs rmsg rsta row
+   . DefaultRecordPartial Tok {} datauisGiven html fm fs rmsg rsta row
   => Record datauisGiven
   -> DataUI (IDSurface html) fm fs (D.RecordMsg rmsg) (D.RecordState rsta) (Record row)
-recordPartial_ = defaultRecordPartial_ Tok
+recordPartial_ = recordPartial {}
 
 variantPartial_
   :: forall html fm fs @initsym rcase rmsg rsta row datauisGiven

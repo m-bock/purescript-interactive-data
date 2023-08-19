@@ -63,8 +63,11 @@ import InteractiveData.DataUIs.Generic
 
 import InteractiveData.DataUIs.Common
   ( maybe_
+  , maybe
   , either_
+  , either
   , tuple_
+  , tuple
   ) as Export
 
 import InteractiveData.DataUIs.Json

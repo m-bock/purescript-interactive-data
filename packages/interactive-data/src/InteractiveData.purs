@@ -45,8 +45,11 @@ import InteractiveData.DataUIs
   , newtype_
 
   , maybe_
+  , maybe
   , either_
+  , either
   , tuple_
+  , tuple
 
   , JsonMsg
   , JsonState
@@ -70,6 +73,7 @@ import InteractiveData.Class
 
 import InteractiveData.Class.Partial
   ( recordPartial_
+  , recordPartial
   , variantPartial_
   , genericPartial_
   ) as Export

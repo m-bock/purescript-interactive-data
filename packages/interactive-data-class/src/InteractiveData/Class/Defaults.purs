@@ -4,7 +4,7 @@ import InteractiveData.Class.Defaults.Record
   ( class DefaultRecord
   , defaultRecord
   , class DefaultRecordPartial
-  , defaultRecordPartial_
+  , defaultRecordPartial
   ) as Export
 
 import InteractiveData.Class.Defaults.Variant

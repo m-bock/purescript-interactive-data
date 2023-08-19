@@ -15,10 +15,32 @@ import Data.Either (Either(..))
 import Data.Maybe (Maybe(..), fromMaybe)
 import Demo.Common.PaintingSample (Image, Meta, Painting)
 import Effect (Effect)
+import InteractiveData (DataUI')
 import InteractiveData as ID
 import InteractiveData.Entry (InteractiveDataApp)
 import React.Basic.Hooks (JSX, (/\))
 import React.Basic.Hooks as React
+
+paintingDataUi :: DataUI' _ _ Painting
+paintingDataUi = ID.record_
+  { meta: ID.recordPartial
+      { text: Just "Contains meta data about the painting"
+      }
+      { title: ID.maybe
+          { text: Just "The title of the Painting, if existing"
+          }
+          { "Just": ID.string_
+          , "Nothing": unit
+          }
+      , author: ID.maybe
+          { text: Just "The author of the Painting, if known"
+          }
+          { "Just": ID.string_
+          , "Nothing": unit
+          }
+      }
+  , image: ID.dataUi
+  }
 
 sampleApp :: forall html. Html html => InteractiveDataApp html _ _ Painting
 sampleApp =
@@ -28,7 +50,7 @@ sampleApp =
     , fullscreen: false
     , showLogo: true
     }
-    ID.dataUi
+    paintingDataUi
 
 reactComponent :: React.Component {}
 reactComponent = do
@@ -320,7 +342,10 @@ viewJson json =
           , "box-sizing: border-box"
           , "overflow: auto"
           ]
-      , jsonStr: styleNode C.pre
+      , pre: styleNode C.pre
+          [ "margin: 0"
+          ]
+      , jsonStr: styleNode C.code
           [ "font-size: 10px"
           , "font-family: monospace"
           , "margin: 0"
@@ -332,8 +357,10 @@ viewJson json =
   in
 
     el.root []
-      [ el.jsonStr []
-          [ C.text $ jsonStr
+      [ el.pre []
+          [ el.jsonStr []
+              [ C.text $ jsonStr
+              ]
           ]
       ]
 

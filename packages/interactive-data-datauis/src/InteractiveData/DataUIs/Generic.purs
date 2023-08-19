@@ -13,6 +13,7 @@ module InteractiveData.DataUIs.Generic
 import Prelude
 
 import Data.Either (Either(..))
+import Data.Maybe (Maybe(..))
 import Data.Symbol (class IsSymbol)
 import DataMVC.Record.DataUI (class DataUiRecord)
 import DataMVC.Types (DataUI)
@@ -20,6 +21,7 @@ import DataMVC.Types.DataUI (refineDataUi)
 import DataMVC.Variant.DataUI (class DataUiVariant)
 import Heterogeneous.Mapping (class HMap, class Mapping, hmap)
 import InteractiveData.Core (class IDHtml, IDSurface)
+import InteractiveData.Core.Classes.OptArgs (class OptArgs, getAllArgs)
 import InteractiveData.DataUIs.Record (RecordMsg, RecordState, record)
 import InteractiveData.DataUIs.Record as R
 import InteractiveData.DataUIs.Variant as VUI
@@ -34,12 +36,18 @@ import Type.Proxy (Proxy(..))
 
 type IDDataUIGeneric html fm fs rcase rmsg rsta a = DataUI html fm fs (VariantMsg rcase rmsg) (VariantState rsta) a
 
-type Cfg =
-  { typeName :: String
+type CfgGeneric =
+  { text :: Maybe String
+  }
+
+defaultCfg :: CfgGeneric
+defaultCfg =
+  { text: Nothing
   }
 
 class
   GenericDataUI
+    (opt :: Type)
     (html :: Type -> Type)
     (fm :: Type -> Type)
     (fs :: Type -> Type)
@@ -48,17 +56,19 @@ class
     (msg :: Type)
     (sta :: Type)
     (a :: Type)
-  | datauis -> initcase html fm fs datauis msg sta a
+  | datauis opt -> initcase html fm fs datauis msg sta a
   where
-  generic :: Cfg -> { | datauis } -> DataUI (IDSurface html) fm fs msg sta a
+  generic :: { typeName :: String } -> opt -> { | datauis } -> DataUI (IDSurface html) fm fs msg sta a
 
 instance
   ( DataUiVariant datauis fm fs (IDSurface html) initcase rcase rmsg rsta r
   , IDHtml html
   , GenericVariantLike DefaultTransform a r
   , HMap MappingHlistToRecord (Record datauisHlist) (Record datauis)
+  , OptArgs CfgGeneric opt
   ) =>
   GenericDataUI
+    opt
     html
     fm
     fs
@@ -69,16 +79,24 @@ instance
     a
   where
   generic
-    :: Cfg -> { | datauisHlist } -> DataUI (IDSurface html) fm fs (VariantMsg rcase rmsg) (VariantState rsta) a
-  generic { typeName } uisHlist =
-    uisHlist
-      # hmap MappingHlistToRecord
-      # VUI.variant_ @initcase
-      # refineDataUi
-          { typeName
-          , refine: LD.genericFromVariant (Proxy :: _ DefaultTransform) >>> Right
-          , unrefine: LD.genericToVariant (Proxy :: _ DefaultTransform)
-          }
+    :: { typeName :: String }
+    -> opt
+    -> { | datauisHlist }
+    -> DataUI (IDSurface html) fm fs (VariantMsg rcase rmsg) (VariantState rsta) a
+  generic { typeName } opt uisHlist =
+    let
+      cfg :: CfgGeneric
+      cfg = getAllArgs defaultCfg opt
+    in
+
+      uisHlist
+        # hmap MappingHlistToRecord
+        # VUI.variant @initcase { text: cfg.text }
+        # refineDataUi
+            { typeName
+            , refine: LD.genericFromVariant (Proxy :: _ DefaultTransform) >>> Right
+            , unrefine: LD.genericToVariant (Proxy :: _ DefaultTransform)
+            }
 
 --------------------------------------------------------------------------------
 --- LabeledData config
