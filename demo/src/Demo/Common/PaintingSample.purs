@@ -74,9 +74,9 @@ data Shape
       , radius :: Number
       }
   | Line
-      { x1 :: Number
-      , y1 :: Number
-      , x2 :: Number
-      , y2 :: Number
+      { xStart :: Number
+      , yStart :: Number
+      , xEnd :: Number
+      , yEnd :: Number
       }
 

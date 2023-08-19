@@ -58,7 +58,7 @@ instance Show msg => Show (WrapMsg msg) where
 --------------------------------------------------------------------------------
 
 viewStandalone :: forall html msg. IDHtml html => ViewDataCfg html msg -> html msg
-viewStandalone { viewContent, actions, typeName } =
+viewStandalone { viewContent, actions, typeName, text } =
   withCtx \(ctx :: IDViewCtx) ->
     let
       el =
@@ -68,7 +68,7 @@ viewStandalone { viewContent, actions, typeName } =
                   "background-color: #f8f8f8"
                 Standalone ->
                   "background-color: white"
-            , "margin-bottom: 20px"
+            , "margin-bottom: 5px"
             , "position: relative"
             , "border-radius: 5px"
             , "padding-bottom: 5px"
@@ -95,26 +95,40 @@ viewStandalone { viewContent, actions, typeName } =
         , subRow:
             styleNode C.div
               [ "display: flex"
-              , "margin-bottom: 10px"
               , "align-items: center"
               , "justify-content: space-between"
               ]
         , typeName: styleNode C.div
             [ "font-size: 20px"
             , "grid-area: b"
+            , "font-weight: bold"
+            , "margin-bottom: 3px"
+            ]
+        , text: styleNode C.div
+            [ "font-size: 11px"
+            ]
+
+        , header: styleNode C.div
+            [ "margin-bottom: 35px"
             ]
         }
     in
       el.data_
         []
-        [ el.item []
-            [ el.subRow []
-                [ el.typeName [] [ C.text typeName ]
-                , el.actions []
-                    ( map
-                        (\dataAction -> UIActionButton.view { dataAction })
-                        actions
-                    )
+        [ el.header []
+            [ el.item []
+                [ el.subRow []
+                    [ el.typeName [] [ C.text typeName ]
+                    , el.actions []
+                        ( map
+                            (\dataAction -> UIActionButton.view { dataAction })
+                            actions
+                        )
+                    ]
+                ]
+            , text # maybe C.noHtml \text' -> el.item []
+                [ el.text []
+                    [ C.text text' ]
                 ]
             ]
 

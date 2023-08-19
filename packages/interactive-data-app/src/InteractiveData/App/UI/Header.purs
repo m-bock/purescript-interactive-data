@@ -17,12 +17,15 @@ type ViewCfg msg =
   , showMenu :: Boolean
   , onSetShowMenu :: Boolean -> msg
   , typeName :: String
+  , text :: Maybe String
   }
 
 view :: forall html msg. IDHtml html => ViewCfg msg -> html msg
-view { dataPath, typeName, onSelectPath, showMenu, onSetShowMenu } =
+view { dataPath, typeName, onSelectPath, showMenu, onSetShowMenu, text } =
   viewRoot
     { viewTypeName: viewTypeName { typeName }
+
+    , atDescription: C.text $ fromMaybe "" text
 
     , viewBreadcrumbs:
         UIBreadcrumbs.view
@@ -56,6 +59,7 @@ viewRoot
    . IDHtml html
   => { viewBreadcrumbs :: html msg
      , viewTypeName :: html msg
+     , atDescription :: html msg
      , right :: html msg
      }
   -> html msg

@@ -138,6 +138,8 @@ viewFound
   -> html (AppSelfMsg msg)
 viewFound { global, selected } (AppState { showErrors, menu, showMenu }) =
   let
+    DataTree { text } = selected.dataTree
+
     header :: html (AppSelfMsg msg)
     header =
       UIHeader.view
@@ -146,6 +148,7 @@ viewFound { global, selected } (AppState { showErrors, menu, showMenu }) =
         , showMenu
         , onSetShowMenu: SetShowMenu
         , typeName: selected.meta.typeName
+        , text
         }
 
     sidebar :: html (AppSelfMsg msg)

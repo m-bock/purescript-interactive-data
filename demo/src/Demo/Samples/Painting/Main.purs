@@ -39,13 +39,22 @@ paintingDataUi = ID.record_
           , "Nothing": unit
           }
       }
-  , image: ID.dataUi
+  , image: ID.recordPartial
+      { text: Just "The actual image data: Shapes and Colors"
+      }
+      { height: ID.number
+          { text: Just "The height of the image"
+          }
+      , width: ID.number
+          { text: Just "The width of the image"
+          }
+      }
   }
 
 sampleApp :: forall html. Html html => InteractiveDataApp html _ _ Painting
 sampleApp =
   ID.toApp
-    { name: "Sample"
+    { name: "Painting"
     , initData: Just initPainting
     , fullscreen: false
     , showLogo: true
