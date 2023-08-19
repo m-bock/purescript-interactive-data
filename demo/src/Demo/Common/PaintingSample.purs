@@ -36,7 +36,7 @@ newtype USD = USD Number
 
 type Meta =
   { title :: Maybe String
-  --   , author :: Maybe String
+  , author :: Maybe String
   --   , year :: Maybe Int
   --   , archiveId :: ArchiveID
   --   , keywords :: Array String

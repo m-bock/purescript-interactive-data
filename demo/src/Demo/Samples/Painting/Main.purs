@@ -4,14 +4,15 @@ module Demo.Samples.Painting.Main
 
 import Prelude
 
+import Chameleon (class Html)
 import Chameleon as C
 import Chameleon.Impl.ReactBasic as RI
 import Chameleon.Impl.ReactBasic.Html (ReactHtml, defaultConfig)
-import Chameleon.Styled (class HtmlStyled, runStyleT, styleNode)
+import Chameleon.Styled (class HtmlStyled, StyleT, runStyleT, styleNode)
 import Data.Argonaut (Json, encodeJson)
 import Data.Argonaut as JSON
 import Data.Either (Either(..))
-import Data.Maybe (Maybe(..))
+import Data.Maybe (Maybe(..), fromMaybe)
 import Demo.Common.PaintingSample (Image, Meta, Painting)
 import Effect (Effect)
 import InteractiveData as ID
@@ -19,7 +20,7 @@ import InteractiveData.Entry (InteractiveDataApp)
 import React.Basic.Hooks (JSX, (/\))
 import React.Basic.Hooks as React
 
-sampleApp :: InteractiveDataApp ReactHtml _ _ Painting
+sampleApp :: forall html. Html html => InteractiveDataApp html _ _ Painting
 sampleApp =
   ID.toApp
     { name: "Sample"
@@ -42,33 +43,37 @@ reactComponent = do
       handler msg = do
         setState $ ui.update msg
 
-      mainView :: forall html msg. HtmlStyled html => html msg
+      dataResult :: Either _ Painting
+      dataResult = extract state
+
+      mainView :: StyleT ReactHtml _
       mainView =
         view
-          { atControls: C.text "controls"
-          , atImage: case extract state of
-              Left errors -> Left
-                { atError: C.text $ show errors }
-              Right st -> Right
-                { atJson: viewJson (encodeJson st)
-                , atPicture: viewPainting
-                    { atMeta: viewMeta st.meta
-                    , atImage: viewImage st.image
-                    }
-                    st
-                }
+          { atControls: ui.view state
+          , atImage:
+              case dataResult of
+                Left errors -> Left
+                  { atError: C.text $ show errors }
+                Right data_ -> Right
+                  { atJson: viewJson (encodeJson data_)
+                  , atPicture: viewPainting
+                      { atMeta: viewMeta data_.meta
+                      , atImage: viewImage data_.image
+                      }
+                      data_
+                  }
           }
 
-      jsx2 :: JSX
-      jsx2 = RI.runReactHtml { handler } defaultConfig $ runStyleT mainView
+      jsx :: JSX
+      jsx = RI.runReactHtml { handler } defaultConfig $ runStyleT mainView
 
-    pure jsx2
+    pure jsx
 
 initPainting :: Painting
 initPainting =
   { meta:
       { title: Nothing
-      -- , author: Nothing
+      , author: Nothing
       -- , year: Just 2023
       -- , archiveId: ArchiveID "0"
       -- , keywords: [ "Foo", "Bar", "Baz" ]
@@ -109,7 +114,7 @@ view
          html msg
      }
   -> html msg
-view { atImage } =
+view { atControls,atImage } =
   let
     el =
       { root: styleNode C.div
@@ -119,29 +124,29 @@ view { atImage } =
           , "left: 0"
           , "width: 100%"
           , "height: 100%"
+          , "background-color: rgb(242 245 249)"
           ]
       , tiles: styleNode C.div
           [ "display: grid"
-          , "grid-template-columns: 1fr 1fr 1fr"
-          , "grid-template-rows: 1fr 1fr 1fr 1fr"
-          , "gap: 10px"
-          , "height: 600px"
+          , "grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr)" 
+          , "grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr"
+          , "gap: 60px 30px"
+          , "height: 800px"
           , "width: 800px"
           , "place-self: center"
           ]
       , itemControls: styleNode C.div
           [ "background-color: #eee"
           , "border: 1px solid #333"
-          , "padding: 10px"
           , "grid-column: 1 / 4"
-          , "grid-row: 1 / 3"
+          , "grid-row: 1 / 5"
           ]
       , itemPicture: styleNode C.div
           [ "background-color: #eee"
           , "border: 1px solid #333"
           , "padding: 10px"
           , "grid-column: 1 / 3"
-          , "grid-row: 3 / 5"
+          , "grid-row: 5 / 7"
           , "border-radius: 5px"
           ]
       , itemJson: styleNode C.div
@@ -149,7 +154,7 @@ view { atImage } =
           , "border: 1px solid #333"
           , "padding: 10px"
           , "grid-column: 3 / 4"
-          , "grid-row: 3 / 5"
+          , "grid-row: 5 / 7"
           , "border-radius: 5px"
           ]
       }
@@ -157,7 +162,7 @@ view { atImage } =
     el.root []
       [ el.tiles [] $
           [ el.itemControls []
-              [ C.text "control" ]
+              [ atControls ]
 
           ] <>
             case atImage of
@@ -184,7 +189,7 @@ viewPainting { atMeta, atImage } {} =
     el =
       { root: styleNode C.div
           [ "display: grid"
-          , "grid-template-columns: 1fr 1fr"
+          , "grid-template-columns: minmax(0, 1fr) minmax(0, 1fr)"
           , "grid-template-rows: 1fr"
           , "gap: 10px"
           , "height: 100%"
@@ -212,31 +217,39 @@ viewPainting { atMeta, atImage } {} =
       ]
 
 viewMeta :: forall html msg. HtmlStyled html => Meta -> html msg
-viewMeta {} =
+viewMeta {author, title} =
   let
     el =
       { root: styleNode C.div
           [ "background-color: #eee"
-          , "height: 100%"
           ]
       , table: styleNode C.table
           [ "width: 100%"
           , "border-collapse: collapse"
           , "height: 100%"
+          , "table-layout: fixed"
           ]
       , row: styleNode C.tr
-          [ "" ]
+          [ ""
+          ]
       , cellKey: styleNode C.td
-          [ "padding: 5px"
+          [ "padding-left: 10px"
+          , "padding-right: 20px"
           , "border: 1px solid #333"
+          , "font-size: 13px"
           , "font-weight: bold"
           , "font-family: Arial"
+          , "width: 70px"
           ]
       , cellValue: styleNode C.td
-          [ "padding: 5px"
+          [ "padding-left: 10px"
+          , "padding-right: 10px"
           , "border: 1px solid #333"
-          , "width: 100%"
+          , "font-size: 13px"
           , "font-family: Arial"
+          , "overflow: hidden"
+          , "white-space: nowrap"
+          , "text-overflow: ellipsis"
           ]
       }
 
@@ -250,27 +263,27 @@ viewMeta {} =
       [ el.table []
           [ viewEntry
               { atKey: C.text "Title"
-              , atValue: C.text "X"
+              , atValue: C.text (fromMaybe "-" title)
               }
           , viewEntry
               { atKey: C.text "Author"
-              , atValue: C.text "X"
+              , atValue: C.text (fromMaybe "-" author)
               }
           , viewEntry
               { atKey: C.text "Year"
-              , atValue: C.text "X"
+              , atValue: C.text "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
               }
           , viewEntry
               { atKey: C.text "ID"
-              , atValue: C.text "X"
+              , atValue: C.text "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
               }
           , viewEntry
               { atKey: C.text "Keywords"
-              , atValue: C.text "X"
+              , atValue: C.text "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
               }
           , viewEntry
               { atKey: C.text "Price"
-              , atValue: C.text "X"
+              , atValue: C.text "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
               }
           ]
       ]
@@ -283,6 +296,9 @@ viewJson json =
           [ "background-color: #eee"
           , "border: 1px solid #333"
           , "padding: 10px"
+          , "height: 100%"
+          , "box-sizing: border-box"
+          , "overflow: auto"
           ]
       , jsonStr: styleNode C.pre
           [ "font-size: 12px"
