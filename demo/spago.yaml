@@ -3,6 +3,7 @@ package:
   dependencies:
     - argonaut
     - argonaut-generic
+    - arrays
     - chameleon
     - chameleon-halogen
     - chameleon-react-basic
