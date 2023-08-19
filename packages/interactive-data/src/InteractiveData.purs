@@ -3,6 +3,7 @@ module InteractiveData (module Export) where
 import InteractiveData.DataUIs
   ( StringMsg
   , StringState
+  , CfgString
   , string
   , string_
 

@@ -24,10 +24,10 @@ import InteractiveData
   , IDSurface
   , StringMsg
   , StringState
+  , CfgString
   )
 import InteractiveData as ID
 import InteractiveData.Core.Classes.OptArgs (class OptArgs)
-import InteractiveData.DataUIs.String (CfgString)
 
 sampleArchiveID :: ArchiveID
 sampleArchiveID = ArchiveID "abcdefg"

@@ -8,6 +8,8 @@ import Chameleon (class Html)
 import Chameleon as C
 import Chameleon.Impl.ReactBasic as RI
 import Chameleon.Impl.ReactBasic.Html (ReactHtml, defaultConfig)
+import Chameleon.SVG.Attributes as SA
+import Chameleon.SVG.Elements as S
 import Chameleon.Styled (class HtmlStyled, StyleT, runStyleT, styleNode)
 import Data.Argonaut (Json, encodeJson)
 import Data.Argonaut as JSON
@@ -68,9 +70,13 @@ paintingDataUi = ID.record_
       }
       { height: ID.number
           { text: Just "The height of the image"
+          , min: 0.0
+          , max: 100.0
           }
       , width: ID.number
           { text: Just "The width of the image"
+          , min: 0.0
+          , max: 100.0
           }
       }
   }
@@ -146,15 +152,25 @@ initPainting =
 ---
 
 viewImage :: forall html msg. HtmlStyled html => Image -> html msg
-viewImage {} =
+viewImage { width, height } =
   let
     el =
       { root: styleNode C.div
-          [ "" ]
+          [ "display: grid"
+          , "place-items: center"
+          , "width: 100%"
+          , "height: 100%"
+          ]
       }
   in
     el.root []
-      [ C.text "image" ]
+      [ S.svg
+          [ SA.width $ show width <> "px"
+          , SA.height $ show height <> "px"
+          , C.style "border: 1px solid black"
+          ]
+          []
+      ]
 
 view
   :: forall html msg
