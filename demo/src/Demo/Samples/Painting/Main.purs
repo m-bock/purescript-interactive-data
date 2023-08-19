@@ -14,7 +14,7 @@ import Data.Argonaut as JSON
 import Data.Array (intercalate)
 import Data.Either (Either(..))
 import Data.Maybe (Maybe(..), fromMaybe, maybe)
-import Demo.Common.Features.Refinement.ArchiveID (sampleArchiveID)
+import Demo.Common.Features.Refinement.ArchiveID (archiveID, sampleArchiveID)
 import Demo.Common.Features.Refinement.ArchiveID as ArchiveID
 import Demo.Common.PaintingSample (Image, Meta, Painting, USD(..), printUSD)
 import Effect (Effect)
@@ -49,6 +49,9 @@ paintingDataUi = ID.record_
               , max: 3000
               }
           , "Nothing": unit
+          }
+      , archiveId: archiveID
+          { text: Just "The ID of the painting in the archive. Only lowercase letters."
           }
       , keywords: ID.array
           { text: Just "A list of keywords describing the painting"
@@ -261,7 +264,7 @@ viewPainting { atMeta, atImage } {} =
     el =
       { root: styleNode C.div
           [ "display: grid"
-          , "grid-template-columns: minmax(0, 1fr) minmax(0, 1fr)"
+          , "grid-template-columns: minmax(0, 2fr) minmax(0, 1fr)"
           , "grid-template-rows: 1fr"
           , "gap: 10px"
           , "height: 100%"

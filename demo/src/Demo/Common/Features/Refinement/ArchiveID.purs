@@ -1,5 +1,6 @@
 module Demo.Common.Features.Refinement.ArchiveID
   ( ArchiveID
+  , archiveID
   , archiveID_
   , mkArchiveID
   , print
@@ -25,6 +26,8 @@ import InteractiveData
   , StringState
   )
 import InteractiveData as ID
+import InteractiveData.Core.Classes.OptArgs (class OptArgs)
+import InteractiveData.DataUIs.String (CfgString)
 
 sampleArchiveID :: ArchiveID
 sampleArchiveID = ArchiveID "abcdefg"
@@ -63,8 +66,16 @@ archiveID_
   :: forall html fm fs
    . IDHtml html
   => DataUI (IDSurface html) fm fs StringMsg StringState ArchiveID
-archiveID_ =
-  ID.string_
+archiveID_ = archiveID {}
+
+archiveID
+  :: forall opt html fm fs
+   . IDHtml html
+  => OptArgs (CfgString StringMsg) opt
+  => opt
+  -> DataUI (IDSurface html) fm fs StringMsg StringState ArchiveID
+archiveID opt =
+  ID.string opt
     # ID.refineDataUi
         { typeName: "ArchiveID"
         , refine: mkArchiveID >>>
