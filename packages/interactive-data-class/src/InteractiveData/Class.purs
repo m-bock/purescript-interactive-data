@@ -19,6 +19,7 @@ import InteractiveData.Class.Defaults
   )
 import InteractiveData.Class.InitDataUI (class Init)
 import InteractiveData.Core (class IDHtml, IDSurface)
+import InteractiveData.DataUIs (ArrayMsg, ArrayState, array_)
 import InteractiveData.DataUIs as D
 import Type.Proxy (Proxy(..))
 
@@ -128,6 +129,18 @@ instance
   IDDataUI (IDSurface html) fm fs msg sta (Tuple a b)
   where
   dataUi = defaultGeneric_ @"Tuple" Tok Proxy "Tuple"
+
+--------------------------------------------------------------------------------
+--- Array
+--------------------------------------------------------------------------------
+
+instance
+  ( IDHtml html
+  , IDDataUI (IDSurface html) fm fs msg sta a
+  ) =>
+  IDDataUI (IDSurface html) fm fs (ArrayMsg (fm msg)) (ArrayState (fs sta)) (Array a)
+  where
+  dataUi = array_ dataUi
 
 --------------------------------------------------------------------------------
 --- Tok

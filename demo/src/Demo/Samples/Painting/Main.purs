@@ -11,9 +11,12 @@ import Chameleon.Impl.ReactBasic.Html (ReactHtml, defaultConfig)
 import Chameleon.Styled (class HtmlStyled, StyleT, runStyleT, styleNode)
 import Data.Argonaut (Json, encodeJson)
 import Data.Argonaut as JSON
+import Data.Array (intercalate)
 import Data.Either (Either(..))
-import Data.Maybe (Maybe(..), fromMaybe)
-import Demo.Common.PaintingSample (Image, Meta, Painting)
+import Data.Maybe (Maybe(..), fromMaybe, maybe)
+import Demo.Common.Features.Refinement.ArchiveID (sampleArchiveID)
+import Demo.Common.Features.Refinement.ArchiveID as ArchiveID
+import Demo.Common.PaintingSample (Image, Meta, Painting, USD(..), printUSD)
 import Effect (Effect)
 import InteractiveData (DataUI')
 import InteractiveData as ID
@@ -24,7 +27,7 @@ import React.Basic.Hooks as React
 paintingDataUi :: DataUI' _ _ Painting
 paintingDataUi = ID.record_
   { meta: ID.recordPartial
-      { text: Just "Contains meta data about the painting"
+      { text: Just "Contains meta data about a painting"
       }
       { title: ID.maybe
           { text: Just "The title of the Painting, if existing"
@@ -37,6 +40,24 @@ paintingDataUi = ID.record_
           }
           { "Just": ID.string_
           , "Nothing": unit
+          }
+      , year: ID.maybe
+          { text: Just "The year the painting was created"
+          }
+          { "Just": ID.int
+              { min: 1900
+              , max: 3000
+              }
+          , "Nothing": unit
+          }
+      , keywords: ID.array
+          { text: Just "A list of keywords describing the painting"
+          }
+          ID.string_
+      , price: ID.newtype_ $ ID.int
+          { min: 1900
+          , max: 3000
+          , text: Just "The price for the next auction"
           }
       }
   , image: ID.recordPartial
@@ -105,10 +126,10 @@ initPainting =
   { meta:
       { title: Nothing
       , author: Nothing
-      -- , year: Just 2023
-      -- , archiveId: ArchiveID "0"
-      -- , keywords: [ "Foo", "Bar", "Baz" ]
-      -- , price: USD 0.0
+      , year: Just 2023
+      , archiveId: sampleArchiveID
+      , keywords: [ "Abstract", "Geometric", "Colorful" ]
+      , price: USD 0
       }
   , image:
       { width: 100.0
@@ -268,7 +289,7 @@ viewPainting { atMeta, atImage } {} =
       ]
 
 viewMeta :: forall html msg. HtmlStyled html => Meta -> html msg
-viewMeta { author, title } =
+viewMeta { author, title, year, archiveId, keywords, price } =
   let
     el =
       { root: styleNode C.div
@@ -302,39 +323,49 @@ viewMeta { author, title } =
           , "white-space: nowrap"
           , "text-overflow: ellipsis"
           ]
+      , notAvailable: styleNode C.div
+          [ "color: #999"
+          ]
       }
 
     viewEntry :: { atKey :: html msg, atValue :: html msg } -> html msg
-    viewEntry { atKey, atValue } = el.row []
-      [ el.cellKey [] [ atKey ]
-      , el.cellValue [] [ atValue ]
-      ]
+    viewEntry { atKey, atValue } =
+      el.row []
+        [ el.cellKey [] [ atKey ]
+        , el.cellValue [] [ atValue ]
+        ]
+
+    viewNotAvailable :: html msg
+    viewNotAvailable =
+      el.notAvailable []
+        [ C.text "N/A" ]
+
   in
     el.root []
       [ el.table []
           [ viewEntry
               { atKey: C.text "Title"
-              , atValue: C.text (fromMaybe "-" title)
+              , atValue: maybe viewNotAvailable C.text title
               }
           , viewEntry
               { atKey: C.text "Author"
-              , atValue: C.text (fromMaybe "-" author)
+              , atValue: maybe viewNotAvailable C.text author
               }
           , viewEntry
               { atKey: C.text "Year"
-              , atValue: C.text "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+              , atValue: maybe viewNotAvailable (show >>> C.text) year
               }
           , viewEntry
               { atKey: C.text "ID"
-              , atValue: C.text "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+              , atValue: C.text ("#" <> ArchiveID.print archiveId)
               }
           , viewEntry
               { atKey: C.text "Keywords"
-              , atValue: C.text "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+              , atValue: C.text (intercalate ", " keywords)
               }
           , viewEntry
               { atKey: C.text "Price"
-              , atValue: C.text "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+              , atValue: C.text $ printUSD price
               }
           ]
       ]
