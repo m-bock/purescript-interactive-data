@@ -9,7 +9,7 @@ import Chameleon (class Html)
 import Chameleon as C
 import Chameleon.SVG.Attributes as SA
 import Chameleon.SVG.Elements as S
-import Chameleon.Styled (class HtmlStyled, styleLeaf, styleNode)
+import Chameleon.Styled (class HtmlStyled, styleNode)
 import Data.Argonaut (Json, encodeJson)
 import Data.Argonaut as JSON
 import Data.Array (intercalate)
