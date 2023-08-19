@@ -89,7 +89,7 @@ sampleDataUi = ID.record_
                 }
             , "Nothing": unit
             }
-        , custom: customADT
+        , custom: customADT {}
             { "Foo": ID.int_
             , "Bar": ID.string_
             , "Baz": ID.number_
@@ -161,9 +161,10 @@ instance EncodeJson CustomADT where
   encodeJson = genericEncodeJson
 
 customADT
-  :: forall html fm fs datauis msg sta
-   . ID.GenericDataUI html fm fs "Foo" datauis msg sta CustomADT
-  => { | datauis }
+  :: forall opt html fm fs datauis msg sta
+   . ID.GenericDataUI opt html fm fs "Foo" datauis msg sta CustomADT
+  => opt
+  -> { | datauis }
   -> DataUI (IDSurface html) fm fs msg sta CustomADT
 customADT = ID.generic
   { typeName: "CustomADT"
