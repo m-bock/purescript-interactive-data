@@ -5,24 +5,18 @@ module Demo.Common.PaintingSample
   , Painting
   , Shape(..)
   , USD(..)
+  , paintingDataUi
   , printUSD
   ) where
 
 import Prelude
 
 import Data.Argonaut (class EncodeJson)
-import Data.Maybe (Maybe)
+import Data.Maybe (Maybe(..))
 import Data.Newtype (class Newtype)
-import Demo.Common.Features.Refinement.ArchiveID (ArchiveID)
-import InteractiveData
-  ( class IDDataUI
-  , class IDHtml
-  , IDSurface
-  , IntMsg
-  , IntState
-  , dataUi
-  , newtype_
-  )
+import Demo.Common.Features.Refinement.ArchiveID (ArchiveID, archiveID)
+import InteractiveData (class IDDataUI, class IDHtml, IDSurface, IntMsg, IntState, DataUI', dataUi, newtype_)
+import InteractiveData as ID
 
 {-
  - [x] String
@@ -105,3 +99,59 @@ data Shape
       , yEnd :: Number
       }
 
+---
+
+paintingDataUi :: DataUI' _ _ Painting
+paintingDataUi = ID.record_
+  { meta: ID.recordPartial
+      { text: Just "Contains meta data about a painting"
+      }
+      { title: ID.maybe
+          { text: Just "The title of the Painting, if existing"
+          }
+          { "Just": ID.string_
+          , "Nothing": unit
+          }
+      , author: ID.maybe
+          { text: Just "The author of the Painting, if known"
+          }
+          { "Just": ID.string_
+          , "Nothing": unit
+          }
+      , year: ID.maybe
+          { text: Just "The year the painting was created"
+          }
+          { "Just": ID.int
+              { min: 1900
+              , max: 3000
+              }
+          , "Nothing": unit
+          }
+      , archiveId: archiveID
+          { text: Just "The ID of the painting in the archive. Only lowercase letters."
+          }
+      , keywords: ID.array
+          { text: Just "A list of keywords describing the painting"
+          }
+          ID.string_
+      , price: ID.newtype_ $ ID.int
+          { min: 1900
+          , max: 3000
+          , text: Just "The price for the next auction"
+          }
+      }
+  , image: ID.recordPartial
+      { text: Just "The actual image data: Shapes and Colors"
+      }
+      { height: ID.number
+          { text: Just "The height of the image"
+          , min: 0.0
+          , max: 100.0
+          }
+      , width: ID.number
+          { text: Just "The width of the image"
+          , min: 0.0
+          , max: 100.0
+          }
+      }
+  }
