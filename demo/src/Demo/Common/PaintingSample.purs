@@ -1,5 +1,6 @@
 module Demo.Common.PaintingSample
   ( Image
+  , ImageElement
   , Meta
   , Painting
   , Shape(..)
@@ -11,12 +12,18 @@ module Demo.Common.PaintingSample
 import Prelude
 
 import Data.Argonaut (class EncodeJson)
+import Data.Argonaut.Encode.Generic (genericEncodeJson)
+import Data.Generic.Rep (class Generic)
 import Data.Maybe (Maybe(..))
 import Data.Newtype (class Newtype)
+import Data.Show.Generic (genericShow)
 import Demo.Common.Features.CustomDataUI.Color (Color, color)
 import Demo.Common.Features.Refinement.ArchiveID (ArchiveID, archiveID)
-import InteractiveData (class IDDataUI, class IDHtml, IDSurface, IntMsg, IntState, DataUI', dataUi, newtype_)
+import InteractiveData (class IDDataUI, class IDHtml, DataUI, DataUI', IDSurface, IntMsg, IntState, dataUi, newtype_)
 import InteractiveData as ID
+import InteractiveData.Class (Tok(..))
+import InteractiveData.Class.Defaults (class DefaultGeneric, defaultGeneric_)
+import Type.Proxy (Proxy(..))
 
 {-
  - [x] String
@@ -56,13 +63,13 @@ type Image =
   , height :: Number
   , frame :: Number
   , background :: Color
-  , shapes ::
-      Array
-        {
-          -- shape :: Shape
-          color :: Color
-        , outline :: Boolean
-        }
+  , elements :: Array ImageElement
+  }
+
+type ImageElement =
+  { shape :: Shape
+  , color :: Color
+  , outline :: Boolean
   }
 
 type Painting =
@@ -155,6 +162,16 @@ paintingDataUi = ID.record_
       }
   }
 
+shape
+  :: forall opt html fm fs datauis msg sta
+   . ID.GenericDataUI opt html fm fs "Foo" datauis msg sta Shape
+  => opt
+  -> { | datauis }
+  -> DataUI (IDSurface html) fm fs msg sta Shape
+shape = ID.generic
+  { typeName: "Shape"
+  }
+
 --------------------------------------------------------------------------------
 --- Utils
 --------------------------------------------------------------------------------
@@ -166,6 +183,8 @@ printUSD (USD n) = "$" <> show n
 --- Instances
 --------------------------------------------------------------------------------
 
+--- USD
+
 derive instance Newtype USD _
 
 instance
@@ -175,3 +194,20 @@ instance
   dataUi = newtype_ dataUi
 
 derive newtype instance EncodeJson USD
+
+--- Shape
+
+derive instance Generic Shape _
+
+instance Show Shape where
+  show = genericShow
+
+instance EncodeJson Shape where
+  encodeJson = genericEncodeJson
+
+instance
+  ( DefaultGeneric "Circle" Tok html fm fs msg sta Shape
+  ) =>
+  IDDataUI (IDSurface html) fm fs msg sta Shape
+  where
+  dataUi = defaultGeneric_ @"Circle" Tok Proxy "Shape"

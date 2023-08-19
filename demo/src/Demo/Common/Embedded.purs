@@ -9,7 +9,7 @@ import Chameleon (class Html)
 import Chameleon as C
 import Chameleon.SVG.Attributes as SA
 import Chameleon.SVG.Elements as S
-import Chameleon.Styled (class HtmlStyled, styleNode)
+import Chameleon.Styled (class HtmlStyled, styleLeaf, styleNode)
 import Data.Argonaut (Json, encodeJson)
 import Data.Argonaut as JSON
 import Data.Array (intercalate)
@@ -19,7 +19,7 @@ import Demo.Common.Features.CustomDataUI.Color (Color(..))
 import Demo.Common.Features.CustomDataUI.Color as Color
 import Demo.Common.Features.Refinement.ArchiveID (sampleArchiveID)
 import Demo.Common.Features.Refinement.ArchiveID as ArchiveID
-import Demo.Common.PaintingSample (Image, Meta, Painting, USD(..), paintingDataUi, printUSD)
+import Demo.Common.PaintingSample (Image, ImageElement, Meta, Painting, Shape(..), USD(..), paintingDataUi, printUSD)
 import InteractiveData (DataResult)
 import InteractiveData as ID
 import InteractiveData.Entry (InteractiveDataApp)
@@ -48,8 +48,21 @@ initPainting =
       { width: 100.0
       , height: 100.0
       , frame: 0.0
-      , background: Color { red: 0, green: 0, blue: 0 }
-      , shapes: []
+      , background: Color { red: 200, green: 200, blue: 200 }
+      , elements:
+          [ { shape: Circle { x: 25.0, y: 25.0, radius: 10.0 }
+            , color: Color { red: 255, green: 0, blue: 0 }
+            , outline: true
+            }
+          , { shape: Rect { x: 75.0, y: 75.0, width: 10.0, height: 10.0 }
+            , color: Color { red: 0, green: 255, blue: 0 }
+            , outline: true
+            }
+          , { shape: Line { xStart: 0.0, yStart: 0.0, xEnd: 100.0, yEnd: 100.0 }
+            , color: Color { red: 0, green: 0, blue: 255 }
+            , outline: true
+            }
+          ]
       }
   }
 
@@ -72,14 +85,23 @@ view { viewInteractiveData } dataResult =
             { atJson: viewJson (encodeJson data_)
             , atPicture: viewPainting
                 { atMeta: viewMeta data_.meta
-                , atImage: viewImage data_.image
+                , atImage:
+                    viewImage
+                      { atElement: viewElement }
+                      data_.image
                 }
                 data_
             }
     }
 
-viewImage :: forall html msg. HtmlStyled html => Image -> html msg
-viewImage { width, height, background, frame } =
+viewImage
+  :: forall html msg
+   . HtmlStyled html
+  => { atElement :: ImageElement -> html msg
+     }
+  -> Image
+  -> html msg
+viewImage { atElement } { width, height, background, frame, elements } =
   let
     el =
       { root: styleNode C.div
@@ -100,13 +122,52 @@ viewImage { width, height, background, frame } =
           [ SA.width $ show width <> "px"
           , SA.height $ show height <> "px"
           ]
-          [ S.rect
-              [ SA.fill $ Color.toHex background
-              , SA.width "100%"
-              , SA.height "100%"
-              ]
-          ]
+          ( [ S.rect
+                [ SA.fill $ Color.toHex background
+                , SA.width "100%"
+                , SA.height "100%"
+                ]
+            ] <> map atElement elements
+          )
       ]
+
+viewElement
+  :: forall html msg
+   . HtmlStyled html
+  => ImageElement
+  -> html msg
+viewElement { shape, color, outline } =
+  let
+    commonAttrs =
+      [ SA.fill $ Color.toHex color
+      , SA.stroke "black"
+      , SA.strokeWidth if outline then "1px" else "0px"
+      ]
+
+  in
+    case shape of
+      Circle { x, y, radius } ->
+        S.circle $
+          [ SA.cx $ show x <> "px"
+          , SA.cy $ show y <> "px"
+          , SA.r $ show radius <> "px"
+          ] <> commonAttrs
+
+      Rect { x, y, width, height } ->
+        S.rect $
+          [ SA.x $ show x <> "px"
+          , SA.y $ show y <> "px"
+          , SA.width $ show width <> "px"
+          , SA.height $ show height <> "px"
+          ] <> commonAttrs
+
+      Line { xStart, xEnd, yStart, yEnd } ->
+        S.line $
+          [ SA.x1 $ show xStart <> "px"
+          , SA.y1 $ show yStart <> "px"
+          , SA.x2 $ show xEnd <> "px"
+          , SA.y2 $ show yEnd <> "px"
+          ] <> commonAttrs
 
 viewRoot
   :: forall html msg
