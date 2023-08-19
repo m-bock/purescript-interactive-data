@@ -6,6 +6,7 @@ package:
     - chameleon
     - chameleon-halogen
     - chameleon-react-basic
+    - chameleon-styled
     - console
     - effect
     - either

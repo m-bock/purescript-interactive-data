@@ -65,6 +65,7 @@ The following types are supported out of the box:
 - Primitives like `String`, `Int`, `Number`, `Boolean`
 - `Record`
 - `Variant`
+- `Array`
 - Common ADTs like `Maybe`, `Either`, `Tuple`
 - Newtypes
 - Refinement of existing types (smart constructor pattern)
@@ -195,7 +196,6 @@ Go to http://localhost:1234
 
 ## Limitations
 
-- No implementation for `Array` yet. This will be provided in the future though. Until then you can use the generic `Json` Data UI.
 - Currently no support for recursive types.
 - Data UIs cannot have side effects other than user input. A Data UI that fetches data from a server is currently not possible.
 
