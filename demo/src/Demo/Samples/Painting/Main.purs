@@ -15,7 +15,7 @@ import Data.Argonaut (Json, encodeJson)
 import Data.Argonaut as JSON
 import Data.Array (intercalate)
 import Data.Either (Either(..))
-import Data.Maybe (Maybe(..), fromMaybe, maybe)
+import Data.Maybe (Maybe(..), maybe)
 import Demo.Common.Features.Refinement.ArchiveID (archiveID, sampleArchiveID)
 import Demo.Common.Features.Refinement.ArchiveID as ArchiveID
 import Demo.Common.PaintingSample (Image, Meta, Painting, USD(..), printUSD)

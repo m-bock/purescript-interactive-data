@@ -20,8 +20,6 @@ import InteractiveData
   , IDSurface
   , IntMsg
   , IntState
-  , NumberMsg
-  , NumberState
   , dataUi
   , newtype_
   )
