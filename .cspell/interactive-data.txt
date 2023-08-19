@@ -21,3 +21,4 @@ notfound
 datalabel
 
 valign
+minmax

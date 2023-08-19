@@ -114,7 +114,7 @@ view
          html msg
      }
   -> html msg
-view { atControls,atImage } =
+view { atControls, atImage } =
   let
     el =
       { root: styleNode C.div
@@ -124,11 +124,11 @@ view { atControls,atImage } =
           , "left: 0"
           , "width: 100%"
           , "height: 100%"
-          , "background-color: rgb(242 245 249)"
+          , "background-color: rgb(49 50 55)"
           ]
       , tiles: styleNode C.div
           [ "display: grid"
-          , "grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr)" 
+          , "grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr)"
           , "grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr"
           , "gap: 60px 30px"
           , "height: 800px"
@@ -140,6 +140,7 @@ view { atControls,atImage } =
           , "border: 1px solid #333"
           , "grid-column: 1 / 4"
           , "grid-row: 1 / 5"
+          , "position: relative"
           ]
       , itemPicture: styleNode C.div
           [ "background-color: #eee"
@@ -148,6 +149,7 @@ view { atControls,atImage } =
           , "grid-column: 1 / 3"
           , "grid-row: 5 / 7"
           , "border-radius: 5px"
+          , "position: relative"
           ]
       , itemJson: styleNode C.div
           [ "background-color: #eee"
@@ -156,22 +158,40 @@ view { atControls,atImage } =
           , "grid-column: 3 / 4"
           , "grid-row: 5 / 7"
           , "border-radius: 5px"
+          , "position: relative"
+          ]
+      , label: styleNode C.div
+          [ "font-size: 12px"
+          , "color: #333"
+          , "position: absolute"
+          , "top: -20"
+          , "left: 0"
+          , "color: white"
           ]
       }
   in
     el.root []
       [ el.tiles [] $
           [ el.itemControls []
-              [ atControls ]
+              [ el.label []
+                  [ C.text "Embedded interactive-data UI" ]
+              , atControls
+              ]
 
           ] <>
             case atImage of
               Left {} -> []
               Right { atJson, atPicture } ->
                 [ el.itemPicture []
-                    [ atPicture ]
+                    [ el.label []
+                        [ C.text "Sample data rendering" ]
+                    , atPicture
+                    ]
                 , el.itemJson []
-                    [ atJson ]
+                    [ el.label []
+                        [ C.text "JSON encoded data" ]
+                    , atJson
+                    ]
                 ]
 
       ]
@@ -217,7 +237,7 @@ viewPainting { atMeta, atImage } {} =
       ]
 
 viewMeta :: forall html msg. HtmlStyled html => Meta -> html msg
-viewMeta {author, title} =
+viewMeta { author, title } =
   let
     el =
       { root: styleNode C.div
@@ -301,15 +321,19 @@ viewJson json =
           , "overflow: auto"
           ]
       , jsonStr: styleNode C.pre
-          [ "font-size: 12px"
+          [ "font-size: 10px"
           , "font-family: monospace"
+          , "margin: 0"
           ]
       }
+
+    jsonStr :: String
+    jsonStr = JSON.stringifyWithIndent 2 json
   in
 
     el.root []
       [ el.jsonStr []
-          [ C.text $ JSON.stringifyWithIndent 2 json
+          [ C.text $ jsonStr
           ]
       ]
 
