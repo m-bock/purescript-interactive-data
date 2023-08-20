@@ -4,9 +4,8 @@ module Demo.Samples.PaintingHalogenNoRoute.Main
 
 import Prelude
 
-import Chameleon.Impl.Halogen (HalogenHtml)
 import Chameleon.Impl.Halogen as ChameleonHalogen
-import Chameleon.Styled (StyleT, runStyleT)
+import Chameleon.Styled (runStyleT)
 import Demo.Common.Embedded as UIEmbedded
 import Demo.Common.PaintingSample (Painting)
 import Effect (Effect)
@@ -14,8 +13,9 @@ import Effect.Aff (Aff)
 import Halogen as H
 import Halogen as Halogen
 import Halogen.Aff as HA
+import Halogen.HTML (HTML)
 import Halogen.VDom.Driver (runUI)
-import InteractiveData (DataResult)
+import InteractiveData as ID
 
 mkHalogenComponent
   :: forall q i o
@@ -36,16 +36,20 @@ mkHalogenComponent =
 
   render state =
     let
-      dataResult :: DataResult Painting
+      dataResult :: ID.DataResult Painting
       dataResult = extract state
 
-      html :: StyleT HalogenHtml _
-      html = UIEmbedded.view
-        { viewInteractiveData: ui.view state
-        }
-        dataResult
+      halogenRender :: ID.DataResult Painting -> HTML _ (ID.AppMsg _)
+      halogenRender result =
+        UIEmbedded.view
+          { viewInteractiveData: ui.view state
+          }
+          result
+          # runStyleT
+          # ChameleonHalogen.runHalogenHtml
+
     in
-      ChameleonHalogen.runHalogenHtml $ runStyleT html
+      halogenRender dataResult
 
   handleAction msg = do
     H.modify_ $ ui.update msg

@@ -5,8 +5,8 @@ module Demo.Samples.PaintingReact.Main
 import Prelude
 
 import Chameleon.Impl.ReactBasic as RI
-import Chameleon.Impl.ReactBasic.Html (ReactHtml, defaultConfig)
-import Chameleon.Styled (StyleT, runStyleT)
+import Chameleon.Impl.ReactBasic.Html (defaultConfig)
+import Chameleon.Styled (runStyleT)
 import Demo.Common.Embedded as UIEmbedded
 import Demo.Common.PaintingSample (Painting)
 import Effect (Effect)
@@ -30,18 +30,16 @@ reactComponent = do
       dataResult :: DataResult Painting
       dataResult = extract state
 
-      reactHtml :: StyleT ReactHtml _
-      reactHtml = UIEmbedded.view
-        { viewInteractiveData: ui.view state
-        }
-        dataResult
+      reactRender :: DataResult Painting -> JSX
+      reactRender result =
+        UIEmbedded.view
+          { viewInteractiveData: ui.view state
+          }
+          result
+          # runStyleT
+          # RI.runReactHtml { handler } defaultConfig
 
-      jsx :: JSX
-      jsx = RI.runReactHtml { handler } defaultConfig $ runStyleT reactHtml
-
-    pure jsx
-
----
+    pure $ reactRender dataResult
 
 main :: Effect Unit
 main = RI.mountAtId "root" reactComponent

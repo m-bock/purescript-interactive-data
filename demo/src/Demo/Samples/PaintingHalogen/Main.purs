@@ -4,9 +4,8 @@ module Demo.Samples.PaintingHalogen.Main
 
 import Prelude
 
-import Chameleon.Impl.Halogen (HalogenHtml)
 import Chameleon.Impl.Halogen as ChameleonHalogen
-import Chameleon.Styled (StyleT, runStyleT)
+import Chameleon.Styled (runStyleT)
 import Data.Maybe (Maybe(..))
 import Data.These (These(..))
 import Demo.Common.Embedded as UIEmbedded
@@ -17,11 +16,12 @@ import Halogen (get, liftEffect, subscribe)
 import Halogen as H
 import Halogen as Halogen
 import Halogen.Aff as HA
+import Halogen.HTML (HTML)
 import Halogen.Subscription (makeEmitter)
 import Halogen.VDom.Driver (runUI)
-import InteractiveData (DataResult)
 import InteractiveData.App.Routing (RouteIO, Route, routeSpec)
 import InteractiveData.App.Routing as ID.Routing
+import InteractiveData as ID
 
 data Msg route msg = Init | ChildMsg msg | MsgNewRoute route
 
@@ -46,16 +46,21 @@ mkHalogenComponent { routeIO } =
 
   render state =
     let
-      dataResult :: DataResult Painting
+      dataResult :: ID.DataResult Painting
       dataResult = extract state
 
-      html :: StyleT HalogenHtml _
-      html = UIEmbedded.view
-        { viewInteractiveData: ui.view state
-        }
-        dataResult
+      halogenRender :: ID.DataResult Painting -> HTML _ (Msg Route (ID.AppMsg _))
+      halogenRender result =
+        UIEmbedded.view
+          { viewInteractiveData: ui.view state
+          }
+          result
+          # runStyleT
+          # ChameleonHalogen.runHalogenHtml
+          <#> ChildMsg
+
     in
-      ChameleonHalogen.runHalogenHtml $ ChildMsg <$> runStyleT html
+      halogenRender dataResult
 
   handleAction msg_ = do
     case msg_ of

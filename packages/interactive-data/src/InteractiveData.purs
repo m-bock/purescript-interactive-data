@@ -109,4 +109,6 @@ import DataMVC.Types.DataError
 import InteractiveData.App
   ( WrapMsg
   , WrapState
+  , AppMsg
+  , AppState
   ) as Export

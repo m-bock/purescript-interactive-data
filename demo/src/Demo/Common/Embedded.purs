@@ -380,9 +380,7 @@ viewMeta { author, title, year, archiveId, keywords, price } =
           , "height: 100%"
           , "table-layout: fixed"
           ]
-      , row: styleNode C.tr
-          [ ""
-          ]
+      , row: C.tr
       , cellKey: styleNode C.td
           [ "padding-left: 10px"
           , "padding-right: 20px"
@@ -474,7 +472,6 @@ viewJson json =
     jsonStr :: String
     jsonStr = JSON.stringifyWithIndent 2 json
   in
-
     el.root []
       [ el.pre []
           [ el.jsonStr []
