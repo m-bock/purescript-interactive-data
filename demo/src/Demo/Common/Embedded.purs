@@ -127,15 +127,10 @@ viewImage { atShape } { width, height, background, frame, shapes } =
           , "width: 100%"
           , "height: 100%"
           ]
-      , svg: styleNode S.svg
-          [ "width: " <> show width <> "px"
-          , "height: " <> show height <> "px"
-          , "outline: " <> show frame <> "px solid #996633"
-          ]
       }
   in
     el.root []
-      [ el.svg
+      [ S.svg
           [ SA.width $ show width <> "px"
           , SA.height $ show height <> "px"
           ]
@@ -144,7 +139,15 @@ viewImage { atShape } { width, height, background, frame, shapes } =
                 , SA.width "100%"
                 , SA.height "100%"
                 ]
-            ] <> map atShape (Array.reverse shapes)
+            ] <> map atShape (Array.reverse shapes) <>[
+              S.rect
+                [ SA.width "100%"
+                , SA.height "100%"
+                , SA.stroke "#996633"
+                , SA.fill "none"
+                , SA.strokeWidth $ show frame <> "px"
+                ]
+            ]
           )
       ]
 

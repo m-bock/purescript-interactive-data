@@ -68,6 +68,7 @@ run-example: build clean-parcel
     node scripts/run-example.js $FILE
     export SAMPLE=`cat $FILE`
     echo "Starting $SAMPLE"
+    rm -rf .parcel-cache
     parcel demo/src/Demo/Samples/$SAMPLE/index.html
 
 run-dist:

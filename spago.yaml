@@ -1,5 +1,6 @@
 workspace:
-  extra_packages: {}
+  extra_packages:
+    chameleon-halogen: 1.0.2
   package_set:
     registry: 36.0.0
   build_opts:
