@@ -27,13 +27,14 @@ Composable UIs for interactive data.
 
 ## Live Demo
 
-<a href="https://thought2.github.io/purescript-interactive-data/PaintingReact">
+<a href="https://thought2.github.io/purescript-interactive-data/PaintingHalogen">
   <img src="https://github.com/thought2/assets/blob/3ac74450fed65cc663c6e0e88db52b75fc323c28/interactive-data/demo3.png" width="400">
 </a>
 
-<!-- [Halogen](https://thought2.github.io/purescript-interactive-data/PaintingHalogen) (with routing) -->
+The live demo shows the library used to build a configuration panel for painting digital pictures.
 
-[React](https://thought2.github.io/purescript-interactive-data/PaintingReact)
+- [Halogen](https://thought2.github.io/purescript-interactive-data/PaintingHalogen) (with routing)
+- [React](https://thought2.github.io/purescript-interactive-data/PaintingReact)
 
 ## Features
 
