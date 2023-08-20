@@ -53,3 +53,5 @@ instance Monoid ViewMode where
 
 instance Semigroup ViewMode where
   append x _ = x
+
+derive instance Eq ViewMode

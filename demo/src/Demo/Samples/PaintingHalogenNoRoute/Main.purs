@@ -47,7 +47,7 @@ mkHalogenComponent =
     in
       ChameleonHalogen.runHalogenHtml $ runStyleT html
 
-  handleAction msg =
+  handleAction msg = do
     H.modify_ $ ui.update msg
 
 main :: Effect Unit

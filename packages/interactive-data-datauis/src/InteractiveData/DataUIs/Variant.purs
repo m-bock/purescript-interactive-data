@@ -54,7 +54,8 @@ view { viewCase, mkMsg, caseKey, caseKeys } =
     in
       putCtx ctx { path = newPath } $
         C.div_
-          [ el.caseLabels []
+          [ C.noHtml -- This is needed due to a very weird rendering issue in Halogen
+          , el.caseLabels []
               ( caseKeys # map \possibleCaseKey ->
                   el.caseLabel []
                     [ UIDataLabel.view
