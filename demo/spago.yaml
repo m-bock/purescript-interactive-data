@@ -18,6 +18,7 @@ package:
     - interactive-data-core
     - maybe
     - newtype
+    - numbers
     - prelude
     - react-basic-dom
     - react-basic-hooks

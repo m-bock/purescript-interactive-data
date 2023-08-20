@@ -89,12 +89,12 @@ data Shape
       , y :: Number
       , radius :: Number
       }
-  | Line
-      { xStart :: Number
-      , yStart :: Number
-      , xEnd :: Number
-      , yEnd :: Number
-      }
+  | Triangle
+     { x :: Number
+     , y :: Number
+     , radius :: Number
+     , rotation :: Number
+     }
 
 --------------------------------------------------------------------------------
 --- Data UI
@@ -142,35 +142,7 @@ shapeDataUi :: DataUI' _ _ Shape
 shapeDataUi = shape
   { text: Just "The shape of the element"
   }
-  { "Line": ID.record
-      { text: Just "A line"
-      }
-      { xStart: ID.number
-          { text: Just "The x coordinate of the start point"
-          , min: 0.0
-          , max: 100.0
-          , init: Just 40.0
-          }
-      , yStart: ID.number
-          { text: Just "The y coordinate of the start point"
-          , min: 0.0
-          , max: 100.0
-          , init: Just 40.0
-          }
-      , xEnd: ID.number
-          { text: Just "The x coordinate of the end point"
-          , min: 0.0
-          , max: 100.0
-          , init: Just 60.0
-          }
-      , yEnd: ID.number
-          { text: Just "The y coordinate of the end point"
-          , min: 0.0
-          , max: 100.0
-          , init: Just 60.0
-          }
-      }
-  , "Rect": ID.record
+  { "Rect": ID.record
       { text: Just "A rectangle"
       }
       { x: ID.number
@@ -218,6 +190,34 @@ shapeDataUi = shape
           , min: 0.0
           , max: 100.0
           , init: Just 10.0
+          }
+      }
+  , "Triangle": ID.record
+      { text: Just "A triangle"
+      }
+      { x: ID.number
+          { text: Just "The x coordinate of the center"
+          , min: 0.0
+          , max: 100.0
+          , init: Just 50.0
+          }
+      , y: ID.number
+          { text: Just "The y coordinate of the center"
+          , min: 0.0
+          , max: 100.0
+          , init: Just 50.0
+          }
+      , radius: ID.number
+          { text: Just "The radius of the triangle"
+          , min: 0.0
+          , max: 100.0
+          , init: Just 10.0
+          }
+      , rotation: ID.number
+          { text: Just "The rotation angle of the triangle"
+          , min: 0.0
+          , max: 360.0
+          , init: Just 0.0
           }
       }
   }

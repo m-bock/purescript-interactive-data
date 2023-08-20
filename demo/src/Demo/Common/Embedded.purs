@@ -15,6 +15,9 @@ import Data.Argonaut as JSON
 import Data.Array (intercalate)
 import Data.Either (Either(..))
 import Data.Maybe (Maybe(..), maybe)
+import Data.Number (cos, pi, sin)
+import Data.String as Str
+import Data.Tuple.Nested (type (/\), (/\))
 import Demo.Common.Features.CustomDataUI.Color (Color(..))
 import Demo.Common.Features.CustomDataUI.Color as Color
 import Demo.Common.Features.Refinement.ArchiveID (sampleArchiveID)
@@ -54,14 +57,14 @@ initPainting =
             , color: Color { red: 255, green: 0, blue: 0 }
             , outline: true
             }
-          , { shape: Rect { x: 75.0, y: 75.0, width: 10.0, height: 10.0 }
-            , color: Color { red: 0, green: 255, blue: 0 }
-            , outline: true
-            }
-          , { shape: Line { xStart: 0.0, yStart: 0.0, xEnd: 100.0, yEnd: 100.0 }
-            , color: Color { red: 0, green: 0, blue: 255 }
-            , outline: true
-            }
+          -- , { shape: Rect { x: 75.0, y: 75.0, width: 10.0, height: 10.0 }
+          --   , color: Color { red: 0, green: 255, blue: 0 }
+          --   , outline: true
+          --   }
+          -- , { shape: Line { xStart: 0.0, yStart: 0.0, xEnd: 100.0, yEnd: 100.0 }
+          --   , color: Color { red: 0, green: 0, blue: 255 }
+          --   , outline: true
+          --   }
           ]
       }
   }
@@ -161,12 +164,25 @@ viewElement { shape, color, outline } =
           , SA.height $ show height <> "px"
           ] <> commonAttrs
 
-      Line { xStart, xEnd, yStart, yEnd } ->
-        S.line $
-          [ SA.x1 $ show xStart <> "px"
-          , SA.y1 $ show yStart <> "px"
-          , SA.x2 $ show xEnd <> "px"
-          , SA.y2 $ show yEnd <> "px"
+      Triangle { x, y, radius, rotation } ->
+        let
+          pointAx = x
+          pointAy = y - radius
+          
+          pointBx = x - radius * cos (pi / 6.0) 
+          pointBy = y + radius * sin (pi / 6.0)
+
+          pointCx = x + radius * cos (pi / 6.0)
+          pointCy = y + radius * sin (pi / 6.0)
+          
+        in
+        S.polygon $
+          [ SA.points $ Str.joinWith ","
+              [ show pointAx <> " " <> show pointAy
+              , show pointBx <> " " <> show pointBy
+              , show pointCx <> " " <> show pointCy
+              ]
+          , SA.transform ("rotate(" <> show rotation <> "," <> show x <> "," <> show y <> ")")
           ] <> commonAttrs
 
 viewRoot
