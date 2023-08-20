@@ -27,13 +27,13 @@ Composable UIs for interactive data.
 
 ## Live Demo
 
-<a href="https://thought2.github.io/purescript-interactive-data/HalogenFullscreen">
-  <img src="https://github.com/thought2/assets/blob/744109caf1feb639b6aff8388f4598e66a3f66bd/interactive-data/demo2.png" width="400">
+<a href="https://thought2.github.io/purescript-interactive-data/PaintingReact">
+  <img src="https://github.com/thought2/assets/blob/3ac74450fed65cc663c6e0e88db52b75fc323c28/interactive-data/demo3.png" width="400">
 </a>
 
-[Halogen Fullscreen](https://thought2.github.io/purescript-interactive-data/HalogenFullscreen)
+<!-- [Halogen](https://thought2.github.io/purescript-interactive-data/PaintingHalogen) (with routing) -->
 
-[React Embedded](https://thought2.github.io/purescript-interactive-data/ReactEmbed)
+[React](https://thought2.github.io/purescript-interactive-data/PaintingReact)
 
 ## Features
 

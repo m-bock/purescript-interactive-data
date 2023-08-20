@@ -1,4 +1,4 @@
-module Demo.Samples.Painting.Main
+module Demo.Samples.PaintingReact.Main
   ( main
   ) where
 

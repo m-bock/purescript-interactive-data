@@ -1,7 +1,10 @@
 module InteractiveData.App.Routing
-  ( getRouteIO
+  ( Route
+  , RouteIO
+  , getRouteIO
   , routeSpec
-  ) where
+  )
+  where
 
 import Prelude
 
