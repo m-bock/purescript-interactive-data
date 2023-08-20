@@ -30,7 +30,7 @@ import InteractiveData as ID
 import InteractiveData.Core.Classes.OptArgs (class OptArgs)
 
 sampleArchiveID :: ArchiveID
-sampleArchiveID = ArchiveID "abcdefg"
+sampleArchiveID = ArchiveID "igytkklqew"
 
 print :: ArchiveID -> String
 print (ArchiveID x) = x

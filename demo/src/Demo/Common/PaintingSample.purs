@@ -132,8 +132,8 @@ metaDataUi = ID.recordPartial
       }
       ID.string_
   , price: ID.newtype_ $ ID.int
-      { min: 1900
-      , max: 3000
+      { min: 0
+      , max: 1000
       , text: Just "The price for the next auction"
       }
   }
