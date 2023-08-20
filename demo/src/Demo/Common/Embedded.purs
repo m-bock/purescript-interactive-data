@@ -139,15 +139,15 @@ viewImage { atShape } { width, height, background, frame, shapes } =
                 , SA.width "100%"
                 , SA.height "100%"
                 ]
-            ] <> map atShape (Array.reverse shapes) <>[
-              S.rect
-                [ SA.width "100%"
-                , SA.height "100%"
-                , SA.stroke "#996633"
-                , SA.fill "none"
-                , SA.strokeWidth $ show frame <> "px"
-                ]
-            ]
+            ] <> map atShape (Array.reverse shapes) <>
+              [ S.rect
+                  [ SA.width "100%"
+                  , SA.height "100%"
+                  , SA.stroke "#996633"
+                  , SA.fill "none"
+                  , SA.strokeWidth $ show frame <> "px"
+                  ]
+              ]
           )
       ]
 
