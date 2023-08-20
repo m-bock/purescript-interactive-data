@@ -3,8 +3,7 @@ module InteractiveData.App.Routing
   , RouteIO
   , getRouteIO
   , routeSpec
-  )
-  where
+  ) where
 
 import Prelude
 

@@ -31,13 +31,13 @@ dist-examples:
     #!/usr/bin/env bash
     set -euxo pipefail
     rm -f output/package.json
-    rm -rf .parcel-cache
     main_dir="purescript-interactive-data"; \
     export VERSION=$(git rev-parse HEAD); \
     for dir in demo/src/Demo/Samples/*/; do \
         name=$(basename $dir); \
         echo Building $name $VERSION; \
         export PREFIX="/$main_dir/$name"; \
+        rm -rf .parcel-cache
         parcel build --dist-dir dist/$main_dir/$name --public-url /$main_dir/$name/ $dir/index.html ; \
     done
 
