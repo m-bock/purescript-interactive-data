@@ -13,16 +13,16 @@ import Chameleon.Styled (class HtmlStyled, styleNode)
 import Data.Argonaut (Json, encodeJson)
 import Data.Argonaut as JSON
 import Data.Array (intercalate)
+import Data.Array as Array
 import Data.Either (Either(..))
 import Data.Maybe (Maybe(..), maybe)
 import Data.Number (cos, pi, sin)
 import Data.String as Str
-import Data.Tuple.Nested (type (/\), (/\))
 import Demo.Common.Features.CustomDataUI.Color (Color(..))
 import Demo.Common.Features.CustomDataUI.Color as Color
 import Demo.Common.Features.Refinement.ArchiveID (sampleArchiveID)
 import Demo.Common.Features.Refinement.ArchiveID as ArchiveID
-import Demo.Common.PaintingSample (Image, ImageElement, Meta, Painting, Shape(..), USD(..), paintingDataUi, printUSD)
+import Demo.Common.PaintingSample (Image, Meta, Painting, Shape(..), USD(..), paintingDataUi, printUSD)
 import InteractiveData (DataResult)
 import InteractiveData as ID
 import InteractiveData.Entry (InteractiveDataApp)
@@ -50,21 +50,35 @@ initPainting =
   , image:
       { width: 100.0
       , height: 100.0
-      , frame: 0.0
+      , frame: 3.0
       , background: Color { red: 200, green: 200, blue: 200 }
-      , elements:
-          [ { shape: Circle { x: 25.0, y: 25.0, radius: 10.0 }
-            , color: Color { red: 255, green: 0, blue: 0 }
-            , outline: true
-            }
-          -- , { shape: Rect { x: 75.0, y: 75.0, width: 10.0, height: 10.0 }
-          --   , color: Color { red: 0, green: 255, blue: 0 }
-          --   , outline: true
-          --   }
-          -- , { shape: Line { xStart: 0.0, yStart: 0.0, xEnd: 100.0, yEnd: 100.0 }
-          --   , color: Color { red: 0, green: 0, blue: 255 }
-          --   , outline: true
-          --   }
+      , shapes:
+          [ Triangle
+              { x: 41.0
+              , y: 71.0
+              , radius: 36.0
+              , rotation: 81.0
+              , color: Color { red: 195, green: 255, blue: 56 }
+              , outline: false
+              }
+
+          , Rect
+              { x: 56.0
+              , y: 20.0
+              , width: 53.0
+              , height: 62.0
+              , rotation: 242.0
+              , color: Color { red: 68, green: 176, blue: 213 }
+              , outline: false
+              }
+
+          , Circle
+              { x: 31.0
+              , y: 33.0
+              , radius: 36.0
+              , color: Color { red: 226, green: 75, blue: 75 }
+              , outline: false
+              }
           ]
       }
   }
@@ -90,7 +104,7 @@ view { viewInteractiveData } dataResult =
                 { atMeta: viewMeta data_.meta
                 , atImage:
                     viewImage
-                      { atElement: viewElement }
+                      { atShape: viewShape }
                       data_.image
                 }
                 data_
@@ -100,11 +114,11 @@ view { viewInteractiveData } dataResult =
 viewImage
   :: forall html msg
    . HtmlStyled html
-  => { atElement :: ImageElement -> html msg
+  => { atShape :: Shape -> html msg
      }
   -> Image
   -> html msg
-viewImage { atElement } { width, height, background, frame, elements } =
+viewImage { atShape } { width, height, background, frame, shapes } =
   let
     el =
       { root: styleNode C.div
@@ -130,60 +144,65 @@ viewImage { atElement } { width, height, background, frame, elements } =
                 , SA.width "100%"
                 , SA.height "100%"
                 ]
-            ] <> map atElement elements
+            ] <> map atShape (Array.reverse shapes)
           )
       ]
 
-viewElement
+viewShape
   :: forall html msg
    . HtmlStyled html
-  => ImageElement
+  => Shape
   -> html msg
-viewElement { shape, color, outline } =
-  let
-    commonAttrs =
-      [ SA.fill $ Color.toHex color
+viewShape = case _ of
+  Circle { x, y, radius, color, outline } ->
+    S.circle
+      [ SA.cx $ show x <> "px"
+      , SA.cy $ show y <> "px"
+      , SA.r $ show radius <> "px"
+      , SA.fill $ Color.toHex color
       , SA.stroke "black"
       , SA.strokeWidth if outline then "1px" else "0px"
       ]
 
-  in
-    case shape of
-      Circle { x, y, radius } ->
-        S.circle $
-          [ SA.cx $ show x <> "px"
-          , SA.cy $ show y <> "px"
-          , SA.r $ show radius <> "px"
-          ] <> commonAttrs
+  Rect { x, y, width, height, color, outline, rotation } ->
+    let
+      centerX = x + width / 2.0
+      centerY = y + height / 2.0
+    in
+      S.rect
+        [ SA.x $ show x <> "px"
+        , SA.y $ show y <> "px"
+        , SA.width $ show width <> "px"
+        , SA.height $ show height <> "px"
+        , SA.transform ("rotate(" <> show rotation <> "," <> show centerX <> "," <> show centerY <> ")")
+        , SA.fill $ Color.toHex color
+        , SA.stroke "black"
+        , SA.strokeWidth if outline then "1px" else "0px"
+        ]
 
-      Rect { x, y, width, height } ->
-        S.rect $
-          [ SA.x $ show x <> "px"
-          , SA.y $ show y <> "px"
-          , SA.width $ show width <> "px"
-          , SA.height $ show height <> "px"
-          ] <> commonAttrs
+  Triangle { x, y, radius, rotation, color, outline } ->
+    let
+      pointAx = x
+      pointAy = y - radius
 
-      Triangle { x, y, radius, rotation } ->
-        let
-          pointAx = x
-          pointAy = y - radius
-          
-          pointBx = x - radius * cos (pi / 6.0) 
-          pointBy = y + radius * sin (pi / 6.0)
+      pointBx = x - radius * cos (pi / 6.0)
+      pointBy = y + radius * sin (pi / 6.0)
 
-          pointCx = x + radius * cos (pi / 6.0)
-          pointCy = y + radius * sin (pi / 6.0)
-          
-        in
-        S.polygon $
-          [ SA.points $ Str.joinWith ","
-              [ show pointAx <> " " <> show pointAy
-              , show pointBx <> " " <> show pointBy
-              , show pointCx <> " " <> show pointCy
-              ]
-          , SA.transform ("rotate(" <> show rotation <> "," <> show x <> "," <> show y <> ")")
-          ] <> commonAttrs
+      pointCx = x + radius * cos (pi / 6.0)
+      pointCy = y + radius * sin (pi / 6.0)
+
+    in
+      S.polygon
+        [ SA.points $ Str.joinWith ","
+            [ show pointAx <> " " <> show pointAy
+            , show pointBx <> " " <> show pointBy
+            , show pointCx <> " " <> show pointCy
+            ]
+        , SA.transform ("rotate(" <> show rotation <> "," <> show x <> "," <> show y <> ")")
+        , SA.fill $ Color.toHex color
+        , SA.stroke "black"
+        , SA.strokeWidth if outline then "1px" else "0px"
+        ]
 
 viewRoot
   :: forall html msg

@@ -39,9 +39,11 @@ extract (NumberState s) = Right s
 -------------------------------------------------------------------------------
 
 init :: { initCfg :: Maybe Number } -> Maybe Number -> NumberState
-init { initCfg } optStr = case initCfg of
-  Nothing -> NumberState $ fromMaybe zero optStr
-  Just n -> NumberState n
+init { initCfg } initGlobal = case initCfg, initGlobal of
+  Just n, Nothing -> NumberState n
+  Nothing, Just n -> NumberState n
+  Nothing, Nothing -> NumberState zero
+  Just _, Just n -> NumberState n
 
 -------------------------------------------------------------------------------
 --- Update

@@ -1,6 +1,5 @@
 module Demo.Common.PaintingSample
   ( Image
-  , ImageElement
   , Meta
   , Painting
   , Shape(..)
@@ -63,13 +62,7 @@ type Image =
   , height :: Number
   , frame :: Number
   , background :: Color
-  , elements :: Array ImageElement
-  }
-
-type ImageElement =
-  { shape :: Shape
-  , color :: Color
-  , outline :: Boolean
+  , shapes :: Array Shape
   }
 
 type Painting =
@@ -83,18 +76,25 @@ data Shape
       , y :: Number
       , width :: Number
       , height :: Number
+      , rotation :: Number
+      , color :: Color
+      , outline :: Boolean
       }
   | Circle
       { x :: Number
       , y :: Number
       , radius :: Number
+      , color :: Color
+      , outline :: Boolean
       }
   | Triangle
-     { x :: Number
-     , y :: Number
-     , radius :: Number
-     , rotation :: Number
-     }
+      { x :: Number
+      , y :: Number
+      , radius :: Number
+      , rotation :: Number
+      , color :: Color
+      , outline :: Boolean
+      }
 
 --------------------------------------------------------------------------------
 --- Data UI
@@ -169,6 +169,18 @@ shapeDataUi = shape
           , max: 100.0
           , init: Just 20.0
           }
+      , rotation: ID.number
+          { text: Just "The rotation angle of the rectangle"
+          , min: 0.0
+          , max: 360.0
+          , init: Just 0.0
+          }
+      , outline: ID.boolean
+          { text: Just "Whether the shape should be outlined"
+          }
+      , color: color
+          { text: Just "The fill color of the shape"
+          }
       }
   , "Circle": ID.record
       { text: Just "A circle"
@@ -190,6 +202,12 @@ shapeDataUi = shape
           , min: 0.0
           , max: 100.0
           , init: Just 10.0
+          }
+      , outline: ID.boolean
+          { text: Just "Whether the shape should be outlined"
+          }
+      , color: color
+          { text: Just "The fill color of the shape"
           }
       }
   , "Triangle": ID.record
@@ -219,22 +237,14 @@ shapeDataUi = shape
           , max: 360.0
           , init: Just 0.0
           }
+      , outline: ID.boolean
+          { text: Just "Whether the shape should be outlined"
+          }
+      , color: color
+          { text: Just "The fill color of the shape"
+          }
       }
   }
-
-elementDataUi :: DataUI' _ _ ImageElement
-elementDataUi =
-  ID.record
-    { text: Just "A graphical element"
-    }
-    { outline: ID.boolean
-        { text: Just "Whether the shape should be outlined"
-        }
-    , color: color
-        { text: Just "The fill color of the shape"
-        }
-    , shape: shapeDataUi
-    }
 
 imageDataUi :: DataUI' _ _ Image
 imageDataUi = ID.record
@@ -257,10 +267,10 @@ imageDataUi = ID.record
       }
   , background: color
       { text: Just "The background color of the image" }
-  , elements: ID.array
+  , shapes: ID.array
       { text: Just "The graphical elements of the image"
       }
-      elementDataUi
+      shapeDataUi
   }
 
 paintingDataUi :: DataUI' _ _ Painting
