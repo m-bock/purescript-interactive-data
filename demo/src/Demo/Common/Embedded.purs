@@ -9,7 +9,7 @@ import Chameleon (class Html)
 import Chameleon as C
 import Chameleon.SVG.Attributes as SA
 import Chameleon.SVG.Elements as S
-import Chameleon.Styled (class HtmlStyled, styleNode)
+import Chameleon.Styled (class HtmlStyled, decl, declWith, styleNode)
 import Data.Argonaut (Json, encodeJson)
 import Data.Argonaut as JSON
 import Data.Array (intercalate)
@@ -274,6 +274,25 @@ viewRoot { atControls, atImage } =
           , "left: 0"
           , "color: white"
           ]
+      , linkSection: styleNode C.div
+          [ "position: fixed"
+          , "top: 0"
+          , "right: 0"
+          , "padding: 10px"
+          , "font-size: 12px"
+          , "color: white"
+          ]
+      , link: styleNode C.a
+          [ declWith ":link" [ "text-decoration : none" ]
+          , declWith ":visited" [ "text-decoration : none" ]
+          , declWith ":hover" [ "text-decoration : none" ]
+          , declWith ":active" [ "text-decoration : none" ]
+          , decl
+              [ "color : white"
+              , "font-size : 12px"
+              , "font-family : sans-serif"
+              ]
+          ]
       }
   in
     el.root []
@@ -299,7 +318,13 @@ viewRoot { atControls, atImage } =
                     , atJson
                     ]
                 ]
-
+      , el.linkSection []
+          [ el.link [ C.href "https://github.com/thought2/purescript-interactive-data" ]
+              [ C.text "Github" ]
+          , C.text " | "
+          , el.link [ C.href "https://thought2.github.io/purescript-interactive-data/manual/" ]
+              [ C.text "Manual" ]
+          ]
       ]
 
 viewPainting
