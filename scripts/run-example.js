@@ -3,24 +3,22 @@ import * as fs from "fs";
 
 const out = process.argv[2];
 
-const sampleValues = fs.readdirSync("demo/src/Demo/Samples");
+const sampleValues = fs.readdirSync("demo/static");
 
-const choices = sampleValues.map((name) => {
+const samplesChoices = sampleValues.map((name) => {
   return {
     name,
     value: name,
   };
 });
 
-const getAnswer = () =>
-  select({
+const main = async () => {
+  const sample = await select({
     message: "Select an Example",
-    choices,
+    choices: samplesChoices,
   });
 
-const main = async () => {
-  const answer = await getAnswer();
-  fs.writeFileSync(out, answer.trim());
+  fs.writeFileSync(out, sample.trim());
 };
 
 main();

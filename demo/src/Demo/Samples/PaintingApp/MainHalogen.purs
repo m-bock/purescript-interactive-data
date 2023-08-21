@@ -1,4 +1,4 @@
-module Demo.Samples.PaintingHalogen.Main
+module Demo.Samples.PaintingApp.MainHalogen
   ( main
   ) where
 
@@ -9,7 +9,7 @@ import Chameleon.Styled (runStyleT)
 import Data.Maybe (Maybe(..))
 import Data.These (These(..))
 import Demo.Common.Embedded as UIEmbedded
-import Demo.Common.PaintingSample (Painting)
+import Demo.Samples.PaintingApp.Types (Painting)
 import Effect (Effect)
 import Effect.Aff (Aff)
 import Halogen (get, liftEffect, subscribe)

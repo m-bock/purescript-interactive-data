@@ -1,4 +1,4 @@
-module Demo.Common.Features.Refinement.ArchiveID
+module Demo.Samples.PaintingApp.ArchiveID
   ( ArchiveID
   , archiveID
   , archiveID_

@@ -31,7 +31,7 @@ const main = () => {
     demoHtml: codeBlock(
       "static/index.html",
       "html",
-      fs.readFileSync("./demo/src/Demo/Samples/MinimalComplete/index.html", "utf8").toString()
+      fs.readFileSync("./demo/static/sample-minimal-complete/index.html", "utf8").toString()
     ),
   };
 

@@ -1,4 +1,4 @@
-module Demo.Common.Features.CustomDataUI.Color
+module Demo.Samples.PaintingApp.Color
   ( CfgColor
   , Color(..)
   , ColorMsg(..)

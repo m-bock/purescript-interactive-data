@@ -1,4 +1,4 @@
-module Demo.Samples.PaintingReact.Main
+module Demo.Samples.PaintingApp.MainReact
   ( main
   ) where
 
@@ -8,7 +8,7 @@ import Chameleon.Impl.ReactBasic as RI
 import Chameleon.Impl.ReactBasic.Html (defaultConfig)
 import Chameleon.Styled (runStyleT)
 import Demo.Common.Embedded as UIEmbedded
-import Demo.Common.PaintingSample (Painting)
+import Demo.Samples.PaintingApp.Types (Painting)
 import Effect (Effect)
 import InteractiveData (DataResult)
 import React.Basic.Hooks (JSX, (/\))

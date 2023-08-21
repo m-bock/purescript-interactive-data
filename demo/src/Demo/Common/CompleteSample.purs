@@ -13,7 +13,6 @@ import Data.Generic.Rep (class Generic)
 import Data.Maybe (Maybe(..))
 import Data.Show.Generic (genericShow)
 import Data.Tuple (Tuple)
-import Demo.Common.Features.CustomDataUI.Color (Color, color)
 import Demo.Common.Features.Refinement.UserID (UserID, userId_)
 import Demo.Common.VariantJ (VariantJ)
 import InteractiveData (class IDHtml, DataUI, IDSurface, (~))
@@ -47,10 +46,7 @@ type Sample =
             )
       }
   , theme ::
-      { backgroundColor :: Color
-      , foregroundColor :: Color
-      , textColor :: Color
-      , coordinate :: { x :: Int, y :: Int }
+      { coordinate :: { x :: Int, y :: Int }
       , item :: Maybe Int
       , size :: VariantJ (width :: Int, height :: Int, depth :: Int)
       }
@@ -132,10 +128,7 @@ sampleDataUi = ID.record_
   , theme: ID.record
       { text: Just "A sample theme to configure"
       }
-      { backgroundColor: color {}
-      , foregroundColor: color {}
-      , textColor: color {}
-      , coordinate: ID.dataUi
+      { coordinate: ID.dataUi
       , item: ID.dataUi
       , size: ID.newtype_ $ ID.variantPartial_ @"width"
           { width: ID.int { min: 0 }

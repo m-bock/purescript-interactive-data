@@ -19,11 +19,11 @@ import Data.Interpolate (i)
 import Data.Maybe (Maybe(..), maybe)
 import Data.Number (cos, pi, sin)
 import Data.String as Str
-import Demo.Common.Features.CustomDataUI.Color (Color(..))
-import Demo.Common.Features.CustomDataUI.Color as Color
-import Demo.Common.Features.Refinement.ArchiveID (sampleArchiveID)
-import Demo.Common.Features.Refinement.ArchiveID as ArchiveID
-import Demo.Common.PaintingSample (Image, Meta, Painting, Shape(..), USD(..), paintingDataUi, printUSD)
+import Demo.Samples.PaintingApp.Color (Color(..))
+import Demo.Samples.PaintingApp.Color as Color
+import Demo.Samples.PaintingApp.ArchiveID (sampleArchiveID)
+import Demo.Samples.PaintingApp.ArchiveID as ArchiveID
+import Demo.Samples.PaintingApp.Types (Image, Meta, Painting, Shape(..), USD(..), paintingDataUi, printUSD)
 import InteractiveData (DataResult)
 import InteractiveData as ID
 import InteractiveData.Entry (InteractiveDataApp)

@@ -1,4 +1,4 @@
-module Demo.Common.PaintingSample
+module Demo.Samples.PaintingApp.Types
   ( Image
   , Meta
   , Painting
@@ -16,8 +16,8 @@ import Data.Generic.Rep (class Generic)
 import Data.Maybe (Maybe(..))
 import Data.Newtype (class Newtype)
 import Data.Show.Generic (genericShow)
-import Demo.Common.Features.CustomDataUI.Color (Color, color)
-import Demo.Common.Features.Refinement.ArchiveID (ArchiveID, archiveID)
+import Demo.Samples.PaintingApp.Color (Color, color)
+import Demo.Samples.PaintingApp.ArchiveID (ArchiveID, archiveID)
 import InteractiveData (class IDDataUI, class IDHtml, DataUI, DataUI', IDSurface, IntMsg, IntState, dataUi, newtype_)
 import InteractiveData as ID
 import InteractiveData.Class (Tok(..))

@@ -33,7 +33,7 @@ dist-examples:
     rm -f output/package.json
     main_dir="purescript-interactive-data"; \
     export VERSION=$(git rev-parse HEAD); \
-    for dir in demo/src/Demo/Samples/*/; do \
+    for dir in demo/static/*/; do \
         name=$(basename $dir); \
         echo Building $name $VERSION; \
         export PREFIX="/$main_dir/$name"; \
@@ -62,7 +62,7 @@ dev: clean-parcel
     export SAMPLE=HalogenFullscreen
     parcel demo/src/Demo/Samples/$SAMPLE/index.html
 
-run-example: build clean-parcel
+dev-example: build clean-parcel
     #!/bin/bash
     FILE=`mktemp`
     node scripts/run-example.js $FILE
