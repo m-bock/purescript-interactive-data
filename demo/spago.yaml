@@ -19,6 +19,7 @@ package:
     - interactive-data
     - interactive-data-app
     - interactive-data-core
+    - interpolate
     - maybe
     - newtype
     - numbers

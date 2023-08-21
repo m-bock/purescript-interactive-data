@@ -15,6 +15,7 @@ import Data.Argonaut as JSON
 import Data.Array (intercalate)
 import Data.Array as Array
 import Data.Either (Either(..))
+import Data.Interpolate (i)
 import Data.Maybe (Maybe(..), maybe)
 import Data.Number (cos, pi, sin)
 import Data.String as Str
@@ -83,7 +84,9 @@ initPainting =
       }
   }
 
----
+--------------------------------------------------------------------------------
+-- Views
+--------------------------------------------------------------------------------
 
 view
   :: forall html msg
@@ -100,14 +103,15 @@ view { viewInteractiveData } dataResult =
             { atError: C.text $ show errors }
           Right data_ -> Right
             { atJson: viewJson (encodeJson data_)
-            , atPicture: viewPainting
-                { atMeta: viewMeta data_.meta
-                , atImage:
-                    viewImage
-                      { atShape: viewShape }
-                      data_.image
-                }
-                data_
+            , atPicture:
+                viewPainting
+                  { atMeta: viewMeta data_.meta
+                  , atImage:
+                      viewImage
+                        { atShape: viewShape }
+                        data_.image
+                  }
+                  data_
             }
     }
 
@@ -131,8 +135,8 @@ viewImage { atShape } { width, height, background, frame, shapes } =
   in
     el.root []
       [ S.svg
-          [ SA.width $ show width <> "px"
-          , SA.height $ show height <> "px"
+          [ SA.width $ i width "px"
+          , SA.height $ i height "px"
           ]
           ( [ S.rect
                 [ SA.fill $ Color.toHex background
@@ -145,7 +149,7 @@ viewImage { atShape } { width, height, background, frame, shapes } =
                   , SA.height "100%"
                   , SA.stroke "#996633"
                   , SA.fill "none"
-                  , SA.strokeWidth $ show frame <> "px"
+                  , SA.strokeWidth $ i frame "px"
                   ]
               ]
           )
@@ -159,9 +163,9 @@ viewShape
 viewShape = case _ of
   Circle { x, y, radius, color, outline } ->
     S.circle
-      [ SA.cx $ show x <> "px"
-      , SA.cy $ show y <> "px"
-      , SA.r $ show radius <> "px"
+      [ SA.cx $ i x "px"
+      , SA.cy $ i y "px"
+      , SA.r $ i radius "px"
       , SA.fill $ Color.toHex color
       , SA.stroke "black"
       , SA.strokeWidth if outline then "1px" else "0px"
@@ -173,11 +177,11 @@ viewShape = case _ of
       centerY = y + height / 2.0
     in
       S.rect
-        [ SA.x $ show x <> "px"
-        , SA.y $ show y <> "px"
-        , SA.width $ show width <> "px"
-        , SA.height $ show height <> "px"
-        , SA.transform ("rotate(" <> show rotation <> "," <> show centerX <> "," <> show centerY <> ")")
+        [ SA.x $ i x "px"
+        , SA.y $ i y "px"
+        , SA.width $ i width "px"
+        , SA.height $ i height "px"
+        , SA.transform $ i "rotate(" rotation " " centerX " " centerY ")"
         , SA.fill $ Color.toHex color
         , SA.stroke "black"
         , SA.strokeWidth if outline then "1px" else "0px"
@@ -197,11 +201,11 @@ viewShape = case _ of
     in
       S.polygon
         [ SA.points $ Str.joinWith ","
-            [ show pointAx <> " " <> show pointAy
-            , show pointBx <> " " <> show pointBy
-            , show pointCx <> " " <> show pointCy
+            [ i pointAx " " pointAy
+            , i pointBx " " pointBy
+            , i pointCx " " pointCy
             ]
-        , SA.transform ("rotate(" <> show rotation <> "," <> show x <> "," <> show y <> ")")
+        , SA.transform $ i "rotate(" rotation "," x "," y ")"
         , SA.fill $ Color.toHex color
         , SA.stroke "black"
         , SA.strokeWidth if outline then "1px" else "0px"
