@@ -1,6 +1,41 @@
 workspace:
   extra_packages:
     chameleon-halogen: 1.0.2
+    language-cst-parser:
+      git: https://github.com/thought2/purescript-language-cst-parser.git
+      ref: add-generic-instances
+      dependencies: 
+        [ "arrays"
+        , "console"
+        , "const"
+        , "control"
+        , "effect"
+        , "either"
+        , "enums"
+        , "foldable-traversable"
+        , "free"
+        , "functions"
+        , "functors"
+        , "identity"
+        , "integers"
+        , "lazy"
+        , "lists"
+        , "maybe"
+        , "newtype"
+        , "node-process"
+        , "numbers"
+        , "ordered-collections"
+        , "partial"
+        , "prelude"
+        , "st"
+        , "strings"
+        , "transformers"
+        , "tuples"
+        , "typelevel-prelude"
+        , "unfoldable"
+        , "unsafe-coerce"
+        ]
+
   package_set:
     registry: 36.0.0
   build_opts:

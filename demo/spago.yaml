@@ -20,6 +20,7 @@ package:
     - interactive-data-app
     - interactive-data-core
     - interpolate
+    - language-cst-parser
     - maybe
     - newtype
     - numbers
