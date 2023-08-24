@@ -15,7 +15,7 @@ import Data.Show.Generic (genericShow)
 import Data.Tuple (Tuple)
 import Demo.Common.Features.Refinement.UserID (UserID, userId_)
 import Demo.Common.VariantJ (VariantJ)
-import InteractiveData (class IDHtml, DataUI, IDSurface, (~))
+import InteractiveData (class IDHtml, DataUI, IDSurface)
 import InteractiveData as ID
 
 type Sample =
@@ -74,12 +74,12 @@ sampleDataUi = ID.record_
             , min: 0
             , max: 150
             }
-        , description: ID.maybe_
+        , description: ID.mkMaybe_
             { "Just": ID.string_
             , "Nothing": unit
             }
-        , nestedMaybe: ID.maybe_
-            { "Just": ID.maybe_
+        , nestedMaybe: ID.mkMaybe_
+            { "Just": ID.mkMaybe_
                 { "Just": ID.string_
                 , "Nothing": unit
                 }
@@ -90,13 +90,8 @@ sampleDataUi = ID.record_
             , "Bar": ID.string_
             , "Baz": ID.number_
             }
-        , tuple: ID.tuple_
-            { "Tuple": ID.string_ ~ ID.int_
-            }
-        , result: ID.either_
-            { "Left": ID.string_
-            , "Right": ID.int_
-            }
+        , tuple: ID.tuple_ ID.string_ ID.int_
+        , result: ID.either_ ID.string_ ID.int_
         , switch: ID.boolean { text: Just "Switch it!" }
         , items: ID.json
             { init: []

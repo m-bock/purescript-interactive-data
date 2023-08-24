@@ -65,6 +65,8 @@ import InteractiveData.DataUIs.Generic
 import InteractiveData.DataUIs.Common
   ( maybe_
   , maybe
+  , mkMaybe
+  , mkMaybe_
   , either_
   , either
   , tuple_

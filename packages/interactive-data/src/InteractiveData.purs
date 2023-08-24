@@ -47,6 +47,8 @@ import InteractiveData.DataUIs
 
   , maybe_
   , maybe
+  , mkMaybe
+  , mkMaybe_
   , either_
   , either
   , tuple_

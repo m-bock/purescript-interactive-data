@@ -1,6 +1,7 @@
 module InteractiveData.Entry
-  ( InteractiveDataApp
-  , DataUI'
+  ( DataUI'
+  , DataUI_
+  , InteractiveDataApp
   , ToAppCfg
   , ToAppMandatory
   , ToAppOptional
@@ -36,6 +37,9 @@ type DataUI' msg sta typ =
   forall html
    . IDHtml html
   => DataUI (IDSurface html) WrapMsg WrapState msg sta typ
+
+type DataUI_ html msg sta typ =
+  DataUI (IDSurface html) WrapMsg WrapState msg sta typ
 
 --------------------------------------------------------------------------------
 --- Functions

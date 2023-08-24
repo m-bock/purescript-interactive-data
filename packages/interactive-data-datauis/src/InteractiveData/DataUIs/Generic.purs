@@ -1,5 +1,6 @@
 module InteractiveData.DataUIs.Generic
   ( (~)
+  , CfgGeneric
   , DefaultTransform
   , MappingHlistToRecord(..)
   , Product(..)

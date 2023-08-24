@@ -16,12 +16,13 @@ import Data.Generic.Rep (class Generic)
 import Data.Maybe (Maybe(..))
 import Data.Newtype (class Newtype)
 import Data.Show.Generic (genericShow)
-import Demo.Samples.PaintingApp.Color (Color, color)
 import Demo.Samples.PaintingApp.ArchiveID (ArchiveID, archiveID)
+import Demo.Samples.PaintingApp.Color (Color, color)
 import InteractiveData (class IDDataUI, class IDHtml, DataUI, DataUI', IDSurface, IntMsg, IntState, dataUi, newtype_)
 import InteractiveData as ID
 import InteractiveData.Class (Tok(..))
 import InteractiveData.Class.Defaults (class DefaultGeneric, defaultGeneric_)
+import InteractiveData.Entry (DataUI_)
 import Type.Proxy (Proxy(..))
 
 {-
@@ -99,31 +100,26 @@ data Shape
 --------------------------------------------------------------------------------
 --- Data UI
 --------------------------------------------------------------------------------
-metaDataUi :: DataUI' _ _ Meta
+metaDataUi :: forall html. IDHtml html => DataUI (IDSurface html) _ _ _ _ Meta
 metaDataUi = ID.recordPartial
   { text: Just "Contains meta data about a painting"
   }
   { title: ID.maybe
       { text: Just "The title of the Painting, if existing"
       }
-      { "Just": ID.string_
-      , "Nothing": unit
-      }
+      ID.string_
   , author: ID.maybe
       { text: Just "The author of the Painting, if known"
       }
-      { "Just": ID.string_
-      , "Nothing": unit
-      }
+      ID.string_
   , year: ID.maybe
       { text: Just "The year the painting was created"
       }
-      { "Just": ID.int
+      ( ID.int
           { min: 1900
           , max: 3000
           }
-      , "Nothing": unit
-      }
+      )
   , archiveId: archiveID
       { text: Just "The ID of the painting in the archive. Only lowercase letters."
       }

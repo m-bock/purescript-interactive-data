@@ -3,76 +3,138 @@ module InteractiveData.DataUIs.Common
   , either_
   , maybe
   , maybe_
+  , mkEither
+  , mkEither_
+  , mkMaybe
+  , mkMaybe_
   , tuple
   , tuple_
   ) where
+
+import Prelude
 
 import Data.Either (Either)
 import Data.Maybe (Maybe)
 import Data.Tuple (Tuple)
 import DataMVC.Types (DataUI)
-import InteractiveData.Core (IDSurface)
-import InteractiveData.DataUIs.Generic (class GenericDataUI, generic)
+import InteractiveData.Core (class IDHtml, IDSurface)
+import InteractiveData.Core.Classes.OptArgs (class OptArgs)
+import InteractiveData.DataUIs.Generic (class GenericDataUI, CfgGeneric, generic, (~))
 
 --------------------------------------------------------------------------------
 --- Maybe
 --------------------------------------------------------------------------------
 
-maybe
+mkMaybe
   :: forall opt html fm fs datauis msg sta a
    . GenericDataUI opt html fm fs "Nothing" datauis msg sta (Maybe a)
   => opt
   -> { | datauis }
   -> DataUI (IDSurface html) fm fs msg sta (Maybe a)
-maybe = generic
+mkMaybe = generic
   { typeName: "Maybe"
   }
 
-maybe_
+mkMaybe_
   :: forall html fm fs datauis msg sta a
    . GenericDataUI {} html fm fs "Nothing" datauis msg sta (Maybe a)
   => { | datauis }
   -> DataUI (IDSurface html) fm fs msg sta (Maybe a)
+mkMaybe_ = mkMaybe {}
+
+maybe_
+  :: forall html a
+   . IDHtml html
+  => DataUI (IDSurface html) _ _ _ _ a
+  -> DataUI (IDSurface html) _ _ _ _ (Maybe a)
 maybe_ = maybe {}
+
+maybe
+  :: forall opt html a
+   . IDHtml html
+  => OptArgs CfgGeneric opt
+  => opt
+  -> DataUI (IDSurface html) _ _ _ _ a
+  -> DataUI (IDSurface html) _ _ _ _ (Maybe a)
+maybe opt x = mkMaybe
+  opt
+  { "Just": x
+  , "Nothing": unit
+  }
 
 --------------------------------------------------------------------------------
 --- Either
 --------------------------------------------------------------------------------
 
-either
+mkEither
   :: forall opt html fm fs datauis msg sta a b
    . GenericDataUI opt html fm fs "Left" datauis msg sta (Either a b)
   => opt
   -> { | datauis }
   -> DataUI (IDSurface html) fm fs msg sta (Either a b)
-either = generic
+mkEither = generic
   { typeName: "Either"
   }
 
-either_
+mkEither_
   :: forall html fm fs datauis msg sta a b
    . GenericDataUI {} html fm fs "Left" datauis msg sta (Either a b)
   => { | datauis }
   -> DataUI (IDSurface html) fm fs msg sta (Either a b)
+mkEither_ = mkEither {}
+
+either_
+  :: forall html a b
+   . IDHtml html
+  => DataUI (IDSurface html) _ _ _ _ a
+  -> DataUI (IDSurface html) _ _ _ _ b
+  -> DataUI (IDSurface html) _ _ _ _ (Either a b)
 either_ = either {}
+
+either
+  :: forall opt html a b
+   . IDHtml html
+  => OptArgs CfgGeneric opt
+  => opt
+  -> DataUI (IDSurface html) _ _ _ _ a
+  -> DataUI (IDSurface html) _ _ _ _ b
+  -> DataUI (IDSurface html) _ _ _ _ (Either a b)
+either opt x y = mkEither
+  opt
+  { "Left": x
+  , "Right": y
+  }
 
 --------------------------------------------------------------------------------
 --- Tuple
 --------------------------------------------------------------------------------
 
-tuple
+mkTuple
   :: forall opt html fm fs datauis msg sta a b
    . GenericDataUI opt html fm fs "Tuple" datauis msg sta (Tuple a b)
   => opt
   -> { | datauis }
   -> DataUI (IDSurface html) fm fs msg sta (Tuple a b)
-tuple = generic
+mkTuple = generic
   { typeName: "Tuple"
   }
 
 tuple_
-  :: forall html fm fs datauis msg sta a b
-   . GenericDataUI {} html fm fs "Tuple" datauis msg sta (Tuple a b)
-  => { | datauis }
-  -> DataUI (IDSurface html) fm fs msg sta (Tuple a b)
+  :: forall html a b
+   . IDHtml html
+  => DataUI (IDSurface html) _ _ _ _ a
+  -> DataUI (IDSurface html) _ _ _ _ b
+  -> DataUI (IDSurface html) _ _ _ _ (Tuple a b)
 tuple_ = tuple {}
+
+tuple
+  :: forall opt html a b
+   . IDHtml html
+  => OptArgs CfgGeneric opt
+  => opt
+  -> DataUI (IDSurface html) _ _ _ _ a
+  -> DataUI (IDSurface html) _ _ _ _ b
+  -> DataUI (IDSurface html) _ _ _ _ (Tuple a b)
+tuple opt x y = mkTuple
+  opt
+  { "Tuple": x ~ y }
