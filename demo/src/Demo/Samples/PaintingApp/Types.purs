@@ -22,7 +22,6 @@ import InteractiveData (class IDDataUI, class IDHtml, DataUI, DataUI', IDSurface
 import InteractiveData as ID
 import InteractiveData.Class (Tok(..))
 import InteractiveData.Class.Defaults (class DefaultGeneric, defaultGeneric_)
-import InteractiveData.Entry (DataUI_)
 import Type.Proxy (Proxy(..))
 
 {-
