@@ -12,7 +12,7 @@
   - [Primitives](./generated/ComposingDataUIs/Primitives.md)
   - [Records](./generated/ComposingDataUIs/Records.md)
   - [Variants]()
-  - [Maybe and friends]()
+  - [Maybe and friends](./generated/ComposingDataUIs/MaybeAndFriends.md)
   - [Custom ADTs]()
   - [Newtypes & Refinement]()
   - [Escape hatch: JSON Data UI]()
