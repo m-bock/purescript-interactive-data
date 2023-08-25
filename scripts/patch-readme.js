@@ -3,7 +3,7 @@ const mkReplace = (name, arg) => (patch) =>
 
 export const patchAll = (patchData) => (source) => {
   const regex = new RegExp(
-    `<!-- START ([a-zA-Z0-9_]+)(.*?)-->([\\s\\S]*?)<!-- END ([a-zA-Z0-9_]+) -->`,
+    `<!-- START ([a-zA-Z0-9_]+)(.*?)-->([\\s\\S]*?)<!-- END ([a-zA-Z0-9_]+) (.*?)-->`,
     "g"
   );
 

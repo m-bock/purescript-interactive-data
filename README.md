@@ -10,6 +10,7 @@ Composable UIs for interactive data.
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
 - [Live Demo](#live-demo)
 - [Features](#features)
@@ -104,7 +105,7 @@ The following types are supported out of the box:
 
 The following example renders with `Halogen`. Have a look at the demo folder for more examples in different frameworks.
 
-<!-- START demoApp -->
+<!-- START demoApp  -->
 *src/Main.purs:*
 ```hs
 module Main (main) where
@@ -161,7 +162,7 @@ main = do
 
 We also need to create a simple html file and a `index.js` file to run the web app.
 
-<!-- START demoHtml -->
+<!-- START demoHtml  -->
 *static/index.html:*
 ```html
 <html>
@@ -176,7 +177,7 @@ We also need to create a simple html file and a `index.js` file to run the web a
 ```
 <!-- END demoHtml -->
 
-<!-- START demoIndex -->
+<!-- START demoIndex  -->
 *static/index.js:*
 ```js
 import { main } from "../output/Main/index.js";

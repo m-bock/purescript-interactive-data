@@ -33,6 +33,8 @@ const main = () => {
       "html",
       fs.readFileSync("./demo/static/sample-minimal-complete/index.html", "utf8").toString()
     ),
+
+    doctoc: (content) => content
   };
 
   const result = patchAll(patchData)(source);
