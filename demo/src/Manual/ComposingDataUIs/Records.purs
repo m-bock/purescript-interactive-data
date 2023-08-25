@@ -59,9 +59,12 @@ demoRecord =
   ID.record
     { text: Just "A sample User"
     }
-    { name: ID.string_
-    , age: ID.int { text: Just "The age of the user", min: 0, max: 100 }
-    , address: ID.string_
+    { name: ID.string
+        { text: Just "The name of the user" }
+    , age: ID.int
+        { text: Just "The age of the user", min: 0, max: 100 }
+    , address: ID.string
+        { text: Just "The address of the user" }
     }
 
 {-

@@ -5,7 +5,10 @@ module Demo.Samples.DocsEmbed.Main
 
 import Prelude
 
+import Chameleon as C
+import Chameleon.Impl.Halogen (HalogenHtml, runHalogenHtml)
 import Chameleon.Impl.Halogen as HI
+import Chameleon.Styled (class HtmlStyled, StyleT, runStyleT, styleNode)
 import Data.Array as Array
 import Data.Map (Map)
 import Data.Map as Map
@@ -14,9 +17,13 @@ import Data.String (Pattern(..), Replacement(..))
 import Data.String as Str
 import Data.Tuple.Nested ((/\))
 import Effect (Effect)
+import Effect.Aff (Aff)
 import Effect.Class.Console (error)
-import InteractiveData (DataUI)
+import Halogen as H
+import Halogen as Halogen
+import InteractiveData (AppMsg, AppState, DataUI, WrapMsg, WrapState)
 import InteractiveData as ID
+import InteractiveData.Entry (InteractiveDataApp)
 import Manual.ComposingDataUIs.Primitives as Primitives
 import Manual.ComposingDataUIs.Records as Records
 
@@ -35,26 +42,81 @@ embeds =
 embedKeys :: Array String
 embedKeys = Array.fromFoldable $ Map.keys embeds
 
-app :: forall a. { showMenuOnStart :: Boolean } -> DataUI _ _ _ _ _ a -> Effect Unit
+viewWrapper :: forall html msg. HtmlStyled html => { atDataStr :: String, atInteractiveData :: html msg } -> html msg
+viewWrapper { atInteractiveData, atDataStr } =
+  let
+    el =
+      { root: styleNode C.div
+          [ "display: grid"
+          , "grid-template-rows: 5fr auto"
+          , "height: 100%"
+          , "background: hsl(200, 7%, 8%);"
+          , "padding: 10px"
+          , "box-sizing: border-box"
+          , "position: fixed"
+          , "top: 0"
+          , "left: 0"
+          , "right: 0"
+          , "bottom: 0"
+          ]
+      , atInteractiveData: styleNode C.div
+          [ "overflow: auto"
+          , "border:1px solid #9f9f9f"
+          , "border-radius: 5px"
+          , "margin-top: 10px"
+          , "margin-bottom: 10px"
+          ]
+      , atDataStr: styleNode C.pre
+          [ "font-size: 10px"
+          , "color: #c3c3c3"
+          , "padding: 0 10px"
+          ]
+      }
+  in
+    el.root []
+      [ el.atInteractiveData []
+          [ atInteractiveData ]
+      , el.atDataStr []
+          [ C.text atDataStr ]
+      ]
+
+mkHalogenComponent
+  :: forall q i o msg sta a
+   . Show a
+  => InteractiveDataApp (StyleT HalogenHtml) (AppMsg (WrapMsg msg)) (AppState (WrapState sta)) a
+  -> Halogen.Component q i o Aff
+mkHalogenComponent { ui, extract } =
+  H.mkComponent
+    { initialState
+    , render
+    , eval: H.mkEval $ H.defaultEval { handleAction = handleAction }
+    }
+  where
+  initialState _ = ui.init
+
+  render state =
+    runHalogenHtml $ runStyleT $ viewWrapper
+      { atInteractiveData: ui.view state
+      , atDataStr: show $ extract state
+      }
+
+  handleAction msg = do
+    H.modify_ $ ui.update msg
+
+app :: forall a. Show a => { showMenuOnStart :: Boolean } -> DataUI _ _ _ _ _ a -> Effect Unit
 app { showMenuOnStart } dataUi = do
   let
     sampleApp =
       ID.toApp
-        { name: "Sample"
+        { name: ""
         , initData: Nothing
-        , fullscreen: true
+        , fullscreen: false
         , showLogo: false
         , showMenuOnStart
         }
         dataUi
 
-    halogenComponent =
-      HI.uiToHalogenComponent
-        { onStateChange: \_ -> pure unit
-        }
-        sampleApp.ui
-
-  HI.uiMountAtId "root" halogenComponent
+  HI.uiMountAtId "root" $ mkHalogenComponent sampleApp
 
 main :: Effect Unit
 main = do

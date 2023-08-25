@@ -76,6 +76,8 @@ viewDataLabel' { dataPath, mkTitle } { onHit, isSelected } = withCtx \ctx ->
               , "padding-left: 3px"
               , "padding-right: 3px"
               , "border-radius: 2px"
+              , "height: 18px"
+              , "font-size: 12px"
               ]
             /\
               declWith ":hover" case onHit of

@@ -57,12 +57,9 @@ const postProcessFile = (source) => {
       }
       const height = height_ || 315;
       const style = [
-        "border:1px solid #cccccc",
-        "border-radius: 5px",
-        "margin-top: 10px",
-        "margin-bottom: 10px",
+        "border: 0px"
       ].join(";");
-      return `<iframe style="${style}" width="100%" height="${height}" src="${url}?${embedId}"></iframe>`;
+      return `<iframe allowtransparency="true" style="${style}" width="100%" height="${height}" src="${url}?${embedId}"></iframe>`;
     },
   };
 
