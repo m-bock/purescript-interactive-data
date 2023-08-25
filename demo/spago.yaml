@@ -23,6 +23,7 @@ package:
     - maybe
     - newtype
     - numbers
+    - ordered-collections
     - prelude
     - react-basic-hooks
     - record-studio
