@@ -170,9 +170,9 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="data-uis-for-primitive-types"><a class="header" href="#data-uis-for-primitive-types">Data UIs for Primitive types</a></h1>
-<!-- START hide -->
+<!-- START hide  -->
 <!-- END hide -->
-<!-- START imports -->
+<!-- START imports  -->
 <details><summary>Imports for the code samples</summary>
 <pre><code class="language-hs">import Data.Maybe (Maybe(..))
 import InteractiveData (DataUI')
@@ -187,52 +187,41 @@ import InteractiveData as ID
 <li>Strings</li>
 <li>Numbers</li>
 </ul>
-<h2 id="usage-without-options"><a class="header" href="#usage-without-options">Usage without options</a></h2>
-<p>Each primitive can be either created without extra configuration. E.g.:</p>
-<pre><code class="language-hs">sampleInt :: DataUI' _ _ Int
-sampleInt = ID.int_
-
-sampleBoolean :: DataUI' _ _ Boolean
-sampleBoolean = ID.boolean_
-
-sampleString :: DataUI' _ _ String
-sampleString = ID.string_
-
-sampleNumber :: DataUI' _ _ Number
-sampleNumber = ID.number_
-</code></pre>
-<p><code>DataUI'</code> is a simplification of the <code>DataUI</code> type.
-It hides some type arguments and constraints
-which are not so important in the beginning.
-It will be used in most of the examples.</p>
-<h2 id="configure-options-example-for-int"><a class="header" href="#configure-options-example-for-int">Configure options, example for <code>Int</code></a></h2>
-<p>Otherwise if the <code>_</code> is omitted some configuration options can be provided.
-Int the following example a descriptive text is added
-and the UI is limited to only create integer values between <code>0</code> and <code>100</code>.</p>
-<pre><code class="language-hs">sampleInt2 :: DataUI' _ _ Int
-sampleInt2 = ID.int
-  { text: Just &quot;The Age of a person&quot;
+<h2 id="int"><a class="header" href="#int">Int</a></h2>
+<pre><code class="language-hs">demoInt :: DataUI' _ _ Int
+demoInt = ID.int
+  { text: Just &quot;The age of a person&quot;
   , min: 0
-  , max: 100
+  , max: 120
   }
 </code></pre>
-<p>Note that this boundaries are only existent on the UI level.
-In one of the following chapters you'll see how you can go a step further
-and add restrictions on the type level with a smart constructor refinement.</p>
-<p>Some configuration options are applicable to every Data UI (e.g. <code>text</code>),
-others a specific for each type. Refer to the API docs to see which ones are
-available.</p>
-<h2 id="for-the-lazy-people"><a class="header" href="#for-the-lazy-people">For the lazy people...</a></h2>
-<p>There is also a polymorphic way to create primitive Data UIs. In this case no configuration options can be provided.</p>
-<pre><code class="language-hs">sampleInt3 :: DataUI' _ _ Int
-sampleInt3 = ID.dataUi
+<!-- START embed int 300 -->
+<iframe allowtransparency="true" style="border: 0px" width="100%" height="300" src="https://thought2.github.io/purescript-interactive-data/docs-embed?int"></iframe>
+<!-- END embed -->
+<h2 id="boolean"><a class="header" href="#boolean">Boolean</a></h2>
+<pre><code class="language-hs">sampleBoolean :: DataUI' _ _ Boolean
+sampleBoolean = ID.boolean_
 </code></pre>
-<h2 id="whats-behind-the-wildcards"><a class="header" href="#whats-behind-the-wildcards">What's behind the wildcards?</a></h2>
-<p>Each Data UI has a message type and a state type.
-The two type arguments which are omitted above look like this if they are not hidden:</p>
-<pre><code class="language-hs">sampleInt4 :: DataUI' ID.IntMsg ID.IntState Int
-sampleInt4 = ID.int_
+<!-- START embed boolean 300 -->
+<iframe allowtransparency="true" style="border: 0px" width="100%" height="300" src="https://thought2.github.io/purescript-interactive-data/docs-embed?boolean"></iframe>
+<!-- END embed -->
+<h2 id="string"><a class="header" href="#string">String</a></h2>
+<pre><code class="language-hs">demoString :: DataUI' _ _ String
+demoString = ID.string
+  { text: Just &quot;The name of a person&quot;
+  , maxLength: Just 100
+  }
 </code></pre>
+<!-- START embed string 300 -->
+<iframe allowtransparency="true" style="border: 0px" width="100%" height="300" src="https://thought2.github.io/purescript-interactive-data/docs-embed?string"></iframe>
+<!-- END embed -->
+<h2 id="number"><a class="header" href="#number">Number</a></h2>
+<pre><code class="language-hs">sampleNumber :: DataUI' _ _ Number
+sampleNumber = ID.number_
+</code></pre>
+<!-- START embed number -->
+<iframe allowtransparency="true" style="border: 0px" width="100%" height="315" src="https://thought2.github.io/purescript-interactive-data/docs-embed?number"></iframe>
+<!-- END embed -->
 
                     </main>
 
