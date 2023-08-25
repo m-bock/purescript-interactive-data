@@ -48,7 +48,7 @@ viewWrapper { atInteractiveData, atDataStr } =
     el =
       { root: styleNode C.div
           [ "display: grid"
-          , "grid-template-rows: 5fr auto"
+          , "grid-template-rows: minmax(0,5fr) minmax(0,1fr)"
           , "height: 100%"
           , "background: hsl(200, 7%, 8%);"
           , "padding: 10px"
