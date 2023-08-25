@@ -84,3 +84,5 @@ derive instance Generic SumTree _
 
 instance Show SumTree where
   show x = genericShow x
+
+derive instance Newtype SumTree _

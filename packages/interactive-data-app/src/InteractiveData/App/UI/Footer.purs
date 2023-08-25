@@ -93,6 +93,8 @@ footerRoot { errors, viewError, isExpanded, onChangeIsExpanded } =
           , "flex-direction: row"
           , "justify-content: space-between"
           , "padding: 5px"
+          , "font-size: 12px"
+          , "color: #a1a1a1"
           ]
       , expandIcon: styleNode C.div
           [ "cursor: pointer"

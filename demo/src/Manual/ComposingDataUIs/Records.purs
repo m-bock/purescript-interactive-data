@@ -54,8 +54,8 @@ works exactly like the configuration for the primitive types:
 
 -}
 
-sampleRecord2 :: DataUI' _ _ User
-sampleRecord2 =
+demoRecord :: DataUI' _ _ User
+demoRecord =
   ID.record
     { text: Just "A sample User"
     }
@@ -63,6 +63,10 @@ sampleRecord2 =
     , age: ID.int { text: Just "The age of the user", min: 0, max: 100 }
     , address: ID.string_
     }
+
+{-
+<!-- START embed record -->
+<!-- END embed -->
 
 {-
 

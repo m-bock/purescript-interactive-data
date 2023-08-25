@@ -3,7 +3,13 @@
 
 <!-- START hide -->
 -}
-module Manual.ComposingDataUIs.Primitives where
+module Manual.ComposingDataUIs.Primitives
+  ( demoInt
+  , demoString
+  , sampleBoolean
+  , sampleNumber
+  )
+  where
 
 {-
 <!-- END hide -->
@@ -24,70 +30,50 @@ The interactive-data library provides Data UIs for the following PureScript prim
 - Strings
 - Numbers
 
-## Usage without options
-
-Each primitive can be either created without extra configuration. E.g.:
-
+## Int
 -}
 
-sampleInt :: DataUI' _ _ Int
-sampleInt = ID.int_
+demoInt :: DataUI' _ _ Int
+demoInt = ID.int
+  { text: Just "The age of a person"
+  , min: 0
+  , max: 120
+  }
+
+{-
+<!-- START embed int -->
+<!-- END embed -->
+
+## Boolean
+-}
 
 sampleBoolean :: DataUI' _ _ Boolean
 sampleBoolean = ID.boolean_
 
-sampleString :: DataUI' _ _ String
-sampleString = ID.string_
+{-
+<!-- START embed boolean -->
+<!-- END embed -->
+
+## String
+-}
+
+demoString :: DataUI' _ _ String
+demoString = ID.string {
+  text: Just "The name of a person",
+  maxLength:  Just 1
+}
+
+{-
+<!-- START embed string -->
+<!-- END embed -->
+
+## Number
+-}
 
 sampleNumber :: DataUI' _ _ Number
 sampleNumber = ID.number_
 
 {-
-
-`DataUI'` is a simplification of the `DataUI` type.
-It hides some type arguments and constraints
-which are not so important in the beginning.
-It will be used in most of the examples.
-
-## Configure options, example for `Int`
-
-Otherwise if the `_` is omitted some configuration options can be provided.
-Int the following example a descriptive text is added
-and the UI is limited to only create integer values between `0` and `100`.
-
+<!-- START embed number -->
+<!-- END embed -->
 -}
-
-sampleInt2 :: DataUI' _ _ Int
-sampleInt2 = ID.int
-  { text: Just "The Age of a person"
-  , min: 0
-  , max: 100
-  }
-
-{-
-Note that this boundaries are only existent on the UI level.
-In one of the following chapters you'll see how you can go a step further
-and add restrictions on the type level with a smart constructor refinement.
-
-Some configuration options are applicable to every Data UI (e.g. `text`),
-others a specific for each type. Refer to the API docs to see which ones are
-available.
-
-## For the lazy people...
-
-There is also a polymorphic way to create primitive Data UIs. In this case no configuration options can be provided.
--}
-
-sampleInt3 :: DataUI' _ _ Int
-sampleInt3 = ID.dataUi
-
-{-
-
-## What's behind the wildcards?
-
-Each Data UI has a message type and a state type.
-The two type arguments which are omitted above look like this if they are not hidden:
--}
-
-sampleInt4 :: DataUI' ID.IntMsg ID.IntState Int
-sampleInt4 = ID.int_

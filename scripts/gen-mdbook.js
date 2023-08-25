@@ -4,6 +4,7 @@ import * as path from "path";
 import { patchAll } from "./patch-readme.js";
 import * as cp from "child_process";
 import { program } from "commander";
+import { embedKeys } from "../output/Demo.Samples.DocsEmbed.Main/index.js";
 
 const pursSrc = "demo/src/Manual";
 const mdDest = "mdbook/src/generated";
@@ -43,6 +44,18 @@ const postProcessFile = (source) => {
     removeType: (content) => content.replace(/type [^=]+= /g, ""),
     imports: (content) =>
       `<details><summary>Imports for the code samples</summary>${content}</details><hr><br>`,
+    embed: (_, embedId) => {
+      const embedExists = embedKeys.includes(embedId);
+      if (!embedExists) {
+        throw new Error(`No embed for '${embedId}'`);
+      }
+
+      const url = process.env.ID_URL_DEMO_EMBEDS;
+      if (typeof url === "undefined") {
+        throw new Error(`No 'ID_URL_DEMO_EMBEDS' defined`);
+      }
+      return `<iframe width="560" height="315" src="${url}?${embedId}"></iframe>`
+    },
   };
 
   const result = patchAll(patchData)(source);

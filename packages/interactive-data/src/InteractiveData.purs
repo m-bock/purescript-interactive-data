@@ -64,6 +64,10 @@ import InteractiveData.Run
   , getUi
   ) as Export
 
+import InteractiveData.Run.Types.HtmlT
+  ( IDHtmlT
+  ) as Export
+
 import InteractiveData.Core
   ( IDSurface
   , class IDHtml

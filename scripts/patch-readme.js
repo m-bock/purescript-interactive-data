@@ -1,24 +1,36 @@
-const patchSection = (name, patch) => (source) => {
-  const regex = mkRegex(name);
-  const replace = (_, content) => {
-    const newContent = typeof patch === "function" ? patch(content) : patch;
+const mkReplace = (name, arg) => (patch) =>
+  `<!-- START ${name} ${arg} -->\n${patch}\n<!-- END ${name} -->`;
 
-    return mkReplace(name)(newContent);
-  };
+export const patchAll = (patchData) => (source) => {
+  const regex = new RegExp(
+    `<!-- START ([a-zA-Z0-9_]+)(.*?)-->([\\s\\S]*?)<!-- END ([a-zA-Z0-9_]+) -->`,
+    "g"
+  );
 
-  return source.replace(regex, replace);
-};
+  const newSource = source.replace(
+    regex,
+    (_, nameOpen, arg_, content, nameClose) => {
+      if (nameOpen !== nameClose) {
+        throw new Error(
+          `Mismatched open/close name: '${nameOpen}' is not '${nameClose}'`
+        );
+      }
+      const name = nameOpen;
 
-const mkRegex = (name) =>
-  new RegExp(`<!-- START ${name} -->([\\s\\S]*)<!-- END ${name} -->`, "g");
+      const patch = patchData[name];
 
-const mkReplace = (name) => (patch) =>
-  `<!-- START ${name} -->\n${patch}\n<!-- END ${name} -->`;
+      if (typeof patch === "undefined") {
+        throw new Error(`No patch for '${name}'`);
+      }
 
-export const patchAll = (patchData) => (source_) => {
-  let source = source_;
-  for (const [name, patch] of Object.entries(patchData)) {
-    source = patchSection(name, patch)(source);
-  }
-  return source;
+      const arg = arg_.trim();
+
+      const newContent =
+        typeof patch === "function" ? patch(content, arg) : patch;
+
+      return mkReplace(name, arg)(newContent);
+    }
+  );
+
+  return newSource;
 };

@@ -25,6 +25,7 @@ package:
     - numbers
     - prelude
     - react-basic-hooks
+    - record-studio
     - strings
     - these
     - tuples

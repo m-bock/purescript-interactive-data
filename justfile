@@ -1,4 +1,13 @@
 export PATH := "node_modules/.bin:" + env_var('PATH')
+set dotenv-load
+
+export CI := env_var_or_default("CI", "false")
+
+export ID_URL_DEMO_EMBEDS := if CI == "true" {
+  "https://thought2.github.io/purescript-interactive-data/docs-embed"
+} else {
+  "http://localhost:1234"
+}
 
 build:
     spago build
@@ -69,7 +78,7 @@ dev-example: build clean-parcel
     export SAMPLE=`cat $FILE`
     echo "Starting $SAMPLE"
     rm -rf .parcel-cache
-    parcel demo/src/Demo/Samples/$SAMPLE/index.html
+    parcel demo/static/$SAMPLE/index.html
 
 run-dist:
     http-server dist
@@ -160,5 +169,7 @@ dev-manual: gen-mdbook
     chokidar "demo/src/Manual/**/*.purs" -c "node scripts/gen-mdbook.js --file {path}" &
 
     mdbook serve mdbook &
+
+    parcel demo/static/docs-embed/index.html &
 
     read -rp "Press Enter to cancel..."
