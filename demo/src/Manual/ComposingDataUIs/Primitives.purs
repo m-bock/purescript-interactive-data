@@ -59,7 +59,7 @@ sampleBoolean = ID.boolean_
 demoString :: DataUI' _ _ String
 demoString = ID.string
   { text: Just "The name of a person"
-  , maxLength: Just 1
+  , maxLength: Just 100
   }
 
 {-

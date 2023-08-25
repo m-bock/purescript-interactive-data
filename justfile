@@ -129,7 +129,7 @@ suggest-apply:
 
 # CI
 
-ci_: install spell format gen build build-strict dist check-git-clean
+ci_: install spell format build gen build-strict dist check-git-clean
 
 ci: clean
     just ci_
