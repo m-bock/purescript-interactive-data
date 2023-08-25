@@ -60,8 +60,7 @@ viewWrapper { atInteractiveData, atDataStr } =
           , "bottom: 0"
           ]
       , atInteractiveData: styleNode C.div
-          [ "overflow: auto"
-          , "border:1px solid #9f9f9f"
+          [ "border:1px solid #9f9f9f"
           , "border-radius: 5px"
           , "margin-top: 10px"
           , "margin-bottom: 10px"
