@@ -302,12 +302,17 @@ update update' =
 --- Init
 --------------------------------------------------------------------------------
 
-init :: forall sta a. (Maybe a -> sta) -> Maybe a -> AppState sta
-init init' opt = AppState
+init
+  :: forall sta a
+   . { showMenu :: Boolean }
+  -> (Maybe a -> sta)
+  -> Maybe a
+  -> AppState sta
+init { showMenu } init' opt = AppState
   { selectedPath: []
   , dataState: init' opt
   , menu: UIMenu.init
-  , showMenu: false
+  , showMenu
   , showErrors: false
   }
 
@@ -326,9 +331,10 @@ wrapApp
   :: forall html fm fs msg sta a
    . Ctx IDViewCtx html
   => IDHtml html
-  => DataUI (IDSurface html) fm fs msg sta a
+  => { showMenuOnStart :: Boolean }
+  -> DataUI (IDSurface html) fm fs msg sta a
   -> DataUI (IDSurface html) fm fs (AppMsg (fm msg)) (AppState (fs sta)) a
-wrapApp dataUi' =
+wrapApp { showMenuOnStart } dataUi' =
   DataUI \ctx ->
     let
       dataUi'' :: DataUI (IDSurface html) fm fs (fm msg) (fs sta) a
@@ -349,7 +355,7 @@ wrapApp dataUi' =
         { name: itf.name
         , view: view'
         , update: update itf.update
-        , init: init itf.init
+        , init: init { showMenu: showMenuOnStart } itf.init
         , extract: extract itf.extract
         }
 

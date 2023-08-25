@@ -8,8 +8,7 @@ module Manual.ComposingDataUIs.Primitives
   , demoString
   , sampleBoolean
   , sampleNumber
-  )
-  where
+  ) where
 
 {-
 <!-- END hide -->
@@ -41,7 +40,7 @@ demoInt = ID.int
   }
 
 {-
-<!-- START embed int -->
+<!-- START embed int 300 -->
 <!-- END embed -->
 
 ## Boolean
@@ -51,20 +50,20 @@ sampleBoolean :: DataUI' _ _ Boolean
 sampleBoolean = ID.boolean_
 
 {-
-<!-- START embed boolean -->
+<!-- START embed boolean 300 -->
 <!-- END embed -->
 
 ## String
 -}
 
 demoString :: DataUI' _ _ String
-demoString = ID.string {
-  text: Just "The name of a person",
-  maxLength:  Just 1
-}
+demoString = ID.string
+  { text: Just "The name of a person"
+  , maxLength: Just 1
+  }
 
 {-
-<!-- START embed string -->
+<!-- START embed string 300 -->
 <!-- END embed -->
 
 ## Number

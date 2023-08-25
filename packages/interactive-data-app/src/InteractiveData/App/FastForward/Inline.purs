@@ -21,7 +21,6 @@ view items =
       { root: styleNode C.div
           [ "display: flex"
           , "flex-direction: row"
-          , "margin-bottom: 20px"
           , "justify-content: space-between"
           , "align-items: start"
           ]

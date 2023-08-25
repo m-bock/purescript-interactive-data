@@ -65,10 +65,8 @@ demoRecord =
     }
 
 {-
-<!-- START embed record -->
+<!-- START embed record 500 -->
 <!-- END embed -->
-
-{-
 
 ## Using the general `dataUi` function
 

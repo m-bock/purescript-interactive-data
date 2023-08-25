@@ -109,7 +109,7 @@ viewStandalone { viewContent, actions, typeName, text } =
             ]
 
         , header: styleNode C.div
-            [ "margin-bottom: 35px"
+            [ "margin-bottom: 25px"
             ]
         }
     in

@@ -20,24 +20,23 @@ import InteractiveData as ID
 import Manual.ComposingDataUIs.Primitives as Primitives
 import Manual.ComposingDataUIs.Records as Records
 
-
 foreign import getQueryString :: Effect String
 
 embeds :: Map String (Effect Unit)
 embeds =
   Map.fromFoldable
-    [ "int" /\ app Primitives.demoInt
-    , "string" /\ app Primitives.demoString
-    , "boolean" /\ app ID.boolean_
-    , "number" /\ app ID.number_
-    , "record" /\ app Records.demoRecord
+    [ "int" /\ app { showMenuOnStart: false } Primitives.demoInt
+    , "string" /\ app { showMenuOnStart: false } Primitives.demoString
+    , "boolean" /\ app { showMenuOnStart: false } ID.boolean_
+    , "number" /\ app { showMenuOnStart: false } ID.number_
+    , "record" /\ app { showMenuOnStart: true } Records.demoRecord
     ]
 
 embedKeys :: Array String
 embedKeys = Array.fromFoldable $ Map.keys embeds
 
-app :: forall a. DataUI _ _ _ _ _ a -> Effect Unit
-app dataUi = do
+app :: forall a. { showMenuOnStart :: Boolean } -> DataUI _ _ _ _ _ a -> Effect Unit
+app { showMenuOnStart } dataUi = do
   let
     sampleApp =
       ID.toApp
@@ -45,6 +44,7 @@ app dataUi = do
         , initData: Nothing
         , fullscreen: true
         , showLogo: false
+        , showMenuOnStart
         }
         dataUi
 

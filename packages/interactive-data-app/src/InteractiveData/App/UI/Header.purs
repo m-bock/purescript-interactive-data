@@ -70,12 +70,11 @@ viewRoot { viewBreadcrumbs, right } =
           [ "background-color: #F8F8F8"
           , "padding: 5px"
           , "display: grid"
-          , "gap: 5px"
           , "height: 100%"
           , "box-shadow: 0px 1px 3px #ccc"
           , "justify-content: space-between"
           , "align-items: center"
-          , "grid-template-areas: 'a c' 'b d'"
+          , "grid-template-areas: 'a c'"
           ]
       , breadcrumbs: styleNode C.div
           [ "width: 100%"

@@ -56,6 +56,7 @@ type ToAppOptional a r =
   ( initData :: Maybe a
   , fullscreen :: Boolean
   , showLogo :: Boolean
+  , showMenuOnStart :: Boolean
   | r
   )
 
@@ -64,6 +65,7 @@ defaultToAppCfg =
   { initData: Nothing
   , fullscreen: false
   , showLogo: true
+  , showMenuOnStart: true
   }
 
 toApp
@@ -81,7 +83,7 @@ toApp given dataUi =
     cfg :: ToAppCfg a
     cfg = getAllArgsMixed defaultToAppCfg given
 
-    { name, fullscreen, initData, showLogo } = cfg
+    { name, fullscreen, initData, showLogo, showMenuOnStart } = cfg
 
     interface :: DataUiInterface html (AppMsg (WrapMsg msg)) (AppState (WrapState sta)) a
     interface =
@@ -91,7 +93,7 @@ toApp given dataUi =
         , fullscreen
         , showLogo
         }
-        $ App.wrapApp dataUi
+        $ App.wrapApp { showMenuOnStart } dataUi
 
     ui :: UI html (AppMsg (WrapMsg msg)) (AppState (WrapState sta))
     ui = Run.getUi { initData } interface

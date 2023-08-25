@@ -44,7 +44,8 @@ const postProcessFile = (source) => {
     removeType: (content) => content.replace(/type [^=]+= /g, ""),
     imports: (content) =>
       `<details><summary>Imports for the code samples</summary>${content}</details><hr><br>`,
-    embed: (_, embedId) => {
+    embed: (_, args) => {
+      const [embedId, height_] = args.trim().split(" ");
       const embedExists = embedKeys.includes(embedId);
       if (!embedExists) {
         throw new Error(`No embed for '${embedId}'`);
@@ -54,7 +55,14 @@ const postProcessFile = (source) => {
       if (typeof url === "undefined") {
         throw new Error(`No 'ID_URL_DEMO_EMBEDS' defined`);
       }
-      return `<iframe width="560" height="315" src="${url}?${embedId}"></iframe>`
+      const height = height_ || 315;
+      const style = [
+        "border:1px solid #cccccc",
+        "border-radius: 5px",
+        "margin-top: 10px",
+        "margin-bottom: 10px",
+      ].join(";");
+      return `<iframe style="${style}" width="100%" height="${height}" src="${url}?${embedId}"></iframe>`;
     },
   };
 

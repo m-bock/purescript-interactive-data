@@ -47,8 +47,7 @@ view { viewHeader, viewSidebar, viewBody, viewFooter } = withCtx \ctx ->
             , "background-color: white"
             ]
       , header: styleNode C.div
-          [ "min-height: 70px"
-          , "position: sticky"
+          [ "position: sticky"
           , "top: 0"
           , "z-index: 99"
           ]
