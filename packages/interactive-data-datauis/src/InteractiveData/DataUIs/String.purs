@@ -55,14 +55,13 @@ update msg (StringState state) =
 -------------------------------------------------------------------------------
 
 type CfgView =
-  { multilineInline :: Boolean
-  , multilineStandalone :: Boolean
+  { multiline ::  Boolean
   , maxLength :: Maybe Int
   }
 
 view :: forall html. IDHtml html => CfgView -> StringState -> html StringMsg
 view
-  { multilineInline, multilineStandalone, maxLength }
+  { multiline, maxLength }
   (StringState state) =
   withCtx \ctx ->
     let
@@ -112,13 +111,13 @@ view
       case ctx.viewMode of
         Standalone ->
           el.root []
-            [ getLineInput multilineStandalone
+            [ getLineInput multiline
             , el.details []
                 [ C.text ("Length: " <> show (Str.length state)) ]
             ]
         Inline ->
           el.root []
-            [ getLineInput multilineInline
+            [ singleLineInput
             ]
 
 -------------------------------------------------------------------------------
@@ -145,8 +144,7 @@ actions =
 
 type CfgString msg =
   { text :: Maybe String
-  , multilineInline :: Boolean
-  , multilineStandalone :: Boolean
+  , multiline :: Boolean
   , actions :: Array (DataAction msg)
   , maxLength :: Maybe Int
   }
@@ -154,8 +152,7 @@ type CfgString msg =
 defaultCfgString :: CfgString StringMsg
 defaultCfgString =
   { text: Nothing
-  , multilineInline: false
-  , multilineStandalone: true
+  , multiline : false
   , actions
   , maxLength: Nothing
   }

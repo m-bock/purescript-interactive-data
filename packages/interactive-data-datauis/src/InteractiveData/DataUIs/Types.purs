@@ -1,6 +1,5 @@
 module InteractiveData.DataUIs.Types
   ( TypeName(..)
-  )
-  where
+  ) where
 
 newtype TypeName = TypeName String
