@@ -275,8 +275,8 @@ paintingDataUi = ID.record_
   }
 
 shape
-  :: forall opt html fm fs datauis msg sta
-   . ID.GenericDataUI opt html fm fs "Circle" datauis msg sta Shape
+  :: forall opt html datauis fm fs msg sta
+   . ID.GenericDataUI "Circle" opt html datauis fm fs msg sta Shape
   => opt
   -> { | datauis }
   -> DataUI (IDSurface html) fm fs msg sta Shape

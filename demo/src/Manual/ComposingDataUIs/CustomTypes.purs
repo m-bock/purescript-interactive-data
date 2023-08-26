@@ -42,19 +42,25 @@ instance Show CustomADT where
 
 {-
 
-Then define a generic data UI for it:
+Then define a generic data UI for it.
+Don't get intimidated by the many tye parameters.
+You don't have to deal with them any further.
+Just copy paste the type signature and the implementation
+and replace `CustomADT` with the name of your type.
+Also replace "Foo" with the constructor of your type
+which should be the default case.
 
 -}
 
 customADT
-  :: forall opt html fm fs datauis msg sta
-   . ID.GenericDataUI opt html fm fs "Foo" datauis msg sta CustomADT
+  :: forall opt html datauis fm fs msg sta
+   . ID.GenericDataUI "Foo" opt html datauis fm fs msg sta CustomADT
   => opt
   -> { | datauis }
   -> DataUI (IDSurface html) fm fs msg sta CustomADT
-customADT = ID.generic
-  { typeName: "CustomADT"
-  }
+customADT =
+  ID.generic
+    { typeName: "CustomADT" }
 
 {-
 

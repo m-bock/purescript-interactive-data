@@ -149,8 +149,8 @@ instance EncodeJson CustomADT where
   encodeJson = genericEncodeJson
 
 customADT
-  :: forall opt html fm fs datauis msg sta
-   . ID.GenericDataUI opt html fm fs "Foo" datauis msg sta CustomADT
+  :: forall opt html datauis fm fs msg sta
+   . ID.GenericDataUI "Foo" opt html datauis fm fs msg sta CustomADT
   => opt
   -> { | datauis }
   -> DataUI (IDSurface html) fm fs msg sta CustomADT

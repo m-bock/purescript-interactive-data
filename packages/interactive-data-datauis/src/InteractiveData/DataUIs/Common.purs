@@ -26,8 +26,8 @@ import InteractiveData.DataUIs.Generic (class GenericDataUI, CfgGeneric, generic
 --------------------------------------------------------------------------------
 
 mkMaybe
-  :: forall opt html fm fs datauis msg sta a
-   . GenericDataUI opt html fm fs "Nothing" datauis msg sta (Maybe a)
+  :: forall opt html datauis fm fs msg sta a
+   . GenericDataUI "Nothing" opt html datauis fm fs msg sta (Maybe a)
   => opt
   -> { | datauis }
   -> DataUI (IDSurface html) fm fs msg sta (Maybe a)
@@ -36,8 +36,8 @@ mkMaybe = generic
   }
 
 mkMaybe_
-  :: forall html fm fs datauis msg sta a
-   . GenericDataUI {} html fm fs "Nothing" datauis msg sta (Maybe a)
+  :: forall html datauis fm fs msg sta a
+   . GenericDataUI "Nothing" {} html datauis fm fs msg sta (Maybe a)
   => { | datauis }
   -> DataUI (IDSurface html) fm fs msg sta (Maybe a)
 mkMaybe_ = mkMaybe {}
@@ -67,8 +67,8 @@ maybe opt x = mkMaybe
 --------------------------------------------------------------------------------
 
 mkEither
-  :: forall opt html fm fs datauis msg sta a b
-   . GenericDataUI opt html fm fs "Left" datauis msg sta (Either a b)
+  :: forall opt html datauis fm fs msg sta a b
+   . GenericDataUI "Left" opt html datauis fm fs msg sta (Either a b)
   => opt
   -> { | datauis }
   -> DataUI (IDSurface html) fm fs msg sta (Either a b)
@@ -77,8 +77,8 @@ mkEither = generic
   }
 
 mkEither_
-  :: forall html fm fs datauis msg sta a b
-   . GenericDataUI {} html fm fs "Left" datauis msg sta (Either a b)
+  :: forall html datauis fm fs msg sta a b
+   . GenericDataUI "Left" {} html datauis fm fs msg sta (Either a b)
   => { | datauis }
   -> DataUI (IDSurface html) fm fs msg sta (Either a b)
 mkEither_ = mkEither {}
@@ -110,8 +110,8 @@ either opt x y = mkEither
 --------------------------------------------------------------------------------
 
 mkTuple
-  :: forall opt html fm fs datauis msg sta a b
-   . GenericDataUI opt html fm fs "Tuple" datauis msg sta (Tuple a b)
+  :: forall opt html datauis fm fs msg sta a b
+   . GenericDataUI "Tuple" opt html datauis fm fs msg sta (Tuple a b)
   => opt
   -> { | datauis }
   -> DataUI (IDSurface html) fm fs msg sta (Tuple a b)

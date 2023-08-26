@@ -48,12 +48,12 @@ defaultCfg =
 
 class
   GenericDataUI
+    (initcase :: Symbol)
     (opt :: Type)
     (html :: Type -> Type)
+    (datauis :: Row Type)
     (fm :: Type -> Type)
     (fs :: Type -> Type)
-    (initcase :: Symbol)
-    (datauis :: Row Type)
     (msg :: Type)
     (sta :: Type)
     (a :: Type)
@@ -69,12 +69,12 @@ instance
   , OptArgs CfgGeneric opt
   ) =>
   GenericDataUI
+    initcase
     opt
     html
+    datauisHlist
     fm
     fs
-    initcase
-    datauisHlist
     (VariantMsg rcase rmsg)
     (VariantState rsta)
     a
