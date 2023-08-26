@@ -583,11 +583,12 @@ demoTuple = ID.tuple
 
 import Data.Generic.Rep (class Generic)
 import Data.Show.Generic (genericShow)
-import InteractiveData (DataUI, DataUI', IDSurface, (~))
+import InteractiveData (DataUI', (~))
 import InteractiveData as ID
 </code></pre>
 </details><hr><br>
 <!-- END imports -->
+<h2 id="defining-a-custom-data-type"><a class="header" href="#defining-a-custom-data-type">Defining a custom data type</a></h2>
 <p>Define a custom data type first:</p>
 <pre><code class="language-hs">data CustomADT
   = Foo Int
@@ -595,26 +596,17 @@ import InteractiveData as ID
   | Baz Number Boolean
   | Qux
 </code></pre>
+<h2 id="deriving-instances"><a class="header" href="#deriving-instances">Deriving Instances</a></h2>
 <p>Then derive <code>Generic</code> and <code>Show</code> instances for it:</p>
 <pre><code class="language-hs">derive instance Generic CustomADT _
 
 instance Show CustomADT where
   show = genericShow
 </code></pre>
-<p>Then define a generic data UI for it:</p>
-<pre><code class="language-hs">customADT
-  :: forall opt html fm fs datauis msg sta
-   . ID.GenericDataUI opt html fm fs &quot;Foo&quot; datauis msg sta CustomADT
-  =&gt; opt
-  -&gt; { | datauis }
-  -&gt; DataUI (IDSurface html) fm fs msg sta CustomADT
-customADT = ID.generic
-  { typeName: &quot;CustomADT&quot;
-  }
-</code></pre>
+<h2 id="composing-a-data-ui-for-the-type"><a class="header" href="#composing-a-data-ui-for-the-type">Composing a Data UI for the type</a></h2>
 <p>And then compose a data UI for it:</p>
 <pre><code class="language-hs">demoCustomType :: DataUI' _ _ CustomADT
-demoCustomType = customADT {}
+demoCustomType = ID.generic_ @&quot;Foo&quot; (ID.TypeName &quot;CustomADT&quot;)
   { &quot;Foo&quot;: ID.int_
   , &quot;Bar&quot;: ID.string_
   , &quot;Baz&quot;: ID.number_ ~ ID.boolean_
