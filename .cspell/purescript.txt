@@ -21,3 +21,5 @@ hmap
 combinators
 unsnoc
 snoc
+Newtype
+Newtypes
