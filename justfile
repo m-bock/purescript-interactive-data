@@ -29,6 +29,8 @@ lint:
 install:
     npm ci
 
+pre-push: ci_ ci-tmp
+
 # Dist
 
 clean-dist:
