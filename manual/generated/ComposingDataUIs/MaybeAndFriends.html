@@ -83,7 +83,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../../generated/Introduction.html">Introduction</a></li><li class="chapter-item expanded affix "><a href="../../generated/Installation.html">Installation</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">User Guide</li><li class="chapter-item expanded "><a href="../../generated/ComposingDataUIs.html"><strong aria-hidden="true">1.</strong> Composing Data UIs</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../generated/ComposingDataUIs/Primitives.html"><strong aria-hidden="true">1.1.</strong> Primitives</a></li><li class="chapter-item expanded "><a href="../../generated/ComposingDataUIs/Records.html"><strong aria-hidden="true">1.2.</strong> Records</a></li><li class="chapter-item expanded "><div><strong aria-hidden="true">1.3.</strong> Variants</div></li><li class="chapter-item expanded "><a href="../../generated/ComposingDataUIs/MaybeAndFriends.html" class="active"><strong aria-hidden="true">1.4.</strong> Maybe and friends</a></li><li class="chapter-item expanded "><div><strong aria-hidden="true">1.5.</strong> Custom ADTs</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">1.6.</strong> Newtypes & Refinement</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">1.7.</strong> Escape hatch: JSON Data UI</div></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">2.</strong> Advanced Recipies</div></li><li><ol class="section"><li class="chapter-item expanded "><div><strong aria-hidden="true">2.1.</strong> Writing custom Data UIs</div></li><li><ol class="section"><li class="chapter-item expanded "><div><strong aria-hidden="true">2.1.1.</strong> Example: A color picker</div></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">2.2.</strong> Define custom type class</div></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.</strong> Running Data UIs</div></li><li><ol class="section"><li class="chapter-item expanded "><div><strong aria-hidden="true">3.1.</strong> Halogen</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.2.</strong> React Basic</div></li></ol></li><li class="chapter-item expanded "><li class="part-title">Appendix</li><li class="chapter-item expanded "><a href="../../generated/Glossary.html"><strong aria-hidden="true">4.</strong> Glossary</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../../generated/Introduction.html">Introduction</a></li><li class="chapter-item expanded affix "><a href="../../generated/Installation.html">Installation</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">User Guide</li><li class="chapter-item expanded "><a href="../../generated/ComposingDataUIs.html"><strong aria-hidden="true">1.</strong> Composing Data UIs</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../generated/ComposingDataUIs/Primitives.html"><strong aria-hidden="true">1.1.</strong> Primitives</a></li><li class="chapter-item expanded "><a href="../../generated/ComposingDataUIs/Records.html"><strong aria-hidden="true">1.2.</strong> Records</a></li><li class="chapter-item expanded "><a href="../../generated/ComposingDataUIs/Variants.html"><strong aria-hidden="true">1.3.</strong> Variants</a></li><li class="chapter-item expanded "><a href="../../generated/ComposingDataUIs/MaybeAndFriends.html" class="active"><strong aria-hidden="true">1.4.</strong> Maybe and friends</a></li><li class="chapter-item expanded "><div><strong aria-hidden="true">1.5.</strong> Custom ADTs</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">1.6.</strong> Newtypes & Refinement</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">1.7.</strong> Escape hatch: JSON Data UI</div></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">2.</strong> Advanced Recipies</div></li><li><ol class="section"><li class="chapter-item expanded "><div><strong aria-hidden="true">2.1.</strong> Writing custom Data UIs</div></li><li><ol class="section"><li class="chapter-item expanded "><div><strong aria-hidden="true">2.1.1.</strong> Example: A color picker</div></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">2.2.</strong> Define custom type class</div></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.</strong> Running Data UIs</div></li><li><ol class="section"><li class="chapter-item expanded "><div><strong aria-hidden="true">3.1.</strong> Halogen</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.2.</strong> React Basic</div></li></ol></li><li class="chapter-item expanded "><li class="part-title">Appendix</li><li class="chapter-item expanded "><a href="../../generated/Glossary.html"><strong aria-hidden="true">4.</strong> Glossary</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -188,37 +188,88 @@ like <code>Maybe</code>, <code>Either</code> and <code>Tuple</code>.</p>
 <pre><code class="language-hs">dataUiMaybe1 :: DataUI' _ _ (Maybe Int)
 dataUiMaybe1 = ID.maybe_ ID.int_
 
-dataUiMaybe2 :: DataUI' _ _ (Maybe Int)
-dataUiMaybe2 = ID.maybe
+demoMaybe :: DataUI' _ _ (Maybe Int)
+demoMaybe = ID.maybe
   { text: Just &quot;Call me maybe..&quot; }
   ID.int_
 </code></pre>
+<!-- START embed maybe 500 -->
+<div style="display:grid; grid-template-rows: auto minmax(0, 1fr); gap: 10px">
+  <div style="display: flex; justify-content: flex-end">
+    <a href="https://thought2.github.io/purescript-interactive-data/docs-embed?maybe">
+      <img style="width: 15px; border: 1px solid #979797; border-radius: 5px; padding: 3px" title="Fullscreen" src="/assets/expand.svg">
+    </a>
+  </div>
+  <iframe 
+    allowtransparency="true"
+    style="border: 0px"
+    width="100%"
+    height="500"
+    src="https://thought2.github.io/purescript-interactive-data/docs-embed?maybe"
+    >
+  </iframe>
+</div>
+<!-- END embed -->
 <h1 id="either"><a class="header" href="#either">Either</a></h1>
 <pre><code class="language-hs">dataUiEither1 :: DataUI' _ _ (Either Int String)
 dataUiEither1 = ID.either_ ID.int_ ID.string_
 
-dataUiEither2 :: DataUI' _ _ (Either String Int)
-dataUiEither2 = ID.either
+demoEither :: DataUI' _ _ (Either String Int)
+demoEither = ID.either
   { text: Just &quot;Some Result or some Error&quot; }
   ID.string_
   ID.int_
 </code></pre>
+<!-- START embed either 500 -->
+<div style="display:grid; grid-template-rows: auto minmax(0, 1fr); gap: 10px">
+  <div style="display: flex; justify-content: flex-end">
+    <a href="https://thought2.github.io/purescript-interactive-data/docs-embed?either">
+      <img style="width: 15px; border: 1px solid #979797; border-radius: 5px; padding: 3px" title="Fullscreen" src="/assets/expand.svg">
+    </a>
+  </div>
+  <iframe 
+    allowtransparency="true"
+    style="border: 0px"
+    width="100%"
+    height="500"
+    src="https://thought2.github.io/purescript-interactive-data/docs-embed?either"
+    >
+  </iframe>
+</div>
+<!-- END embed -->
 <h1 id="tuple"><a class="header" href="#tuple">Tuple</a></h1>
 <pre><code class="language-hs">dataUiTuple1 :: DataUI' _ _ (Tuple Int String)
 dataUiTuple1 = ID.tuple_ ID.int_ ID.string_
 
-dataUiTuple2 :: DataUI' _ _ (Tuple Int String)
-dataUiTuple2 = ID.tuple
+demoTuple :: DataUI' _ _ (Tuple Int String)
+demoTuple = ID.tuple
   { text: Just &quot;Int and String&quot; }
   ID.int_
   ID.string_
 </code></pre>
+<!-- START embed tuple 500 -->
+<div style="display:grid; grid-template-rows: auto minmax(0, 1fr); gap: 10px">
+  <div style="display: flex; justify-content: flex-end">
+    <a href="https://thought2.github.io/purescript-interactive-data/docs-embed?tuple">
+      <img style="width: 15px; border: 1px solid #979797; border-radius: 5px; padding: 3px" title="Fullscreen" src="/assets/expand.svg">
+    </a>
+  </div>
+  <iframe 
+    allowtransparency="true"
+    style="border: 0px"
+    width="100%"
+    height="500"
+    src="https://thought2.github.io/purescript-interactive-data/docs-embed?tuple"
+    >
+  </iframe>
+</div>
+<!-- END embed -->
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../../generated/ComposingDataUIs/Records.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../../generated/ComposingDataUIs/Variants.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
@@ -232,7 +283,7 @@ dataUiTuple2 = ID.tuple
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../../generated/ComposingDataUIs/Records.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../../generated/ComposingDataUIs/Variants.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 

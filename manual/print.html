@@ -84,7 +84,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="generated/Introduction.html">Introduction</a></li><li class="chapter-item expanded affix "><a href="generated/Installation.html">Installation</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">User Guide</li><li class="chapter-item expanded "><a href="generated/ComposingDataUIs.html"><strong aria-hidden="true">1.</strong> Composing Data UIs</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="generated/ComposingDataUIs/Primitives.html"><strong aria-hidden="true">1.1.</strong> Primitives</a></li><li class="chapter-item expanded "><a href="generated/ComposingDataUIs/Records.html"><strong aria-hidden="true">1.2.</strong> Records</a></li><li class="chapter-item expanded "><div><strong aria-hidden="true">1.3.</strong> Variants</div></li><li class="chapter-item expanded "><a href="generated/ComposingDataUIs/MaybeAndFriends.html"><strong aria-hidden="true">1.4.</strong> Maybe and friends</a></li><li class="chapter-item expanded "><div><strong aria-hidden="true">1.5.</strong> Custom ADTs</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">1.6.</strong> Newtypes & Refinement</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">1.7.</strong> Escape hatch: JSON Data UI</div></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">2.</strong> Advanced Recipies</div></li><li><ol class="section"><li class="chapter-item expanded "><div><strong aria-hidden="true">2.1.</strong> Writing custom Data UIs</div></li><li><ol class="section"><li class="chapter-item expanded "><div><strong aria-hidden="true">2.1.1.</strong> Example: A color picker</div></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">2.2.</strong> Define custom type class</div></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.</strong> Running Data UIs</div></li><li><ol class="section"><li class="chapter-item expanded "><div><strong aria-hidden="true">3.1.</strong> Halogen</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.2.</strong> React Basic</div></li></ol></li><li class="chapter-item expanded "><li class="part-title">Appendix</li><li class="chapter-item expanded "><a href="generated/Glossary.html"><strong aria-hidden="true">4.</strong> Glossary</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="generated/Introduction.html">Introduction</a></li><li class="chapter-item expanded affix "><a href="generated/Installation.html">Installation</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">User Guide</li><li class="chapter-item expanded "><a href="generated/ComposingDataUIs.html"><strong aria-hidden="true">1.</strong> Composing Data UIs</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="generated/ComposingDataUIs/Primitives.html"><strong aria-hidden="true">1.1.</strong> Primitives</a></li><li class="chapter-item expanded "><a href="generated/ComposingDataUIs/Records.html"><strong aria-hidden="true">1.2.</strong> Records</a></li><li class="chapter-item expanded "><a href="generated/ComposingDataUIs/Variants.html"><strong aria-hidden="true">1.3.</strong> Variants</a></li><li class="chapter-item expanded "><a href="generated/ComposingDataUIs/MaybeAndFriends.html"><strong aria-hidden="true">1.4.</strong> Maybe and friends</a></li><li class="chapter-item expanded "><div><strong aria-hidden="true">1.5.</strong> Custom ADTs</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">1.6.</strong> Newtypes & Refinement</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">1.7.</strong> Escape hatch: JSON Data UI</div></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">2.</strong> Advanced Recipies</div></li><li><ol class="section"><li class="chapter-item expanded "><div><strong aria-hidden="true">2.1.</strong> Writing custom Data UIs</div></li><li><ol class="section"><li class="chapter-item expanded "><div><strong aria-hidden="true">2.1.1.</strong> Example: A color picker</div></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">2.2.</strong> Define custom type class</div></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.</strong> Running Data UIs</div></li><li><ol class="section"><li class="chapter-item expanded "><div><strong aria-hidden="true">3.1.</strong> Halogen</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.2.</strong> React Basic</div></li></ol></li><li class="chapter-item expanded "><li class="part-title">Appendix</li><li class="chapter-item expanded "><a href="generated/Glossary.html"><strong aria-hidden="true">4.</strong> Glossary</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -244,14 +244,42 @@ demoInt = ID.int
   }
 </code></pre>
 <!-- START embed int 300 -->
-<iframe allowtransparency="true" style="border: 0px" width="100%" height="300" src="https://thought2.github.io/purescript-interactive-data/docs-embed?int"></iframe>
+<div style="display:grid; grid-template-rows: auto minmax(0, 1fr); gap: 10px">
+  <div style="display: flex; justify-content: flex-end">
+    <a href="https://thought2.github.io/purescript-interactive-data/docs-embed?int">
+      <img style="width: 15px; border: 1px solid #979797; border-radius: 5px; padding: 3px" title="Fullscreen" src="generated/ComposingDataUIs//assets/expand.svg">
+    </a>
+  </div>
+  <iframe 
+    allowtransparency="true"
+    style="border: 0px"
+    width="100%"
+    height="300"
+    src="https://thought2.github.io/purescript-interactive-data/docs-embed?int"
+    >
+  </iframe>
+</div>
 <!-- END embed -->
 <h2 id="boolean"><a class="header" href="#boolean">Boolean</a></h2>
 <pre><code class="language-hs">sampleBoolean :: DataUI' _ _ Boolean
 sampleBoolean = ID.boolean_
 </code></pre>
 <!-- START embed boolean 300 -->
-<iframe allowtransparency="true" style="border: 0px" width="100%" height="300" src="https://thought2.github.io/purescript-interactive-data/docs-embed?boolean"></iframe>
+<div style="display:grid; grid-template-rows: auto minmax(0, 1fr); gap: 10px">
+  <div style="display: flex; justify-content: flex-end">
+    <a href="https://thought2.github.io/purescript-interactive-data/docs-embed?boolean">
+      <img style="width: 15px; border: 1px solid #979797; border-radius: 5px; padding: 3px" title="Fullscreen" src="generated/ComposingDataUIs//assets/expand.svg">
+    </a>
+  </div>
+  <iframe 
+    allowtransparency="true"
+    style="border: 0px"
+    width="100%"
+    height="300"
+    src="https://thought2.github.io/purescript-interactive-data/docs-embed?boolean"
+    >
+  </iframe>
+</div>
 <!-- END embed -->
 <h2 id="string"><a class="header" href="#string">String</a></h2>
 <pre><code class="language-hs">demoString :: DataUI' _ _ String
@@ -261,22 +289,49 @@ demoString = ID.string
   }
 </code></pre>
 <!-- START embed string 300 -->
-<iframe allowtransparency="true" style="border: 0px" width="100%" height="300" src="https://thought2.github.io/purescript-interactive-data/docs-embed?string"></iframe>
+<div style="display:grid; grid-template-rows: auto minmax(0, 1fr); gap: 10px">
+  <div style="display: flex; justify-content: flex-end">
+    <a href="https://thought2.github.io/purescript-interactive-data/docs-embed?string">
+      <img style="width: 15px; border: 1px solid #979797; border-radius: 5px; padding: 3px" title="Fullscreen" src="generated/ComposingDataUIs//assets/expand.svg">
+    </a>
+  </div>
+  <iframe 
+    allowtransparency="true"
+    style="border: 0px"
+    width="100%"
+    height="300"
+    src="https://thought2.github.io/purescript-interactive-data/docs-embed?string"
+    >
+  </iframe>
+</div>
 <!-- END embed -->
 <h2 id="number"><a class="header" href="#number">Number</a></h2>
 <pre><code class="language-hs">sampleNumber :: DataUI' _ _ Number
 sampleNumber = ID.number_
 </code></pre>
 <!-- START embed number -->
-<iframe allowtransparency="true" style="border: 0px" width="100%" height="315" src="https://thought2.github.io/purescript-interactive-data/docs-embed?number"></iframe>
+<div style="display:grid; grid-template-rows: auto minmax(0, 1fr); gap: 10px">
+  <div style="display: flex; justify-content: flex-end">
+    <a href="https://thought2.github.io/purescript-interactive-data/docs-embed?number">
+      <img style="width: 15px; border: 1px solid #979797; border-radius: 5px; padding: 3px" title="Fullscreen" src="generated/ComposingDataUIs//assets/expand.svg">
+    </a>
+  </div>
+  <iframe 
+    allowtransparency="true"
+    style="border: 0px"
+    width="100%"
+    height="315"
+    src="https://thought2.github.io/purescript-interactive-data/docs-embed?number"
+    >
+  </iframe>
+</div>
 <!-- END embed -->
 <div style="break-before: page; page-break-before: always;"></div><h1 id="data-uis-for-record-types"><a class="header" href="#data-uis-for-record-types">Data UIs for Record types</a></h1>
 <!-- START hide  -->
 <!-- END hide -->
 <!-- START imports  -->
 <details><summary>Imports for the code samples</summary>
-<pre><code class="language-hs">import Data.Maybe (Maybe(..))
-import InteractiveData (DataUI')
+<pre><code class="language-hs">import InteractiveData (DataUI')
 import InteractiveData as ID
 </code></pre>
 </details><hr><br>
@@ -293,32 +348,31 @@ import InteractiveData as ID
 </code></pre>
 <h2 id="simple-data-uis-without-configuration"><a class="header" href="#simple-data-uis-without-configuration">Simple Data UIs without configuration</a></h2>
 <p>Now we can create a Data UI with the <code>record_</code> function like this:</p>
-<pre><code class="language-hs">sampleRecord1 :: DataUI' _ _ User
-sampleRecord1 =
+<pre><code class="language-hs">demoRecord :: DataUI' _ _ User
+demoRecord =
   ID.record_
     { name: ID.string_
     , age: ID.int_
     , address: ID.string_
     }
 </code></pre>
-<h2 id="adding-configuration-to-the-data-uis"><a class="header" href="#adding-configuration-to-the-data-uis">Adding configuration to the Data UIs</a></h2>
-<p>If the <code>_</code> is omitted configuration options can be provided for the record. This
-works exactly like the configuration for the primitive types:</p>
-<pre><code class="language-hs">demoRecord :: DataUI' _ _ User
-demoRecord =
-  ID.record
-    { text: Just &quot;A sample User&quot;
-    }
-    { name: ID.string
-        { text: Just &quot;The name of the user&quot; }
-    , age: ID.int
-        { text: Just &quot;The age of the user&quot;, min: 0, max: 100 }
-    , address: ID.string
-        { text: Just &quot;The address of the user&quot; }
-    }
-</code></pre>
+<p>The UI will look like this:</p>
 <!-- START embed record 500 -->
-<iframe allowtransparency="true" style="border: 0px" width="100%" height="500" src="https://thought2.github.io/purescript-interactive-data/docs-embed?record"></iframe>
+<div style="display:grid; grid-template-rows: auto minmax(0, 1fr); gap: 10px">
+  <div style="display: flex; justify-content: flex-end">
+    <a href="https://thought2.github.io/purescript-interactive-data/docs-embed?record">
+      <img style="width: 15px; border: 1px solid #979797; border-radius: 5px; padding: 3px" title="Fullscreen" src="generated/ComposingDataUIs//assets/expand.svg">
+    </a>
+  </div>
+  <iframe 
+    allowtransparency="true"
+    style="border: 0px"
+    width="100%"
+    height="500"
+    src="https://thought2.github.io/purescript-interactive-data/docs-embed?record"
+    >
+  </iframe>
+</div>
 <!-- END embed -->
 <h2 id="using-the-general-dataui-function"><a class="header" href="#using-the-general-dataui-function">Using the general <code>dataUi</code> function</a></h2>
 <p>If you just want to use the default options for each field, you can also use the
@@ -371,6 +425,60 @@ or keep the final UI composition in a <code>let</code> or <code>where</code> cla
        User
 sampleRecord5 = ID.dataUi
 </code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="data-uis-for-variant-types"><a class="header" href="#data-uis-for-variant-types">Data UIs for Variant types</a></h1>
+<!-- START hide  -->
+<!-- END hide -->
+<!-- START imports  -->
+<details><summary>Imports for the code samples</summary>
+<pre><code class="language-hs">import Data.Variant (Variant)
+import InteractiveData (DataUI')
+import InteractiveData as ID
+</code></pre>
+</details><hr><br>
+<!-- END imports -->
+<p>Define a variant type first:</p>
+<pre><code class="language-hs">type RemoteData = Variant
+  ( notAsked :: {}
+  , loading :: { progress :: Number }
+  , failed ::
+      { errorMessage :: String
+      , errorCode :: Int
+      }
+  , success :: { data :: String }
+  )
+</code></pre>
+<p>And then compose a data UI for it:</p>
+<pre><code class="language-hs">demoVariant :: DataUI' _ _ RemoteData
+demoVariant =
+  ID.variant_ @&quot;notAsked&quot;
+    { notAsked: ID.record_ {}
+    , loading: ID.record_ { progress: ID.number_ }
+    , failed:
+        ID.record_
+          { errorMessage: ID.string_
+          , errorCode: ID.int_
+          }
+    , success: ID.record_ { data: ID.string_ }
+    }
+</code></pre>
+<p>The UI will look like this:</p>
+<!-- START embed variant 500 -->
+<div style="display:grid; grid-template-rows: auto minmax(0, 1fr); gap: 10px">
+  <div style="display: flex; justify-content: flex-end">
+    <a href="https://thought2.github.io/purescript-interactive-data/docs-embed?variant">
+      <img style="width: 15px; border: 1px solid #979797; border-radius: 5px; padding: 3px" title="Fullscreen" src="generated/ComposingDataUIs//assets/expand.svg">
+    </a>
+  </div>
+  <iframe 
+    allowtransparency="true"
+    style="border: 0px"
+    width="100%"
+    height="500"
+    src="https://thought2.github.io/purescript-interactive-data/docs-embed?variant"
+    >
+  </iframe>
+</div>
+<!-- END embed -->
 <div style="break-before: page; page-break-before: always;"></div><h1 id="maybe-and-friends"><a class="header" href="#maybe-and-friends">Maybe and friends</a></h1>
 <!-- START hide  -->
 <!-- END hide -->
@@ -390,31 +498,82 @@ like <code>Maybe</code>, <code>Either</code> and <code>Tuple</code>.</p>
 <pre><code class="language-hs">dataUiMaybe1 :: DataUI' _ _ (Maybe Int)
 dataUiMaybe1 = ID.maybe_ ID.int_
 
-dataUiMaybe2 :: DataUI' _ _ (Maybe Int)
-dataUiMaybe2 = ID.maybe
+demoMaybe :: DataUI' _ _ (Maybe Int)
+demoMaybe = ID.maybe
   { text: Just &quot;Call me maybe..&quot; }
   ID.int_
 </code></pre>
+<!-- START embed maybe 500 -->
+<div style="display:grid; grid-template-rows: auto minmax(0, 1fr); gap: 10px">
+  <div style="display: flex; justify-content: flex-end">
+    <a href="https://thought2.github.io/purescript-interactive-data/docs-embed?maybe">
+      <img style="width: 15px; border: 1px solid #979797; border-radius: 5px; padding: 3px" title="Fullscreen" src="generated/ComposingDataUIs//assets/expand.svg">
+    </a>
+  </div>
+  <iframe 
+    allowtransparency="true"
+    style="border: 0px"
+    width="100%"
+    height="500"
+    src="https://thought2.github.io/purescript-interactive-data/docs-embed?maybe"
+    >
+  </iframe>
+</div>
+<!-- END embed -->
 <h1 id="either"><a class="header" href="#either">Either</a></h1>
 <pre><code class="language-hs">dataUiEither1 :: DataUI' _ _ (Either Int String)
 dataUiEither1 = ID.either_ ID.int_ ID.string_
 
-dataUiEither2 :: DataUI' _ _ (Either String Int)
-dataUiEither2 = ID.either
+demoEither :: DataUI' _ _ (Either String Int)
+demoEither = ID.either
   { text: Just &quot;Some Result or some Error&quot; }
   ID.string_
   ID.int_
 </code></pre>
+<!-- START embed either 500 -->
+<div style="display:grid; grid-template-rows: auto minmax(0, 1fr); gap: 10px">
+  <div style="display: flex; justify-content: flex-end">
+    <a href="https://thought2.github.io/purescript-interactive-data/docs-embed?either">
+      <img style="width: 15px; border: 1px solid #979797; border-radius: 5px; padding: 3px" title="Fullscreen" src="generated/ComposingDataUIs//assets/expand.svg">
+    </a>
+  </div>
+  <iframe 
+    allowtransparency="true"
+    style="border: 0px"
+    width="100%"
+    height="500"
+    src="https://thought2.github.io/purescript-interactive-data/docs-embed?either"
+    >
+  </iframe>
+</div>
+<!-- END embed -->
 <h1 id="tuple"><a class="header" href="#tuple">Tuple</a></h1>
 <pre><code class="language-hs">dataUiTuple1 :: DataUI' _ _ (Tuple Int String)
 dataUiTuple1 = ID.tuple_ ID.int_ ID.string_
 
-dataUiTuple2 :: DataUI' _ _ (Tuple Int String)
-dataUiTuple2 = ID.tuple
+demoTuple :: DataUI' _ _ (Tuple Int String)
+demoTuple = ID.tuple
   { text: Just &quot;Int and String&quot; }
   ID.int_
   ID.string_
 </code></pre>
+<!-- START embed tuple 500 -->
+<div style="display:grid; grid-template-rows: auto minmax(0, 1fr); gap: 10px">
+  <div style="display: flex; justify-content: flex-end">
+    <a href="https://thought2.github.io/purescript-interactive-data/docs-embed?tuple">
+      <img style="width: 15px; border: 1px solid #979797; border-radius: 5px; padding: 3px" title="Fullscreen" src="generated/ComposingDataUIs//assets/expand.svg">
+    </a>
+  </div>
+  <iframe 
+    allowtransparency="true"
+    style="border: 0px"
+    width="100%"
+    height="500"
+    src="https://thought2.github.io/purescript-interactive-data/docs-embed?tuple"
+    >
+  </iframe>
+</div>
+<!-- END embed -->
 <div style="break-before: page; page-break-before: always;"></div><!-- START hide  -->
 <!-- END hide -->
 <h1 id="glossary"><a class="header" href="#glossary">Glossary</a></h1>

@@ -83,7 +83,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../../generated/Introduction.html">Introduction</a></li><li class="chapter-item expanded affix "><a href="../../generated/Installation.html">Installation</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">User Guide</li><li class="chapter-item expanded "><a href="../../generated/ComposingDataUIs.html"><strong aria-hidden="true">1.</strong> Composing Data UIs</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../generated/ComposingDataUIs/Primitives.html" class="active"><strong aria-hidden="true">1.1.</strong> Primitives</a></li><li class="chapter-item expanded "><a href="../../generated/ComposingDataUIs/Records.html"><strong aria-hidden="true">1.2.</strong> Records</a></li><li class="chapter-item expanded "><div><strong aria-hidden="true">1.3.</strong> Variants</div></li><li class="chapter-item expanded "><a href="../../generated/ComposingDataUIs/MaybeAndFriends.html"><strong aria-hidden="true">1.4.</strong> Maybe and friends</a></li><li class="chapter-item expanded "><div><strong aria-hidden="true">1.5.</strong> Custom ADTs</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">1.6.</strong> Newtypes & Refinement</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">1.7.</strong> Escape hatch: JSON Data UI</div></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">2.</strong> Advanced Recipies</div></li><li><ol class="section"><li class="chapter-item expanded "><div><strong aria-hidden="true">2.1.</strong> Writing custom Data UIs</div></li><li><ol class="section"><li class="chapter-item expanded "><div><strong aria-hidden="true">2.1.1.</strong> Example: A color picker</div></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">2.2.</strong> Define custom type class</div></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.</strong> Running Data UIs</div></li><li><ol class="section"><li class="chapter-item expanded "><div><strong aria-hidden="true">3.1.</strong> Halogen</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.2.</strong> React Basic</div></li></ol></li><li class="chapter-item expanded "><li class="part-title">Appendix</li><li class="chapter-item expanded "><a href="../../generated/Glossary.html"><strong aria-hidden="true">4.</strong> Glossary</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../../generated/Introduction.html">Introduction</a></li><li class="chapter-item expanded affix "><a href="../../generated/Installation.html">Installation</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">User Guide</li><li class="chapter-item expanded "><a href="../../generated/ComposingDataUIs.html"><strong aria-hidden="true">1.</strong> Composing Data UIs</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../generated/ComposingDataUIs/Primitives.html" class="active"><strong aria-hidden="true">1.1.</strong> Primitives</a></li><li class="chapter-item expanded "><a href="../../generated/ComposingDataUIs/Records.html"><strong aria-hidden="true">1.2.</strong> Records</a></li><li class="chapter-item expanded "><a href="../../generated/ComposingDataUIs/Variants.html"><strong aria-hidden="true">1.3.</strong> Variants</a></li><li class="chapter-item expanded "><a href="../../generated/ComposingDataUIs/MaybeAndFriends.html"><strong aria-hidden="true">1.4.</strong> Maybe and friends</a></li><li class="chapter-item expanded "><div><strong aria-hidden="true">1.5.</strong> Custom ADTs</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">1.6.</strong> Newtypes & Refinement</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">1.7.</strong> Escape hatch: JSON Data UI</div></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">2.</strong> Advanced Recipies</div></li><li><ol class="section"><li class="chapter-item expanded "><div><strong aria-hidden="true">2.1.</strong> Writing custom Data UIs</div></li><li><ol class="section"><li class="chapter-item expanded "><div><strong aria-hidden="true">2.1.1.</strong> Example: A color picker</div></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">2.2.</strong> Define custom type class</div></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.</strong> Running Data UIs</div></li><li><ol class="section"><li class="chapter-item expanded "><div><strong aria-hidden="true">3.1.</strong> Halogen</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.2.</strong> React Basic</div></li></ol></li><li class="chapter-item expanded "><li class="part-title">Appendix</li><li class="chapter-item expanded "><a href="../../generated/Glossary.html"><strong aria-hidden="true">4.</strong> Glossary</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -196,14 +196,42 @@ demoInt = ID.int
   }
 </code></pre>
 <!-- START embed int 300 -->
-<iframe allowtransparency="true" style="border: 0px" width="100%" height="300" src="https://thought2.github.io/purescript-interactive-data/docs-embed?int"></iframe>
+<div style="display:grid; grid-template-rows: auto minmax(0, 1fr); gap: 10px">
+  <div style="display: flex; justify-content: flex-end">
+    <a href="https://thought2.github.io/purescript-interactive-data/docs-embed?int">
+      <img style="width: 15px; border: 1px solid #979797; border-radius: 5px; padding: 3px" title="Fullscreen" src="/assets/expand.svg">
+    </a>
+  </div>
+  <iframe 
+    allowtransparency="true"
+    style="border: 0px"
+    width="100%"
+    height="300"
+    src="https://thought2.github.io/purescript-interactive-data/docs-embed?int"
+    >
+  </iframe>
+</div>
 <!-- END embed -->
 <h2 id="boolean"><a class="header" href="#boolean">Boolean</a></h2>
 <pre><code class="language-hs">sampleBoolean :: DataUI' _ _ Boolean
 sampleBoolean = ID.boolean_
 </code></pre>
 <!-- START embed boolean 300 -->
-<iframe allowtransparency="true" style="border: 0px" width="100%" height="300" src="https://thought2.github.io/purescript-interactive-data/docs-embed?boolean"></iframe>
+<div style="display:grid; grid-template-rows: auto minmax(0, 1fr); gap: 10px">
+  <div style="display: flex; justify-content: flex-end">
+    <a href="https://thought2.github.io/purescript-interactive-data/docs-embed?boolean">
+      <img style="width: 15px; border: 1px solid #979797; border-radius: 5px; padding: 3px" title="Fullscreen" src="/assets/expand.svg">
+    </a>
+  </div>
+  <iframe 
+    allowtransparency="true"
+    style="border: 0px"
+    width="100%"
+    height="300"
+    src="https://thought2.github.io/purescript-interactive-data/docs-embed?boolean"
+    >
+  </iframe>
+</div>
 <!-- END embed -->
 <h2 id="string"><a class="header" href="#string">String</a></h2>
 <pre><code class="language-hs">demoString :: DataUI' _ _ String
@@ -213,14 +241,42 @@ demoString = ID.string
   }
 </code></pre>
 <!-- START embed string 300 -->
-<iframe allowtransparency="true" style="border: 0px" width="100%" height="300" src="https://thought2.github.io/purescript-interactive-data/docs-embed?string"></iframe>
+<div style="display:grid; grid-template-rows: auto minmax(0, 1fr); gap: 10px">
+  <div style="display: flex; justify-content: flex-end">
+    <a href="https://thought2.github.io/purescript-interactive-data/docs-embed?string">
+      <img style="width: 15px; border: 1px solid #979797; border-radius: 5px; padding: 3px" title="Fullscreen" src="/assets/expand.svg">
+    </a>
+  </div>
+  <iframe 
+    allowtransparency="true"
+    style="border: 0px"
+    width="100%"
+    height="300"
+    src="https://thought2.github.io/purescript-interactive-data/docs-embed?string"
+    >
+  </iframe>
+</div>
 <!-- END embed -->
 <h2 id="number"><a class="header" href="#number">Number</a></h2>
 <pre><code class="language-hs">sampleNumber :: DataUI' _ _ Number
 sampleNumber = ID.number_
 </code></pre>
 <!-- START embed number -->
-<iframe allowtransparency="true" style="border: 0px" width="100%" height="315" src="https://thought2.github.io/purescript-interactive-data/docs-embed?number"></iframe>
+<div style="display:grid; grid-template-rows: auto minmax(0, 1fr); gap: 10px">
+  <div style="display: flex; justify-content: flex-end">
+    <a href="https://thought2.github.io/purescript-interactive-data/docs-embed?number">
+      <img style="width: 15px; border: 1px solid #979797; border-radius: 5px; padding: 3px" title="Fullscreen" src="/assets/expand.svg">
+    </a>
+  </div>
+  <iframe 
+    allowtransparency="true"
+    style="border: 0px"
+    width="100%"
+    height="315"
+    src="https://thought2.github.io/purescript-interactive-data/docs-embed?number"
+    >
+  </iframe>
+</div>
 <!-- END embed -->
 
                     </main>
