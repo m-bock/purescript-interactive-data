@@ -29,7 +29,7 @@ lint:
 install:
     npm ci
 
-pre-push: ci_ ci-tmp
+pre-push: ci-fast ci-tmpdir
 
 # Dist
 
@@ -131,12 +131,12 @@ suggest-apply:
 
 # CI
 
-ci_: install spell format build gen build-strict dist check-git-clean
+ci-fast: install spell format build gen build-strict dist check-git-clean
 
 ci: clean
-    just ci_
+    just ci-fast
 
-ci-tmp:
+ci-tmpdir:
     HERE=$(pwd); \
     DIR=$(mktemp -d); \
     echo $DIR; \
