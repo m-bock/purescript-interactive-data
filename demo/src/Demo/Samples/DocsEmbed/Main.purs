@@ -43,24 +43,24 @@ embeds =
     , "string" /\ app { showMenuOnStart: false } Primitives.demoString
     , "boolean" /\ app { showMenuOnStart: false } ID.boolean_
     , "number" /\ app { showMenuOnStart: false } ID.number_
-    
+
     -- Record
     , "record" /\ app { showMenuOnStart: true } Records.demoRecord
-    
+
     -- Maybe and friends
     , "maybe" /\ app { showMenuOnStart: true } MaybeAndFriends.demoMaybe
     , "either" /\ app { showMenuOnStart: true } MaybeAndFriends.demoEither
     , "tuple" /\ app { showMenuOnStart: true } MaybeAndFriends.demoTuple
-    
+
     -- Variant
     , "variant" /\ app { showMenuOnStart: true } Variants.demoVariant
-    
+
     -- Custom type
     , "customType" /\ app { showMenuOnStart: true } CustomType.demoCustomType
-    
+
     -- Simple newtypes
     , "simpleNewtype" /\ app { showMenuOnStart: false } SimpleNewtypes.demo
-    
+
     -- Validation
     , "validation" /\ app { showMenuOnStart: false } Validation.demo
 
