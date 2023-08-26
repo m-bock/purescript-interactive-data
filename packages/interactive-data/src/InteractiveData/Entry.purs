@@ -6,6 +6,7 @@ module InteractiveData.Entry
   , ToAppMandatory
   , ToAppOptional
   , defaultToAppCfg
+  , mkDataError
   , toApp
   ) where
 
@@ -13,7 +14,8 @@ import Prelude
 
 import Chameleon (class Html)
 import Data.Maybe (Maybe(..))
-import DataMVC.Types (DataUI, DataUiInterface, DataResult)
+import DataMVC.Types (DataErrorCase(..), DataResult, DataUI, DataUiInterface)
+import DataMVC.Types.DataError (DataError(..))
 import InteractiveData.App (AppMsg, AppState)
 import InteractiveData.App as App
 import InteractiveData.App.WrapData (WrapMsg, WrapState)
@@ -102,3 +104,10 @@ toApp given dataUi =
     { ui
     , extract
     }
+
+--------------------------------------------------------------------------------
+--- Utils
+--------------------------------------------------------------------------------
+
+mkDataError :: String -> DataError
+mkDataError msg = DataError [] $ DataErrMsg msg

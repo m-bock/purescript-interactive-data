@@ -33,8 +33,8 @@ type ViewDataCfg (html :: Type -> Type) msg =
   , typeName :: String
   , viewContent :: html msg
   , actions :: Array (DataAction msg)
-  , error :: Either (NonEmptyArray DataError) Unit
   , text :: Maybe String
+  , filteredErrors :: Array DataErrorCase
   }
 
 --------------------------------------------------------------------------------
@@ -58,7 +58,7 @@ instance Show msg => Show (WrapMsg msg) where
 --------------------------------------------------------------------------------
 
 viewStandalone :: forall html msg. IDHtml html => ViewDataCfg html msg -> html msg
-viewStandalone { viewContent, actions, typeName, text } =
+viewStandalone { viewContent, actions, typeName, text, filteredErrors } =
   withCtx \(ctx :: IDViewCtx) ->
     let
       el =
@@ -111,7 +111,21 @@ viewStandalone { viewContent, actions, typeName, text } =
         , header: styleNode C.div
             [ "margin-bottom: 20px"
             ]
+        , errors: styleNode C.div
+            [ "color: red"
+            , "display: flex"
+            , "flex-direction: column"
+            , "gap: 3px"
+            , "margin-top: 10px"
+            ]
+        , error: styleNode C.div
+            [ "font-size: 11px" ]
         }
+
+      showErrors :: Boolean
+      showErrors =
+        Array.length filteredErrors > 0
+
     in
       el.data_
         []
@@ -134,10 +148,20 @@ viewStandalone { viewContent, actions, typeName, text } =
 
         , el.item [] <<< pure $ el.content []
             [ viewContent ]
+
+        , if showErrors then
+            el.errors []
+              ( filteredErrors
+                  # map \error' ->
+                      el.error []
+                        [ C.text $ printErrorCase error' ]
+              )
+          else
+            C.noHtml
         ]
 
 viewInline :: forall html msg. IDHtml html => ViewDataCfg html msg -> html msg
-viewInline { viewContent, typeName, text, error } =
+viewInline { viewContent, typeName, text, filteredErrors } =
   withCtx \ctx ->
     let
       el =
@@ -179,19 +203,6 @@ viewInline { viewContent, typeName, text, error } =
         , error: styleNode C.div
             [ "font-size: 11px" ]
         }
-
-      filteredErrors :: Array DataErrorCase
-      filteredErrors =
-        error
-          # either NEA.toArray (const [])
-          # mapMaybe
-              ( \(DataError path errorCase) ->
-                  if predPath path then Just errorCase
-                  else Nothing
-              )
-
-      predPath :: DataPath -> Boolean
-      predPath dataPath = dataPath == []
 
       showErrors :: Boolean
       showErrors =
@@ -275,15 +286,30 @@ view cfgStatic cfgDynamic@{ viewInner, text } (WrapState { childState }) =
       extractResult :: DataResult a
       extractResult = cfgStatic.extract childState
 
+      error = map (const unit) extractResult
+
       cfg :: ViewDataCfg html msg
       cfg =
         { label: label
         , typeName: cfgStatic.name
         , viewContent: viewInner childState
         , actions: cfgDynamic.actions
-        , error: map (const unit) extractResult
         , text: text
+        , filteredErrors
         }
+
+      predPath :: DataPath -> Boolean
+      predPath dataPath = dataPath == []
+
+      filteredErrors :: Array DataErrorCase
+      filteredErrors =
+        error
+          # either NEA.toArray (const [])
+          # mapMaybe
+              ( \(DataError path errorCase) ->
+                  if predPath path then Just errorCase
+                  else Nothing
+              )
     in
       map ChildMsg
         case ctx.viewMode of

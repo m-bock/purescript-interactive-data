@@ -89,6 +89,7 @@ import InteractiveData.Class.Partial
 
 import InteractiveData.Entry
   ( toApp
+  , mkDataError
   , DataUI'
   ) as Export
 

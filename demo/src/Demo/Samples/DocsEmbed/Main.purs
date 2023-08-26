@@ -26,8 +26,8 @@ import InteractiveData as ID
 import InteractiveData.Entry (InteractiveDataApp)
 import Manual.ComposingDataUIs.CustomTypes as CustomType
 import Manual.ComposingDataUIs.MaybeAndFriends as MaybeAndFriends
-import Manual.ComposingDataUIs.Newtypes.PublicConstructor as NewtypesPublic
-import Manual.ComposingDataUIs.Newtypes.SmartConstructor as NewtypesSmart
+import Manual.ComposingDataUIs.Newtypes.SimpleNewtypes as SimpleNewtypes
+import Manual.ComposingDataUIs.Newtypes.Validation as Validation
 import Manual.ComposingDataUIs.Primitives as Primitives
 import Manual.ComposingDataUIs.Records as Records
 import Manual.ComposingDataUIs.Variants as Variants
@@ -47,8 +47,8 @@ embeds =
     , "tuple" /\ app { showMenuOnStart: true } MaybeAndFriends.demoTuple
     , "variant" /\ app { showMenuOnStart: true } Variants.demoVariant
     , "customType" /\ app { showMenuOnStart: true } CustomType.demoCustomType
-    , "newtypePublic" /\ app { showMenuOnStart: false } NewtypesPublic.demo
-    , "newtypeSmart" /\ app { showMenuOnStart: false } NewtypesSmart.demo
+    , "simpleNewtype" /\ app { showMenuOnStart: false } SimpleNewtypes.demo
+    , "validation" /\ app { showMenuOnStart: false } Validation.demo
     ]
 
 embedKeys :: Array String

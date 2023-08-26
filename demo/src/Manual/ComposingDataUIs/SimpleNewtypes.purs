@@ -1,9 +1,9 @@
 {-
-# Newtypes with public constructors
+# Simple Newtypes with Public Constructors
 
 <!-- START hide -->
 -}
-module Manual.ComposingDataUIs.Newtypes.PublicConstructor where
+module Manual.ComposingDataUIs.Newtypes.SimpleNewtypes where
 
 {-
 <!-- END hide -->
