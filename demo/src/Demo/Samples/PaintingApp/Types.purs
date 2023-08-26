@@ -280,9 +280,7 @@ shape
   => opt
   -> { | datauis }
   -> DataUI (IDSurface html) fm fs msg sta Shape
-shape = ID.generic
-  { typeName: "Shape"
-  }
+shape = ID.generic (ID.TypeName "Shape")
 
 --------------------------------------------------------------------------------
 --- Utils

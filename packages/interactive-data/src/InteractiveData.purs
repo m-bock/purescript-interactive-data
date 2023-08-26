@@ -38,8 +38,10 @@ import InteractiveData.DataUIs
   , variant_
 
   , generic
+  , generic_
   , class GenericDataUI
   , Product
+  , TypeName(..)
   , type (~)
   , (~)
 

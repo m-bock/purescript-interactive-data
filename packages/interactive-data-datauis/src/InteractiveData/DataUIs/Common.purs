@@ -19,7 +19,7 @@ import Data.Tuple (Tuple)
 import DataMVC.Types (DataUI)
 import InteractiveData.Core (class IDHtml, IDSurface)
 import InteractiveData.Core.Classes.OptArgs (class OptArgs)
-import InteractiveData.DataUIs.Generic (class GenericDataUI, CfgGeneric, generic, (~))
+import InteractiveData.DataUIs.Generic (class GenericDataUI, CfgGeneric, TypeName(..), generic, (~))
 
 --------------------------------------------------------------------------------
 --- Maybe
@@ -32,8 +32,7 @@ mkMaybe
   -> { | datauis }
   -> DataUI (IDSurface html) fm fs msg sta (Maybe a)
 mkMaybe = generic
-  { typeName: "Maybe"
-  }
+  (TypeName "Maybe")
 
 mkMaybe_
   :: forall html datauis fm fs msg sta a
@@ -73,8 +72,7 @@ mkEither
   -> { | datauis }
   -> DataUI (IDSurface html) fm fs msg sta (Either a b)
 mkEither = generic
-  { typeName: "Either"
-  }
+  (TypeName "Either")
 
 mkEither_
   :: forall html datauis fm fs msg sta a b
@@ -116,8 +114,7 @@ mkTuple
   -> { | datauis }
   -> DataUI (IDSurface html) fm fs msg sta (Tuple a b)
 mkTuple = generic
-  { typeName: "Tuple"
-  }
+  (TypeName "Tuple")
 
 tuple_
   :: forall html a b

@@ -155,7 +155,6 @@ customADT
   -> { | datauis }
   -> DataUI (IDSurface html) fm fs msg sta CustomADT
 customADT = ID.generic
-  { typeName: "CustomADT"
-  }
+  (ID.TypeName "CustomADT")
 
 --------------------------------------------------------------------------------

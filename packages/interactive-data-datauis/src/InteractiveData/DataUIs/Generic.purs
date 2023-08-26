@@ -4,9 +4,11 @@ module InteractiveData.DataUIs.Generic
   , DefaultTransform
   , MappingHlistToRecord(..)
   , Product(..)
+  , TypeName(..)
   , class GenericDataUI
   , class HlistToRecord
   , generic
+  , generic_
   , hlistToRecord
   , type (~)
   ) where
@@ -35,7 +37,10 @@ import Prim.Row as Row
 import Record as Record
 import Type.Proxy (Proxy(..))
 
-type IDDataUIGeneric html fm fs rcase rmsg rsta a = DataUI html fm fs (VariantMsg rcase rmsg) (VariantState rsta) a
+newtype TypeName = TypeName String
+
+type IDDataUIGeneric html fm fs rcase rmsg rsta a =
+  DataUI html fm fs (VariantMsg rcase rmsg) (VariantState rsta) a
 
 type CfgGeneric =
   { text :: Maybe String
@@ -59,7 +64,7 @@ class
     (a :: Type)
   | datauis opt -> initcase html fm fs datauis msg sta a
   where
-  generic :: { typeName :: String } -> opt -> { | datauis } -> DataUI (IDSurface html) fm fs msg sta a
+  generic :: TypeName -> opt -> { | datauis } -> DataUI (IDSurface html) fm fs msg sta a
 
 instance
   ( DataUiVariant datauis fm fs (IDSurface html) initcase rcase rmsg rsta r
@@ -80,11 +85,11 @@ instance
     a
   where
   generic
-    :: { typeName :: String }
+    :: TypeName
     -> opt
     -> { | datauisHlist }
     -> DataUI (IDSurface html) fm fs (VariantMsg rcase rmsg) (VariantState rsta) a
-  generic { typeName } opt uisHlist =
+  generic (TypeName typeName) opt uisHlist =
     let
       cfg :: CfgGeneric
       cfg = getAllArgs defaultCfg opt
@@ -98,6 +103,15 @@ instance
             , refine: LD.genericFromVariant (Proxy :: _ DefaultTransform) >>> Right
             , unrefine: LD.genericToVariant (Proxy :: _ DefaultTransform)
             }
+
+generic_
+  :: forall @initcase html datauis fm fs msg sta a
+   . GenericDataUI initcase {} html datauis fm fs msg sta a
+  => IDHtml html
+  => TypeName
+  -> { | datauis }
+  -> DataUI (IDSurface html) fm fs msg sta a
+generic_ typeName = generic typeName {}
 
 --------------------------------------------------------------------------------
 --- LabeledData config
