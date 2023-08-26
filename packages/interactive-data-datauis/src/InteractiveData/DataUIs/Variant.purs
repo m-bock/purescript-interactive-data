@@ -73,12 +73,12 @@ view { viewCase, mkMsg, caseKey, caseKeys } =
           , case ctx.viewMode of
               Inline -> C.noHtml
               Standalone | not ctx.fastForward -> C.noHtml
-              Standalone ->
-                putCtx ctx
-                  { path = newPath
-                  , viewMode = Standalone
-                  } $
-                  viewCase
+              Standalone -> C.noHtml
+          -- putCtx ctx
+          --   { path = newPath
+          --   , viewMode = Standalone
+          --   } $
+          --   viewCase
           ]
 
 mkSurface

@@ -11,7 +11,7 @@
 - [Composing Data UIs](./generated/ComposingDataUIs.md)
   - [Primitives](./generated/ComposingDataUIs/Primitives.md)
   - [Records](./generated/ComposingDataUIs/Records.md)
-  - [Variants]()
+  - [Variants](./generated/ComposingDataUIs/Variants.md)
   - [Maybe and friends](./generated/ComposingDataUIs/MaybeAndFriends.md)
   - [Custom ADTs]()
   - [Newtypes & Refinement]()

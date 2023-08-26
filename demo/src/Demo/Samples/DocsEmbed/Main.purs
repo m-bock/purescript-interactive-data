@@ -24,8 +24,10 @@ import Halogen as Halogen
 import InteractiveData (AppMsg, AppState, DataUI, WrapMsg, WrapState)
 import InteractiveData as ID
 import InteractiveData.Entry (InteractiveDataApp)
+import Manual.ComposingDataUIs.MaybeAndFriends as MaybeAndFriends
 import Manual.ComposingDataUIs.Primitives as Primitives
 import Manual.ComposingDataUIs.Records as Records
+import Manual.ComposingDataUIs.Variants as Variants
 
 foreign import getQueryString :: Effect String
 
@@ -37,6 +39,10 @@ embeds =
     , "boolean" /\ app { showMenuOnStart: false } ID.boolean_
     , "number" /\ app { showMenuOnStart: false } ID.number_
     , "record" /\ app { showMenuOnStart: true } Records.demoRecord
+    , "maybe" /\ app { showMenuOnStart: true } MaybeAndFriends.demoMaybe
+    , "either" /\ app { showMenuOnStart: true } MaybeAndFriends.demoEither
+    , "tuple" /\ app { showMenuOnStart: true } MaybeAndFriends.demoTuple
+    , "variant" /\ app { showMenuOnStart: true } Variants.demoVariant
     ]
 
 embedKeys :: Array String
@@ -102,6 +108,31 @@ mkHalogenComponent { ui, extract } =
   handleAction msg = do
     H.modify_ $ ui.update msg
 
+summary
+  :: forall q i o
+   . Halogen.Component q i o Aff
+summary =
+  H.mkComponent
+    { initialState
+    , render
+    , eval: H.mkEval $ H.defaultEval
+    }
+  where
+  initialState _ = unit
+
+  render state =
+    runHalogenHtml $ runStyleT $ view state
+
+  view _ =
+    C.div []
+      ( embedKeys # map
+          ( \key ->
+              C.div []
+                [ C.a [ C.href ("?" <> key) ] [ C.text key ]
+                ]
+          )
+      )
+
 app :: forall a. Show a => { showMenuOnStart :: Boolean } -> DataUI _ _ _ _ _ a -> Effect Unit
 app { showMenuOnStart } dataUi = do
   let
@@ -120,13 +151,17 @@ app { showMenuOnStart } dataUi = do
 main :: Effect Unit
 main = do
   queryString <- getQueryString
-  let
-    embedId = Str.replace (Pattern "?") (Replacement "") queryString
 
-    maybeRunEmbed = Map.lookup embedId embeds
+  case queryString of
+    "" -> HI.uiMountAtId "root" summary
+    _ -> do
+      let
+        embedId = Str.replace (Pattern "?") (Replacement "") queryString
 
-  case maybeRunEmbed of
-    Just runEmbed -> runEmbed
-    Nothing -> do
-      error "Invalid query string"
-      pure unit
+        maybeRunEmbed = Map.lookup embedId embeds
+
+      case maybeRunEmbed of
+        Just runEmbed -> runEmbed
+        Nothing -> do
+          error "Invalid query string"
+          pure unit

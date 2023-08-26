@@ -157,7 +157,7 @@ record opt dataUis =
       # refineDataUi
           { typeName: case cfg.mode of
               Keys -> "Record"
-              Indices -> "Arguments"
+              Indices -> "Fields"
           , refine: Right
           , unrefine: identity
           }
