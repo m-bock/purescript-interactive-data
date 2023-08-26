@@ -4,7 +4,6 @@ module InteractiveData.DataUIs.Generic
   , DefaultTransform
   , MappingHlistToRecord(..)
   , Product(..)
-  , TypeName(..)
   , class GenericDataUI
   , class HlistToRecord
   , generic
@@ -36,8 +35,7 @@ import Prim.Int (class ToString, class Add)
 import Prim.Row as Row
 import Record as Record
 import Type.Proxy (Proxy(..))
-
-newtype TypeName = TypeName String
+import InteractiveData.DataUIs.Types (TypeName(..))
 
 type IDDataUIGeneric html fm fs rcase rmsg rsta a =
   DataUI html fm fs (VariantMsg rcase rmsg) (VariantState rsta) a

@@ -14,7 +14,7 @@
   - [Variants](./generated/ComposingDataUIs/Variants.md)
   - [Maybe and friends](./generated/ComposingDataUIs/MaybeAndFriends.md)
   - [Custom Types](./generated/ComposingDataUIs/CustomTypes.md)
-  - [Newtypes & Refinement]()
+  - [Newtypes & Refinement](./generated/ComposingDataUIs/NewtypesAndRefinement.md)
   - [Escape hatch: JSON Data UI]()
   - [Polymorphic Data UIs]()
 - [Advanced Recipies]()

@@ -107,7 +107,7 @@ sampleDataUi = ID.record_
       { description: ID.string_
       , headline: ID.string_
       , info:
-          ID.newtype_ $
+          ID.newtype_ (ID.TypeName "VariantJ") $
             ID.variant @"name"
               { text: Just "Pick one!" }
               { name: ID.string
@@ -125,7 +125,7 @@ sampleDataUi = ID.record_
       }
       { coordinate: ID.dataUi
       , item: ID.dataUi
-      , size: ID.newtype_ $ ID.variantPartial_ @"width"
+      , size: ID.newtype_ (ID.TypeName "VariantJ") $ ID.variantPartial_ @"width"
           { width: ID.int { min: 0 }
           }
       }

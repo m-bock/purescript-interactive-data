@@ -126,7 +126,7 @@ metaDataUi = ID.recordPartial
       { text: Just "A list of keywords describing the painting"
       }
       ID.string_
-  , price: ID.newtype_ $ ID.int
+  , price: ID.newtype_ (ID.TypeName "USD") $ ID.int
       { min: 0
       , max: 1000
       , text: Just "The price for the next auction"
@@ -301,7 +301,7 @@ instance
   IDHtml html =>
   IDDataUI (IDSurface html) fm fs IntMsg IntState USD
   where
-  dataUi = newtype_ dataUi
+  dataUi = newtype_ (ID.TypeName "USD") dataUi
 
 derive newtype instance EncodeJson USD
 

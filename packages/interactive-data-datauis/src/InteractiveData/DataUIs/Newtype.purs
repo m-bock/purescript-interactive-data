@@ -7,21 +7,21 @@ import Prelude
 import Data.Either (Either(..))
 import Data.Newtype (class Newtype)
 import Data.Newtype as Newtype
-import DataMVC.Types.DataUI (DataUI(..), DataUiInterface(..), refineDataUi, runDataUi)
+import DataMVC.Types.DataUI (DataUI(..), refineDataUi, runDataUi)
+import InteractiveData.DataUIs.Types (TypeName(..))
 
 newtype_
   :: forall srf fm fs msg sta a b
    . Newtype b a
-  => DataUI srf fm fs msg sta a
+  => TypeName
+  -> DataUI srf fm fs msg sta a
   -> DataUI srf fm fs msg sta b
-newtype_ dataUi@(DataUI mkDataUi) = DataUI \ctx ->
+newtype_ (TypeName typeName) dataUi = DataUI \ctx ->
   let
-    DataUiInterface { name } = mkDataUi ctx
-
     newDataUi :: DataUI srf fm fs msg sta b
     newDataUi =
       refineDataUi
-        { typeName: name
+        { typeName
         , refine: Newtype.wrap >>> Right
         , unrefine: Newtype.unwrap
         }

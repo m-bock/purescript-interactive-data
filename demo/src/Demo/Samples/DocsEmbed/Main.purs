@@ -26,6 +26,7 @@ import InteractiveData as ID
 import InteractiveData.Entry (InteractiveDataApp)
 import Manual.ComposingDataUIs.CustomTypes as CustomType
 import Manual.ComposingDataUIs.MaybeAndFriends as MaybeAndFriends
+import Manual.ComposingDataUIs.NewtypesAndRefinement as NewtypesAndRefinement
 import Manual.ComposingDataUIs.Primitives as Primitives
 import Manual.ComposingDataUIs.Records as Records
 import Manual.ComposingDataUIs.Variants as Variants
@@ -45,6 +46,7 @@ embeds =
     , "tuple" /\ app { showMenuOnStart: true } MaybeAndFriends.demoTuple
     , "variant" /\ app { showMenuOnStart: true } Variants.demoVariant
     , "customType" /\ app { showMenuOnStart: true } CustomType.demoCustomType
+    , "simpleNewtype" /\ app { showMenuOnStart: true } NewtypesAndRefinement.demoSimpleNewtype
     ]
 
 embedKeys :: Array String

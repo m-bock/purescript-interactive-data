@@ -59,9 +59,12 @@ import InteractiveData.DataUIs.Generic
   , generic_
   , class GenericDataUI
   , Product
-  , TypeName(..)
   , type (~)
   , (~)
+  ) as Export
+
+import InteractiveData.DataUIs.Types
+  ( TypeName(..)
   ) as Export
 
 import InteractiveData.DataUIs.Common

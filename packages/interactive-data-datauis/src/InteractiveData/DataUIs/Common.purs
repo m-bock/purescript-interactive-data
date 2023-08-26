@@ -19,7 +19,8 @@ import Data.Tuple (Tuple)
 import DataMVC.Types (DataUI)
 import InteractiveData.Core (class IDHtml, IDSurface)
 import InteractiveData.Core.Classes.OptArgs (class OptArgs)
-import InteractiveData.DataUIs.Generic (class GenericDataUI, CfgGeneric, TypeName(..), generic, (~))
+import InteractiveData.DataUIs.Generic (class GenericDataUI, CfgGeneric, generic, (~))
+import InteractiveData.DataUIs.Types (TypeName(..))
 
 --------------------------------------------------------------------------------
 --- Maybe
