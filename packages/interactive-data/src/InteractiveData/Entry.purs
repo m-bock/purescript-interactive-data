@@ -18,7 +18,7 @@ import InteractiveData.App (AppMsg, AppState)
 import InteractiveData.App as App
 import InteractiveData.App.WrapData (WrapMsg, WrapState)
 import InteractiveData.App.WrapData as App.WrapData
-import InteractiveData.Core (class IDHtml, IDSurface)
+import InteractiveData.Core (IDSurface)
 import InteractiveData.Core.Classes.OptArgs (class OptArgsMixed, getAllArgsMixed)
 import InteractiveData.Run as Run
 import InteractiveData.Run.Types.HtmlT (IDHtmlT)
@@ -33,10 +33,8 @@ type InteractiveDataApp html msg sta a =
   , extract :: sta -> DataResult a
   }
 
-type DataUI' msg sta typ =
-  forall html
-   . IDHtml html
-  => DataUI (IDSurface html) WrapMsg WrapState msg sta typ
+type DataUI' html msg sta a =
+  DataUI (IDSurface (IDHtmlT html)) WrapMsg WrapState msg sta a
 
 type DataUI_ html msg sta typ =
   DataUI (IDSurface html) WrapMsg WrapState msg sta typ

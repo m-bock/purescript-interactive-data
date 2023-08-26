@@ -10,6 +10,7 @@ module Manual.ComposingDataUIs.Variants where
 <!-- START imports -->
 -}
 
+import Chameleon (class Html)
 import Data.Variant (Variant)
 import InteractiveData (DataUI')
 import InteractiveData as ID
@@ -36,7 +37,7 @@ And then compose a data UI for it:
 
 -}
 
-demoVariant :: DataUI' _ _ RemoteData
+demoVariant :: forall html. Html html => DataUI' html _ _ RemoteData
 demoVariant =
   ID.variant_ @"notAsked"
     { notAsked: ID.record_ {}

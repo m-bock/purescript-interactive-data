@@ -15,6 +15,7 @@ module Manual.ComposingDataUIs.Primitives
 <!-- START imports -->
 -}
 
+import Chameleon (class Html)
 import Data.Maybe (Maybe(..))
 import InteractiveData (DataUI')
 import InteractiveData as ID
@@ -32,7 +33,7 @@ The interactive-data library provides Data UIs for the following PureScript prim
 ## Int
 -}
 
-demoInt :: DataUI' _ _ Int
+demoInt :: forall html. Html html => DataUI' html _ _ Int
 demoInt = ID.int
   { text: Just "The age of a person"
   , min: 0
@@ -46,7 +47,7 @@ demoInt = ID.int
 ## Boolean
 -}
 
-sampleBoolean :: DataUI' _ _ Boolean
+sampleBoolean :: forall html. Html html => DataUI' html _ _ Boolean
 sampleBoolean = ID.boolean_
 
 {-
@@ -56,7 +57,7 @@ sampleBoolean = ID.boolean_
 ## String
 -}
 
-demoString :: DataUI' _ _ String
+demoString :: forall html. Html html => DataUI' html _ _ String
 demoString = ID.string
   { text: Just "The name of a person"
   , maxLength: Just 100
@@ -69,7 +70,7 @@ demoString = ID.string
 ## Number
 -}
 
-sampleNumber :: DataUI' _ _ Number
+sampleNumber :: forall html. Html html => DataUI' html _ _ Number
 sampleNumber = ID.number_
 
 {-

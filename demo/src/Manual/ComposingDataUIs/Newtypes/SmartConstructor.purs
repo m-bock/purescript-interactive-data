@@ -12,6 +12,7 @@ module Manual.ComposingDataUIs.Newtypes.SmartConstructor where
 
 import Prelude
 
+import Chameleon (class Html)
 import Data.Either (Either(..))
 import InteractiveData (DataUI')
 import InteractiveData as ID
@@ -41,7 +42,7 @@ And then compose a data UI for it:
 
 -}
 
-demo :: DataUI' _ _ UserId
+demo :: forall html. Html html => DataUI' html _ _ UserId
 demo = ID.refineDataUi
   { typeName: "UserId"
   , refine: UserId >>> Right

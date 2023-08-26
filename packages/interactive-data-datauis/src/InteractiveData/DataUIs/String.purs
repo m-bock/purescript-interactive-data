@@ -55,7 +55,7 @@ update msg (StringState state) =
 -------------------------------------------------------------------------------
 
 type CfgView =
-  { multiline ::  Boolean
+  { multiline :: Boolean
   , maxLength :: Maybe Int
   }
 
@@ -152,7 +152,7 @@ type CfgString msg =
 defaultCfgString :: CfgString StringMsg
 defaultCfgString =
   { text: Nothing
-  , multiline : false
+  , multiline: false
   , actions
   , maxLength: Nothing
   }

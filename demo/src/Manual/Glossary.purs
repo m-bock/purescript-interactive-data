@@ -3,6 +3,7 @@
 -}
 module Manual.Glossary where
 
+import Chameleon (class Html)
 import InteractiveData (DataUI, DataUI')
 import InteractiveData.Core (ViewMode)
 
@@ -27,7 +28,7 @@ dummy = 1
 <!-- START removeType -->
 -}
 
-type T1 msg sta a = DataUI' msg sta a
+type T1 msg sta a = forall html. Html html => DataUI' html msg sta a
 
 {-
 <!-- END removeType -->

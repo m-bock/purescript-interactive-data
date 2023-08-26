@@ -10,6 +10,7 @@ module Manual.ComposingDataUIs.MaybeAndFriends where
 <!-- START imports -->
 -}
 
+import Chameleon (class Html)
 import Data.Either (Either)
 import Data.Maybe (Maybe(..))
 import Data.Tuple (Tuple)
@@ -27,10 +28,10 @@ like `Maybe`, `Either` and `Tuple`.
 
 -}
 
-dataUiMaybe1 :: DataUI' _ _ (Maybe Int)
+dataUiMaybe1 :: forall html. Html html => DataUI' html _ _ (Maybe Int)
 dataUiMaybe1 = ID.maybe_ ID.int_
 
-demoMaybe :: DataUI' _ _ (Maybe Int)
+demoMaybe :: forall html. Html html => DataUI' html _ _ (Maybe Int)
 demoMaybe = ID.maybe
   { text: Just "Call me maybe.." }
   ID.int_
@@ -44,10 +45,10 @@ demoMaybe = ID.maybe
 
 -}
 
-dataUiEither1 :: DataUI' _ _ (Either Int String)
+dataUiEither1 :: forall html. Html html => DataUI' html _ _ (Either Int String)
 dataUiEither1 = ID.either_ ID.int_ ID.string_
 
-demoEither :: DataUI' _ _ (Either String Int)
+demoEither :: forall html. Html html => DataUI' html _ _ (Either String Int)
 demoEither = ID.either
   { text: Just "Some Result or some Error" }
   ID.string_
@@ -62,10 +63,10 @@ demoEither = ID.either
 
 -}
 
-dataUiTuple1 :: DataUI' _ _ (Tuple Int String)
+dataUiTuple1 :: forall html. Html html => DataUI' html _ _ (Tuple Int String)
 dataUiTuple1 = ID.tuple_ ID.int_ ID.string_
 
-demoTuple :: DataUI' _ _ (Tuple Int String)
+demoTuple :: forall html. Html html => DataUI' html _ _ (Tuple Int String)
 demoTuple = ID.tuple
   { text: Just "Int and String" }
   ID.int_

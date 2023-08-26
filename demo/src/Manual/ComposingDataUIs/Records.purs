@@ -10,6 +10,7 @@ module Manual.ComposingDataUIs.Records where
 <!-- START imports -->
 -}
 
+import Chameleon (class Html)
 import InteractiveData (DataUI')
 import InteractiveData as ID
 
@@ -37,7 +38,7 @@ type User =
 Now we can create a Data UI with the `record_` function like this:
 -}
 
-demoRecord :: DataUI' _ _ User
+demoRecord :: forall html. Html html => DataUI' html _ _ User
 demoRecord =
   ID.record_
     { name: ID.string_
@@ -59,7 +60,7 @@ general `dataUi` function. The actual Data UI will be derived by the type.
 This example is equivalent to the `sampleRecord` value above.
 -}
 
-sampleRecord3 :: DataUI' _ _ User
+sampleRecord3 :: forall html. Html html => DataUI' html _ _ User
 sampleRecord3 = ID.dataUi
 
 {-
@@ -77,7 +78,7 @@ But also there is no way to configure the Data UI.
 Can we get the best of both worlds?
 -}
 
-sampleRecord4 :: DataUI' _ _ User
+sampleRecord4 :: forall html. Html html => DataUI' html _ _ User
 sampleRecord4 =
   ID.recordPartial_
     { name: ID.string_
@@ -102,7 +103,9 @@ Here's the same example as above, but with the wildcards expanded:
 -}
 
 sampleRecord5
-  :: DataUI'
+  :: forall html
+   . Html html
+  => DataUI' html
        ( ID.RecordMsg
            ( address :: ID.WrapMsg ID.StringMsg
            , age :: ID.WrapMsg ID.IntMsg

@@ -12,6 +12,7 @@ module Manual.ComposingDataUIs.CustomTypes where
 
 import Prelude
 
+import Chameleon (class Html)
 import Data.Generic.Rep (class Generic)
 import Data.Show.Generic (genericShow)
 import InteractiveData (DataUI', (~))
@@ -52,7 +53,7 @@ And then compose a data UI for it:
 
 -}
 
-demoCustomType :: DataUI' _ _ CustomADT
+demoCustomType :: forall html. Html html => DataUI' html _ _ CustomADT
 demoCustomType = ID.generic_ @"Foo" (ID.TypeName "CustomADT")
   { "Foo": ID.int_
   , "Bar": ID.string_

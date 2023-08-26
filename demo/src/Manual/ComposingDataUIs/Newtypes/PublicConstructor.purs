@@ -12,6 +12,7 @@ module Manual.ComposingDataUIs.Newtypes.PublicConstructor where
 
 import Prelude
 
+import Chameleon (class Html)
 import Data.Newtype (class Newtype)
 import InteractiveData (DataUI')
 import InteractiveData as ID
@@ -43,7 +44,7 @@ And then compose a data UI for it:
 
 -}
 
-demo :: DataUI' _ _ UserId
+demo :: forall html. Html html => DataUI' html _ _ UserId
 demo = ID.newtype_ (ID.TypeName "UserId")
   $ ID.string
       { multiline: false }

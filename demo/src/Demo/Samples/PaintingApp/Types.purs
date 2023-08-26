@@ -10,6 +10,7 @@ module Demo.Samples.PaintingApp.Types
 
 import Prelude
 
+import Chameleon (class Html)
 import Data.Argonaut (class EncodeJson)
 import Data.Argonaut.Encode.Generic (genericEncodeJson)
 import Data.Generic.Rep (class Generic)
@@ -133,7 +134,7 @@ metaDataUi = ID.recordPartial
       }
   }
 
-shapeDataUi :: DataUI' _ _ Shape
+shapeDataUi :: forall html. Html html => DataUI' html _ _ Shape
 shapeDataUi = shape
   { text: Just "The shape of the element"
   }
@@ -241,7 +242,7 @@ shapeDataUi = shape
       }
   }
 
-imageDataUi :: DataUI' _ _ Image
+imageDataUi :: forall html. Html html => DataUI' html _ _ Image
 imageDataUi = ID.record
   { text: Just "The actual image data: Shapes and Colors"
   }
@@ -268,7 +269,7 @@ imageDataUi = ID.record
       shapeDataUi
   }
 
-paintingDataUi :: DataUI' _ _ Painting
+paintingDataUi :: forall html. Html html => DataUI' html _ _ Painting
 paintingDataUi = ID.record_
   { meta: metaDataUi
   , image: imageDataUi
