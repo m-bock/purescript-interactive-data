@@ -23,7 +23,7 @@ import Partial.Unsafe (unsafePartial)
 import Type.Proxy (Proxy(..))
 
 view :: forall html msg. IDHtml html => ViewArgs html msg -> html msg
-view { viewCase, mkMsg, caseKey, caseKeys } =
+view { mkMsg, caseKey, caseKeys } =
   withCtx \ctx ->
     let
       newSeg :: DataPathSegment

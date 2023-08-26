@@ -10,7 +10,6 @@ module Manual.ComposingDataUIs.Records where
 <!-- START imports -->
 -}
 
-import Data.Maybe (Maybe(..))
 import InteractiveData (DataUI')
 import InteractiveData as ID
 
