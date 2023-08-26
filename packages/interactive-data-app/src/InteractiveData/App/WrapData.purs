@@ -10,7 +10,6 @@ import Chameleon as C
 import Chameleon.Transformers.OutMsg.Class (fromOutHtml)
 import Data.Array (mapMaybe)
 import Data.Array as Array
-import Data.Array.NonEmpty (NonEmptyArray)
 import Data.Array.NonEmpty as NEA
 import Data.Tuple (fst)
 import InteractiveData.App.UI.ActionButton as UIActionButton
