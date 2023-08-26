@@ -10,7 +10,6 @@ module Manual.ComposingDataUIs.Variants where
 <!-- START imports -->
 -}
 
-import Data.Maybe (Maybe(..))
 import Data.Variant (Variant)
 import InteractiveData (DataUI')
 import InteractiveData as ID
@@ -18,25 +17,42 @@ import InteractiveData as ID
 {-
 <!-- END imports -->
 
-...
+Define a variant type first:
 -}
 
 type RemoteData = Variant
   ( notAsked :: {}
   , loading :: { progress :: Number }
-  , failed :: { errorMessage :: String, errorCode :: Int }
+  , failed ::
+      { errorMessage :: String
+      , errorCode :: Int
+      }
   , success :: { data :: String }
   )
 
+{-
+
+And then compose a data UI for it:
+
+-}
+
 demoVariant :: DataUI' _ _ RemoteData
-demoVariant = ID.variant_ @"notAsked"
-  { notAsked: ID.record_ {}
-  , loading: ID.record_ { progress: ID.number_ }
-  , failed: ID.record_ { errorMessage: ID.string_, errorCode: ID.int_ }
-  , success: ID.record_ { data: ID.string_ }
-  }
+demoVariant =
+  ID.variant_ @"notAsked"
+    { notAsked: ID.record_ {}
+    , loading: ID.record_ { progress: ID.number_ }
+    , failed:
+        ID.record_
+          { errorMessage: ID.string_
+          , errorCode: ID.int_
+          }
+    , success: ID.record_ { data: ID.string_ }
+    }
 
 {-
-<!-- START embed variant 700 -->
+
+The UI will look like this:
+
+<!-- START embed variant 500 -->
 <!-- END embed -->
 -}

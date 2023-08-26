@@ -38,8 +38,8 @@ type User =
 Now we can create a Data UI with the `record_` function like this:
 -}
 
-sampleRecord1 :: DataUI' _ _ User
-sampleRecord1 =
+demoRecord :: DataUI' _ _ User
+demoRecord =
   ID.record_
     { name: ID.string_
     , age: ID.int_
@@ -48,26 +48,8 @@ sampleRecord1 =
 
 {-
 
-## Adding configuration to the Data UIs
-If the `_` is omitted configuration options can be provided for the record. This
-works exactly like the configuration for the primitive types:
+The UI will look like this:
 
--}
-
-demoRecord :: DataUI' _ _ User
-demoRecord =
-  ID.record
-    { text: Just "A sample User"
-    }
-    { name: ID.string
-        { text: Just "The name of the user" }
-    , age: ID.int
-        { text: Just "The age of the user", min: 0, max: 100 }
-    , address: ID.string
-        { text: Just "The address of the user" }
-    }
-
-{-
 <!-- START embed record 500 -->
 <!-- END embed -->
 

@@ -54,10 +54,9 @@ viewWrapper { atInteractiveData, atDataStr } =
     el =
       { root: styleNode C.div
           [ "display: grid"
-          , "grid-template-rows: minmax(0,5fr) minmax(0,1fr)"
+          , "grid-template-rows: minmax(0, 1fr) auto"
           , "height: 100%"
           , "background: hsl(200, 7%, 8%);"
-          , "padding: 10px"
           , "box-sizing: border-box"
           , "position: fixed"
           , "top: 0"
@@ -68,8 +67,7 @@ viewWrapper { atInteractiveData, atDataStr } =
       , atInteractiveData: styleNode C.div
           [ "border:1px solid #9f9f9f"
           , "border-radius: 5px"
-          , "margin-top: 10px"
-          , "margin-bottom: 10px"
+          , "max-width: 800px"
           ]
       , atDataStr: styleNode C.pre
           [ "font-size: 10px"
