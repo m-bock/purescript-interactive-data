@@ -16,7 +16,7 @@
   - [Custom Types](./generated/ComposingDataUIs/CustomTypes.md)
   - [Simple Newtypes](./generated/ComposingDataUIs/SimpleNewtypes.md)
   - [Validation and Smart Constructors](./generated/ComposingDataUIs/Validation.md)
-  - [Escape hatch: JSON Data UI]()
+  - [Escape hatch: JSON Data UI](./generated/ComposingDataUIs/JsonEscape.md)
   - [Polymorphic Data UIs]()
 - [Advanced Recipies]()
   - [Writing custom Data UIs]()
