@@ -5,6 +5,7 @@ package:
     - argonaut
     - argonaut-generic
     - arrays
+    - bifunctors
     - chameleon
     - chameleon-halogen
     - chameleon-react-basic
