@@ -83,7 +83,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../../generated/Introduction.html">Introduction</a></li><li class="chapter-item expanded affix "><a href="../../generated/Installation.html">Installation</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">User Guide</li><li class="chapter-item expanded "><a href="../../generated/ComposingDataUIs.html"><strong aria-hidden="true">1.</strong> Composing Data UIs</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../generated/ComposingDataUIs/Primitives.html"><strong aria-hidden="true">1.1.</strong> Primitives</a></li><li class="chapter-item expanded "><a href="../../generated/ComposingDataUIs/Records.html" class="active"><strong aria-hidden="true">1.2.</strong> Records</a></li><li class="chapter-item expanded "><a href="../../generated/ComposingDataUIs/Variants.html"><strong aria-hidden="true">1.3.</strong> Variants</a></li><li class="chapter-item expanded "><a href="../../generated/ComposingDataUIs/MaybeAndFriends.html"><strong aria-hidden="true">1.4.</strong> Maybe and friends</a></li><li class="chapter-item expanded "><a href="../../generated/ComposingDataUIs/CustomTypes.html"><strong aria-hidden="true">1.5.</strong> Custom Types</a></li><li class="chapter-item expanded "><div><strong aria-hidden="true">1.6.</strong> Newtypes & Refinement</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">1.7.</strong> Escape hatch: JSON Data UI</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">1.8.</strong> Polymorphic Data UIs</div></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">2.</strong> Advanced Recipies</div></li><li><ol class="section"><li class="chapter-item expanded "><div><strong aria-hidden="true">2.1.</strong> Writing custom Data UIs</div></li><li><ol class="section"><li class="chapter-item expanded "><div><strong aria-hidden="true">2.1.1.</strong> Example: A color picker</div></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">2.2.</strong> Define custom type class</div></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.</strong> Running Data UIs</div></li><li><ol class="section"><li class="chapter-item expanded "><div><strong aria-hidden="true">3.1.</strong> Halogen</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.2.</strong> React Basic</div></li></ol></li><li class="chapter-item expanded "><li class="part-title">Appendix</li><li class="chapter-item expanded "><a href="../../generated/Glossary.html"><strong aria-hidden="true">4.</strong> Glossary</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../../generated/Introduction.html">Introduction</a></li><li class="chapter-item expanded affix "><a href="../../generated/Installation.html">Installation</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">User Guide</li><li class="chapter-item expanded "><a href="../../generated/ComposingDataUIs.html"><strong aria-hidden="true">1.</strong> Composing Data UIs</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../generated/ComposingDataUIs/Primitives.html"><strong aria-hidden="true">1.1.</strong> Primitives</a></li><li class="chapter-item expanded "><a href="../../generated/ComposingDataUIs/Records.html" class="active"><strong aria-hidden="true">1.2.</strong> Records</a></li><li class="chapter-item expanded "><a href="../../generated/ComposingDataUIs/Variants.html"><strong aria-hidden="true">1.3.</strong> Variants</a></li><li class="chapter-item expanded "><a href="../../generated/ComposingDataUIs/MaybeAndFriends.html"><strong aria-hidden="true">1.4.</strong> Maybe and friends</a></li><li class="chapter-item expanded "><a href="../../generated/ComposingDataUIs/CustomTypes.html"><strong aria-hidden="true">1.5.</strong> Custom Types</a></li><li class="chapter-item expanded "><a href="../../generated/ComposingDataUIs/SimpleNewtypes.html"><strong aria-hidden="true">1.6.</strong> Simple Newtypes</a></li><li class="chapter-item expanded "><a href="../../generated/ComposingDataUIs/Validation.html"><strong aria-hidden="true">1.7.</strong> Validation and Smart Constructors</a></li><li class="chapter-item expanded "><div><strong aria-hidden="true">1.8.</strong> Escape hatch: JSON Data UI</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">1.9.</strong> Polymorphic Data UIs</div></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">2.</strong> Advanced Recipies</div></li><li><ol class="section"><li class="chapter-item expanded "><div><strong aria-hidden="true">2.1.</strong> Writing custom Data UIs</div></li><li><ol class="section"><li class="chapter-item expanded "><div><strong aria-hidden="true">2.1.1.</strong> Example: A color picker</div></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">2.2.</strong> Define custom type class</div></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.</strong> Running Data UIs</div></li><li><ol class="section"><li class="chapter-item expanded "><div><strong aria-hidden="true">3.1.</strong> Halogen</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.2.</strong> React Basic</div></li></ol></li><li class="chapter-item expanded "><li class="part-title">Appendix</li><li class="chapter-item expanded "><a href="../../generated/Glossary.html"><strong aria-hidden="true">4.</strong> Glossary</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -174,7 +174,8 @@
 <!-- END hide -->
 <!-- START imports  -->
 <details><summary>Imports for the code samples</summary>
-<pre><code class="language-hs">import InteractiveData (DataUI')
+<pre><code class="language-hs">import Chameleon (class Html)
+import InteractiveData (DataUI')
 import InteractiveData as ID
 </code></pre>
 </details><hr><br>
@@ -191,7 +192,7 @@ import InteractiveData as ID
 </code></pre>
 <h2 id="simple-data-uis-without-configuration"><a class="header" href="#simple-data-uis-without-configuration">Simple Data UIs without configuration</a></h2>
 <p>Now we can create a Data UI with the <code>record_</code> function like this:</p>
-<pre><code class="language-hs">demoRecord :: DataUI' _ _ User
+<pre><code class="language-hs">demoRecord :: forall html. Html html =&gt; DataUI' html _ _ User
 demoRecord =
   ID.record_
     { name: ID.string_
@@ -221,7 +222,7 @@ demoRecord =
 <p>If you just want to use the default options for each field, you can also use the
 general <code>dataUi</code> function. The actual Data UI will be derived by the type.
 This example is equivalent to the <code>sampleRecord</code> value above.</p>
-<pre><code class="language-hs">sampleRecord3 :: DataUI' _ _ User
+<pre><code class="language-hs">sampleRecord3 :: forall html. Html html =&gt; DataUI' html _ _ User
 sampleRecord3 = ID.dataUi
 </code></pre>
 <h2 id="using-the-recordpartial_-function"><a class="header" href="#using-the-recordpartial_-function">Using the <code>recordPartial_</code> function</a></h2>
@@ -233,7 +234,7 @@ Then there is the <code>dataUi</code> function.
 It is the most concise way to create a Data UI for a Record.
 But also there is no way to configure the Data UI.</p>
 <p>Can we get the best of both worlds?</p>
-<pre><code class="language-hs">sampleRecord4 :: DataUI' _ _ User
+<pre><code class="language-hs">sampleRecord4 :: forall html. Html html =&gt; DataUI' html _ _ User
 sampleRecord4 =
   ID.recordPartial_
     { name: ID.string_
@@ -252,7 +253,9 @@ So generally it's a good idea to either use the wildcards
 or keep the final UI composition in a <code>let</code> or <code>where</code> clause.</p>
 <p>Here's the same example as above, but with the wildcards expanded:</p>
 <pre><code class="language-hs">sampleRecord5
-  :: DataUI'
+  :: forall html
+   . Html html
+  =&gt; DataUI' html
        ( ID.RecordMsg
            ( address :: ID.WrapMsg ID.StringMsg
            , age :: ID.WrapMsg ID.IntMsg
