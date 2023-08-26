@@ -75,7 +75,7 @@ view
             ]
         , textarea: styleNode C.textarea
             [ "width: 100%"
-            , "height: 200px"
+            , "height: 100px"
             , "font-family: 'Signika Negative'"
             , "border: 1px solid #ccc"
             , "border-radius: 3px"

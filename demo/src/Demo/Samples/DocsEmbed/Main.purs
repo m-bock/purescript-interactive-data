@@ -24,6 +24,7 @@ import Halogen as Halogen
 import InteractiveData (AppMsg, AppState, DataUI, WrapMsg, WrapState)
 import InteractiveData as ID
 import InteractiveData.Entry (InteractiveDataApp)
+import Manual.ComposingDataUIs.CustomTypes as CustomType
 import Manual.ComposingDataUIs.MaybeAndFriends as MaybeAndFriends
 import Manual.ComposingDataUIs.Primitives as Primitives
 import Manual.ComposingDataUIs.Records as Records
@@ -43,6 +44,7 @@ embeds =
     , "either" /\ app { showMenuOnStart: true } MaybeAndFriends.demoEither
     , "tuple" /\ app { showMenuOnStart: true } MaybeAndFriends.demoTuple
     , "variant" /\ app { showMenuOnStart: true } Variants.demoVariant
+    , "customType" /\ app { showMenuOnStart: true } CustomType.demoCustomType
     ]
 
 embedKeys :: Array String
