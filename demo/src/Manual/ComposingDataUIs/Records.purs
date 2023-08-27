@@ -11,6 +11,7 @@ module Manual.ComposingDataUIs.Records where
 -}
 
 import Chameleon (class Html)
+import Data.Maybe (Maybe(..))
 import InteractiveData (DataUI')
 import InteractiveData as ID
 
@@ -43,7 +44,7 @@ demoRecord =
   ID.record_
     { name: ID.string_
     , age: ID.int_
-    , address: ID.string_
+    , address: ID.string { text: Just "Street and zip code" }
     }
 
 {-

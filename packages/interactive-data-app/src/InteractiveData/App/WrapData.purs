@@ -169,7 +169,6 @@ viewInline { viewContent, typeName, text, filteredErrors } =
             , "flex-direction: column"
             , "height: 100%"
             , "gap: 3px"
-            , "margin-bottom: 5px"
             ]
         , text: styleNode C.div
             [ "font-size: 11px"
@@ -186,8 +185,7 @@ viewInline { viewContent, typeName, text, filteredErrors } =
             , "font-weight: bold"
             ]
         , root: styleNode C.div
-            [ "min-height: 130px"
-            , "min-width: 120px"
+            [ "min-width: 120px"
             , "display: grid"
             ]
         , content: styleNode C.div

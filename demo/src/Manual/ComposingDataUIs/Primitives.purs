@@ -6,8 +6,8 @@
 module Manual.ComposingDataUIs.Primitives
   ( demoInt
   , demoString
-  , sampleBoolean
-  , sampleNumber
+  , demoBoolean
+  , demoNumber
   ) where
 
 {-
@@ -47,8 +47,8 @@ demoInt = ID.int
 ## Boolean
 -}
 
-sampleBoolean :: forall html. Html html => DataUI' html _ _ Boolean
-sampleBoolean = ID.boolean_
+demoBoolean :: forall html. Html html => DataUI' html _ _ Boolean
+demoBoolean = ID.boolean_
 
 {-
 <!-- START embed boolean 300 -->
@@ -70,8 +70,8 @@ demoString = ID.string
 ## Number
 -}
 
-sampleNumber :: forall html. Html html => DataUI' html _ _ Number
-sampleNumber = ID.number_
+demoNumber :: forall html. Html html => DataUI' html _ _ Number
+demoNumber = ID.number_
 
 {-
 <!-- START embed number -->

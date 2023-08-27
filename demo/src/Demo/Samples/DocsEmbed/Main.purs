@@ -24,6 +24,7 @@ import Halogen as Halogen
 import InteractiveData (AppMsg, AppState, DataUI, WrapMsg, WrapState)
 import InteractiveData as ID
 import InteractiveData.Entry (InteractiveDataApp)
+import Manual.ComposingDataUIs.Arrays as Arrays
 import Manual.ComposingDataUIs.CustomTypes as CustomType
 import Manual.ComposingDataUIs.MaybeAndFriends as MaybeAndFriends
 import Manual.ComposingDataUIs.Newtypes.JsonEscape as JsonEscape
@@ -42,8 +43,11 @@ embeds =
     -- Primitives
     [ "int" /\ app { showMenuOnStart: false } Primitives.demoInt
     , "string" /\ app { showMenuOnStart: false } Primitives.demoString
-    , "boolean" /\ app { showMenuOnStart: false } ID.boolean_
-    , "number" /\ app { showMenuOnStart: false } ID.number_
+    , "boolean" /\ app { showMenuOnStart: false } Primitives.demoBoolean
+    , "number" /\ app { showMenuOnStart: false } Primitives.demoNumber
+
+    -- Arrays
+    , "array" /\ app { showMenuOnStart: true } Arrays.demo
 
     -- Record
     , "record" /\ app { showMenuOnStart: true } Records.demoRecord

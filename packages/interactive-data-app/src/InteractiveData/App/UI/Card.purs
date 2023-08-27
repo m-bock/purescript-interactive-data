@@ -57,17 +57,14 @@ view
       , caption: styleNode C.div
           [ "border-bottom: 1px solid " <> borderColor
           , "padding: 5px"
-          , "height: 35px"
           , "box-sizing: border-box"
           ]
       , subCaption: styleNode C.div
           [ "padding: 5px"
-          , "height: 35px"
           , "box-sizing: border-box"
           ]
       , body: styleNode C.div
           [ "padding: 5px"
-          , "margin-top: 10px"
           , "box-sizing: border-box"
           ]
       , footer: styleNode C.div

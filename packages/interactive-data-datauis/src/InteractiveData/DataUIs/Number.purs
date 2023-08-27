@@ -81,9 +81,7 @@ view
     let
       el =
         { root: styleNode C.div
-            [ "margin-top: 10px"
-            , "margin-bottom: 5px"
-            , "display: flex"
+            [ "display: flex"
             , "flex-direction: row"
             , "align-items: center"
             , "justify-content: space-between"
