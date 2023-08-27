@@ -16,7 +16,7 @@ import Data.Show.Generic (genericShow)
 import Data.Tuple (Tuple)
 import Demo.Common.Features.Refinement.UserID (UserID, userId_)
 import Demo.Common.VariantJ (VariantJ)
-import InteractiveData (class IDHtml, DataUI, IDHtmlT, IDSurface)
+import InteractiveData (DataUI, IDHtmlT, IDSurface)
 import InteractiveData as ID
 
 type Sample =

@@ -21,7 +21,6 @@ import Demo.Samples.PaintingApp.ArchiveID (ArchiveID, archiveID)
 import Demo.Samples.PaintingApp.Color (Color, color)
 import InteractiveData
   ( class IDDataUI
-  , class IDHtml
   , DataUI
   , DataUI'
   , IDHtmlT
