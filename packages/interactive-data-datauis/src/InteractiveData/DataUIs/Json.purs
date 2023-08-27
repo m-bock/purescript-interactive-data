@@ -15,6 +15,7 @@ import Data.Argonaut (class DecodeJson, class EncodeJson, Json, JsonDecodeError,
 import Data.Argonaut as Json
 import Data.Array.NonEmpty (NonEmptyArray)
 import Data.Bifunctor (lmap)
+import Data.Int as Int
 
 -------------------------------------------------------------------------------
 --- Types
@@ -73,13 +74,12 @@ update msg state@(JsonState val) =
 --- View
 -------------------------------------------------------------------------------
 
-view :: forall html. IDHtml html => JsonState -> html JsonMsg
-view (JsonState value) =
+view :: forall html. IDHtml html => { rows :: Int } -> JsonState -> html JsonMsg
+view { rows } (JsonState value) =
   let
     el =
       { textarea: styleNode C.textarea
           [ "width: 100%"
-          , "height: 100px"
           , "font-family: monospace"
           , "border: 1px solid #ccc"
           , "border-radius: 3px"
@@ -89,6 +89,7 @@ view (JsonState value) =
     el.textarea
       [ C.onInput SetJson
       , C.value value
+      , C.rows $ Int.toNumber rows
       ]
       []
 
@@ -99,8 +100,8 @@ view (JsonState value) =
 actions :: Array (DataAction JsonMsg)
 actions =
   [ DataAction
-      { label: "Format"
-      , description: "Format"
+      { label: "Format JSON"
+      , description: "Format JSON with indentation"
       , msg: This $ FormatJson
       }
   ]
@@ -119,12 +120,14 @@ type JsonMandatory a r =
 
 type JsonOptional r =
   ( text :: Maybe String
+  , rows :: Int
   | r
   )
 
 defaultCfgJson :: Record (JsonOptional ())
 defaultCfgJson =
   { text: Nothing
+  , rows: 15
   }
 
 json
@@ -148,7 +151,7 @@ json opt =
       { name: cfg.typeName
       , view: \state -> IDSurface \_ ->
           DataTree
-            { view: view state
+            { view: view (pick cfg) state
             , actions
             , children: Fields []
             , meta: Nothing

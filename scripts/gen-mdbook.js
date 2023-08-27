@@ -55,13 +55,23 @@ const postProcessFile = (source) => {
       if (typeof url === "undefined") {
         throw new Error(`No 'ID_URL_DEMO_EMBEDS' defined`);
       }
+
+      const urlManual = process.env.ID_URL_MANUAL;
+      if (typeof urlManual === "undefined") {
+        throw new Error(`No 'ID_URL_MANUAL' defined`);
+      }
+
       const height = height_ || 315;
       const style = ["border: 0px"].join(";");
       return [
         `<div style="display:grid; grid-template-rows: auto minmax(0, 1fr); gap: 10px">`,
         `  <div style="display: flex; justify-content: flex-end">`,
         `    <a href="${url}?${embedId}">`,
-        `      <img style="width: 15px; border: 1px solid #979797; border-radius: 5px; padding: 3px" title="Fullscreen" src="/assets/expand.svg">`,
+        `      <img`,
+        `        style="width: 15px; border: 1px solid #979797; border-radius: 5px; padding: 3px"`,
+        `        title="Fullscreen"`,
+        `        src="${urlManual}/assets/expand.svg"`,
+        `        >`,
         `    </a>`,
         `  </div>`,
         `  <iframe `,

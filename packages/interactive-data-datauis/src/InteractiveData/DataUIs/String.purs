@@ -10,6 +10,7 @@ module InteractiveData.DataUIs.String
 import InteractiveData.Core.Prelude
 
 import Chameleon as C
+import Data.Int as Int
 import Data.String as Str
 
 -------------------------------------------------------------------------------
@@ -57,11 +58,12 @@ update msg (StringState state) =
 type CfgView =
   { multiline :: Boolean
   , maxLength :: Maybe Int
+  , rows :: Int
   }
 
 view :: forall html. IDHtml html => CfgView -> StringState -> html StringMsg
 view
-  { multiline, maxLength }
+  { multiline, maxLength, rows }
   (StringState state) =
   withCtx \ctx ->
     let
@@ -74,7 +76,6 @@ view
             ]
         , textarea: styleNode C.textarea
             [ "width: 100%"
-            , "height: 100px"
             , "font-family: 'Signika Negative'"
             , "border: 1px solid #ccc"
             , "border-radius: 3px"
@@ -90,6 +91,7 @@ view
         el.textarea
           [ C.onInput SetString
           , C.value state
+          , C.rows $ Int.toNumber rows
           , maybe C.noProp C.maxlength maxLength
           ]
           []
@@ -145,6 +147,7 @@ actions =
 type CfgString msg =
   { text :: Maybe String
   , multiline :: Boolean
+  , rows :: Int
   , actions :: Array (DataAction msg)
   , maxLength :: Maybe Int
   }
@@ -153,6 +156,7 @@ defaultCfgString :: CfgString StringMsg
 defaultCfgString =
   { text: Nothing
   , multiline: false
+  , rows: 5
   , actions
   , maxLength: Nothing
   }

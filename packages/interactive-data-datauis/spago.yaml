@@ -8,6 +8,7 @@ package:
     - either
     - foldable-traversable
     - heterogeneous
+    - integers
     - interactive-data-app
     - interactive-data-core
     - labeled-data
