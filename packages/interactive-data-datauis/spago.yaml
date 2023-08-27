@@ -4,6 +4,7 @@ package:
     - arrays
     - bifunctors
     - chameleon
+    - control
     - data-mvc
     - either
     - foldable-traversable

@@ -11,7 +11,7 @@ module Manual.ComposingDataUIs.Arrays where
 -}
 
 import Chameleon (class Html)
-import Data.Maybe (Maybe)
+import Data.Maybe (Maybe(..))
 import InteractiveData (DataUI')
 import InteractiveData as ID
 
@@ -19,9 +19,10 @@ import InteractiveData as ID
 <!-- END imports -->
 -}
 
-demo :: forall html. Html html => DataUI' html _ _ (Array (Maybe Int))
+demo :: forall html. Html html => DataUI' html _ _ (Array Int)
 demo =
-  ID.array_ ID.dataUi
+  ID.array { init: Just [ 1, 2, 3 ] }
+    ID.int_
 
 {-
 <!-- START embed array 500 -->

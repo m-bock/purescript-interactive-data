@@ -7,7 +7,9 @@
 -----------
 
 # User Guide
-
+- [General Concepts]()
+  - [Standalone and Inline views]()
+  - [Fast Forwarding]()
 - [Composing Data UIs](./generated/ComposingDataUIs.md)
   - [Primitives](./generated/ComposingDataUIs/Primitives.md)
   - [Arrays](./generated/ComposingDataUIs/Arrays.md)

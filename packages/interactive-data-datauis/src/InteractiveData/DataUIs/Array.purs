@@ -10,6 +10,7 @@ module InteractiveData.DataUIs.Array
 import InteractiveData.Core.Prelude
 
 import Chameleon as C
+import Control.Alt ((<|>))
 import Data.Array as Array
 import Data.FunctorWithIndex (mapWithIndex)
 import Data.Traversable (traverse)
@@ -46,7 +47,12 @@ extract item (ArrayState s) =
 --- Init
 -------------------------------------------------------------------------------
 
-init :: forall sta a. { init :: Maybe a -> sta } -> Maybe (Array a) -> ArrayState sta
+init
+  :: forall sta a
+   . { init :: Maybe a -> sta
+     }
+  -> Maybe (Array a)
+  -> ArrayState sta
 init item = case _ of
   Nothing -> ArrayState []
   Just a -> ArrayState $ map (Just >>> item.init) a
@@ -210,26 +216,27 @@ actions =
 --- DataUI
 -------------------------------------------------------------------------------
 
-type CfgArray :: forall k. k -> Type
-type CfgArray msg =
+type CfgArray a =
   { text :: Maybe String
+  , init :: Maybe (Array a)
   }
 
-defaultCfgArray :: CfgArray ArrayMsg
+defaultCfgArray :: forall a. CfgArray a
 defaultCfgArray =
   { text: Nothing
+  , init: Nothing
   }
 
 array
   :: forall opt html fm fs msg sta a
-   . OptArgs (CfgArray ArrayMsg) opt
+   . OptArgs (CfgArray a) opt
   => IDHtml html
   => opt
   -> DataUI (IDSurface html) fm fs msg sta a
   -> DataUI (IDSurface html) fm fs (ArrayMsg (fm msg)) (ArrayState (fs sta)) (Array a)
 array opt dataUi =
   let
-    cfg :: CfgArray ArrayMsg
+    cfg :: CfgArray a
     cfg = getAllArgs defaultCfgArray opt
 
     dataUi' :: DataUI (IDSurface html) fm fs (fm msg) (fs sta) a
@@ -279,7 +286,7 @@ array opt dataUi =
                   }
           , extract: extract (pick itf)
           , update: update (pick itf)
-          , init: init (pick itf)
+          , init: \initGlobal -> init (pick itf) (initGlobal <|> cfg.init)
           }
 
 array_
