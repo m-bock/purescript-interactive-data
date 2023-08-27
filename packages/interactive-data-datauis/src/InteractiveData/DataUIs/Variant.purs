@@ -23,7 +23,7 @@ import Partial.Unsafe (unsafePartial)
 import Type.Proxy (Proxy(..))
 
 view :: forall html msg. IDHtml html => ViewArgs html msg -> html msg
-view { viewCase, mkMsg, caseKey, caseKeys } =
+view { mkMsg, caseKey, caseKeys } =
   withCtx \ctx ->
     let
       newSeg :: DataPathSegment
@@ -74,11 +74,6 @@ view { viewCase, mkMsg, caseKey, caseKeys } =
               Inline -> C.noHtml
               Standalone | not ctx.fastForward -> C.noHtml
               Standalone -> C.noHtml
-          -- putCtx ctx
-          --   { path = newPath
-          --   , viewMode = Standalone
-          --   } $
-          --   viewCase
           ]
 
 mkSurface
