@@ -98,6 +98,7 @@ viewWrapper { atInteractiveData, atDataStr } =
       , atInteractiveData: styleNode C.div
           [ "border:1px solid #9f9f9f"
           , "border-radius: 5px"
+          , "overflow: hidden"
           , "max-width: 800px"
           ]
       , atDataStr: styleNode C.pre

@@ -14,7 +14,9 @@ import Data.Array as Array
 import Data.FunctorWithIndex (mapWithIndex)
 import Data.Traversable (traverse)
 import DataMVC.Types.DataUI (applyWrap, runDataUi)
+import InteractiveData.App.FastForward.Inline as FastForwardInline
 import InteractiveData.App.UI.ActionButton as UIActionButton
+import InteractiveData.Core.Types.DataTree as DT
 import InteractiveData.Core.Types.IDSurface (runIdSurface)
 
 -------------------------------------------------------------------------------
@@ -92,7 +94,9 @@ update item msg (ArrayState state) =
 view
   :: forall html msg sta
    . IDHtml html
-  => { view :: sta -> html msg }
+  => { view :: sta -> html msg
+     , childDataTrees :: Array (DataTree html msg)
+     }
   -> ArrayState sta
   -> html (ArrayMsg msg)
 view cfg (ArrayState items) =
@@ -113,11 +117,12 @@ view cfg (ArrayState items) =
       case ctx.viewMode of
         Standalone ->
           el.root []
-            ( items #
-                mapWithIndex \index item ->
-                  el.item []
-                    [ viewItem (pick cfg) index item
-                    ]
+            ( Array.zip items cfg.childDataTrees
+                #
+                  mapWithIndex \index (item /\ childDataTree) ->
+                    el.item []
+                      [ viewItem (pick cfg) index childDataTree item
+                      ]
             )
         Inline ->
           el.root []
@@ -129,9 +134,10 @@ viewItem
    . IDHtml html
   => { view :: sta -> html msg }
   -> Int
+  -> DataTree html msg
   -> sta
   -> html (ArrayMsg msg)
-viewItem item index state =
+viewItem _ index childDataTree _ =
   withCtx \ctx ->
     let
       el =
@@ -148,17 +154,17 @@ viewItem item index state =
 
       newPath = ctx.path <> [ SegField $ SegDynamicIndex index ]
 
-    -- trivialTrees :: Array (Array DataPathSegment /\ DataTree html msg)
-    -- trivialTrees = DT.digTrivialTrees
-    --   newPath
-    --   tree
+      trivialTrees :: Array (Array DataPathSegment /\ DataTree html msg)
+      trivialTrees = DT.digTrivialTrees
+        newPath
+        childDataTree
 
     in
       el.root []
         [ el.item []
             [ putCtx ctx { path = newPath, viewMode = Inline }
                 $ EntryMsg index
-                <$> item.view state
+                <$> FastForwardInline.view trivialTrees
             ]
         , el.actions []
             [ UIActionButton.view
@@ -255,11 +261,19 @@ array opt dataUi =
                     dataTree = runIdSurface srfCtx $ itf.view state'
                   in
                     SegDynamicIndex index /\ map (EntryMsg index) dataTree
+
+                childDataTrees :: Array (DataTree html (fm msg))
+                childDataTrees = items
+                  #
+                    map
+                      (\item -> runIdSurface srfCtx $ itf.view item)
+
+                fields = mapWithIndex mkChildren items
               in
                 DataTree
-                  { view: view { view: view' } state
+                  { view: view { view: view', childDataTrees } state
                   , actions
-                  , children: Fields (mapWithIndex mkChildren items)
+                  , children: Fields fields
                   , meta: Nothing
                   , text: cfg.text
                   }
