@@ -7,6 +7,7 @@ module InteractiveData.Class.Defaults.Generic
 
 import Prelude
 
+import Chameleon (class Html)
 import Data.Either (Either(..))
 import DataMVC.Types (DataUI)
 import DataMVC.Types.DataUI (refineDataUi)
@@ -17,6 +18,7 @@ import InteractiveData.Core (class IDHtml, IDSurface)
 import InteractiveData.DataUIs.Generic (DefaultTransform, MappingHlistToRecord(..))
 import InteractiveData.DataUIs.Variant (VariantMsg, VariantState)
 import InteractiveData.DataUIs.Variant as VUI
+import InteractiveData.Run.Types.HtmlT (IDHtmlT(..))
 import LabeledData.VariantLike.Generic (class GenericVariantLike)
 import LabeledData.VariantLike.Generic as LD
 import Prim.Row as Row
@@ -43,13 +45,13 @@ class
     :: token
     -> Proxy initcase
     -> String
-    -> DataUI (IDSurface html) fm fs msg sta typ
+    -> DataUI (IDSurface (IDHtmlT html)) fm fs msg sta typ
 
 instance
   ( GenericVariantLike DefaultTransform typ row
   , InitGenericSpec token row specs
-  , DataUiVariant specs fm fs (IDSurface html) initcase rcase rmsg rsta row
-  , IDHtml html
+  , DataUiVariant specs fm fs (IDSurface (IDHtmlT html)) initcase rcase rmsg rsta row
+  , Html html
   ) =>
   DefaultGeneric initcase token html fm fs (VariantMsg rcase rmsg) (VariantState rsta) typ
 
@@ -58,7 +60,7 @@ instance
     :: token
     -> Proxy initcase
     -> String
-    -> DataUI (IDSurface html) fm fs (VariantMsg rcase rmsg) (VariantState rsta) typ
+    -> DataUI (IDSurface (IDHtmlT html)) fm fs (VariantMsg rcase rmsg) (VariantState rsta) typ
   defaultGeneric_ token _ typeName =
     let
       specs :: Record specs

@@ -38,8 +38,8 @@ type InteractiveDataApp html msg sta a =
 type DataUI' html msg sta a =
   DataUI (IDSurface (IDHtmlT html)) WrapMsg WrapState msg sta a
 
-type DataUI_ html msg sta typ =
-  DataUI (IDSurface html) WrapMsg WrapState msg sta typ
+type DataUI_ html fm fs msg sta typ =
+  DataUI (IDSurface (IDHtmlT html)) fm fs msg sta typ
 
 --------------------------------------------------------------------------------
 --- Functions

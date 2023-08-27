@@ -19,7 +19,18 @@ import Data.Newtype (class Newtype)
 import Data.Show.Generic (genericShow)
 import Demo.Samples.PaintingApp.ArchiveID (ArchiveID, archiveID)
 import Demo.Samples.PaintingApp.Color (Color, color)
-import InteractiveData (class IDDataUI, class IDHtml, DataUI, DataUI', IDSurface, IntMsg, IntState, dataUi, newtype_)
+import InteractiveData
+  ( class IDDataUI
+  , class IDHtml
+  , DataUI
+  , DataUI'
+  , IDHtmlT
+  , IDSurface
+  , IntMsg
+  , IntState
+  , dataUi
+  , newtype_
+  )
 import InteractiveData as ID
 import InteractiveData.Class (Tok(..))
 import InteractiveData.Class.Defaults (class DefaultGeneric, defaultGeneric_)
@@ -100,7 +111,7 @@ data Shape
 --------------------------------------------------------------------------------
 --- Data UI
 --------------------------------------------------------------------------------
-metaDataUi :: forall html. IDHtml html => DataUI (IDSurface html) _ _ _ _ Meta
+metaDataUi :: forall html. Html html => DataUI (IDSurface (IDHtmlT html)) _ _ _ _ Meta
 metaDataUi = ID.recordPartial
   { text: Just "Contains meta data about a painting"
   }
@@ -299,8 +310,8 @@ printUSD (USD n) = "$" <> show n
 derive instance Newtype USD _
 
 instance
-  IDHtml html =>
-  IDDataUI (IDSurface html) fm fs IntMsg IntState USD
+  Html html =>
+  IDDataUI html fm fs IntMsg IntState USD
   where
   dataUi = newtype_ (ID.TypeName "USD") dataUi
 
@@ -319,6 +330,6 @@ instance EncodeJson Shape where
 instance
   ( DefaultGeneric "Circle" Tok html fm fs msg sta Shape
   ) =>
-  IDDataUI (IDSurface html) fm fs msg sta Shape
+  IDDataUI html fm fs msg sta Shape
   where
   dataUi = defaultGeneric_ @"Circle" Tok Proxy "Shape"

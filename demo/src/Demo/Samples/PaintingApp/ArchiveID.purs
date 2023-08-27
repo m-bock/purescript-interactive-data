@@ -9,6 +9,7 @@ module Demo.Samples.PaintingApp.ArchiveID
 
 import Prelude
 
+import Chameleon (class Html)
 import Data.Argonaut (class DecodeJson, class EncodeJson)
 import Data.Char (toCharCode)
 import Data.Either (note)
@@ -88,7 +89,7 @@ archiveID opt =
 --------------------------------------------------------------------------------
 
 instance
-  IDHtml html =>
-  IDDataUI (IDSurface html) fm fs StringMsg StringState ArchiveID
+  Html html =>
+  IDDataUI html fm fs StringMsg StringState ArchiveID
   where
   dataUi = archiveID_

@@ -11,6 +11,7 @@ module Demo.Samples.PaintingApp.Color
 
 import InteractiveData.Core.Prelude
 
+import Chameleon (class Html)
 import Chameleon as C
 import Data.Argonaut (class DecodeJson, class EncodeJson)
 import Data.Int as Int
@@ -237,7 +238,7 @@ intToHexStr n =
 -------------------------------------------------------------------------------
 
 instance
-  IDHtml html =>
-  IDDataUI (IDSurface html) fm fs ColorMsg ColorState Color
+  Html html =>
+  IDDataUI html fm fs ColorMsg ColorState Color
   where
   dataUi = color_

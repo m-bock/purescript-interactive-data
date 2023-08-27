@@ -4,6 +4,7 @@ module InteractiveData.Class
   , dataUi
   ) where
 
+import Chameleon (class Html)
 import Data.Either (Either)
 import Data.Maybe (Maybe)
 import Data.Tuple (Tuple)
@@ -18,15 +19,16 @@ import InteractiveData.Class.Defaults
   , defaultVariant
   )
 import InteractiveData.Class.InitDataUI (class Init)
-import InteractiveData.Core (class IDHtml, IDSurface)
+import InteractiveData.Core (IDSurface(..))
 import InteractiveData.DataUIs (ArrayMsg, ArrayState, array_)
 import InteractiveData.DataUIs as D
+import InteractiveData.Run.Types.HtmlT (IDHtmlT(..))
 import Prelude as P
 import Type.Proxy (Proxy(..))
 
 class
   IDDataUI
-    (srf :: Type -> Type)
+    (html :: Type -> Type)
     (fm :: Type -> Type)
     (fs :: Type -> Type)
     (msg :: Type)
@@ -34,15 +36,15 @@ class
     (a :: Type)
   | a -> msg sta
   where
-  dataUi :: DataUI srf fm fs msg sta a
+  dataUi :: DataUI (IDSurface (IDHtmlT html)) fm fs msg sta a
 
 -------------------------------------------------------------------------------
 --- String
 -------------------------------------------------------------------------------
 
 instance
-  IDHtml html =>
-  IDDataUI (IDSurface html) fm fs D.StringMsg D.StringState String
+  Html html =>
+  IDDataUI html fm fs D.StringMsg D.StringState String
   where
   dataUi = D.string_
 
@@ -51,8 +53,8 @@ instance
 -------------------------------------------------------------------------------
 
 instance
-  IDHtml html =>
-  IDDataUI (IDSurface html) fm fs D.IntMsg D.IntState Int
+  Html html =>
+  IDDataUI html fm fs D.IntMsg D.IntState Int
   where
   dataUi = D.int_
 
@@ -61,8 +63,8 @@ instance
 -------------------------------------------------------------------------------
 
 instance
-  IDHtml html =>
-  IDDataUI (IDSurface html) fm fs D.BooleanMsg D.BooleanState Boolean
+  Html html =>
+  IDDataUI html fm fs D.BooleanMsg D.BooleanState Boolean
   where
   dataUi = D.boolean_
 
@@ -71,8 +73,8 @@ instance
 -------------------------------------------------------------------------------
 
 instance
-  IDHtml html =>
-  IDDataUI (IDSurface html) fm fs D.NumberMsg D.NumberState Number
+  Html html =>
+  IDDataUI html fm fs D.NumberMsg D.NumberState Number
   where
   dataUi = D.number_
 
@@ -81,8 +83,8 @@ instance
 -------------------------------------------------------------------------------
 
 instance
-  IDHtml html =>
-  IDDataUI (IDSurface html) fm fs P.Unit P.Unit P.Unit
+  Html html =>
+  IDDataUI html fm fs P.Unit P.Unit P.Unit
   where
   dataUi = D.unit_
 
@@ -93,7 +95,7 @@ instance
 instance
   ( DefaultRecord Tok html fm fs rmsg rsta row
   ) =>
-  IDDataUI (IDSurface html) fm fs (D.RecordMsg rmsg) (D.RecordState rsta) (Record row)
+  IDDataUI html fm fs (D.RecordMsg rmsg) (D.RecordState rsta) (Record row)
   where
   dataUi = defaultRecord Tok
 
@@ -104,7 +106,7 @@ instance
 instance
   ( DefaultVariant Tok html fm fs rcase rmsg rsta row
   ) =>
-  IDDataUI (IDSurface html) fm fs (D.VariantMsg rcase rmsg) (D.VariantState rsta) (Variant row)
+  IDDataUI html fm fs (D.VariantMsg rcase rmsg) (D.VariantState rsta) (Variant row)
   where
   dataUi = defaultVariant Tok
 
@@ -115,7 +117,7 @@ instance
 instance
   ( DefaultGeneric "Nothing" Tok html fm fs msg sta (Maybe a)
   ) =>
-  IDDataUI (IDSurface html) fm fs msg sta (Maybe a)
+  IDDataUI html fm fs msg sta (Maybe a)
   where
   dataUi = defaultGeneric_ @"Nothing" Tok Proxy "Maybe"
 
@@ -126,7 +128,7 @@ instance
 instance
   ( DefaultGeneric "Left" Tok html fm fs msg sta (Either a b)
   ) =>
-  IDDataUI (IDSurface html) fm fs msg sta (Either a b)
+  IDDataUI html fm fs msg sta (Either a b)
   where
   dataUi = defaultGeneric_ @"Left" Tok Proxy "Either"
 
@@ -137,7 +139,7 @@ instance
 instance
   ( DefaultGeneric "Tuple" Tok html fm fs msg sta (Tuple a b)
   ) =>
-  IDDataUI (IDSurface html) fm fs msg sta (Tuple a b)
+  IDDataUI html fm fs msg sta (Tuple a b)
   where
   dataUi = defaultGeneric_ @"Tuple" Tok Proxy "Tuple"
 
@@ -146,10 +148,10 @@ instance
 --------------------------------------------------------------------------------
 
 instance
-  ( IDHtml html
-  , IDDataUI (IDSurface html) fm fs msg sta a
+  ( Html html
+  , IDDataUI html fm fs msg sta a
   ) =>
-  IDDataUI (IDSurface html) fm fs (ArrayMsg (fm msg)) (ArrayState (fs sta)) (Array a)
+  IDDataUI html fm fs (ArrayMsg (fm msg)) (ArrayState (fs sta)) (Array a)
   where
   dataUi = array_ dataUi
 
@@ -160,8 +162,8 @@ instance
 data Tok = Tok
 
 instance
-  IDDataUI srf fm fs msg sta a =>
-  Init Tok (DataUI srf fm fs msg sta a)
+  IDDataUI html fm fs msg sta a =>
+  Init Tok (DataUI (IDSurface (IDHtmlT html)) fm fs msg sta a)
   where
-  init :: Tok -> DataUI srf fm fs msg sta a
+  init :: Tok -> DataUI (IDSurface (IDHtmlT html)) fm fs msg sta a
   init _ = dataUi

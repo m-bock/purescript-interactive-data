@@ -5,8 +5,10 @@ module InteractiveData.Class.Defaults.Record
   , defaultRecordPartial
   ) where
 
+import Chameleon (class Html)
 import DataMVC.Record.DataUI (class DataUiRecord)
 import DataMVC.Types (DataUI)
+import InteractiveData.Run.Types.HtmlT (IDHtmlT)
 import InteractiveData.Class.InitDataUI (class InitRecord, initRecord)
 import InteractiveData.Core (class IDHtml, IDSurface)
 import InteractiveData.Core.Classes.OptArgs (class OptArgs)
@@ -30,16 +32,16 @@ class
     (rsta :: Row Type)
     (row :: Row Type)
   where
-  defaultRecord :: token -> DataUI (IDSurface html) fm fs (D.RecordMsg rmsg) (D.RecordState rsta) (Record row)
+  defaultRecord :: token -> DataUI (IDSurface (IDHtmlT html)) fm fs (D.RecordMsg rmsg) (D.RecordState rsta) (Record row)
 
 instance
-  ( IDHtml html
-  , DataUiRecord datauis fm fs (IDSurface html) rmsg rsta row
+  ( Html html
+  , DataUiRecord datauis fm fs (IDSurface (IDHtmlT html)) rmsg rsta row
   , InitRecord token row datauis
   ) =>
   DefaultRecord token html fm fs rmsg rsta row
   where
-  defaultRecord :: token -> DataUI (IDSurface html) fm fs (D.RecordMsg rmsg) (D.RecordState rsta) (Record row)
+  defaultRecord :: token -> DataUI (IDSurface (IDHtmlT html)) fm fs (D.RecordMsg rmsg) (D.RecordState rsta) (Record row)
   defaultRecord token =
     let
       dataUis :: Record datauis

@@ -6,6 +6,7 @@ module Demo.Common.CompleteSample
 
 import Prelude
 
+import Chameleon (class Html)
 import Data.Argonaut (class EncodeJson)
 import Data.Argonaut.Encode.Generic (genericEncodeJson)
 import Data.Either (Either)
@@ -15,7 +16,7 @@ import Data.Show.Generic (genericShow)
 import Data.Tuple (Tuple)
 import Demo.Common.Features.Refinement.UserID (UserID, userId_)
 import Demo.Common.VariantJ (VariantJ)
-import InteractiveData (class IDHtml, DataUI, IDSurface)
+import InteractiveData (class IDHtml, DataUI, IDHtmlT, IDSurface)
 import InteractiveData as ID
 
 type Sample =
@@ -54,8 +55,8 @@ type Sample =
 
 sampleDataUi
   :: forall html
-   . IDHtml html
-  => DataUI (IDSurface html) _ _ _ _ Sample
+   . Html html
+  => DataUI (IDSurface (IDHtmlT html)) _ _ _ _ Sample
 sampleDataUi = ID.record_
   { user:
       ID.record

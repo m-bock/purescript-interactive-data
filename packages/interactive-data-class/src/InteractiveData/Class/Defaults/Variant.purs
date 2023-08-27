@@ -5,12 +5,14 @@ module InteractiveData.Class.Defaults.Variant
   , defaultVariantPartial_
   ) where
 
+import Chameleon (class Html)
 import Data.Variant (Variant)
 import DataMVC.Types (DataUI)
 import DataMVC.Variant.DataUI (class DataUiVariant)
 import InteractiveData.Class.InitDataUI (class GetInitSym, class InitRecord, initRecord)
 import InteractiveData.Core (class IDHtml, IDSurface)
 import InteractiveData.DataUIs as D
+import InteractiveData.Run.Types.HtmlT (IDHtmlT)
 import Prim.Row as Row
 import Record as Record
 import Type.Proxy (Proxy(..))
@@ -30,17 +32,19 @@ class
     (rsta :: Row Type)
     (row :: Row Type)
   where
-  defaultVariant :: token -> DataUI (IDSurface html) fm fs (D.VariantMsg rcase rmsg) (D.VariantState rsta) (Variant row)
+  defaultVariant
+    :: token -> DataUI (IDSurface (IDHtmlT html)) fm fs (D.VariantMsg rcase rmsg) (D.VariantState rsta) (Variant row)
 
 instance
-  ( IDHtml html
-  , DataUiVariant datauis fm fs (IDSurface html) initSym rcase rmsg rsta row
+  ( Html html
+  , DataUiVariant datauis fm fs (IDSurface (IDHtmlT html)) initSym rcase rmsg rsta row
   , InitRecord token row datauis
   , GetInitSym row initSym
   ) =>
   DefaultVariant token html fm fs rcase rmsg rsta row
   where
-  defaultVariant :: token -> DataUI (IDSurface html) fm fs (D.VariantMsg rcase rmsg) (D.VariantState rsta) (Variant row)
+  defaultVariant
+    :: token -> DataUI (IDSurface (IDHtmlT html)) fm fs (D.VariantMsg rcase rmsg) (D.VariantState rsta) (Variant row)
   defaultVariant token =
     let
       dataUis :: Record datauis
