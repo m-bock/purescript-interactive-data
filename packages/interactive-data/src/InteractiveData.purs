@@ -59,6 +59,9 @@ import InteractiveData.DataUIs
   , JsonMsg
   , JsonState
   , json
+
+  , TrivialCfg
+  , mkTrivialDataUi
   ) as Export
 
 import InteractiveData.Run
@@ -73,6 +76,11 @@ import InteractiveData.Run.Types.HtmlT
 import InteractiveData.Core
   ( IDSurface
   , class IDHtml
+  , DataAction(..)
+  ) as Export
+
+import InteractiveData.Core.Classes.OptArgs
+  ( class OptArgs
   ) as Export
 
 import InteractiveData.Class
@@ -121,3 +129,4 @@ import InteractiveData.App
   , AppMsg
   , AppState
   ) as Export
+

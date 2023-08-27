@@ -17,9 +17,7 @@ import Chameleon as C
 import Data.Maybe (Maybe(..))
 import Data.These (These(..))
 import InteractiveData (DataUI')
-import InteractiveData.Core (DataAction(..))
-import InteractiveData.Core.Classes.OptArgs (class OptArgs)
-import InteractiveData.TrivialDataUI (TrivialCfg, mkTrivialDataUi)
+import InteractiveData as ID
 
 {-
 <!-- END imports -->
@@ -64,19 +62,19 @@ view = \_ (Color colorValue) ->
 ## Optionally define actions
 -}
 
-actions :: Color -> Array (DataAction Color)
+actions :: Color -> Array (ID.DataAction Color)
 actions _ =
-  [ DataAction
+  [ ID.DataAction
       { label: "Red"
       , msg: This $ Color "#ff0000"
       , description: "Set the color to red"
       }
-  , DataAction
+  , ID.DataAction
       { label: "Green"
       , msg: This $ Color "#00ff00"
       , description: "Set the color to green"
       }
-  , DataAction
+  , ID.DataAction
       { label: "Blue"
       , msg: This $ Color "#0000ff"
       , description: "Set the color to blue"
@@ -91,11 +89,11 @@ actions _ =
 color
   :: forall opt html
    . Html html
-  => OptArgs (TrivialCfg ViewColorCfg Color) opt
+  => ID.OptArgs (ID.TrivialCfg ViewColorCfg Color) opt
   => opt
   -> DataUI' html Color Color Color
 color =
-  mkTrivialDataUi
+  ID.mkTrivialDataUi
     { init: Color "#000000"
     , view
     , typeName: "Color"

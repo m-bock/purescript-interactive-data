@@ -83,3 +83,8 @@ import InteractiveData.DataUIs.Json
   , JsonState
   , json
   ) as Export
+
+import InteractiveData.DataUIs.Trivial
+  ( TrivialCfg
+  , mkTrivialDataUi
+  ) as Export

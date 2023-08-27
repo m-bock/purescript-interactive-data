@@ -1,4 +1,7 @@
-module InteractiveData.TrivialDataUI where
+module InteractiveData.DataUIs.Trivial
+  ( TrivialCfg
+  , mkTrivialDataUi
+  ) where
 
 import Prelude
 
@@ -7,13 +10,11 @@ import Data.Maybe (Maybe(..))
 import DataMVC.Types (DataUI(..), DataUiInterface(..))
 import InteractiveData.Core (class IDHtml, DataAction, DataTree(..), DataTreeChildren(..), IDSurface(..))
 import InteractiveData.Core.Classes.OptArgs (class OptArgs, getAllArgs)
-import InteractiveData.Core.Util.RecordProjection (pick)
-import Prim.Row (class Union)
 import Prim.Row as Row
-import Record (delete, merge, union)
+import Record (delete, union)
 import Type.Proxy (Proxy(..))
 
-type Cfg html extraCfg a =
+type MkTrivialDataUiCfg html extraCfg a =
   { init :: a
   , view :: Record extraCfg -> a -> html a
   , typeName :: String
@@ -33,16 +34,16 @@ mkTrivialDataUi
   => OptArgs (TrivialCfg extraCfg a) opt
   => Row.Lacks "init" extraCfg
   => Row.Lacks "text" extraCfg
-  => Cfg html extraCfg a
+  => MkTrivialDataUiCfg html extraCfg a
   -> opt
   -> DataUI (IDSurface html) fm fs a a a
 mkTrivialDataUi { view, init, typeName, actions, defaultConfig } opt =
   let
-    a :: TrivialCfg () a
-    a = { init: Nothing, text: Nothing }
+    defaultConfig'' :: TrivialCfg () a
+    defaultConfig'' = { init: Nothing, text: Nothing }
 
     defaultConfig' :: TrivialCfg extraCfg a
-    defaultConfig' = a `union` defaultConfig
+    defaultConfig' = defaultConfig'' `union` defaultConfig
 
     cfg :: TrivialCfg extraCfg a
     cfg = getAllArgs defaultConfig' opt
