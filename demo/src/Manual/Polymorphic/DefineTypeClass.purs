@@ -11,7 +11,7 @@ module Manual.Polymorphic.DefineTypeClass where
 -}
 
 import Chameleon (class Html)
-import InteractiveData (class IDHtml, DataUI, DataUI', IDSurface, WrapMsg, WrapState)
+import InteractiveData (DataUI', WrapMsg, WrapState)
 import InteractiveData as D
 import InteractiveData.Class.Defaults (class DefaultRecord, defaultRecord)
 import InteractiveData.Class.InitDataUI (class Init)

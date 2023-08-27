@@ -18,7 +18,7 @@ import InteractiveData.Core (class IDHtml, IDSurface)
 import InteractiveData.DataUIs.Generic (DefaultTransform, MappingHlistToRecord(..))
 import InteractiveData.DataUIs.Variant (VariantMsg, VariantState)
 import InteractiveData.DataUIs.Variant as VUI
-import InteractiveData.Run.Types.HtmlT (IDHtmlT(..))
+import InteractiveData.Core.Types.IDHtmlT (IDHtmlT(..))
 import LabeledData.VariantLike.Generic (class GenericVariantLike)
 import LabeledData.VariantLike.Generic as LD
 import Prim.Row as Row

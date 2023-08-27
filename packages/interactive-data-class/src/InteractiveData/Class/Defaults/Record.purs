@@ -8,7 +8,7 @@ module InteractiveData.Class.Defaults.Record
 import Chameleon (class Html)
 import DataMVC.Record.DataUI (class DataUiRecord)
 import DataMVC.Types (DataUI)
-import InteractiveData.Run.Types.HtmlT (IDHtmlT)
+import InteractiveData.Core.Types.IDHtmlT (IDHtmlT)
 import InteractiveData.Class.InitDataUI (class InitRecord, initRecord)
 import InteractiveData.Core (class IDHtml, IDSurface)
 import InteractiveData.Core.Classes.OptArgs (class OptArgs)

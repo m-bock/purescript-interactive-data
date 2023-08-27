@@ -2,8 +2,6 @@ package:
   name: interactive-data-run
   dependencies:
     - chameleon
-    - chameleon-styled
-    - chameleon-transformers
     - data-mvc
     - identity
     - interactive-data-core

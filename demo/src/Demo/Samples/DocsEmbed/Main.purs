@@ -34,6 +34,7 @@ import Manual.ComposingDataUIs.Primitives as Primitives
 import Manual.ComposingDataUIs.Records as Records
 import Manual.ComposingDataUIs.Variants as Variants
 import Manual.Polymorphic as Polymorphic
+import Manual.Polymorphic.DefineTypeClass as DefineTypeClass
 import Manual.WritingDataUIs.Trivial as Trivial
 
 foreign import getQueryString :: Effect String
@@ -78,6 +79,7 @@ embeds =
 
     -- Polymorphic
     , "polymorphic" /\ app { showMenuOnStart: false } Polymorphic.demo
+    , "customClass" /\ app { showMenuOnStart: false } DefineTypeClass.demo
     ]
 
 embedKeys :: Array String

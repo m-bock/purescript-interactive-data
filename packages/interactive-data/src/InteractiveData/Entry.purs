@@ -23,7 +23,7 @@ import InteractiveData.App.WrapData as App.WrapData
 import InteractiveData.Core (IDSurface)
 import InteractiveData.Core.Classes.OptArgs (class OptArgsMixed, getAllArgsMixed)
 import InteractiveData.Run as Run
-import InteractiveData.Run.Types.HtmlT (IDHtmlT)
+import InteractiveData.Core.Types.IDHtmlT (IDHtmlT)
 import MVC.Types (UI)
 
 --------------------------------------------------------------------------------

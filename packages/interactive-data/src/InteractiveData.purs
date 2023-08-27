@@ -71,7 +71,7 @@ import InteractiveData.Run
   , getUi
   ) as Export
 
-import InteractiveData.Run.Types.HtmlT
+import InteractiveData.Core.Types.IDHtmlT
   ( IDHtmlT
   ) as Export
 

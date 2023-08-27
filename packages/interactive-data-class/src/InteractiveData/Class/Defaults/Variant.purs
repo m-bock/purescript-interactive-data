@@ -12,7 +12,7 @@ import DataMVC.Variant.DataUI (class DataUiVariant)
 import InteractiveData.Class.InitDataUI (class GetInitSym, class InitRecord, initRecord)
 import InteractiveData.Core (class IDHtml, IDSurface)
 import InteractiveData.DataUIs as D
-import InteractiveData.Run.Types.HtmlT (IDHtmlT)
+import InteractiveData.Core.Types.IDHtmlT (IDHtmlT)
 import Prim.Row as Row
 import Record as Record
 import Type.Proxy (Proxy(..))

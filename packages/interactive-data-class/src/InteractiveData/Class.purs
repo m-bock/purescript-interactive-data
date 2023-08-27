@@ -22,7 +22,7 @@ import InteractiveData.Class.InitDataUI (class Init)
 import InteractiveData.Core (IDSurface(..))
 import InteractiveData.DataUIs (ArrayMsg, ArrayState, array_)
 import InteractiveData.DataUIs as D
-import InteractiveData.Run.Types.HtmlT (IDHtmlT(..))
+import InteractiveData.Core.Types.IDHtmlT (IDHtmlT(..))
 import Prelude as P
 import Type.Proxy (Proxy(..))
 

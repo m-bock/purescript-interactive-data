@@ -16,7 +16,7 @@ import DataMVC.Types.DataUI (runDataUi)
 import InteractiveData.Core (class IDHtml, DataTree(..), IDSurface, IDViewCtx)
 import InteractiveData.Core.Types.IDSurface (runIdSurface)
 import InteractiveData.Core.Types.IDViewCtx (defaultViewCtx)
-import InteractiveData.Run.Types.HtmlT (IDHtmlT, runIDHtmlT)
+import InteractiveData.Core.Types.IDHtmlT (IDHtmlT, runIDHtmlT)
 import MVC.Types (UI)
 
 run

@@ -1,4 +1,4 @@
-module InteractiveData.Run.Types.HtmlT
+module InteractiveData.Core.Types.IDHtmlT
   ( IDHtmlT(..)
   , runIDHtmlT
   ) where
