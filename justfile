@@ -132,9 +132,9 @@ suggest-apply:
 
 # CI
 
-ci-fast: install spell format build gen build-strict dist check-git-clean
+ci-fast: spell format build gen build-strict dist
 
-ci: clean
+ci: clean install && check-git-clean
     just ci-fast
 
 ci-tmpdir:
