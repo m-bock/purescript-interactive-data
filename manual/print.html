@@ -249,7 +249,7 @@ demoInt = ID.int
   <div style="display: flex; justify-content: flex-end">
     <a href="generated/ComposingDataUIs//purescript-interactive-data/docs-embed?int">
       <img
-        style="width: 15px; border: 1px solid #979797; border-radius: 5px; padding: 3px"
+        style="width: 15px;border: 1px solid #979797;border-radius: 5px;padding: 3px"
         title="Fullscreen"
         src="/purescript-interactive-data/manual/assets/expand.svg"
         >
@@ -274,7 +274,7 @@ demoBoolean = ID.boolean_
   <div style="display: flex; justify-content: flex-end">
     <a href="generated/ComposingDataUIs//purescript-interactive-data/docs-embed?boolean">
       <img
-        style="width: 15px; border: 1px solid #979797; border-radius: 5px; padding: 3px"
+        style="width: 15px;border: 1px solid #979797;border-radius: 5px;padding: 3px"
         title="Fullscreen"
         src="/purescript-interactive-data/manual/assets/expand.svg"
         >
@@ -302,7 +302,7 @@ demoString = ID.string
   <div style="display: flex; justify-content: flex-end">
     <a href="generated/ComposingDataUIs//purescript-interactive-data/docs-embed?string">
       <img
-        style="width: 15px; border: 1px solid #979797; border-radius: 5px; padding: 3px"
+        style="width: 15px;border: 1px solid #979797;border-radius: 5px;padding: 3px"
         title="Fullscreen"
         src="/purescript-interactive-data/manual/assets/expand.svg"
         >
@@ -327,7 +327,7 @@ demoNumber = ID.number_
   <div style="display: flex; justify-content: flex-end">
     <a href="generated/ComposingDataUIs//purescript-interactive-data/docs-embed?number">
       <img
-        style="width: 15px; border: 1px solid #979797; border-radius: 5px; padding: 3px"
+        style="width: 15px;border: 1px solid #979797;border-radius: 5px;padding: 3px"
         title="Fullscreen"
         src="/purescript-interactive-data/manual/assets/expand.svg"
         >
@@ -349,21 +349,22 @@ demoNumber = ID.number_
 <!-- START imports  -->
 <details><summary>Imports for the code samples</summary>
 <pre><code class="language-hs">import Chameleon (class Html)
+import Data.Maybe (Maybe)
 import InteractiveData (DataUI')
 import InteractiveData as ID
 </code></pre>
 </details><hr><br>
 <!-- END imports -->
-<pre><code class="language-hs">demo :: forall html. Html html =&gt; DataUI' html _ _ (Array Int)
+<pre><code class="language-hs">demo :: forall html. Html html =&gt; DataUI' html _ _ (Array (Maybe Int))
 demo =
-  ID.array_ ID.int_
+  ID.array_ ID.dataUi
 </code></pre>
 <!-- START embed array 500 -->
 <div style="display:grid; grid-template-rows: auto minmax(0, 1fr); gap: 10px">
   <div style="display: flex; justify-content: flex-end">
     <a href="generated/ComposingDataUIs//purescript-interactive-data/docs-embed?array">
       <img
-        style="width: 15px; border: 1px solid #979797; border-radius: 5px; padding: 3px"
+        style="width: 15px;border: 1px solid #979797;border-radius: 5px;padding: 3px"
         title="Fullscreen"
         src="/purescript-interactive-data/manual/assets/expand.svg"
         >
@@ -417,7 +418,7 @@ demoRecord =
   <div style="display: flex; justify-content: flex-end">
     <a href="generated/ComposingDataUIs//purescript-interactive-data/docs-embed?record">
       <img
-        style="width: 15px; border: 1px solid #979797; border-radius: 5px; padding: 3px"
+        style="width: 15px;border: 1px solid #979797;border-radius: 5px;padding: 3px"
         title="Fullscreen"
         src="/purescript-interactive-data/manual/assets/expand.svg"
         >
@@ -529,7 +530,7 @@ demoVariant =
   <div style="display: flex; justify-content: flex-end">
     <a href="generated/ComposingDataUIs//purescript-interactive-data/docs-embed?variant">
       <img
-        style="width: 15px; border: 1px solid #979797; border-radius: 5px; padding: 3px"
+        style="width: 15px;border: 1px solid #979797;border-radius: 5px;padding: 3px"
         title="Fullscreen"
         src="/purescript-interactive-data/manual/assets/expand.svg"
         >
@@ -575,7 +576,7 @@ demoMaybe = ID.maybe
   <div style="display: flex; justify-content: flex-end">
     <a href="generated/ComposingDataUIs//purescript-interactive-data/docs-embed?maybe">
       <img
-        style="width: 15px; border: 1px solid #979797; border-radius: 5px; padding: 3px"
+        style="width: 15px;border: 1px solid #979797;border-radius: 5px;padding: 3px"
         title="Fullscreen"
         src="/purescript-interactive-data/manual/assets/expand.svg"
         >
@@ -606,7 +607,7 @@ demoEither = ID.either
   <div style="display: flex; justify-content: flex-end">
     <a href="generated/ComposingDataUIs//purescript-interactive-data/docs-embed?either">
       <img
-        style="width: 15px; border: 1px solid #979797; border-radius: 5px; padding: 3px"
+        style="width: 15px;border: 1px solid #979797;border-radius: 5px;padding: 3px"
         title="Fullscreen"
         src="/purescript-interactive-data/manual/assets/expand.svg"
         >
@@ -637,7 +638,7 @@ demoTuple = ID.tuple
   <div style="display: flex; justify-content: flex-end">
     <a href="generated/ComposingDataUIs//purescript-interactive-data/docs-embed?tuple">
       <img
-        style="width: 15px; border: 1px solid #979797; border-radius: 5px; padding: 3px"
+        style="width: 15px;border: 1px solid #979797;border-radius: 5px;padding: 3px"
         title="Fullscreen"
         src="/purescript-interactive-data/manual/assets/expand.svg"
         >
@@ -699,7 +700,7 @@ demoCustomType = ID.generic_ @&quot;Foo&quot; (ID.TypeName &quot;CustomADT&quot;
   <div style="display: flex; justify-content: flex-end">
     <a href="generated/ComposingDataUIs//purescript-interactive-data/docs-embed?customType">
       <img
-        style="width: 15px; border: 1px solid #979797; border-radius: 5px; padding: 3px"
+        style="width: 15px;border: 1px solid #979797;border-radius: 5px;padding: 3px"
         title="Fullscreen"
         src="/purescript-interactive-data/manual/assets/expand.svg"
         >
@@ -752,7 +753,7 @@ demo = ID.newtype_ (ID.TypeName &quot;UserId&quot;)
   <div style="display: flex; justify-content: flex-end">
     <a href="generated/ComposingDataUIs//purescript-interactive-data/docs-embed?simpleNewtype">
       <img
-        style="width: 15px; border: 1px solid #979797; border-radius: 5px; padding: 3px"
+        style="width: 15px;border: 1px solid #979797;border-radius: 5px;padding: 3px"
         title="Fullscreen"
         src="/purescript-interactive-data/manual/assets/expand.svg"
         >
@@ -829,7 +830,7 @@ demo = ID.refineDataUi
   <div style="display: flex; justify-content: flex-end">
     <a href="generated/ComposingDataUIs//purescript-interactive-data/docs-embed?validation">
       <img
-        style="width: 15px; border: 1px solid #979797; border-radius: 5px; padding: 3px"
+        style="width: 15px;border: 1px solid #979797;border-radius: 5px;padding: 3px"
         title="Fullscreen"
         src="/purescript-interactive-data/manual/assets/expand.svg"
         >
@@ -875,7 +876,7 @@ demo = ID.json
   <div style="display: flex; justify-content: flex-end">
     <a href="generated/ComposingDataUIs//purescript-interactive-data/docs-embed?jsonEscape">
       <img
-        style="width: 15px; border: 1px solid #979797; border-radius: 5px; padding: 3px"
+        style="width: 15px;border: 1px solid #979797;border-radius: 5px;padding: 3px"
         title="Fullscreen"
         src="/purescript-interactive-data/manual/assets/expand.svg"
         >
@@ -987,7 +988,7 @@ demo = color
   <div style="display: flex; justify-content: flex-end">
     <a href="generated/WritingDataUIs//purescript-interactive-data/docs-embed?trivial">
       <img
-        style="width: 15px; border: 1px solid #979797; border-radius: 5px; padding: 3px"
+        style="width: 15px;border: 1px solid #979797;border-radius: 5px;padding: 3px"
         title="Fullscreen"
         src="/purescript-interactive-data/manual/assets/expand.svg"
         >
