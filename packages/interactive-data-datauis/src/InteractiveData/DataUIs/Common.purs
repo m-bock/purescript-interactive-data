@@ -9,10 +9,11 @@ module InteractiveData.DataUIs.Common
   , mkMaybe_
   , tuple
   , tuple_
+  , unit
+  , unit_
   ) where
 
-import Prelude
-
+import Chameleon as C
 import Data.Either (Either)
 import Data.Maybe (Maybe)
 import Data.Tuple (Tuple)
@@ -21,6 +22,8 @@ import InteractiveData.Core (class IDHtml, IDSurface)
 import InteractiveData.Core.Classes.OptArgs (class OptArgs)
 import InteractiveData.DataUIs.Generic (class GenericDataUI, CfgGeneric, generic, (~))
 import InteractiveData.DataUIs.Types (TypeName(..))
+import InteractiveData.DataUIs.Trivial (TrivialCfg, mkTrivialDataUi)
+import Prelude as P
 
 --------------------------------------------------------------------------------
 --- Maybe
@@ -59,7 +62,7 @@ maybe
 maybe opt x = mkMaybe
   opt
   { "Just": x
-  , "Nothing": unit
+  , "Nothing": P.unit
   }
 
 --------------------------------------------------------------------------------
@@ -136,3 +139,28 @@ tuple
 tuple opt x y = mkTuple
   opt
   { "Tuple": x ~ y }
+
+--------------------------------------------------------------------------------
+--- Unit
+--------------------------------------------------------------------------------
+
+unit
+  :: forall opt html fm fs
+   . IDHtml html
+  => OptArgs (TrivialCfg () P.Unit) opt
+  => opt
+  -> DataUI (IDSurface html) fm fs P.Unit P.Unit P.Unit
+unit =
+  mkTrivialDataUi
+    { init: P.unit
+    , view: \_ _ -> C.noHtml
+    , typeName: "Unit"
+    , actions: \_ -> []
+    , defaultConfig: {}
+    }
+
+unit_
+  :: forall html fm fs
+   . IDHtml html
+  => DataUI (IDSurface html) fm fs P.Unit P.Unit P.Unit
+unit_ = unit {}

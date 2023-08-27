@@ -33,6 +33,7 @@ import Manual.ComposingDataUIs.Newtypes.Validation as Validation
 import Manual.ComposingDataUIs.Primitives as Primitives
 import Manual.ComposingDataUIs.Records as Records
 import Manual.ComposingDataUIs.Variants as Variants
+import Manual.Polymorphic as Polymorphic
 import Manual.WritingDataUIs.Trivial as Trivial
 
 foreign import getQueryString :: Effect String
@@ -74,6 +75,9 @@ embeds =
 
     -- Trivial Data UI
     , "trivial" /\ app { showMenuOnStart: false } Trivial.demo
+
+    -- Polymorphic
+    , "polymorphic" /\ app { showMenuOnStart: false } Polymorphic.demo
     ]
 
 embedKeys :: Array String

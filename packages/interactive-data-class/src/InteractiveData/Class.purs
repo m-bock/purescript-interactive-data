@@ -21,6 +21,7 @@ import InteractiveData.Class.InitDataUI (class Init)
 import InteractiveData.Core (class IDHtml, IDSurface)
 import InteractiveData.DataUIs (ArrayMsg, ArrayState, array_)
 import InteractiveData.DataUIs as D
+import Prelude as P
 import Type.Proxy (Proxy(..))
 
 class
@@ -74,6 +75,16 @@ instance
   IDDataUI (IDSurface html) fm fs D.NumberMsg D.NumberState Number
   where
   dataUi = D.number_
+
+-------------------------------------------------------------------------------
+--- Unit
+-------------------------------------------------------------------------------
+
+instance
+  IDHtml html =>
+  IDDataUI (IDSurface html) fm fs P.Unit P.Unit P.Unit
+  where
+  dataUi = D.unit_
 
 -------------------------------------------------------------------------------
 --- Record

@@ -83,7 +83,8 @@ viewRow _ (seg /\ tree) = withCtx \ctx ->
       tree
   in
     el.root []
-      [ putCtx ctx { path = newPath, viewMode = Inline } $
+      [ C.noHtml
+      , putCtx ctx { path = newPath, viewMode = Inline } $
           FastForwardInline.view trivialTrees
       ]
 

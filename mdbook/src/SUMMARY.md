@@ -20,7 +20,7 @@
   - [Simple Newtypes](./generated/ComposingDataUIs/SimpleNewtypes.md)
   - [Validation and Smart Constructors](./generated/ComposingDataUIs/Validation.md)
   - [Escape hatch: JSON Data UI](./generated/ComposingDataUIs/JsonEscape.md)
-- [Polymorphic Data UIs]()
+- [Polymorphic Data UIs](./generated/Polymorphic.md)
   - [Use the type class]()
   - [Define instances]()
   - [Advanced: Define your own type class]()

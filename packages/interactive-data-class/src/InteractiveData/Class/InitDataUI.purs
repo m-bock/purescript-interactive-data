@@ -176,7 +176,7 @@ class
     (initSym :: Symbol)
   | row -> initSym
 
-instance (GetInitSymRL rowlist initSym) => GetInitSym row initSym
+instance (GetInitSymRL rowlist initSym, RowToList row rowlist) => GetInitSym row initSym
 
 class
   GetInitSymRL
