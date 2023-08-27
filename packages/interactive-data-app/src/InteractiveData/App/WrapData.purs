@@ -180,9 +180,8 @@ viewInline { viewContent, typeName, text, filteredErrors } =
             , "height: 100%"
             ]
         , typeName: styleNode C.div
-            [ "font-size: 13px"
+            [ "font-size: 12px"
             , "margin-right: 10px"
-            , "font-weight: bold"
             ]
         , root: styleNode C.div
             [ "min-width: 120px"
@@ -208,9 +207,7 @@ viewInline { viewContent, typeName, text, filteredErrors } =
       typeRow :: html msg
       typeRow =
         el.typeRow []
-          [ el.typeName []
-              [ C.text typeName ]
-          , case text of
+          [ case text of
               Just text' ->
                 el.text []
                   [ C.text text' ]
@@ -232,6 +229,8 @@ viewInline { viewContent, typeName, text, filteredErrors } =
                           { onHit: Just (That $ GlobalSelectDataPath $ dataPathToStrings ctx.path)
                           , size: UIDataLabel.Large
                           }
+                      , el.typeName []
+                          [ C.text typeName ]
                       ]
               , viewSubCaption = Just typeRow
               , viewBody = Just $ C.div []

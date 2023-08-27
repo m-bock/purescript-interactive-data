@@ -15,6 +15,7 @@ import Data.FunctorWithIndex (mapWithIndex)
 import Data.Traversable (traverse)
 import DataMVC.Types.DataUI (applyWrap, runDataUi)
 import InteractiveData.App.UI.ActionButton as UIActionButton
+import InteractiveData.Core.Types.DataTree as DT
 import InteractiveData.Core.Types.IDSurface (runIdSurface)
 
 -------------------------------------------------------------------------------
