@@ -3,6 +3,8 @@ set dotenv-load
 
 export CI := env_var_or_default("CI", "false")
 
+export PARCEL_DEV := "dist-dev"
+
 export ID_URL_DEMO_EMBEDS := if CI == "true" {
   "https://thought2.github.io/purescript-interactive-data/docs-embed"
 } else {
@@ -48,7 +50,6 @@ dist-examples:
         name=$(basename $dir); \
         echo Building $name $VERSION; \
         export PREFIX="/$main_dir/$name"; \
-        rm -rf .parcel-cache
         parcel build --dist-dir dist/$main_dir/$name --public-url /$main_dir/$name/ $dir/index.html ; \
     done
 
@@ -70,8 +71,8 @@ format:
 
 dev: clean-parcel
     #!/bin/bash
-    export SAMPLE=HalogenFullscreen
-    parcel demo/src/Demo/Samples/$SAMPLE/index.html
+    export SAMPLE="sample-painting-app-halogen"
+    parcel --dist-dir {{PARCEL_DEV}} demo/static/$SAMPLE/index.html
 
 dev-example: build clean-parcel
     #!/bin/bash
@@ -80,7 +81,7 @@ dev-example: build clean-parcel
     export SAMPLE=`cat $FILE`
     echo "Starting $SAMPLE"
     rm -rf .parcel-cache
-    parcel demo/static/$SAMPLE/index.html
+    parcel --dist-dir {{PARCEL_DEV}} demo/static/$SAMPLE/index.html
 
 run-dist:
     http-server dist
@@ -172,6 +173,6 @@ dev-manual: gen-mdbook
 
     mdbook serve mdbook &
 
-    parcel demo/static/docs-embed/index.html &
+    parcel --dist-dir {{PARCEL_DEV}} demo/static/docs-embed/index.html &
 
     read -rp "Press Enter to cancel..."

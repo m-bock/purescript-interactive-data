@@ -10,6 +10,7 @@
 /output
 /.parcel-cache
 /dist
+/dist-dev
 /tmp
 /mdbook/book
 /mdbook/src/generated

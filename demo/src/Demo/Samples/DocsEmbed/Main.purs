@@ -32,6 +32,7 @@ import Manual.ComposingDataUIs.Newtypes.Validation as Validation
 import Manual.ComposingDataUIs.Primitives as Primitives
 import Manual.ComposingDataUIs.Records as Records
 import Manual.ComposingDataUIs.Variants as Variants
+import Manual.WritingDataUIs.Trivial as Trivial
 
 foreign import getQueryString :: Effect String
 
@@ -66,6 +67,9 @@ embeds =
 
     -- Json Escape
     , "jsonEscape" /\ app { showMenuOnStart: false } JsonEscape.demo
+
+    -- Trivial Data UI
+    , "trivial" /\ app { showMenuOnStart: false } Trivial.demo
     ]
 
 embedKeys :: Array String
