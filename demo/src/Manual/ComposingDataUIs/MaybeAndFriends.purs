@@ -30,9 +30,6 @@ like `Maybe`, `Either` and `Tuple`.
 
 -}
 
-dataUiMaybe1 :: forall html. Html html => DataUI' html _ _ (Maybe Int)
-dataUiMaybe1 = ID.maybe_ ID.int_
-
 demoMaybe :: forall html. Html html => DataUI' html _ _ (Maybe Int)
 demoMaybe = ID.maybe
   { text: Just "Call me maybe.." }
@@ -46,9 +43,6 @@ demoMaybe = ID.maybe
 # Either
 
 -}
-
-dataUiEither1 :: forall html. Html html => DataUI' html _ _ (Either Int String)
-dataUiEither1 = ID.either_ ID.int_ ID.string_
 
 demoEither :: forall html. Html html => DataUI' html _ _ (Either String Int)
 demoEither = ID.either
@@ -64,9 +58,6 @@ demoEither = ID.either
 # Tuple
 
 -}
-
-dataUiTuple1 :: forall html. Html html => DataUI' html _ _ (Tuple Int String)
-dataUiTuple1 = ID.tuple_ ID.int_ ID.string_
 
 demoTuple :: forall html. Html html => DataUI' html _ _ (Tuple Int String)
 demoTuple = ID.tuple
