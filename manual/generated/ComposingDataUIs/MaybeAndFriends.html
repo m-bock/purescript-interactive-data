@@ -188,10 +188,7 @@ import InteractiveData as ID
 <p>the interactive-data library provides Data UIs for common data types
 like <code>Maybe</code>, <code>Either</code> and <code>Tuple</code>.</p>
 <h1 id="maybe"><a class="header" href="#maybe">Maybe</a></h1>
-<pre><code class="language-hs">dataUiMaybe1 :: forall html. Html html =&gt; DataUI' html _ _ (Maybe Int)
-dataUiMaybe1 = ID.maybe_ ID.int_
-
-demoMaybe :: forall html. Html html =&gt; DataUI' html _ _ (Maybe Int)
+<pre><code class="language-hs">demoMaybe :: forall html. Html html =&gt; DataUI' html _ _ (Maybe Int)
 demoMaybe = ID.maybe
   { text: Just &quot;Call me maybe..&quot; }
   ID.int_
@@ -218,10 +215,7 @@ demoMaybe = ID.maybe
 </div>
 <!-- END embed -->
 <h1 id="either"><a class="header" href="#either">Either</a></h1>
-<pre><code class="language-hs">dataUiEither1 :: forall html. Html html =&gt; DataUI' html _ _ (Either Int String)
-dataUiEither1 = ID.either_ ID.int_ ID.string_
-
-demoEither :: forall html. Html html =&gt; DataUI' html _ _ (Either String Int)
+<pre><code class="language-hs">demoEither :: forall html. Html html =&gt; DataUI' html _ _ (Either String Int)
 demoEither = ID.either
   { text: Just &quot;Some Result or some Error&quot; }
   ID.string_
@@ -249,10 +243,7 @@ demoEither = ID.either
 </div>
 <!-- END embed -->
 <h1 id="tuple"><a class="header" href="#tuple">Tuple</a></h1>
-<pre><code class="language-hs">dataUiTuple1 :: forall html. Html html =&gt; DataUI' html _ _ (Tuple Int String)
-dataUiTuple1 = ID.tuple_ ID.int_ ID.string_
-
-demoTuple :: forall html. Html html =&gt; DataUI' html _ _ (Tuple Int String)
+<pre><code class="language-hs">demoTuple :: forall html. Html html =&gt; DataUI' html _ _ (Tuple Int String)
 demoTuple = ID.tuple
   { text: Just &quot;Int and String&quot; }
   ID.int_
