@@ -181,6 +181,7 @@ import InteractiveData as ID
 </code></pre>
 </details><hr><br>
 <!-- END imports -->
+<h2 id="defining-a-variant-type"><a class="header" href="#defining-a-variant-type">Defining a variant type</a></h2>
 <p>Define a variant type first:</p>
 <pre><code class="language-hs">type RemoteData = Variant
   ( notAsked :: {}
@@ -192,6 +193,7 @@ import InteractiveData as ID
   , success :: { data :: String }
   )
 </code></pre>
+<h2 id="composing-a-data-ui-for-a-variant-type"><a class="header" href="#composing-a-data-ui-for-a-variant-type">Composing a Data UI for a variant type</a></h2>
 <p>And then compose a data UI for it:</p>
 <pre><code class="language-hs">demoVariant :: forall html. Html html =&gt; DataUI' html _ _ RemoteData
 demoVariant =

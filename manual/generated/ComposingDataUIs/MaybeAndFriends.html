@@ -174,7 +174,9 @@
 <!-- END hide -->
 <!-- START imports  -->
 <details><summary>Imports for the code samples</summary>
-<pre><code class="language-hs">import Chameleon (class Html)
+<pre><code class="language-hs">import Prelude
+
+import Chameleon (class Html)
 import Data.Either (Either)
 import Data.Maybe (Maybe(..))
 import Data.Tuple (Tuple)
@@ -273,6 +275,33 @@ demoTuple = ID.tuple
     width="100%"
     height="500"
     src="/purescript-interactive-data/docs-embed?tuple"
+    >
+  </iframe>
+</div>
+<!-- END embed -->
+<h1 id="unit"><a class="header" href="#unit">Unit</a></h1>
+<p>There's even a Data UI for the unit type.
+It's useful in some cases. But it's UI is just empty.</p>
+<pre><code class="language-hs">demoUnit :: forall html. Html html =&gt; DataUI' html _ _ Unit
+demoUnit = ID.unit_
+</code></pre>
+<!-- START embed unit 200 -->
+<div style="display:grid; grid-template-rows: auto minmax(0, 1fr); gap: 10px">
+  <div style="display: flex; justify-content: flex-end">
+    <a href="/purescript-interactive-data/docs-embed?unit">
+      <img
+        style="width: 15px;border: 1px solid #979797;border-radius: 5px;padding: 3px"
+        title="Fullscreen"
+        src="/purescript-interactive-data/manual/assets/expand.svg"
+        >
+    </a>
+  </div>
+  <iframe 
+    allowtransparency="true"
+    style="border: 0px"
+    width="100%"
+    height="200"
+    src="/purescript-interactive-data/docs-embed?unit"
     >
   </iframe>
 </div>

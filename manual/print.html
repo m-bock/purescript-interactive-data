@@ -403,7 +403,7 @@ import InteractiveData as ID
   , address :: String
   }
 </code></pre>
-<h2 id="simple-data-uis-without-configuration"><a class="header" href="#simple-data-uis-without-configuration">Simple Data UIs without configuration</a></h2>
+<h2 id="create-data-ui-for-the-specific-record-type"><a class="header" href="#create-data-ui-for-the-specific-record-type">Create Data UI for the specific Record type</a></h2>
 <p>Now we can create a Data UI with the <code>record_</code> function like this:</p>
 <pre><code class="language-hs">demoRecord :: forall html. Html html =&gt; DataUI' html _ _ User
 demoRecord =
@@ -435,33 +435,6 @@ demoRecord =
   </iframe>
 </div>
 <!-- END embed -->
-<h2 id="using-the-general-dataui-function"><a class="header" href="#using-the-general-dataui-function">Using the general <code>dataUi</code> function</a></h2>
-<p>If you just want to use the default options for each field, you can also use the
-general <code>dataUi</code> function. The actual Data UI will be derived by the type.
-This example is equivalent to the <code>sampleRecord</code> value above.</p>
-<pre><code class="language-hs">sampleRecord3 :: forall html. Html html =&gt; DataUI' html _ _ User
-sampleRecord3 = ID.dataUi
-</code></pre>
-<h2 id="using-the-recordpartial_-function"><a class="header" href="#using-the-recordpartial_-function">Using the <code>recordPartial_</code> function</a></h2>
-<p>For now we have seen two ways to create Data UIs for Records.
-The first one is to use the <code>record_</code> function.
-It is the most flexible way to create a Data UI for a Record.
-But it is also the most verbose one.
-Then there is the <code>dataUi</code> function.
-It is the most concise way to create a Data UI for a Record.
-But also there is no way to configure the Data UI.</p>
-<p>Can we get the best of both worlds?</p>
-<pre><code class="language-hs">sampleRecord4 :: forall html. Html html =&gt; DataUI' html _ _ User
-sampleRecord4 =
-  ID.recordPartial_
-    { name: ID.string_
-    , age: ID.int_
-    }
-</code></pre>
-<p>As you can see, we can make use of the <code>recordPartial_</code> function.
-It is similar to the <code>record_</code> function, but it allows us to omit some fields.
-Here we have omitted the <code>address</code> field.
-The omitted fields will be derived by the defaults for the type.</p>
 <h2 id="whats-behind-the-wildcards"><a class="header" href="#whats-behind-the-wildcards">What's behind the wildcards?</a></h2>
 <p>The wildcards contain the computed types for the <code>Msg</code> and <code>State</code> of the Data UI.
 Usually you don't need to care about these types.
@@ -500,6 +473,7 @@ import InteractiveData as ID
 </code></pre>
 </details><hr><br>
 <!-- END imports -->
+<h2 id="defining-a-variant-type"><a class="header" href="#defining-a-variant-type">Defining a variant type</a></h2>
 <p>Define a variant type first:</p>
 <pre><code class="language-hs">type RemoteData = Variant
   ( notAsked :: {}
@@ -511,6 +485,7 @@ import InteractiveData as ID
   , success :: { data :: String }
   )
 </code></pre>
+<h2 id="composing-a-data-ui-for-a-variant-type"><a class="header" href="#composing-a-data-ui-for-a-variant-type">Composing a Data UI for a variant type</a></h2>
 <p>And then compose a data UI for it:</p>
 <pre><code class="language-hs">demoVariant :: forall html. Html html =&gt; DataUI' html _ _ RemoteData
 demoVariant =
@@ -552,7 +527,9 @@ demoVariant =
 <!-- END hide -->
 <!-- START imports  -->
 <details><summary>Imports for the code samples</summary>
-<pre><code class="language-hs">import Chameleon (class Html)
+<pre><code class="language-hs">import Prelude
+
+import Chameleon (class Html)
 import Data.Either (Either)
 import Data.Maybe (Maybe(..))
 import Data.Tuple (Tuple)
@@ -655,6 +632,33 @@ demoTuple = ID.tuple
   </iframe>
 </div>
 <!-- END embed -->
+<h1 id="unit"><a class="header" href="#unit">Unit</a></h1>
+<p>There's even a Data UI for the unit type.
+It's useful in some cases. But it's UI is just empty.</p>
+<pre><code class="language-hs">demoUnit :: forall html. Html html =&gt; DataUI' html _ _ Unit
+demoUnit = ID.unit_
+</code></pre>
+<!-- START embed unit 200 -->
+<div style="display:grid; grid-template-rows: auto minmax(0, 1fr); gap: 10px">
+  <div style="display: flex; justify-content: flex-end">
+    <a href="generated/ComposingDataUIs//purescript-interactive-data/docs-embed?unit">
+      <img
+        style="width: 15px;border: 1px solid #979797;border-radius: 5px;padding: 3px"
+        title="Fullscreen"
+        src="/purescript-interactive-data/manual/assets/expand.svg"
+        >
+    </a>
+  </div>
+  <iframe 
+    allowtransparency="true"
+    style="border: 0px"
+    width="100%"
+    height="200"
+    src="/purescript-interactive-data/docs-embed?unit"
+    >
+  </iframe>
+</div>
+<!-- END embed -->
 <div style="break-before: page; page-break-before: always;"></div><h1 id="data-uis-for-custom-types"><a class="header" href="#data-uis-for-custom-types">Data UIs for custom Types</a></h1>
 <!-- START hide  -->
 <!-- END hide -->
@@ -747,7 +751,6 @@ demo = ID.newtype_ (ID.TypeName &quot;UserId&quot;)
   $ ID.string
       { multiline: false }
 </code></pre>
-<p>{-</p>
 <p>The UI will look like this:</p>
 <!-- START embed simpleNewtype 500 -->
 <div style="display:grid; grid-template-rows: auto minmax(0, 1fr); gap: 10px">
@@ -917,7 +920,7 @@ import InteractiveData as ID
         , &quot;medium&quot; :: Unit
         , &quot;high&quot; :: Unit
         )
-  , extraNode :: Maybe String
+  , extraNote :: Maybe String
   }
 
 demo :: forall html. Html html =&gt; DataUI' html _ _ Sample
