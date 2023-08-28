@@ -31,7 +31,7 @@ type Sample = Array
         , "medium" :: Unit
         , "high" :: Unit
         )
-  , extraNode :: Maybe String
+  , extraNote :: Maybe String
   }
 
 demo :: forall html. Html html => DataUI' html _ _ Sample

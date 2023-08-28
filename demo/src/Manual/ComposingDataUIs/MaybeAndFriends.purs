@@ -10,6 +10,8 @@ module Manual.ComposingDataUIs.MaybeAndFriends where
 <!-- START imports -->
 -}
 
+import Prelude
+
 import Chameleon (class Html)
 import Data.Either (Either)
 import Data.Maybe (Maybe(..))
@@ -75,6 +77,20 @@ demoTuple = ID.tuple
 {-
 
 <!-- START embed tuple 500 -->
+<!-- END embed -->
+
+# Unit
+
+There's even a Data UI for the unit type.
+It's useful in some cases. But it's UI is just empty.
+-}
+
+demoUnit :: forall html. Html html => DataUI' html _ _ Unit
+demoUnit = ID.unit_
+
+{-
+
+<!-- START embed unit 200 -->
 <!-- END embed -->
 
 -}

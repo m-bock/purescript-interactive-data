@@ -35,7 +35,7 @@ type User =
 
 {-
 
-## Simple Data UIs without configuration
+## Create Data UI for the specific Record type
 Now we can create a Data UI with the `record_` function like this:
 -}
 
@@ -53,44 +53,6 @@ The UI will look like this:
 
 <!-- START embed record 500 -->
 <!-- END embed -->
-
-## Using the general `dataUi` function
-
-If you just want to use the default options for each field, you can also use the
-general `dataUi` function. The actual Data UI will be derived by the type.
-This example is equivalent to the `sampleRecord` value above.
--}
-
-sampleRecord3 :: forall html. Html html => DataUI' html _ _ User
-sampleRecord3 = ID.dataUi
-
-{-
-
-## Using the `recordPartial_` function
-
-For now we have seen two ways to create Data UIs for Records.
-The first one is to use the `record_` function.
-It is the most flexible way to create a Data UI for a Record.
-But it is also the most verbose one.
-Then there is the `dataUi` function.
-It is the most concise way to create a Data UI for a Record.
-But also there is no way to configure the Data UI.
-
-Can we get the best of both worlds?
--}
-
-sampleRecord4 :: forall html. Html html => DataUI' html _ _ User
-sampleRecord4 =
-  ID.recordPartial_
-    { name: ID.string_
-    , age: ID.int_
-    }
-
-{-
-As you can see, we can make use of the `recordPartial_` function.
-It is similar to the `record_` function, but it allows us to omit some fields.
-Here we have omitted the `address` field.
-The omitted fields will be derived by the defaults for the type.
 
 ## What's behind the wildcards?
 

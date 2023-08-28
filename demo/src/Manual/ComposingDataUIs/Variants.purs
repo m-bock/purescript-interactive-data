@@ -18,6 +18,8 @@ import InteractiveData as ID
 {-
 <!-- END imports -->
 
+## Defining a variant type
+
 Define a variant type first:
 -}
 
@@ -32,6 +34,8 @@ type RemoteData = Variant
   )
 
 {-
+
+## Composing a Data UI for a variant type
 
 And then compose a data UI for it:
 

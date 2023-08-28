@@ -51,8 +51,6 @@ demo = ID.newtype_ (ID.TypeName "UserId")
 
 {-
 
-{-
-
 The UI will look like this:
 
 <!-- START embed simpleNewtype 500 -->

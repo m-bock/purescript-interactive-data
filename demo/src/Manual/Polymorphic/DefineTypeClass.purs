@@ -30,19 +30,17 @@ class
   where
   myDataUi :: DataUI' html msg sta a
 
-type T = WrapMsg
-
 {-
 
 -}
 
-data MyTok = MyTok
+data MyToken = MyToken
 
 instance
   MyDataUI html msg sta a =>
-  Init MyTok (DataUI' html msg sta a)
+  Init MyToken (DataUI' html msg sta a)
   where
-  init :: MyTok -> DataUI' html msg sta a
+  init :: MyToken -> DataUI' html msg sta a
   init _ = myDataUi
 
 {-
@@ -59,12 +57,12 @@ instance
 -}
 
 instance
-  ( DefaultRecord MyTok html WrapMsg WrapState rmsg rsta row
+  ( DefaultRecord MyToken html WrapMsg WrapState rmsg rsta row
   , Html html
   ) =>
   MyDataUI html (D.RecordMsg rmsg) (D.RecordState rsta) (Record row)
   where
-  myDataUi = defaultRecord MyTok
+  myDataUi = defaultRecord MyToken
 
 {-
 -}

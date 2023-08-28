@@ -58,6 +58,7 @@ embeds =
     , "maybe" /\ app { showMenuOnStart: true } MaybeAndFriends.demoMaybe
     , "either" /\ app { showMenuOnStart: true } MaybeAndFriends.demoEither
     , "tuple" /\ app { showMenuOnStart: true } MaybeAndFriends.demoTuple
+    , "unit" /\ app { showMenuOnStart: true } MaybeAndFriends.demoUnit
 
     -- Variant
     , "variant" /\ app { showMenuOnStart: true } Variants.demoVariant
