@@ -16,3 +16,5 @@
 /mdbook/src/generated
 /output-es
 .env
+*.bkp
+*.dtmp
