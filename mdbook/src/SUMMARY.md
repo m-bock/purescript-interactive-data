@@ -7,9 +7,6 @@
 -----------
 
 # User Guide
-- [General Concepts]()
-  - [Standalone and Inline views]()
-  - [Fast Forwarding]()
 - [Composing Data UIs](./generated/ComposingDataUIs.md)
   - [Primitives](./generated/ComposingDataUIs/Primitives.md)
   - [Arrays](./generated/ComposingDataUIs/Arrays.md)
@@ -26,6 +23,9 @@
   - [Advanced: Define your own type class]()
 - [Writing custom Data UIs]()
   - [A trivial Data UI](./generated/WritingDataUIs/Trivial.md)
+- [General Concepts]()
+  - [Standalone and Inline views]()
+  - [Fast Forwarding]()
 - [Running Data UIs]()
   - [Halogen]()
   - [React Basic]()

@@ -8,13 +8,13 @@ export PARCEL_DEV := "dist-dev"
 export ID_URL_DEMO_EMBEDS := if CI == "true" {
   "/purescript-interactive-data/docs-embed"
 } else {
-  "http://localhost:1234/"
+  "http://localhost:1234"
 }
 
 export ID_URL_MANUAL := if CI == "true" {
   "/purescript-interactive-data/manual"
 } else {
-  "http://localhost:3000/"
+  "http://localhost:3000"
 }
 
 build:

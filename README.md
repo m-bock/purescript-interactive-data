@@ -2,9 +2,12 @@
 
 ![interactive-data](./assets/logo.svg)
 
-Composable UIs for interactive data.
+Define UIs in terms of data types.
 
 ![ci](https://github.com/thought2/purescript-interactive-data/actions/workflows/ci.yaml/badge.svg)
+&nbsp;
+![release](https://img.shields.io/github/v/tag/thought2/purescript-interactive-data?label=latest%20release)
+
 
 ## Table of Contents
 
@@ -17,6 +20,8 @@ Composable UIs for interactive data.
 - [Use cases](#use-cases)
 - [Supported types](#supported-types)
 - [Documentation](#documentation)
+  - [API docs](#api-docs)
+  - [Library Manual](#library-manual)
 - [Getting started](#getting-started)
   - [Installation](#installation)
   - [Minimal complete example](#minimal-complete-example)
@@ -38,6 +43,12 @@ Composable UIs for interactive data.
 
 ## Features
 
+- **Data centric**
+  <br>
+  _UIs are defined in terms of data types. You don't have to know much about frontends._
+- **Type safety**
+  <br>
+  _Impossible to create wrong configutations for given types._
 - **Framework agnostic**
   <br>
   _Can be embedded in any ReactBasic or Halogen app_
@@ -54,10 +65,11 @@ Composable UIs for interactive data.
 ## Use cases
 
 Any part of a web app that need to handle user input of nested structured data. E.g:
+It works best for scenarios where highest priority is correctness of data and not so much the look and feel.
 
-- Settings panel
+- Settings/Config panels
+- Controls to showcase UI components
 - Back office tools
-- User input forms
 
 ## Supported types
 
@@ -75,8 +87,13 @@ The following types are supported out of the box:
 
 ## Documentation
 
-- [API docs on Pursuit](https://pursuit.purescript.org/packages/purescript-interactive-data)
-- [Library Manual](https://thought2.github.io/purescript-interactive-data/manual)
+### API
+
+[API docs](https://pursuit.purescript.org/packages/purescript-interactive-data) are published on Pursuit.
+
+### Library Manual
+
+Learn about the core concepts of `interactive-data` in the [Library Manual](https://thought2.github.io/purescript-interactive-data/manual).
 
 ## Getting started
 
@@ -96,7 +113,7 @@ The following types are supported out of the box:
    ```
 
 3. Install a bundler, e.g.:
-   
+
    ```
    npm install --dev --save parcel
    ```
@@ -106,7 +123,9 @@ The following types are supported out of the box:
 The following example renders with `Halogen`. Have a look at the demo folder for more examples in different frameworks.
 
 <!-- START demoApp  -->
-*src/Main.purs:*
+
+_src/Main.purs:_
+
 ```hs
 module Main (main) where
 
@@ -158,12 +177,15 @@ main = do
   -- 4. Finally mount the component to the DOM
   HI.uiMountAtId "root" halogenComponent
 ```
+
 <!-- END demoApp -->
 
 We also need to create a simple html file and a `index.js` file to run the web app.
 
 <!-- START demoHtml  -->
-*static/index.html:*
+
+_static/index.html:_
+
 ```html
 <html>
   <head>
@@ -175,15 +197,19 @@ We also need to create a simple html file and a `index.js` file to run the web a
   </body>
 </html>
 ```
+
 <!-- END demoHtml -->
 
 <!-- START demoIndex  -->
-*static/index.js:*
+
+_static/index.js:_
+
 ```js
 import { main } from "../output/Main/index.js";
 
 main();
 ```
+
 <!-- END demoIndex -->
 
 ### Run

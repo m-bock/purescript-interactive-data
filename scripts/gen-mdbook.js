@@ -94,6 +94,12 @@ const postProcessFile = (source) => {
         `</div>`,
       ].join("\n");
     },
+    asset: (content, args) => {
+      const {label, url} = JSON.parse(args);
+      const urlManual = process.env.ID_URL_MANUAL;
+      const url_ = `${urlManual}/assets/${url}`
+      return `![${label}](${url_})`
+    }
   };
 
   const result = patchAll(patchData)(source);

@@ -13,12 +13,8 @@ dummy = 1
 In the following sections we will look at how to compose Data UIs.
 They'll appear in the following form:
 
-```hs
-DataUI' _ _ SomeType
-```
-
-The `DataUI'` type is a simplified version of `DataUI`.
-It hides some details which are not relevant here.
+<!-- START asset {"url": "dataui-type.svg", "label": "Data UI type"} -->
+<!-- END asset -->
 
 Most of the time the first two type parameters are omitted.
 We do so by using the `_` wildcard.
