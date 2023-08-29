@@ -20,7 +20,7 @@ Define UIs in terms of data types.
 - [Use cases](#use-cases)
 - [Supported types](#supported-types)
 - [Documentation](#documentation)
-  - [API docs](#api-docs)
+  - [API](#api)
   - [Library Manual](#library-manual)
 - [Getting started](#getting-started)
   - [Installation](#installation)
@@ -123,9 +123,7 @@ Learn about the core concepts of `interactive-data` in the [Library Manual](http
 The following example renders with `Halogen`. Have a look at the demo folder for more examples in different frameworks.
 
 <!-- START demoApp  -->
-
-_src/Main.purs:_
-
+*src/Main.purs:*
 ```hs
 module Main (main) where
 
@@ -177,15 +175,12 @@ main = do
   -- 4. Finally mount the component to the DOM
   HI.uiMountAtId "root" halogenComponent
 ```
-
 <!-- END demoApp -->
 
 We also need to create a simple html file and a `index.js` file to run the web app.
 
 <!-- START demoHtml  -->
-
-_static/index.html:_
-
+*static/index.html:*
 ```html
 <html>
   <head>
@@ -197,19 +192,15 @@ _static/index.html:_
   </body>
 </html>
 ```
-
 <!-- END demoHtml -->
 
 <!-- START demoIndex  -->
-
-_static/index.js:_
-
+*static/index.js:*
 ```js
 import { main } from "../output/Main/index.js";
 
 main();
 ```
-
 <!-- END demoIndex -->
 
 ### Run
