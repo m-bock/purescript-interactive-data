@@ -4,7 +4,7 @@ import Prelude
 
 import Chameleon as C
 import Chameleon.Styled (class HtmlStyled, decl, declWith, styleNode)
-import Data.Array (intercalate, intersperse)
+import Data.Array (intersperse)
 
 view :: forall html msg. HtmlStyled html => html msg
 view =
