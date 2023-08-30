@@ -100,6 +100,29 @@ const patchData = {
     const url_ = `${urlManual}/assets/${url}`;
     return `![${label}](${url_})`;
   },
+
+  features: (content) => {
+    return `
+- **Data centric**
+  <br>
+  _UIs are defined in terms of data types. You don't have to know much about frontends._
+- **Type safety**
+  <br>
+  _Impossible to create wrong configutations for given types._
+- **Framework agnostic**
+  <br>
+  _Can be embedded in any ReactBasic or Halogen app_
+- **Configurable**
+  <br>
+  _UIs for each data type can be customized_
+- **Extensible**
+  <br>
+  _UIs for any data type can be written in a simple MVC architecture_
+- **Data validation**
+  <br>
+  _Data is validated on the fly and errors are displayed_
+    `.trim();
+  },
 };
 
 export const idPatchMd = (source) => patchAll(patchData)(source);

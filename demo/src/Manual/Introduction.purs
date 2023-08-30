@@ -23,4 +23,9 @@ This manual is intended to be a comprehensive guide to the `interactive-data` li
 
 At the top of each chapter you'll find all the imports needed to run the examples in that chapter.
 Every example in this manual is __type checked__ and thus guaranteed to compile. 
+
+## Features
+<!-- START features  -->
+<!-- END features -->
+
 -}

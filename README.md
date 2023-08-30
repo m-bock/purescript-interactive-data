@@ -43,6 +43,7 @@ Define UIs in terms of data types.
 
 ## Features
 
+<!-- START features  -->
 - **Data centric**
   <br>
   _UIs are defined in terms of data types. You don't have to know much about frontends._
@@ -61,6 +62,8 @@ Define UIs in terms of data types.
 - **Data validation**
   <br>
   _Data is validated on the fly and errors are displayed_
+<!-- END features -->
+
 
 ## Use cases
 
