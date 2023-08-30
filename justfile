@@ -12,7 +12,7 @@ export ID_URL_DEMO_EMBEDS := if CI == "true" {
 }
 
 export ID_URL_MANUAL := if CI == "true" {
-  "/"
+  "/manual"
 } else {
   "http://localhost:3000"
 }
@@ -44,7 +44,7 @@ pre-push: ci-fast ci-tmpdir
 clean-dist:
     rm -rf dist
 
-dist: clean-dist dist-mdbook dist-examples
+dist: clean-dist dist-mdbook dist-examples dist-landing
 
 dist-examples:
     #!/usr/bin/env bash
@@ -58,8 +58,11 @@ dist-examples:
         parcel build --dist-dir dist/$name --public-url /$name/ $dir/index.html ; \
     done
 
+dist-landing:
+    parcel build --dist-dir dist/ demo/static/landing/index.html
+
 dist-mdbook:
-    mdbook build mdbook --dest-dir ../dist
+    mdbook build mdbook --dest-dir ../dist/manual
 
 serve-dist:
     http-server dist

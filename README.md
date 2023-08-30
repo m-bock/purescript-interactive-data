@@ -96,7 +96,7 @@ The following types are supported out of the box:
 
 ### Library Manual
 
-Learn about the core concepts of `interactive-data` in the [Library Manual](https://interactive-data.app).
+Learn about the core concepts of `interactive-data` in the [Library Manual](https://interactive-data.app/manual).
 
 ## Getting started
 
