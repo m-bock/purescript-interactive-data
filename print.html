@@ -180,6 +180,29 @@
 <h2 id="code-examples"><a class="header" href="#code-examples">Code examples</a></h2>
 <p>At the top of each chapter you'll find all the imports needed to run the examples in that chapter.
 Every example in this manual is <strong>type checked</strong> and thus guaranteed to compile. </p>
+<h2 id="features"><a class="header" href="#features">Features</a></h2>
+<!-- START features  -->
+<ul>
+<li><strong>Data centric</strong>
+<br>
+<em>UIs are defined in terms of data types. You don't have to know much about frontends.</em></li>
+<li><strong>Type safety</strong>
+<br>
+<em>Impossible to create wrong configutations for given types.</em></li>
+<li><strong>Framework agnostic</strong>
+<br>
+<em>Can be embedded in any ReactBasic or Halogen app</em></li>
+<li><strong>Configurable</strong>
+<br>
+<em>UIs for each data type can be customized</em></li>
+<li><strong>Extensible</strong>
+<br>
+<em>UIs for any data type can be written in a simple MVC architecture</em></li>
+<li><strong>Data validation</strong>
+<br>
+<em>Data is validated on the fly and errors are displayed</em></li>
+</ul>
+<!-- END features -->
 <div style="break-before: page; page-break-before: always;"></div><!-- START hide  -->
 <!-- END hide -->
 <h1 id="installation"><a class="header" href="#installation">Installation</a></h1>
@@ -210,7 +233,7 @@ you need an adapter that will turn it into framework specific views.</p>
 <p>In the following sections we will look at how to compose Data UIs.
 They'll appear in the following form:</p>
 <!-- START asset {"url": "dataui-type.svg", "label": "Data UI type"} -->
-<p><img src="generated//purescript-interactive-data/manual/assets/dataui-type.svg" alt="Data UI type" /></p>
+<p><img src="generated///assets/dataui-type.svg" alt="Data UI type" /></p>
 <!-- END asset -->
 <p>Most of the time the first two type parameters are omitted.
 We do so by using the <code>_</code> wildcard.
@@ -246,11 +269,11 @@ demoInt = ID.int
 <!-- START embed int 300 -->
 <div style="display:grid; grid-template-rows: auto minmax(0, 1fr); gap: 10px">
   <div style="display: flex; justify-content: flex-end">
-    <a href="generated/ComposingDataUIs//purescript-interactive-data/docs-embed?int">
+    <a href="generated/ComposingDataUIs//docs-embed?int">
       <img
         style="width: 15px;border: 1px solid #979797;border-radius: 5px;padding: 3px"
         title="Fullscreen"
-        src="/purescript-interactive-data/manual/assets/expand.svg"
+        src="//assets/expand.svg"
         >
     </a>
   </div>
@@ -259,7 +282,7 @@ demoInt = ID.int
     style="border: 0px"
     width="100%"
     height="300"
-    src="/purescript-interactive-data/docs-embed?int"
+    src="/docs-embed?int"
     >
   </iframe>
 </div>
@@ -271,11 +294,11 @@ demoBoolean = ID.boolean_
 <!-- START embed boolean 300 -->
 <div style="display:grid; grid-template-rows: auto minmax(0, 1fr); gap: 10px">
   <div style="display: flex; justify-content: flex-end">
-    <a href="generated/ComposingDataUIs//purescript-interactive-data/docs-embed?boolean">
+    <a href="generated/ComposingDataUIs//docs-embed?boolean">
       <img
         style="width: 15px;border: 1px solid #979797;border-radius: 5px;padding: 3px"
         title="Fullscreen"
-        src="/purescript-interactive-data/manual/assets/expand.svg"
+        src="//assets/expand.svg"
         >
     </a>
   </div>
@@ -284,7 +307,7 @@ demoBoolean = ID.boolean_
     style="border: 0px"
     width="100%"
     height="300"
-    src="/purescript-interactive-data/docs-embed?boolean"
+    src="/docs-embed?boolean"
     >
   </iframe>
 </div>
@@ -299,11 +322,11 @@ demoString = ID.string
 <!-- START embed string 300 -->
 <div style="display:grid; grid-template-rows: auto minmax(0, 1fr); gap: 10px">
   <div style="display: flex; justify-content: flex-end">
-    <a href="generated/ComposingDataUIs//purescript-interactive-data/docs-embed?string">
+    <a href="generated/ComposingDataUIs//docs-embed?string">
       <img
         style="width: 15px;border: 1px solid #979797;border-radius: 5px;padding: 3px"
         title="Fullscreen"
-        src="/purescript-interactive-data/manual/assets/expand.svg"
+        src="//assets/expand.svg"
         >
     </a>
   </div>
@@ -312,7 +335,7 @@ demoString = ID.string
     style="border: 0px"
     width="100%"
     height="300"
-    src="/purescript-interactive-data/docs-embed?string"
+    src="/docs-embed?string"
     >
   </iframe>
 </div>
@@ -324,11 +347,11 @@ demoNumber = ID.number_
 <!-- START embed number -->
 <div style="display:grid; grid-template-rows: auto minmax(0, 1fr); gap: 10px">
   <div style="display: flex; justify-content: flex-end">
-    <a href="generated/ComposingDataUIs//purescript-interactive-data/docs-embed?number">
+    <a href="generated/ComposingDataUIs//docs-embed?number">
       <img
         style="width: 15px;border: 1px solid #979797;border-radius: 5px;padding: 3px"
         title="Fullscreen"
-        src="/purescript-interactive-data/manual/assets/expand.svg"
+        src="//assets/expand.svg"
         >
     </a>
   </div>
@@ -337,7 +360,7 @@ demoNumber = ID.number_
     style="border: 0px"
     width="100%"
     height="315"
-    src="/purescript-interactive-data/docs-embed?number"
+    src="/docs-embed?number"
     >
   </iframe>
 </div>
@@ -362,11 +385,11 @@ demo =
 <!-- START embed array 500 -->
 <div style="display:grid; grid-template-rows: auto minmax(0, 1fr); gap: 10px">
   <div style="display: flex; justify-content: flex-end">
-    <a href="generated/ComposingDataUIs//purescript-interactive-data/docs-embed?array">
+    <a href="generated/ComposingDataUIs//docs-embed?array">
       <img
         style="width: 15px;border: 1px solid #979797;border-radius: 5px;padding: 3px"
         title="Fullscreen"
-        src="/purescript-interactive-data/manual/assets/expand.svg"
+        src="//assets/expand.svg"
         >
     </a>
   </div>
@@ -375,7 +398,7 @@ demo =
     style="border: 0px"
     width="100%"
     height="500"
-    src="/purescript-interactive-data/docs-embed?array"
+    src="/docs-embed?array"
     >
   </iframe>
 </div>
@@ -416,11 +439,11 @@ demoRecord =
 <!-- START embed record 500 -->
 <div style="display:grid; grid-template-rows: auto minmax(0, 1fr); gap: 10px">
   <div style="display: flex; justify-content: flex-end">
-    <a href="generated/ComposingDataUIs//purescript-interactive-data/docs-embed?record">
+    <a href="generated/ComposingDataUIs//docs-embed?record">
       <img
         style="width: 15px;border: 1px solid #979797;border-radius: 5px;padding: 3px"
         title="Fullscreen"
-        src="/purescript-interactive-data/manual/assets/expand.svg"
+        src="//assets/expand.svg"
         >
     </a>
   </div>
@@ -429,7 +452,7 @@ demoRecord =
     style="border: 0px"
     width="100%"
     height="500"
-    src="/purescript-interactive-data/docs-embed?record"
+    src="/docs-embed?record"
     >
   </iframe>
 </div>
@@ -503,11 +526,11 @@ demoVariant =
 <!-- START embed variant 500 -->
 <div style="display:grid; grid-template-rows: auto minmax(0, 1fr); gap: 10px">
   <div style="display: flex; justify-content: flex-end">
-    <a href="generated/ComposingDataUIs//purescript-interactive-data/docs-embed?variant">
+    <a href="generated/ComposingDataUIs//docs-embed?variant">
       <img
         style="width: 15px;border: 1px solid #979797;border-radius: 5px;padding: 3px"
         title="Fullscreen"
-        src="/purescript-interactive-data/manual/assets/expand.svg"
+        src="//assets/expand.svg"
         >
     </a>
   </div>
@@ -516,7 +539,7 @@ demoVariant =
     style="border: 0px"
     width="100%"
     height="500"
-    src="/purescript-interactive-data/docs-embed?variant"
+    src="/docs-embed?variant"
     >
   </iframe>
 </div>
@@ -548,11 +571,11 @@ demoMaybe = ID.maybe
 <!-- START embed maybe 500 -->
 <div style="display:grid; grid-template-rows: auto minmax(0, 1fr); gap: 10px">
   <div style="display: flex; justify-content: flex-end">
-    <a href="generated/ComposingDataUIs//purescript-interactive-data/docs-embed?maybe">
+    <a href="generated/ComposingDataUIs//docs-embed?maybe">
       <img
         style="width: 15px;border: 1px solid #979797;border-radius: 5px;padding: 3px"
         title="Fullscreen"
-        src="/purescript-interactive-data/manual/assets/expand.svg"
+        src="//assets/expand.svg"
         >
     </a>
   </div>
@@ -561,7 +584,7 @@ demoMaybe = ID.maybe
     style="border: 0px"
     width="100%"
     height="500"
-    src="/purescript-interactive-data/docs-embed?maybe"
+    src="/docs-embed?maybe"
     >
   </iframe>
 </div>
@@ -576,11 +599,11 @@ demoEither = ID.either
 <!-- START embed either 500 -->
 <div style="display:grid; grid-template-rows: auto minmax(0, 1fr); gap: 10px">
   <div style="display: flex; justify-content: flex-end">
-    <a href="generated/ComposingDataUIs//purescript-interactive-data/docs-embed?either">
+    <a href="generated/ComposingDataUIs//docs-embed?either">
       <img
         style="width: 15px;border: 1px solid #979797;border-radius: 5px;padding: 3px"
         title="Fullscreen"
-        src="/purescript-interactive-data/manual/assets/expand.svg"
+        src="//assets/expand.svg"
         >
     </a>
   </div>
@@ -589,7 +612,7 @@ demoEither = ID.either
     style="border: 0px"
     width="100%"
     height="500"
-    src="/purescript-interactive-data/docs-embed?either"
+    src="/docs-embed?either"
     >
   </iframe>
 </div>
@@ -604,11 +627,11 @@ demoTuple = ID.tuple
 <!-- START embed tuple 500 -->
 <div style="display:grid; grid-template-rows: auto minmax(0, 1fr); gap: 10px">
   <div style="display: flex; justify-content: flex-end">
-    <a href="generated/ComposingDataUIs//purescript-interactive-data/docs-embed?tuple">
+    <a href="generated/ComposingDataUIs//docs-embed?tuple">
       <img
         style="width: 15px;border: 1px solid #979797;border-radius: 5px;padding: 3px"
         title="Fullscreen"
-        src="/purescript-interactive-data/manual/assets/expand.svg"
+        src="//assets/expand.svg"
         >
     </a>
   </div>
@@ -617,7 +640,7 @@ demoTuple = ID.tuple
     style="border: 0px"
     width="100%"
     height="500"
-    src="/purescript-interactive-data/docs-embed?tuple"
+    src="/docs-embed?tuple"
     >
   </iframe>
 </div>
@@ -631,11 +654,11 @@ demoUnit = ID.unit_
 <!-- START embed unit 200 -->
 <div style="display:grid; grid-template-rows: auto minmax(0, 1fr); gap: 10px">
   <div style="display: flex; justify-content: flex-end">
-    <a href="generated/ComposingDataUIs//purescript-interactive-data/docs-embed?unit">
+    <a href="generated/ComposingDataUIs//docs-embed?unit">
       <img
         style="width: 15px;border: 1px solid #979797;border-radius: 5px;padding: 3px"
         title="Fullscreen"
-        src="/purescript-interactive-data/manual/assets/expand.svg"
+        src="//assets/expand.svg"
         >
     </a>
   </div>
@@ -644,7 +667,7 @@ demoUnit = ID.unit_
     style="border: 0px"
     width="100%"
     height="200"
-    src="/purescript-interactive-data/docs-embed?unit"
+    src="/docs-embed?unit"
     >
   </iframe>
 </div>
@@ -693,11 +716,11 @@ demoCustomType = ID.generic_ @&quot;Foo&quot; (ID.TypeName &quot;CustomADT&quot;
 <!-- START embed customType 500 -->
 <div style="display:grid; grid-template-rows: auto minmax(0, 1fr); gap: 10px">
   <div style="display: flex; justify-content: flex-end">
-    <a href="generated/ComposingDataUIs//purescript-interactive-data/docs-embed?customType">
+    <a href="generated/ComposingDataUIs//docs-embed?customType">
       <img
         style="width: 15px;border: 1px solid #979797;border-radius: 5px;padding: 3px"
         title="Fullscreen"
-        src="/purescript-interactive-data/manual/assets/expand.svg"
+        src="//assets/expand.svg"
         >
     </a>
   </div>
@@ -706,7 +729,7 @@ demoCustomType = ID.generic_ @&quot;Foo&quot; (ID.TypeName &quot;CustomADT&quot;
     style="border: 0px"
     width="100%"
     height="500"
-    src="/purescript-interactive-data/docs-embed?customType"
+    src="/docs-embed?customType"
     >
   </iframe>
 </div>
@@ -745,11 +768,11 @@ demo = ID.newtype_ (ID.TypeName &quot;UserId&quot;)
 <!-- START embed simpleNewtype 500 -->
 <div style="display:grid; grid-template-rows: auto minmax(0, 1fr); gap: 10px">
   <div style="display: flex; justify-content: flex-end">
-    <a href="generated/ComposingDataUIs//purescript-interactive-data/docs-embed?simpleNewtype">
+    <a href="generated/ComposingDataUIs//docs-embed?simpleNewtype">
       <img
         style="width: 15px;border: 1px solid #979797;border-radius: 5px;padding: 3px"
         title="Fullscreen"
-        src="/purescript-interactive-data/manual/assets/expand.svg"
+        src="//assets/expand.svg"
         >
     </a>
   </div>
@@ -758,7 +781,7 @@ demo = ID.newtype_ (ID.TypeName &quot;UserId&quot;)
     style="border: 0px"
     width="100%"
     height="500"
-    src="/purescript-interactive-data/docs-embed?simpleNewtype"
+    src="/docs-embed?simpleNewtype"
     >
   </iframe>
 </div>
@@ -822,11 +845,11 @@ demo = ID.refineDataUi
 <!-- START embed validation 500 -->
 <div style="display:grid; grid-template-rows: auto minmax(0, 1fr); gap: 10px">
   <div style="display: flex; justify-content: flex-end">
-    <a href="generated/ComposingDataUIs//purescript-interactive-data/docs-embed?validation">
+    <a href="generated/ComposingDataUIs//docs-embed?validation">
       <img
         style="width: 15px;border: 1px solid #979797;border-radius: 5px;padding: 3px"
         title="Fullscreen"
-        src="/purescript-interactive-data/manual/assets/expand.svg"
+        src="//assets/expand.svg"
         >
     </a>
   </div>
@@ -835,7 +858,7 @@ demo = ID.refineDataUi
     style="border: 0px"
     width="100%"
     height="500"
-    src="/purescript-interactive-data/docs-embed?validation"
+    src="/docs-embed?validation"
     >
   </iframe>
 </div>
@@ -868,11 +891,11 @@ demo = ID.json
 <!-- START embed jsonEscape 500 -->
 <div style="display:grid; grid-template-rows: auto minmax(0, 1fr); gap: 10px">
   <div style="display: flex; justify-content: flex-end">
-    <a href="generated/ComposingDataUIs//purescript-interactive-data/docs-embed?jsonEscape">
+    <a href="generated/ComposingDataUIs//docs-embed?jsonEscape">
       <img
         style="width: 15px;border: 1px solid #979797;border-radius: 5px;padding: 3px"
         title="Fullscreen"
-        src="/purescript-interactive-data/manual/assets/expand.svg"
+        src="//assets/expand.svg"
         >
     </a>
   </div>
@@ -881,7 +904,7 @@ demo = ID.json
     style="border: 0px"
     width="100%"
     height="500"
-    src="/purescript-interactive-data/docs-embed?jsonEscape"
+    src="/docs-embed?jsonEscape"
     >
   </iframe>
 </div>
@@ -919,11 +942,11 @@ demo = ID.dataUi
 <!-- START embed polymorphic 500 -->
 <div style="display:grid; grid-template-rows: auto minmax(0, 1fr); gap: 10px">
   <div style="display: flex; justify-content: flex-end">
-    <a href="generated//purescript-interactive-data/docs-embed?polymorphic">
+    <a href="generated//docs-embed?polymorphic">
       <img
         style="width: 15px;border: 1px solid #979797;border-radius: 5px;padding: 3px"
         title="Fullscreen"
-        src="/purescript-interactive-data/manual/assets/expand.svg"
+        src="//assets/expand.svg"
         >
     </a>
   </div>
@@ -932,7 +955,7 @@ demo = ID.dataUi
     style="border: 0px"
     width="100%"
     height="500"
-    src="/purescript-interactive-data/docs-embed?polymorphic"
+    src="/docs-embed?polymorphic"
     >
   </iframe>
 </div>
@@ -1031,11 +1054,11 @@ demo = color
 <!-- START embed trivial 300 -->
 <div style="display:grid; grid-template-rows: auto minmax(0, 1fr); gap: 10px">
   <div style="display: flex; justify-content: flex-end">
-    <a href="generated/WritingDataUIs//purescript-interactive-data/docs-embed?trivial">
+    <a href="generated/WritingDataUIs//docs-embed?trivial">
       <img
         style="width: 15px;border: 1px solid #979797;border-radius: 5px;padding: 3px"
         title="Fullscreen"
-        src="/purescript-interactive-data/manual/assets/expand.svg"
+        src="//assets/expand.svg"
         >
     </a>
   </div>
@@ -1044,7 +1067,7 @@ demo = color
     style="border: 0px"
     width="100%"
     height="300"
-    src="/purescript-interactive-data/docs-embed?trivial"
+    src="/docs-embed?trivial"
     >
   </iframe>
 </div>
