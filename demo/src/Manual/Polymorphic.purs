@@ -1,5 +1,5 @@
 {-
-# Data UIs for Arrays
+# Polymorphic Data UIs
 
 <!-- START hide -->
 -}
