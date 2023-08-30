@@ -1,0 +1,1175 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>interactive-data library manual</title>
+        <meta name="robots" content="noindex" />
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "coal" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var html = document.querySelector('html');
+            var sidebar = null;
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="generated/Introduction.html">Introduction</a></li><li class="chapter-item expanded affix "><a href="generated/Installation.html">Installation</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">User Guide</li><li class="chapter-item expanded "><a href="generated/ComposingDataUIs.html"><strong aria-hidden="true">1.</strong> Composing Data UIs</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="generated/ComposingDataUIs/Primitives.html"><strong aria-hidden="true">1.1.</strong> Primitives</a></li><li class="chapter-item expanded "><a href="generated/ComposingDataUIs/Arrays.html"><strong aria-hidden="true">1.2.</strong> Arrays</a></li><li class="chapter-item expanded "><a href="generated/ComposingDataUIs/Records.html"><strong aria-hidden="true">1.3.</strong> Records</a></li><li class="chapter-item expanded "><a href="generated/ComposingDataUIs/Variants.html"><strong aria-hidden="true">1.4.</strong> Variants</a></li><li class="chapter-item expanded "><a href="generated/ComposingDataUIs/MaybeAndFriends.html"><strong aria-hidden="true">1.5.</strong> Maybe and friends</a></li><li class="chapter-item expanded "><a href="generated/ComposingDataUIs/CustomTypes.html"><strong aria-hidden="true">1.6.</strong> Custom Types</a></li><li class="chapter-item expanded "><a href="generated/ComposingDataUIs/SimpleNewtypes.html"><strong aria-hidden="true">1.7.</strong> Simple Newtypes</a></li><li class="chapter-item expanded "><a href="generated/ComposingDataUIs/Validation.html"><strong aria-hidden="true">1.8.</strong> Validation and Smart Constructors</a></li><li class="chapter-item expanded "><a href="generated/ComposingDataUIs/JsonEscape.html"><strong aria-hidden="true">1.9.</strong> Escape hatch: JSON Data UI</a></li></ol></li><li class="chapter-item expanded "><a href="generated/Polymorphic.html"><strong aria-hidden="true">2.</strong> Polymorphic Data UIs</a></li><li><ol class="section"><li class="chapter-item expanded "><div><strong aria-hidden="true">2.1.</strong> Use the type class</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">2.2.</strong> Define instances</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">2.3.</strong> Advanced: Define your own type class</div></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.</strong> Writing custom Data UIs</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="generated/WritingDataUIs/Trivial.html"><strong aria-hidden="true">3.1.</strong> A trivial Data UI</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">4.</strong> General Concepts</div></li><li><ol class="section"><li class="chapter-item expanded "><div><strong aria-hidden="true">4.1.</strong> Standalone and Inline views</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">4.2.</strong> Fast Forwarding</div></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">5.</strong> Running Data UIs</div></li><li><ol class="section"><li class="chapter-item expanded "><div><strong aria-hidden="true">5.1.</strong> Halogen</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">5.2.</strong> React Basic</div></li></ol></li><li class="chapter-item expanded "><li class="part-title">Appendix</li><li class="chapter-item expanded "><a href="generated/Glossary.html"><strong aria-hidden="true">6.</strong> Glossary</a></li><li class="chapter-item expanded "><div><strong aria-hidden="true">7.</strong> Conceptional background</div></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">interactive-data library manual</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/thought2/purescript-interactive-data" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <!-- START hide  -->
+<!-- END hide -->
+<p><em>It's still a work in progress, some sections are still missing.</em></p>
+<h1 id="introduction"><a class="header" href="#introduction">Introduction</a></h1>
+<p>This manual is intended to be a comprehensive guide to the <code>interactive-data</code> library.</p>
+<h2 id="what-is-interactive-data"><a class="header" href="#what-is-interactive-data">What is <code>interactive-data</code>?</a></h2>
+<p><code>interactive-data</code> is a library for creating type safe UIs for data editing.</p>
+<h2 id="code-examples"><a class="header" href="#code-examples">Code examples</a></h2>
+<p>At the top of each chapter you'll find all the imports needed to run the examples in that chapter.
+Every example in this manual is <strong>type checked</strong> and thus guaranteed to compile. </p>
+<div style="break-before: page; page-break-before: always;"></div><!-- START hide  -->
+<!-- END hide -->
+<h1 id="installation"><a class="header" href="#installation">Installation</a></h1>
+<ol>
+<li>
+<p>Install the library</p>
+<pre><code>spago install interactive-data
+</code></pre>
+</li>
+<li>
+<p>Install a virtual dom implementation, e.g. one of the following:</p>
+<pre><code>spago install chameleon-halogen
+spago install chameleon-react-basic
+</code></pre>
+<p>This is needed because <code>interactive-data</code> itself is framework-agnostic.
+And if you want to run the resulting UI or embed it in an existing app,
+you need an adapter that will turn it into framework specific views.</p>
+</li>
+<li>
+<p>Install a bundler, e.g.:</p>
+<pre><code>npm install --dev --save parcel
+</code></pre>
+</li>
+</ol>
+<div style="break-before: page; page-break-before: always;"></div><!-- START hide  -->
+<!-- END hide -->
+<h1 id="composing-data-uis"><a class="header" href="#composing-data-uis">Composing Data UIs</a></h1>
+<p>In the following sections we will look at how to compose Data UIs.
+They'll appear in the following form:</p>
+<!-- START asset {"url": "dataui-type.svg", "label": "Data UI type"} -->
+<p><img src="generated//purescript-interactive-data/manual/assets/dataui-type.svg" alt="Data UI type" /></p>
+<!-- END asset -->
+<p>Most of the time the first two type parameters are omitted.
+We do so by using the <code>_</code> wildcard.
+It may be helpful o disable the wildcard warnings and completions in your editor.
+Refer to the manual of the PureScript IDE plugin for more information.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="data-uis-for-primitive-types"><a class="header" href="#data-uis-for-primitive-types">Data UIs for Primitive types</a></h1>
+<!-- START hide  -->
+<!-- END hide -->
+<!-- START imports  -->
+<details><summary>Imports for the code samples</summary>
+<pre><code class="language-hs">import Chameleon (class Html)
+import Data.Maybe (Maybe(..))
+import InteractiveData (DataUI')
+import InteractiveData as ID
+</code></pre>
+</details><hr><br>
+<!-- END imports -->
+<p>The interactive-data library provides Data UIs for the following PureScript primitives:</p>
+<ul>
+<li>Integers</li>
+<li>Booleans</li>
+<li>Strings</li>
+<li>Numbers</li>
+</ul>
+<h2 id="int"><a class="header" href="#int">Int</a></h2>
+<pre><code class="language-hs">demoInt :: forall html. Html html =&gt; DataUI' html _ _ Int
+demoInt = ID.int
+  { text: Just &quot;The age of a person&quot;
+  , min: 0
+  , max: 120
+  }
+</code></pre>
+<!-- START embed int 300 -->
+<div style="display:grid; grid-template-rows: auto minmax(0, 1fr); gap: 10px">
+  <div style="display: flex; justify-content: flex-end">
+    <a href="generated/ComposingDataUIs//purescript-interactive-data/docs-embed?int">
+      <img
+        style="width: 15px;border: 1px solid #979797;border-radius: 5px;padding: 3px"
+        title="Fullscreen"
+        src="/purescript-interactive-data/manual/assets/expand.svg"
+        >
+    </a>
+  </div>
+  <iframe 
+    allowtransparency="true"
+    style="border: 0px"
+    width="100%"
+    height="300"
+    src="/purescript-interactive-data/docs-embed?int"
+    >
+  </iframe>
+</div>
+<!-- END embed -->
+<h2 id="boolean"><a class="header" href="#boolean">Boolean</a></h2>
+<pre><code class="language-hs">demoBoolean :: forall html. Html html =&gt; DataUI' html _ _ Boolean
+demoBoolean = ID.boolean_
+</code></pre>
+<!-- START embed boolean 300 -->
+<div style="display:grid; grid-template-rows: auto minmax(0, 1fr); gap: 10px">
+  <div style="display: flex; justify-content: flex-end">
+    <a href="generated/ComposingDataUIs//purescript-interactive-data/docs-embed?boolean">
+      <img
+        style="width: 15px;border: 1px solid #979797;border-radius: 5px;padding: 3px"
+        title="Fullscreen"
+        src="/purescript-interactive-data/manual/assets/expand.svg"
+        >
+    </a>
+  </div>
+  <iframe 
+    allowtransparency="true"
+    style="border: 0px"
+    width="100%"
+    height="300"
+    src="/purescript-interactive-data/docs-embed?boolean"
+    >
+  </iframe>
+</div>
+<!-- END embed -->
+<h2 id="string"><a class="header" href="#string">String</a></h2>
+<pre><code class="language-hs">demoString :: forall html. Html html =&gt; DataUI' html _ _ String
+demoString = ID.string
+  { text: Just &quot;The name of a person&quot;
+  , maxLength: Just 100
+  }
+</code></pre>
+<!-- START embed string 300 -->
+<div style="display:grid; grid-template-rows: auto minmax(0, 1fr); gap: 10px">
+  <div style="display: flex; justify-content: flex-end">
+    <a href="generated/ComposingDataUIs//purescript-interactive-data/docs-embed?string">
+      <img
+        style="width: 15px;border: 1px solid #979797;border-radius: 5px;padding: 3px"
+        title="Fullscreen"
+        src="/purescript-interactive-data/manual/assets/expand.svg"
+        >
+    </a>
+  </div>
+  <iframe 
+    allowtransparency="true"
+    style="border: 0px"
+    width="100%"
+    height="300"
+    src="/purescript-interactive-data/docs-embed?string"
+    >
+  </iframe>
+</div>
+<!-- END embed -->
+<h2 id="number"><a class="header" href="#number">Number</a></h2>
+<pre><code class="language-hs">demoNumber :: forall html. Html html =&gt; DataUI' html _ _ Number
+demoNumber = ID.number_
+</code></pre>
+<!-- START embed number -->
+<div style="display:grid; grid-template-rows: auto minmax(0, 1fr); gap: 10px">
+  <div style="display: flex; justify-content: flex-end">
+    <a href="generated/ComposingDataUIs//purescript-interactive-data/docs-embed?number">
+      <img
+        style="width: 15px;border: 1px solid #979797;border-radius: 5px;padding: 3px"
+        title="Fullscreen"
+        src="/purescript-interactive-data/manual/assets/expand.svg"
+        >
+    </a>
+  </div>
+  <iframe 
+    allowtransparency="true"
+    style="border: 0px"
+    width="100%"
+    height="315"
+    src="/purescript-interactive-data/docs-embed?number"
+    >
+  </iframe>
+</div>
+<!-- END embed -->
+<div style="break-before: page; page-break-before: always;"></div><h1 id="data-uis-for-arrays"><a class="header" href="#data-uis-for-arrays">Data UIs for Arrays</a></h1>
+<!-- START hide  -->
+<!-- END hide -->
+<!-- START imports  -->
+<details><summary>Imports for the code samples</summary>
+<pre><code class="language-hs">import Chameleon (class Html)
+import Data.Maybe (Maybe(..))
+import InteractiveData (DataUI')
+import InteractiveData as ID
+</code></pre>
+</details><hr><br>
+<!-- END imports -->
+<pre><code class="language-hs">demo :: forall html. Html html =&gt; DataUI' html _ _ (Array Int)
+demo =
+  ID.array { init: Just [ 1, 2, 3 ] }
+    ID.int_
+</code></pre>
+<!-- START embed array 500 -->
+<div style="display:grid; grid-template-rows: auto minmax(0, 1fr); gap: 10px">
+  <div style="display: flex; justify-content: flex-end">
+    <a href="generated/ComposingDataUIs//purescript-interactive-data/docs-embed?array">
+      <img
+        style="width: 15px;border: 1px solid #979797;border-radius: 5px;padding: 3px"
+        title="Fullscreen"
+        src="/purescript-interactive-data/manual/assets/expand.svg"
+        >
+    </a>
+  </div>
+  <iframe 
+    allowtransparency="true"
+    style="border: 0px"
+    width="100%"
+    height="500"
+    src="/purescript-interactive-data/docs-embed?array"
+    >
+  </iframe>
+</div>
+<!-- END embed -->
+<div style="break-before: page; page-break-before: always;"></div><h1 id="data-uis-for-record-types"><a class="header" href="#data-uis-for-record-types">Data UIs for Record types</a></h1>
+<!-- START hide  -->
+<!-- END hide -->
+<!-- START imports  -->
+<details><summary>Imports for the code samples</summary>
+<pre><code class="language-hs">import Chameleon (class Html)
+import Data.Maybe (Maybe(..))
+import InteractiveData (DataUI')
+import InteractiveData as ID
+</code></pre>
+</details><hr><br>
+<!-- END imports -->
+<p>In the previous chapter we've seen how to create Data UIs for primitive data types.</p>
+<p>Data UIs can also be created for Records. </p>
+<h2 id="defining-a-record-type-alias"><a class="header" href="#defining-a-record-type-alias">Defining a Record type alias</a></h2>
+<p>Let's assume we have defined the following Record type alias:</p>
+<pre><code class="language-hs">type User =
+  { name :: String
+  , age :: Int
+  , address :: String
+  }
+</code></pre>
+<h2 id="create-data-ui-for-the-specific-record-type"><a class="header" href="#create-data-ui-for-the-specific-record-type">Create Data UI for the specific Record type</a></h2>
+<p>Now we can create a Data UI with the <code>record_</code> function like this:</p>
+<pre><code class="language-hs">demoRecord :: forall html. Html html =&gt; DataUI' html _ _ User
+demoRecord =
+  ID.record_
+    { name: ID.string_
+    , age: ID.int_
+    , address: ID.string { text: Just &quot;Street and zip code&quot; }
+    }
+</code></pre>
+<p>The UI will look like this:</p>
+<!-- START embed record 500 -->
+<div style="display:grid; grid-template-rows: auto minmax(0, 1fr); gap: 10px">
+  <div style="display: flex; justify-content: flex-end">
+    <a href="generated/ComposingDataUIs//purescript-interactive-data/docs-embed?record">
+      <img
+        style="width: 15px;border: 1px solid #979797;border-radius: 5px;padding: 3px"
+        title="Fullscreen"
+        src="/purescript-interactive-data/manual/assets/expand.svg"
+        >
+    </a>
+  </div>
+  <iframe 
+    allowtransparency="true"
+    style="border: 0px"
+    width="100%"
+    height="500"
+    src="/purescript-interactive-data/docs-embed?record"
+    >
+  </iframe>
+</div>
+<!-- END embed -->
+<h2 id="whats-behind-the-wildcards"><a class="header" href="#whats-behind-the-wildcards">What's behind the wildcards?</a></h2>
+<p>The wildcards contain the computed types for the <code>Msg</code> and <code>State</code> of the Data UI.
+Usually you don't need to care about these types.
+The larger your Data UIs get, the more nested these types will be.
+So generally it's a good idea to either use the wildcards
+or keep the final UI composition in a <code>let</code> or <code>where</code> clause.</p>
+<p>Here's the same example as above, but with the wildcards expanded:</p>
+<pre><code class="language-hs">sampleRecord5
+  :: forall html
+   . Html html
+  =&gt; DataUI' html
+       ( ID.RecordMsg
+           ( address :: ID.WrapMsg ID.StringMsg
+           , age :: ID.WrapMsg ID.IntMsg
+           , name :: ID.WrapMsg ID.StringMsg
+           )
+       )
+       ( ID.RecordState
+           ( address :: ID.WrapState ID.StringState
+           , age :: ID.WrapState ID.IntState
+           , name :: ID.WrapState ID.StringState
+           )
+       )
+       User
+sampleRecord5 = ID.dataUi
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="data-uis-for-variant-types"><a class="header" href="#data-uis-for-variant-types">Data UIs for Variant types</a></h1>
+<!-- START hide  -->
+<!-- END hide -->
+<!-- START imports  -->
+<details><summary>Imports for the code samples</summary>
+<pre><code class="language-hs">import Chameleon (class Html)
+import Data.Variant (Variant)
+import InteractiveData (DataUI')
+import InteractiveData as ID
+</code></pre>
+</details><hr><br>
+<!-- END imports -->
+<h2 id="defining-a-variant-type"><a class="header" href="#defining-a-variant-type">Defining a variant type</a></h2>
+<p>Define a variant type first:</p>
+<pre><code class="language-hs">type RemoteData = Variant
+  ( notAsked :: {}
+  , loading :: { progress :: Number }
+  , failed ::
+      { errorMessage :: String
+      , errorCode :: Int
+      }
+  , success :: { data :: String }
+  )
+</code></pre>
+<h2 id="composing-a-data-ui-for-a-variant-type"><a class="header" href="#composing-a-data-ui-for-a-variant-type">Composing a Data UI for a variant type</a></h2>
+<p>And then compose a data UI for it:</p>
+<pre><code class="language-hs">demoVariant :: forall html. Html html =&gt; DataUI' html _ _ RemoteData
+demoVariant =
+  ID.variant_ @&quot;notAsked&quot;
+    { notAsked: ID.record_ {}
+    , loading: ID.record_ { progress: ID.number_ }
+    , failed:
+        ID.record_
+          { errorMessage: ID.string_
+          , errorCode: ID.int_
+          }
+    , success: ID.record_ { data: ID.string_ }
+    }
+</code></pre>
+<p>The UI will look like this:</p>
+<!-- START embed variant 500 -->
+<div style="display:grid; grid-template-rows: auto minmax(0, 1fr); gap: 10px">
+  <div style="display: flex; justify-content: flex-end">
+    <a href="generated/ComposingDataUIs//purescript-interactive-data/docs-embed?variant">
+      <img
+        style="width: 15px;border: 1px solid #979797;border-radius: 5px;padding: 3px"
+        title="Fullscreen"
+        src="/purescript-interactive-data/manual/assets/expand.svg"
+        >
+    </a>
+  </div>
+  <iframe 
+    allowtransparency="true"
+    style="border: 0px"
+    width="100%"
+    height="500"
+    src="/purescript-interactive-data/docs-embed?variant"
+    >
+  </iframe>
+</div>
+<!-- END embed -->
+<div style="break-before: page; page-break-before: always;"></div><h1 id="maybe-and-friends"><a class="header" href="#maybe-and-friends">Maybe and friends</a></h1>
+<!-- START hide  -->
+<!-- END hide -->
+<!-- START imports  -->
+<details><summary>Imports for the code samples</summary>
+<pre><code class="language-hs">import Prelude
+
+import Chameleon (class Html)
+import Data.Either (Either)
+import Data.Maybe (Maybe(..))
+import Data.Tuple (Tuple)
+import InteractiveData (DataUI')
+import InteractiveData as ID
+</code></pre>
+</details><hr><br>
+<!-- END imports -->
+<p>the interactive-data library provides Data UIs for common data types
+like <code>Maybe</code>, <code>Either</code> and <code>Tuple</code>.</p>
+<h1 id="maybe"><a class="header" href="#maybe">Maybe</a></h1>
+<pre><code class="language-hs">demoMaybe :: forall html. Html html =&gt; DataUI' html _ _ (Maybe Int)
+demoMaybe = ID.maybe
+  { text: Just &quot;Call me maybe..&quot; }
+  ID.int_
+</code></pre>
+<!-- START embed maybe 500 -->
+<div style="display:grid; grid-template-rows: auto minmax(0, 1fr); gap: 10px">
+  <div style="display: flex; justify-content: flex-end">
+    <a href="generated/ComposingDataUIs//purescript-interactive-data/docs-embed?maybe">
+      <img
+        style="width: 15px;border: 1px solid #979797;border-radius: 5px;padding: 3px"
+        title="Fullscreen"
+        src="/purescript-interactive-data/manual/assets/expand.svg"
+        >
+    </a>
+  </div>
+  <iframe 
+    allowtransparency="true"
+    style="border: 0px"
+    width="100%"
+    height="500"
+    src="/purescript-interactive-data/docs-embed?maybe"
+    >
+  </iframe>
+</div>
+<!-- END embed -->
+<h1 id="either"><a class="header" href="#either">Either</a></h1>
+<pre><code class="language-hs">demoEither :: forall html. Html html =&gt; DataUI' html _ _ (Either String Int)
+demoEither = ID.either
+  { text: Just &quot;Some Result or some Error&quot; }
+  ID.string_
+  ID.int_
+</code></pre>
+<!-- START embed either 500 -->
+<div style="display:grid; grid-template-rows: auto minmax(0, 1fr); gap: 10px">
+  <div style="display: flex; justify-content: flex-end">
+    <a href="generated/ComposingDataUIs//purescript-interactive-data/docs-embed?either">
+      <img
+        style="width: 15px;border: 1px solid #979797;border-radius: 5px;padding: 3px"
+        title="Fullscreen"
+        src="/purescript-interactive-data/manual/assets/expand.svg"
+        >
+    </a>
+  </div>
+  <iframe 
+    allowtransparency="true"
+    style="border: 0px"
+    width="100%"
+    height="500"
+    src="/purescript-interactive-data/docs-embed?either"
+    >
+  </iframe>
+</div>
+<!-- END embed -->
+<h1 id="tuple"><a class="header" href="#tuple">Tuple</a></h1>
+<pre><code class="language-hs">demoTuple :: forall html. Html html =&gt; DataUI' html _ _ (Tuple Int String)
+demoTuple = ID.tuple
+  { text: Just &quot;Int and String&quot; }
+  ID.int_
+  ID.string_
+</code></pre>
+<!-- START embed tuple 500 -->
+<div style="display:grid; grid-template-rows: auto minmax(0, 1fr); gap: 10px">
+  <div style="display: flex; justify-content: flex-end">
+    <a href="generated/ComposingDataUIs//purescript-interactive-data/docs-embed?tuple">
+      <img
+        style="width: 15px;border: 1px solid #979797;border-radius: 5px;padding: 3px"
+        title="Fullscreen"
+        src="/purescript-interactive-data/manual/assets/expand.svg"
+        >
+    </a>
+  </div>
+  <iframe 
+    allowtransparency="true"
+    style="border: 0px"
+    width="100%"
+    height="500"
+    src="/purescript-interactive-data/docs-embed?tuple"
+    >
+  </iframe>
+</div>
+<!-- END embed -->
+<h1 id="unit"><a class="header" href="#unit">Unit</a></h1>
+<p>There's even a Data UI for the unit type.
+It's useful in some cases. But it's UI is just empty.</p>
+<pre><code class="language-hs">demoUnit :: forall html. Html html =&gt; DataUI' html _ _ Unit
+demoUnit = ID.unit_
+</code></pre>
+<!-- START embed unit 200 -->
+<div style="display:grid; grid-template-rows: auto minmax(0, 1fr); gap: 10px">
+  <div style="display: flex; justify-content: flex-end">
+    <a href="generated/ComposingDataUIs//purescript-interactive-data/docs-embed?unit">
+      <img
+        style="width: 15px;border: 1px solid #979797;border-radius: 5px;padding: 3px"
+        title="Fullscreen"
+        src="/purescript-interactive-data/manual/assets/expand.svg"
+        >
+    </a>
+  </div>
+  <iframe 
+    allowtransparency="true"
+    style="border: 0px"
+    width="100%"
+    height="200"
+    src="/purescript-interactive-data/docs-embed?unit"
+    >
+  </iframe>
+</div>
+<!-- END embed -->
+<div style="break-before: page; page-break-before: always;"></div><h1 id="data-uis-for-custom-types"><a class="header" href="#data-uis-for-custom-types">Data UIs for custom Types</a></h1>
+<!-- START hide  -->
+<!-- END hide -->
+<!-- START imports  -->
+<details><summary>Imports for the code samples</summary>
+<pre><code class="language-hs">import Prelude
+
+import Chameleon (class Html)
+import Data.Generic.Rep (class Generic)
+import Data.Show.Generic (genericShow)
+import InteractiveData (DataUI', (~))
+import InteractiveData as ID
+</code></pre>
+</details><hr><br>
+<!-- END imports -->
+<h2 id="defining-a-custom-data-type"><a class="header" href="#defining-a-custom-data-type">Defining a custom data type</a></h2>
+<p>Define a custom data type first:</p>
+<pre><code class="language-hs">data CustomADT
+  = Foo Int
+  | Bar String
+  | Baz Number Boolean
+  | Qux
+</code></pre>
+<h2 id="deriving-instances"><a class="header" href="#deriving-instances">Deriving Instances</a></h2>
+<p>Then derive <code>Generic</code> and <code>Show</code> instances for it:</p>
+<pre><code class="language-hs">derive instance Generic CustomADT _
+
+instance Show CustomADT where
+  show = genericShow
+</code></pre>
+<h2 id="composing-a-data-ui-for-the-type"><a class="header" href="#composing-a-data-ui-for-the-type">Composing a Data UI for the type</a></h2>
+<p>And then compose a data UI for it:</p>
+<pre><code class="language-hs">demoCustomType :: forall html. Html html =&gt; DataUI' html _ _ CustomADT
+demoCustomType = ID.generic_ @&quot;Foo&quot; (ID.TypeName &quot;CustomADT&quot;)
+  { &quot;Foo&quot;: ID.int_
+  , &quot;Bar&quot;: ID.string_
+  , &quot;Baz&quot;: ID.number_ ~ ID.boolean_
+  , &quot;Qux&quot;: unit
+  }
+</code></pre>
+<p>The UI will look like this:</p>
+<!-- START embed customType 500 -->
+<div style="display:grid; grid-template-rows: auto minmax(0, 1fr); gap: 10px">
+  <div style="display: flex; justify-content: flex-end">
+    <a href="generated/ComposingDataUIs//purescript-interactive-data/docs-embed?customType">
+      <img
+        style="width: 15px;border: 1px solid #979797;border-radius: 5px;padding: 3px"
+        title="Fullscreen"
+        src="/purescript-interactive-data/manual/assets/expand.svg"
+        >
+    </a>
+  </div>
+  <iframe 
+    allowtransparency="true"
+    style="border: 0px"
+    width="100%"
+    height="500"
+    src="/purescript-interactive-data/docs-embed?customType"
+    >
+  </iframe>
+</div>
+<!-- END embed -->
+<div style="break-before: page; page-break-before: always;"></div><h1 id="simple-newtypes-with-public-constructors"><a class="header" href="#simple-newtypes-with-public-constructors">Simple Newtypes with Public Constructors</a></h1>
+<!-- START hide  -->
+<!-- END hide -->
+<!-- START imports  -->
+<details><summary>Imports for the code samples</summary>
+<pre><code class="language-hs">import Prelude
+
+import Chameleon (class Html)
+import Data.Newtype (class Newtype)
+import InteractiveData (DataUI')
+import InteractiveData as ID
+</code></pre>
+</details><hr><br>
+<!-- END imports -->
+<h2 id="define-a-newtype-around-a-type"><a class="header" href="#define-a-newtype-around-a-type">Define a newtype around a type</a></h2>
+<pre><code class="language-hs">newtype UserId = UserId String
+</code></pre>
+<h2 id="define-instances"><a class="header" href="#define-instances">Define Instances</a></h2>
+<pre><code class="language-hs">derive instance Newtype UserId _
+
+instance Show UserId where
+  show (UserId s) = &quot;(UserId &quot; &lt;&gt; show s &lt;&gt; &quot;)&quot;
+</code></pre>
+<h2 id="composing-a-data-ui-for-the-newtype"><a class="header" href="#composing-a-data-ui-for-the-newtype">Composing a Data UI for the newtype</a></h2>
+<p>And then compose a data UI for it:</p>
+<pre><code class="language-hs">demo :: forall html. Html html =&gt; DataUI' html _ _ UserId
+demo = ID.newtype_ (ID.TypeName &quot;UserId&quot;)
+  $ ID.string
+      { multiline: false }
+</code></pre>
+<p>The UI will look like this:</p>
+<!-- START embed simpleNewtype 500 -->
+<div style="display:grid; grid-template-rows: auto minmax(0, 1fr); gap: 10px">
+  <div style="display: flex; justify-content: flex-end">
+    <a href="generated/ComposingDataUIs//purescript-interactive-data/docs-embed?simpleNewtype">
+      <img
+        style="width: 15px;border: 1px solid #979797;border-radius: 5px;padding: 3px"
+        title="Fullscreen"
+        src="/purescript-interactive-data/manual/assets/expand.svg"
+        >
+    </a>
+  </div>
+  <iframe 
+    allowtransparency="true"
+    style="border: 0px"
+    width="100%"
+    height="500"
+    src="/purescript-interactive-data/docs-embed?simpleNewtype"
+    >
+  </iframe>
+</div>
+<!-- END embed -->
+<div style="break-before: page; page-break-before: always;"></div><h1 id="validation-and-smart-constructors"><a class="header" href="#validation-and-smart-constructors">Validation and Smart Constructors</a></h1>
+<!-- START hide  -->
+<!-- END hide -->
+<!-- START imports  -->
+<details><summary>Imports for the code samples</summary>
+<pre><code class="language-hs">import Prelude
+
+import Chameleon (class Html)
+import Data.Array.NonEmpty as NonEmptyArray
+import Data.Bifunctor (lmap)
+import Data.Either (Either(..))
+import Data.String.Regex (Regex)
+import Data.String.Regex as Regex
+import Data.String.Regex.Flags (noFlags)
+import Data.String.Regex.Unsafe (unsafeRegex)
+import InteractiveData (DataUI', DataResult)
+import InteractiveData as ID
+</code></pre>
+</details><hr><br>
+<!-- END imports -->
+<h2 id="define-a-newtype-around-a-type-1"><a class="header" href="#define-a-newtype-around-a-type-1">Define a newtype around a type</a></h2>
+<pre><code class="language-hs">newtype UserId = UserId String
+</code></pre>
+<p>Create a smart constructor for the newtype:</p>
+<pre><code class="language-hs">mkUserId :: String -&gt; Either String UserId
+mkUserId candidate =
+  if Regex.test regexUserId candidate then
+    Right (UserId candidate)
+  else
+    Left &quot;Invalid UserId. Must be 8 characters long and only contain lowercase letters and numbers.&quot;
+  where
+  regexUserId :: Regex
+  regexUserId = unsafeRegex &quot;^[a-z0-9]{8}$&quot; noFlags
+</code></pre>
+<h2 id="define-instances-1"><a class="header" href="#define-instances-1">Define Instances</a></h2>
+<pre><code class="language-hs">instance Show UserId where
+  show (UserId s) = &quot;(unsafeFromString &quot; &lt;&gt; show s &lt;&gt; &quot;)&quot;
+</code></pre>
+<h2 id="composing-a-data-ui-for-the-newtype-1"><a class="header" href="#composing-a-data-ui-for-the-newtype-1">Composing a Data UI for the newtype</a></h2>
+<p>And then compose a data UI for it:</p>
+<pre><code class="language-hs">demo :: forall html. Html html =&gt; DataUI' html _ _ UserId
+demo = ID.refineDataUi
+  { typeName: &quot;UserId&quot;
+  , refine
+  , unrefine
+  }
+  (ID.string { multiline: false })
+
+  where
+  refine :: String -&gt; DataResult UserId
+  refine = mkUserId &gt;&gt;&gt; lmap (NonEmptyArray.singleton &lt;&lt;&lt; ID.mkDataError)
+
+  unrefine :: UserId -&gt; String
+  unrefine (UserId s) = s
+</code></pre>
+<p>The UI will look like this:</p>
+<!-- START embed validation 500 -->
+<div style="display:grid; grid-template-rows: auto minmax(0, 1fr); gap: 10px">
+  <div style="display: flex; justify-content: flex-end">
+    <a href="generated/ComposingDataUIs//purescript-interactive-data/docs-embed?validation">
+      <img
+        style="width: 15px;border: 1px solid #979797;border-radius: 5px;padding: 3px"
+        title="Fullscreen"
+        src="/purescript-interactive-data/manual/assets/expand.svg"
+        >
+    </a>
+  </div>
+  <iframe 
+    allowtransparency="true"
+    style="border: 0px"
+    width="100%"
+    height="500"
+    src="/purescript-interactive-data/docs-embed?validation"
+    >
+  </iframe>
+</div>
+<!-- END embed -->
+<div style="break-before: page; page-break-before: always;"></div><h1 id="escape-hatch-json-data-ui"><a class="header" href="#escape-hatch-json-data-ui">Escape hatch: JSON Data UI</a></h1>
+<!-- START hide  -->
+<!-- END hide -->
+<!-- START imports  -->
+<details><summary>Imports for the code samples</summary>
+<pre><code class="language-hs">import Chameleon (class Html)
+import Data.Map (Map)
+import Data.Map as Map
+import Data.Tuple.Nested ((/\))
+import InteractiveData (DataUI')
+import InteractiveData as ID
+</code></pre>
+</details><hr><br>
+<!-- END imports -->
+<pre><code class="language-hs">demo :: forall html. Html html =&gt; DataUI' html _ _ (Map Int String)
+demo = ID.json
+  { init: Map.fromFoldable
+      [ 1 /\ &quot;one&quot;
+      , 2 /\ &quot;two&quot;
+      , 3 /\ &quot;three&quot;
+      ]
+  , typeName: &quot;Map Int String&quot;
+  }
+</code></pre>
+<p>The UI will look like this:</p>
+<!-- START embed jsonEscape 500 -->
+<div style="display:grid; grid-template-rows: auto minmax(0, 1fr); gap: 10px">
+  <div style="display: flex; justify-content: flex-end">
+    <a href="generated/ComposingDataUIs//purescript-interactive-data/docs-embed?jsonEscape">
+      <img
+        style="width: 15px;border: 1px solid #979797;border-radius: 5px;padding: 3px"
+        title="Fullscreen"
+        src="/purescript-interactive-data/manual/assets/expand.svg"
+        >
+    </a>
+  </div>
+  <iframe 
+    allowtransparency="true"
+    style="border: 0px"
+    width="100%"
+    height="500"
+    src="/purescript-interactive-data/docs-embed?jsonEscape"
+    >
+  </iframe>
+</div>
+<!-- END embed -->
+<div style="break-before: page; page-break-before: always;"></div><h1 id="data-uis-for-arrays-1"><a class="header" href="#data-uis-for-arrays-1">Data UIs for Arrays</a></h1>
+<!-- START hide  -->
+<!-- END hide -->
+<!-- START imports  -->
+<details><summary>Imports for the code samples</summary>
+<pre><code class="language-hs">import Prelude
+
+import Chameleon (class Html)
+import Data.Maybe (Maybe)
+import Data.Variant (Variant)
+import InteractiveData (DataUI')
+import InteractiveData as ID
+</code></pre>
+</details><hr><br>
+<!-- END imports -->
+<pre><code class="language-hs">type Sample = Array
+  { task :: String
+  , done :: Boolean
+  , priority ::
+      Variant
+        ( &quot;low&quot; :: Unit
+        , &quot;medium&quot; :: Unit
+        , &quot;high&quot; :: Unit
+        )
+  , extraNote :: Maybe String
+  }
+
+demo :: forall html. Html html =&gt; DataUI' html _ _ Sample
+demo = ID.dataUi
+</code></pre>
+<!-- START embed polymorphic 500 -->
+<div style="display:grid; grid-template-rows: auto minmax(0, 1fr); gap: 10px">
+  <div style="display: flex; justify-content: flex-end">
+    <a href="generated//purescript-interactive-data/docs-embed?polymorphic">
+      <img
+        style="width: 15px;border: 1px solid #979797;border-radius: 5px;padding: 3px"
+        title="Fullscreen"
+        src="/purescript-interactive-data/manual/assets/expand.svg"
+        >
+    </a>
+  </div>
+  <iframe 
+    allowtransparency="true"
+    style="border: 0px"
+    width="100%"
+    height="500"
+    src="/purescript-interactive-data/docs-embed?polymorphic"
+    >
+  </iframe>
+</div>
+<!-- END embed -->
+<div style="break-before: page; page-break-before: always;"></div><h1 id="data-uis-for-custom-types-1"><a class="header" href="#data-uis-for-custom-types-1">Data UIs for custom Types</a></h1>
+<!-- START hide  -->
+<!-- END hide -->
+<!-- START imports  -->
+<details><summary>Imports for the code samples</summary>
+<pre><code class="language-hs">import Prelude
+
+import Chameleon (class Html)
+import Chameleon as C
+import Data.Maybe (Maybe(..))
+import Data.These (These(..))
+import InteractiveData (DataUI')
+import InteractiveData as ID
+</code></pre>
+</details><hr><br>
+<!-- END imports -->
+<h2 id="define-a-custom-type"><a class="header" href="#define-a-custom-type">Define a custom type</a></h2>
+<pre><code class="language-hs">newtype Color = Color String
+
+instance Show Color where
+  show (Color s) = &quot;(Color &quot; &lt;&gt; show s &lt;&gt; &quot;)&quot;
+</code></pre>
+<h2 id="define-a-view"><a class="header" href="#define-a-view">Define a view</a></h2>
+<pre><code class="language-hs">type ViewColorCfg =
+  ( extraConfig1 :: String
+  , extraConfig2 :: Int
+  )
+
+view
+  :: forall html
+   . Html html
+  =&gt; { | ViewColorCfg }
+  -&gt; Color
+  -&gt; html Color
+view = \_ (Color colorValue) -&gt;
+  C.div_
+    [ C.input
+        [ C.type_ &quot;color&quot;
+        , C.onInput Color
+        , C.value colorValue
+        ]
+    , C.text &quot; Example of a custom Data UI, pick a color!&quot;
+    ]
+</code></pre>
+<h2 id="optionally-define-actions"><a class="header" href="#optionally-define-actions">Optionally define actions</a></h2>
+<pre><code class="language-hs">actions :: Color -&gt; Array (ID.DataAction Color)
+actions _ =
+  [ ID.DataAction
+      { label: &quot;Red&quot;
+      , msg: This $ Color &quot;#ff0000&quot;
+      , description: &quot;Set the color to red&quot;
+      }
+  , ID.DataAction
+      { label: &quot;Green&quot;
+      , msg: This $ Color &quot;#00ff00&quot;
+      , description: &quot;Set the color to green&quot;
+      }
+  , ID.DataAction
+      { label: &quot;Blue&quot;
+      , msg: This $ Color &quot;#0000ff&quot;
+      , description: &quot;Set the color to blue&quot;
+      }
+  ]
+</code></pre>
+<h2 id="define-the-data-ui"><a class="header" href="#define-the-data-ui">Define the Data UI</a></h2>
+<pre><code class="language-hs">color
+  :: forall opt html
+   . Html html
+  =&gt; ID.OptArgs (ID.TrivialCfg ViewColorCfg Color) opt
+  =&gt; opt
+  -&gt; DataUI' html Color Color Color
+color =
+  ID.mkTrivialDataUi
+    { init: Color &quot;#000000&quot;
+    , view
+    , typeName: &quot;Color&quot;
+    , actions
+    , defaultConfig: { extraConfig1: &quot;a&quot;, extraConfig2: 0 }
+    }
+</code></pre>
+<h2 id="use-the-data-ui"><a class="header" href="#use-the-data-ui">Use the Data UI</a></h2>
+<pre><code class="language-hs">demo
+  :: forall html
+   . Html html
+  =&gt; DataUI' html Color Color Color
+demo = color
+  { text: Just &quot;Hello!&quot;
+  , extraConfig1: &quot;a&quot;
+  , extraConfig2: 1
+  }
+</code></pre>
+<!-- START embed trivial 300 -->
+<div style="display:grid; grid-template-rows: auto minmax(0, 1fr); gap: 10px">
+  <div style="display: flex; justify-content: flex-end">
+    <a href="generated/WritingDataUIs//purescript-interactive-data/docs-embed?trivial">
+      <img
+        style="width: 15px;border: 1px solid #979797;border-radius: 5px;padding: 3px"
+        title="Fullscreen"
+        src="/purescript-interactive-data/manual/assets/expand.svg"
+        >
+    </a>
+  </div>
+  <iframe 
+    allowtransparency="true"
+    style="border: 0px"
+    width="100%"
+    height="300"
+    src="/purescript-interactive-data/docs-embed?trivial"
+    >
+  </iframe>
+</div>
+<!-- END embed -->
+<div style="break-before: page; page-break-before: always;"></div><!-- START hide  -->
+<!-- END hide -->
+<h1 id="glossary"><a class="header" href="#glossary">Glossary</a></h1>
+<h2 id="common-types"><a class="header" href="#common-types">Common Types</a></h2>
+<table>
+    <tr>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+<tr></tr>
+<!-- ---------------------------------------------------------- -->
+<tr valign="top">
+<td>
+<!-- START removeType  -->
+<pre><code class="language-hs">forall html. Html html =&gt; DataUI' html msg sta a
+</code></pre>
+<!-- END removeType -->
+</td>
+<td>
+<p>Simplified version of the <code>DataUI</code> type</p>
+<ul>
+<li><code>msg</code> is the type of messages that can be sent to the UI</li>
+<li><code>sta</code> is the type of the state of the UI</li>
+<li><code>a</code> is the type of the data that the UI is about</li>
+</ul>
+</td>
+</tr>
+<tr></tr>
+<!-- ---------------------------------------------------------- -->
+<tr valign="top">
+<td>
+<!-- START removeType  -->
+<pre><code class="language-hs">DataUI
+  srf
+  fm
+  fs
+  msg
+  sta
+  a
+</code></pre>
+<!-- END removeType -->
+</td>
+<td>
+<p>General type for Data UIs</p>
+<ul>
+<li><code>srf</code> is the type of the surface of the UI (Typically some HTML)</li>
+<li><code>fm</code> is the type of a wrapping functor applied to the messages of each Data UI layer</li>
+<li><code>fs</code> is the type of a wrapping functor applied to the state of each Data UI layer</li>
+<li><code>msg</code> is the type of messages that can be sent to the UI</li>
+<li><code>sta</code> is the type of the state of the UI</li>
+<li><code>a</code> is the type of the data that the UI is about</li>
+</ul>
+</td>
+</tr>
+<tr></tr>
+<!-- ---------------------------------------------------------- -->
+<tr valign="top">
+<td>
+<!-- START removeType  -->
+<pre><code class="language-hs">ViewMode
+</code></pre>
+<!-- END removeType -->
+</td>
+<td>
+<p>Each Data UI can render itself in two modes:</p>
+<ul>
+<li><code>Standalone</code>: The UI is rendered as a standalone page</li>
+<li><code>Inline</code>: The UI is rendered as an inline embed inside a parent UI</li>
+</ul>
+<p>Usually the inline rendering is a subset of the standalone rendering.
+And it's UI is much more compact.</p>
+<p>Taking <code>String</code> as an example:
+The standalone rendering of a <code>String</code> will appear as a multiline text box.
+The inline rendering of a <code>String</code> will appear as a single line text box.</p>
+</td>
+</tr>
+<tr></tr>
+<!-- ---------------------------------------------------------- -->
+</table>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+        <script>
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+
+    </div>
+    </body>
+</html>
