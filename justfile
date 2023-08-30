@@ -91,6 +91,9 @@ dev-example: build clean-parcel
     rm -rf .parcel-cache
     parcel --dist-dir {{PARCEL_DEV}} demo/static/$SAMPLE/index.html
 
+dev-landing: clean-parcel
+    parcel --dist-dir {{PARCEL_DEV}} demo/static/landing/index.html
+
 run-dist:
     http-server dist
 
