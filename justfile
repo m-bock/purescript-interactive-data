@@ -6,13 +6,13 @@ export CI := env_var_or_default("CI", "false")
 export PARCEL_DEV := "dist-dev"
 
 export ID_URL_DEMO_EMBEDS := if CI == "true" {
-  "/purescript-interactive-data/docs-embed"
+  "/docs-embed"
 } else {
   "http://localhost:1234"
 }
 
 export ID_URL_MANUAL := if CI == "true" {
-  "/purescript-interactive-data/manual"
+  "/"
 } else {
   "http://localhost:3000"
 }
@@ -50,17 +50,16 @@ dist-examples:
     #!/usr/bin/env bash
     set -euxo pipefail
     rm -f output/package.json
-    main_dir="purescript-interactive-data"; \
     export VERSION=$(git rev-parse HEAD); \
     for dir in demo/static/*/; do \
         name=$(basename $dir); \
         echo Building $name $VERSION; \
-        export PREFIX="/$main_dir/$name"; \
-        parcel build --dist-dir dist/$main_dir/$name --public-url /$main_dir/$name/ $dir/index.html ; \
+        export PREFIX="/$name"; \
+        parcel build --dist-dir dist/$name --public-url /$name/ $dir/index.html ; \
     done
 
 dist-mdbook:
-    mdbook build mdbook --dest-dir ../dist/purescript-interactive-data
+    mdbook build mdbook --dest-dir ../dist
 
 serve-dist:
     http-server dist
