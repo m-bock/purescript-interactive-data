@@ -33,13 +33,13 @@ Define UIs in terms of data types.
 
 ## Live Demo
 
-<a href="https://thought2.github.io/purescript-interactive-data/sample-painting-app-halogen">
+<a href="https://interactive-data.app/sample-painting-app-halogen">
   <img src="https://github.com/thought2/assets/blob/3ac74450fed65cc663c6e0e88db52b75fc323c28/interactive-data/demo3.png" width="400">
 </a>
 
 - Painting App ([Source](demo/src/Demo/Samples/PaintingApp))
-  - [Halogen](https://thought2.github.io/purescript-interactive-data/sample-painting-app-halogen) (with routing)
-  - [React](https://thought2.github.io/purescript-interactive-data/sample-painting-app-react/) (no routing)
+  - [Halogen](https://interactive-data.app/sample-painting-app-halogen) (with routing)
+  - [React](https://interactive-data.app/sample-painting-app-react/) (no routing)
 
 ## Features
 
@@ -93,7 +93,7 @@ The following types are supported out of the box:
 
 ### Library Manual
 
-Learn about the core concepts of `interactive-data` in the [Library Manual](https://thought2.github.io/purescript-interactive-data/manual).
+Learn about the core concepts of `interactive-data` in the [Library Manual](https://interactive-data.app).
 
 ## Getting started
 
@@ -139,7 +139,6 @@ main :: Effect Unit
 main = do
   let
     -- 1. Compose a "Data UI" for a specific type
-    --    (see demo/src/Demo/Common/CompleteSample.purs for more options)
     sampleDataUi = ID.record_
       { user: ID.record_
           { firstName: ID.string_

@@ -44,7 +44,7 @@ pre-push: ci-fast ci-tmpdir
 clean-dist:
     rm -rf dist
 
-dist: clean-dist dist-examples dist-mdbook
+dist: clean-dist dist-mdbook dist-examples
 
 dist-examples:
     #!/usr/bin/env bash
@@ -60,7 +60,7 @@ dist-examples:
     done
 
 dist-mdbook:
-    mdbook build mdbook --dest-dir ../dist/purescript-interactive-data/manual
+    mdbook build mdbook --dest-dir ../dist/purescript-interactive-data
 
 serve-dist:
     http-server dist
