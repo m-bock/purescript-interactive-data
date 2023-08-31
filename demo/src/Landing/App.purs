@@ -5,6 +5,8 @@ import Prelude
 import Chameleon as C
 import Chameleon.Styled (class HtmlStyled, decl, declWith, styleNode)
 import Data.Array (intersperse)
+import Landing.App.LogoAnim as UILogo
+
 
 view :: forall html msg. HtmlStyled html => html msg
 view =
@@ -23,6 +25,8 @@ view =
       , logo: styleNode C.div
           [ "margin: auto"
           , "margin-bottom: 20px"
+          , "stroke: #30FFC4"
+          , "width: 100px"
           ]
       , caption: styleNode C.div
           [ "margin: auto"
@@ -53,9 +57,7 @@ view =
     el.root []
       [ el.content []
           [ el.logo []
-              [ C.img
-                  [ C.src "https://raw.githubusercontent.com/thought2/purescript-interactive-data/main/assets/logo.svg"
-                  ]
+              [ UILogo.view
               ]
           , el.caption [] [ C.text "interactive-data" ]
           , el.subCaption [] [ C.text "Define UIs in terms of data types in PureScript" ]
