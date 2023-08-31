@@ -7,7 +7,6 @@ import Chameleon.Styled (class HtmlStyled, decl, declWith, styleNode)
 import Data.Array (intersperse)
 import Landing.App.LogoAnim as UILogo
 
-
 view :: forall html msg. HtmlStyled html => html msg
 view =
   let
