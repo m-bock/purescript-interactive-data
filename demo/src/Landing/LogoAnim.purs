@@ -22,8 +22,7 @@ view =
             , C.attr "id" "E428_Control_media_multimedia_player_stop"
             ]
             [ C.elem (C.ElemName "rect")
-                [ C.attr "class" "cls-1"
-                , C.attr "height" "492"
+                [ C.attr "height" "492"
                 , C.attr "rx" "50.2"
                 , C.attr "width" "492"
                 , C.attr "x" "10"
@@ -58,8 +57,7 @@ viewControl { x, ys } =
   in
     CS.g []
       [ el.line
-          [ C.attr "class" "cls-1"
-          , C.attr "x1" (show x)
+          [ C.attr "x1" (show x)
           , C.attr "x2" (show x)
           , C.attr "y1" (show y1)
           , C.attr "y2" (show y2)
@@ -67,8 +65,7 @@ viewControl { x, ys } =
           []
 
       , el.circle
-          [ C.attr "class" "cls-1"
-          , C.attr "cx" (show x)
+          [ C.attr "cx" (show x)
           , C.attr "cy" (show $ y1 + (1.0 - yFirst) * yDelta)
           , C.attr "r" (show r)
           ]
