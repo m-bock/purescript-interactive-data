@@ -27,3 +27,4 @@ nowrap
 igytkklqew
 dataui
 linejoin
+linecap
