@@ -64,7 +64,7 @@ viewLogoAnim =
   C.elem (C.ElemName "svg")
     [ C.attr "viewBox" "0 0 512 512"
     , C.attr "xmlns" "http://www.w3.org/2000/svg"
-    , C.attr "style" "fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:20px;"
+    , C.attr "style" "fill:none;stroke:black;stroke-linecap:round;stroke-linejoin:round;stroke-width:20px;"
     ]
     [ C.elem (C.ElemName "g") [ C.attr "data-name" "Layer 2", C.attr "id" "Layer_2" ]
         [ C.elem (C.ElemName "g")
@@ -99,9 +99,9 @@ viewLogoAnim =
             , C.elem (C.ElemName "circle")
                 [ C.attr "class" "cls-1", C.attr "cx" "87.59", C.attr "cy" "195.18", C.attr "r" "37.42" ]
                 [ C.elem (C.ElemName "animate")
-                    [ C.attr "attributeName" "cy"
-                    , C.attr "values" "0;100%;0"
-                    , C.attr "dur" "5s"
+                    [ C.attr "attributeName" "r"
+                    , C.attr "values" "0;50;0"
+                    , C.attr "dur" "10s"
                     , C.attr "repeatCount" "indefinite"
                     ]
                     []
