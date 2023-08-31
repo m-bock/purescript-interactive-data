@@ -2,14 +2,14 @@ module Landing.App.LogoAnim where
 
 import Prelude
 
+import Chameleon (class Html)
 import Chameleon as C
 import Chameleon.SVG.Elements as CS
-import Chameleon.Styled (class HtmlStyled, styleNode)
 import Data.Array ((!!))
 import Data.Maybe (fromMaybe)
 import Data.String as Str
 
-view :: forall html msg. HtmlStyled html => html msg
+view :: forall html msg. Html html => html msg
 view =
   C.elem (C.ElemName "svg")
     [ C.attr "viewBox" "0 0 512 512"
@@ -37,18 +37,9 @@ view =
         ]
     ]
 
-viewControl :: forall html msg. HtmlStyled html => { x :: Number, ys :: Array Number } -> html msg
+viewControl :: forall html msg. Html html => { x :: Number, ys :: Array Number } -> html msg
 viewControl { x, ys } =
   let
-    el =
-      { circle: styleNode (C.elem (C.ElemName "circle"))
-          [ "fill: white"
-          ]
-      , line: styleNode (C.elem (C.ElemName "line"))
-          [ ""
-          ]
-      }
-
     y1 = 120.33
     y2 = 391.67
     yDelta = y2 - y1
@@ -56,7 +47,7 @@ viewControl { x, ys } =
     yFirst = fromMaybe 0.0 $ ys !! 0
   in
     CS.g []
-      [ el.line
+      [ (C.elem (C.ElemName "line"))
           [ C.attr "x1" (show x)
           , C.attr "x2" (show x)
           , C.attr "y1" (show y1)
@@ -64,10 +55,11 @@ viewControl { x, ys } =
           ]
           []
 
-      , el.circle
+      , (C.elem (C.ElemName "circle"))
           [ C.attr "cx" (show x)
           , C.attr "cy" (show $ y1 + (1.0 - yFirst) * yDelta)
           , C.attr "r" (show r)
+          , C.attr "fill" "white"
           ]
           [ C.elem (C.ElemName "animate")
               [ C.attr "attributeName" "cy"
