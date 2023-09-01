@@ -187,6 +187,7 @@ We also need to create a simple html file and a `index.js` file to run the web a
 <html>
   <head>
     <title>Interactive Data Sample</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
   <body>
     <script src="index.js" type="module"></script>
