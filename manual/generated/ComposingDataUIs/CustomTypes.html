@@ -206,7 +206,8 @@ instance Show CustomADT where
    . Html html
   =&gt; DataUI' html _ _ CustomADT
 demoCustomType =
-  ID.generic_ @&quot;Foo&quot; (ID.TypeName &quot;CustomADT&quot;)
+  ID.generic_ @&quot;Foo&quot;
+    (ID.TypeName &quot;CustomADT&quot;)
     { &quot;Foo&quot;: ID.int_
     , &quot;Bar&quot;: ID.string_
     , &quot;Baz&quot;: ID.number_ ~ ID.boolean_

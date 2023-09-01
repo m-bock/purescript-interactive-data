@@ -458,7 +458,9 @@ demoRecord =
         ID.int_
     , address:
         ID.string
-          { text: Just &quot;Street and zip code&quot; }
+          { text: Just
+              &quot;Street and zip code&quot;
+          }
     }
 </code></pre>
 <p>The UI will look like this:</p>
@@ -496,20 +498,26 @@ or keep the final UI composition in a <code>let</code> or <code>where</code> cla
   =&gt; DataUI' html
        ( ID.RecordMsg
            ( address ::
-               ID.WrapMsg ID.StringMsg
+               ID.WrapMsg
+                 ID.StringMsg
            , age ::
-               ID.WrapMsg ID.IntMsg
+               ID.WrapMsg
+                 ID.IntMsg
            , name ::
-               ID.WrapMsg ID.StringMsg
+               ID.WrapMsg
+                 ID.StringMsg
            )
        )
        ( ID.RecordState
            ( address ::
-               ID.WrapState ID.StringState
+               ID.WrapState
+                 ID.StringState
            , age ::
-               ID.WrapState ID.IntState
+               ID.WrapState
+                 ID.IntState
            , name ::
-               ID.WrapState ID.StringState
+               ID.WrapState
+                 ID.StringState
            )
        )
        User
@@ -637,10 +645,13 @@ demoMaybe =
 <pre><code class="language-hs">demoEither
   :: forall html
    . Html html
-  =&gt; DataUI' html _ _ (Either String Int)
+  =&gt; DataUI' html _ _
+       (Either String Int)
 demoEither =
   ID.either
-    { text: Just &quot;Some Result or some Error&quot; }
+    { text: Just
+        &quot;Some Result or some Error&quot;
+    }
     ID.string_
     ID.int_
 </code></pre>
@@ -669,7 +680,8 @@ demoEither =
 <pre><code class="language-hs">demoTuple
   :: forall html
    . Html html
-  =&gt; DataUI' html _ _ (Tuple Int String)
+  =&gt; DataUI' html _ _
+       (Tuple Int String)
 demoTuple =
   ID.tuple
     { text: Just &quot;Int and String&quot; }
@@ -765,7 +777,8 @@ instance Show CustomADT where
    . Html html
   =&gt; DataUI' html _ _ CustomADT
 demoCustomType =
-  ID.generic_ @&quot;Foo&quot; (ID.TypeName &quot;CustomADT&quot;)
+  ID.generic_ @&quot;Foo&quot;
+    (ID.TypeName &quot;CustomADT&quot;)
     { &quot;Foo&quot;: ID.int_
     , &quot;Bar&quot;: ID.string_
     , &quot;Baz&quot;: ID.number_ ~ ID.boolean_
@@ -874,25 +887,34 @@ import InteractiveData as ID
 <pre><code class="language-hs">newtype UserId = UserId String
 </code></pre>
 <p>Create a smart constructor for the newtype:</p>
-<pre><code class="language-hs">mkUserId :: String -&gt; Either String UserId
+<pre><code class="language-hs">mkUserId
+  :: String -&gt; Either String UserId
 mkUserId candidate =
-  if Regex.test regexUserId candidate then
-    Right (UserId candidate)
-  else
-    Left $ String.joinWith &quot; &quot;
+  let
+    result =
+      Regex.test regexUserId candidate
+
+    errorMsg = String.joinWith &quot; &quot;
       [ &quot;Invalid UserId.&quot;
       , &quot;Must be 8 characters long.&quot;
       , &quot;Only lowercase letters and numbers.&quot;
       ]
-  where
-  regexUserId :: Regex
-  regexUserId =
-    unsafeRegex &quot;^[a-z0-9]{8}$&quot; noFlags
+  in
+    if result then
+      Right (UserId candidate)
+    else
+      Left errorMsg
+
+regexUserId :: Regex
+regexUserId =
+  unsafeRegex &quot;^[a-z0-9]{8}$&quot; noFlags
 </code></pre>
 <h2 id="define-instances-1"><a class="header" href="#define-instances-1">Define Instances</a></h2>
 <pre><code class="language-hs">instance Show UserId where
   show (UserId s) =
-    &quot;(unsafeFromString &quot; &lt;&gt; show s &lt;&gt; &quot;)&quot;
+    &quot;(unsafeFromString &quot;
+      &lt;&gt; show s
+      &lt;&gt; &quot;)&quot;
 </code></pre>
 <h2 id="composing-a-data-ui-for-the-newtype-1"><a class="header" href="#composing-a-data-ui-for-the-newtype-1">Composing a Data UI for the newtype</a></h2>
 <p>And then compose a data UI for it:</p>
@@ -1020,7 +1042,10 @@ import InteractiveData as ID
   , extraNote :: Maybe String
   }
 
-demo :: forall html. Html html =&gt; DataUI' html _ _ Sample
+demo
+  :: forall html
+   . Html html
+  =&gt; DataUI' html _ _ Sample
 demo = ID.dataUi
 </code></pre>
 <!-- START embed polymorphic 500 -->

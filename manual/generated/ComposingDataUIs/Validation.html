@@ -193,25 +193,34 @@ import InteractiveData as ID
 <pre><code class="language-hs">newtype UserId = UserId String
 </code></pre>
 <p>Create a smart constructor for the newtype:</p>
-<pre><code class="language-hs">mkUserId :: String -&gt; Either String UserId
+<pre><code class="language-hs">mkUserId
+  :: String -&gt; Either String UserId
 mkUserId candidate =
-  if Regex.test regexUserId candidate then
-    Right (UserId candidate)
-  else
-    Left $ String.joinWith &quot; &quot;
+  let
+    result =
+      Regex.test regexUserId candidate
+
+    errorMsg = String.joinWith &quot; &quot;
       [ &quot;Invalid UserId.&quot;
       , &quot;Must be 8 characters long.&quot;
       , &quot;Only lowercase letters and numbers.&quot;
       ]
-  where
-  regexUserId :: Regex
-  regexUserId =
-    unsafeRegex &quot;^[a-z0-9]{8}$&quot; noFlags
+  in
+    if result then
+      Right (UserId candidate)
+    else
+      Left errorMsg
+
+regexUserId :: Regex
+regexUserId =
+  unsafeRegex &quot;^[a-z0-9]{8}$&quot; noFlags
 </code></pre>
 <h2 id="define-instances"><a class="header" href="#define-instances">Define Instances</a></h2>
 <pre><code class="language-hs">instance Show UserId where
   show (UserId s) =
-    &quot;(unsafeFromString &quot; &lt;&gt; show s &lt;&gt; &quot;)&quot;
+    &quot;(unsafeFromString &quot;
+      &lt;&gt; show s
+      &lt;&gt; &quot;)&quot;
 </code></pre>
 <h2 id="composing-a-data-ui-for-the-newtype"><a class="header" href="#composing-a-data-ui-for-the-newtype">Composing a Data UI for the newtype</a></h2>
 <p>And then compose a data UI for it:</p>

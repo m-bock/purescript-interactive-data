@@ -196,7 +196,10 @@ import InteractiveData as ID
   , extraNote :: Maybe String
   }
 
-demo :: forall html. Html html =&gt; DataUI' html _ _ Sample
+demo
+  :: forall html
+   . Html html
+  =&gt; DataUI' html _ _ Sample
 demo = ID.dataUi
 </code></pre>
 <!-- START embed polymorphic 500 -->

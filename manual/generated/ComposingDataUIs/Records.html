@@ -205,7 +205,9 @@ demoRecord =
         ID.int_
     , address:
         ID.string
-          { text: Just &quot;Street and zip code&quot; }
+          { text: Just
+              &quot;Street and zip code&quot;
+          }
     }
 </code></pre>
 <p>The UI will look like this:</p>
@@ -243,20 +245,26 @@ or keep the final UI composition in a <code>let</code> or <code>where</code> cla
   =&gt; DataUI' html
        ( ID.RecordMsg
            ( address ::
-               ID.WrapMsg ID.StringMsg
+               ID.WrapMsg
+                 ID.StringMsg
            , age ::
-               ID.WrapMsg ID.IntMsg
+               ID.WrapMsg
+                 ID.IntMsg
            , name ::
-               ID.WrapMsg ID.StringMsg
+               ID.WrapMsg
+                 ID.StringMsg
            )
        )
        ( ID.RecordState
            ( address ::
-               ID.WrapState ID.StringState
+               ID.WrapState
+                 ID.StringState
            , age ::
-               ID.WrapState ID.IntState
+               ID.WrapState
+                 ID.IntState
            , name ::
-               ID.WrapState ID.StringState
+               ID.WrapState
+                 ID.StringState
            )
        )
        User
