@@ -19,11 +19,12 @@ import Data.Interpolate (i)
 import Data.Maybe (Maybe(..), maybe)
 import Data.Number (cos, pi, sin)
 import Data.String as Str
-import Demo.Samples.PaintingApp.Color (Color(..))
-import Demo.Samples.PaintingApp.Color as Color
 import Demo.Samples.PaintingApp.ArchiveID (sampleArchiveID)
 import Demo.Samples.PaintingApp.ArchiveID as ArchiveID
-import Demo.Samples.PaintingApp.Types (Image, Meta, Painting, Shape(..), USD(..), paintingDataUi, printUSD)
+import Demo.Samples.PaintingApp.Color (Color(..))
+import Demo.Samples.PaintingApp.Color as Color
+import Demo.Samples.PaintingApp.DataUIs (paintingDataUi)
+import Demo.Samples.PaintingApp.Types (Image, Meta, Painting, Shape(..), USD(..), printUSD)
 import InteractiveData (DataResult)
 import InteractiveData as ID
 import InteractiveData.Entry (InteractiveDataApp)
@@ -242,7 +243,7 @@ viewRoot { atControls, atImage } =
           , "grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr"
           , "gap: 60px 30px"
           , "height: 800px"
-          , "width: 800px"
+          , "max-width: 800px"
           , "place-self: center"
           ]
       , itemControls: styleNode C.div
