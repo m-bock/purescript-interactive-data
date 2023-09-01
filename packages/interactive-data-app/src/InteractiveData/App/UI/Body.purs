@@ -18,7 +18,7 @@ view { viewContent } =
       { body: styleNode C.div unit
       , content: styleNode C.div
           [ "padding: 10px"
-          , "padding-left: 20px"
+          , "padding-right: 15px"
           , "max-width: 600px"
           ]
       }

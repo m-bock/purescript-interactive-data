@@ -74,7 +74,9 @@ viewRow _ (seg /\ tree) = withCtx \ctx ->
     newPath = ctx.path <> [ SegField seg ]
 
     el =
-      { root: C.div
+      { root: styleNode C.div
+          [ "overflow-x: auto"
+          ]
       }
 
     trivialTrees :: Array (Array DataPathSegment /\ DataTree html msg)

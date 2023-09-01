@@ -54,14 +54,13 @@ view { viewHeader, viewSidebar, viewBody, viewFooter } = withCtx \ctx ->
           ]
       , root: styleNode C.div
           [ "width: 100%"
-          , "overflow-y: auto"
           , "display: flex"
           , "height: 100%"
           ]
       , sidebar: styleNode C.div
           $
             ( if showSidebar then
-                [ "width: 250px"
+                [ "width: 120px"
                 , "border-right: 1px solid #E0E0E0"
                 ]
               else
@@ -69,18 +68,27 @@ view { viewHeader, viewSidebar, viewBody, viewFooter } = withCtx \ctx ->
             )
           /\
             [ "transition: width 100ms ease-in-out"
+            , "flex: 0 0 auto;"
             ]
       , body: styleNode C.div
-          [ "width: 100%"
-          , "height: 100%"
-          , "display: flex"
-          , "flex-direction: column"
-          ]
+          $
+            [ "height: 100%"
+            , "display: flex"
+            , "flex-direction: column"
+            , "flex: 1"
+            ]
+          <>
+            if showSidebar then
+              [ "max-width: calc(100% - 120px)"
+              ]
+            else
+              [ "max-width: 100%" ]
+
       , main: styleNode C.div
-          [ "overflow-y: auto"
-          , "display: flex"
+          [ "display: flex"
           , "flex-direction: column"
           , "height: 100%"
+          , "overflow-y: auto"
           ]
       , footer: styleNode C.div
           [ "width: 100%"

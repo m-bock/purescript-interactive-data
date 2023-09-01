@@ -79,6 +79,7 @@ viewRoot { viewBreadcrumbs, right } =
       , breadcrumbs: styleNode C.div
           [ "width: 100%"
           , "grid-area: a"
+          , "overflow-x: auto"
           ]
       , right: styleNode C.div
           [ "grid-area: c" ]

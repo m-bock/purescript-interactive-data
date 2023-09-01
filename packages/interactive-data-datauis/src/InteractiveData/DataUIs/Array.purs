@@ -151,9 +151,11 @@ viewItem _ index childDataTree _ =
             [ "display: flex"
             , "align-items: flex-start"
             , "justify-content: space-between"
+            , "overflow-x: auto"
+            , "width: 100%"
             ]
         , item: styleNode C.div
-            [ "width: 100%"
+            [ "flex: 1"
             ]
         , actions: C.div
         }

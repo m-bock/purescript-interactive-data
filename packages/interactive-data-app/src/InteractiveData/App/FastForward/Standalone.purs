@@ -16,7 +16,7 @@ view
 view items =
   let
     el =
-      { root: C.div
+      { root: styleNode C.div unit
       , item: styleNode C.div
           $
             [ "margin-bottom: 20px" ]
@@ -48,8 +48,7 @@ viewItem
 viewItem { isLast } (path /\ tree) =
   let
     el =
-      { root: styleNode C.div
-          $ [ "margin-left: 20px" ]
+      { root: C.div
       }
 
     DataTree { view } = tree
