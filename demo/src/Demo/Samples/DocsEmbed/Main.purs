@@ -16,12 +16,14 @@ import Data.Maybe (Maybe(..))
 import Data.String (Pattern(..), Replacement(..))
 import Data.String as Str
 import Data.Tuple.Nested ((/\))
+import Dodo (Doc, plainText, twoSpaces)
+import Dodo as Dodo
 import Effect (Effect)
 import Effect.Aff (Aff)
 import Effect.Class.Console (error)
 import Halogen as H
 import Halogen as Halogen
-import InteractiveData (AppMsg, AppState, DataUI, WrapMsg, WrapState)
+import InteractiveData (AppMsg, AppState, DataUI, IDHtmlT, IDSurface, WrapMsg, WrapState)
 import InteractiveData as ID
 import InteractiveData.Entry (InteractiveDataApp)
 import Manual.ComposingDataUIs.Arrays as Arrays
@@ -36,6 +38,9 @@ import Manual.ComposingDataUIs.Variants as Variants
 import Manual.Polymorphic as Polymorphic
 import Manual.Polymorphic.DefineTypeClass as DefineTypeClass
 import Manual.WritingDataUIs.Trivial as Trivial
+import PureScript.CST (RecoveredParserResult(..), parseExpr)
+import PureScript.CST.Types (Expr)
+import Tidy (FormatDoc, defaultFormatOptions, formatExpr, toDoc)
 
 foreign import getQueryString :: Effect String
 
@@ -122,6 +127,37 @@ viewWrapper { atInteractiveData, atDataStr } =
           [ C.text atDataStr ]
       ]
 
+printVal :: forall a. Show a => a -> String
+printVal val =
+  let
+    valStr :: String
+    valStr = show val
+
+    parseResult :: RecoveredParserResult Expr
+    parseResult = parseExpr valStr
+  in
+    case parseResult of
+      ParseSucceeded expr -> printExpr expr
+      ParseSucceededWithErrors _ _ -> valStr
+      ParseFailed _ -> valStr
+
+printExpr :: Expr Void -> String
+printExpr expr =
+  let
+    formatDoc :: forall b. FormatDoc b
+    formatDoc = formatExpr defaultFormatOptions expr
+
+    doc :: forall b. Doc b
+    doc = toDoc formatDoc
+
+    dodoOptions :: Dodo.PrintOptions
+    dodoOptions = twoSpaces
+      { pageWidth = 50
+      }
+
+  in
+    Dodo.print plainText dodoOptions doc
+
 mkHalogenComponent
   :: forall q i o msg sta a
    . Show a
@@ -139,7 +175,7 @@ mkHalogenComponent { ui, extract } =
   render state =
     runHalogenHtml $ runStyleT $ viewWrapper
       { atInteractiveData: ui.view state
-      , atDataStr: show $ extract state
+      , atDataStr: printVal $ extract state
       }
 
   handleAction msg = do
@@ -170,7 +206,17 @@ summary =
           )
       )
 
-app :: forall a. Show a => { showMenuOnStart :: Boolean } -> DataUI _ _ _ _ _ a -> Effect Unit
+app
+  :: forall a
+   . Show a
+  => { showMenuOnStart :: Boolean }
+  -> DataUI (IDSurface (IDHtmlT (StyleT HalogenHtml)))
+       WrapMsg
+       WrapState
+       _
+       _
+       a
+  -> Effect Unit
 app { showMenuOnStart } dataUi = do
   let
     sampleApp =

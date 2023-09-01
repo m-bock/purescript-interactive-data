@@ -5,12 +5,12 @@ package:
     - argonaut
     - argonaut-generic
     - arrays
-    - bifunctors
     - chameleon
     - chameleon-halogen
     - chameleon-react-basic
     - chameleon-styled
     - console
+    - dodo-printer
     - effect
     - either
     - foldable-traversable
@@ -21,6 +21,7 @@ package:
     - interactive-data-app
     - interactive-data-core
     - interpolate
+    - language-cst-parser
     - maybe
     - newtype
     - numbers
@@ -29,6 +30,7 @@ package:
     - react-basic-hooks
     - strings
     - these
+    - tidy
     - tuples
     - variant
   test:

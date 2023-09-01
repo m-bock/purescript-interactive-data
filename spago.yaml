@@ -1,6 +1,24 @@
 workspace:
   extra_packages:
     chameleon-halogen: 1.0.3
+    tidy:
+      git: https://github.com/natefaubion/purescript-tidy.git
+      ref: v0.10.0
+      dependencies:
+        - "arrays"
+        - "control"
+        - "dodo-printer"
+        - "either"
+        - "foldable-traversable"
+        - "lists"
+        - "maybe"
+        - "newtype"
+        - "ordered-collections"
+        - "partial"
+        - "prelude"
+        - "language-cst-parser"
+        - "strings"
+        - "tuples"
 
   package_set:
     registry: 36.0.0
