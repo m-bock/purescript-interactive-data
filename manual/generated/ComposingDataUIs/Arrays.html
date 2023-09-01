@@ -181,7 +181,10 @@ import InteractiveData as ID
 </code></pre>
 </details><hr><br>
 <!-- END imports -->
-<pre><code class="language-hs">demo :: forall html. Html html =&gt; DataUI' html _ _ (Array Int)
+<pre><code class="language-hs">demo
+  :: forall html
+   . Html html
+  =&gt; DataUI' html _ _ (Array Int)
 demo =
   ID.array { init: Just [ 1, 2, 3 ] }
     ID.int_

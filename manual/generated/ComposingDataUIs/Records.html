@@ -193,12 +193,19 @@ import InteractiveData as ID
 </code></pre>
 <h2 id="create-data-ui-for-the-specific-record-type"><a class="header" href="#create-data-ui-for-the-specific-record-type">Create Data UI for the specific Record type</a></h2>
 <p>Now we can create a Data UI with the <code>record_</code> function like this:</p>
-<pre><code class="language-hs">demoRecord :: forall html. Html html =&gt; DataUI' html _ _ User
+<pre><code class="language-hs">demoRecord
+  :: forall html
+   . Html html
+  =&gt; DataUI' html _ _ User
 demoRecord =
   ID.record_
-    { name: ID.string_
-    , age: ID.int_
-    , address: ID.string { text: Just &quot;Street and zip code&quot; }
+    { name:
+        ID.string_
+    , age:
+        ID.int_
+    , address:
+        ID.string
+          { text: Just &quot;Street and zip code&quot; }
     }
 </code></pre>
 <p>The UI will look like this:</p>

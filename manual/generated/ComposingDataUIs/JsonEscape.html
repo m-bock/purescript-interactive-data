@@ -183,7 +183,10 @@ import InteractiveData as ID
 </code></pre>
 </details><hr><br>
 <!-- END imports -->
-<pre><code class="language-hs">demo :: forall html. Html html =&gt; DataUI' html _ _ (Map Int String)
+<pre><code class="language-hs">demo
+  :: forall html
+   . Html html
+  =&gt; DataUI' html _ _ (Map Int String)
 demo = ID.json
   { init: Map.fromFoldable
       [ 1 /\ &quot;one&quot;

@@ -195,17 +195,25 @@ import InteractiveData as ID
 </code></pre>
 <h2 id="composing-a-data-ui-for-a-variant-type"><a class="header" href="#composing-a-data-ui-for-a-variant-type">Composing a Data UI for a variant type</a></h2>
 <p>And then compose a data UI for it:</p>
-<pre><code class="language-hs">demoVariant :: forall html. Html html =&gt; DataUI' html _ _ RemoteData
+<pre><code class="language-hs">demoVariant
+  :: forall html
+   . Html html
+  =&gt; DataUI' html _ _ RemoteData
 demoVariant =
   ID.variant_ @&quot;notAsked&quot;
-    { notAsked: ID.record_ {}
-    , loading: ID.record_ { progress: ID.number_ }
+    { notAsked:
+        ID.record_ {}
+    , loading:
+        ID.record_
+          { progress: ID.number_ }
     , failed:
         ID.record_
           { errorMessage: ID.string_
           , errorCode: ID.int_
           }
-    , success: ID.record_ { data: ID.string_ }
+    , success:
+        ID.record_
+          { data: ID.string_ }
     }
 </code></pre>
 <p>The UI will look like this:</p>

@@ -178,8 +178,8 @@
 
 import Chameleon (class Html)
 import Data.Array.NonEmpty as NonEmptyArray
-import Data.Bifunctor (lmap)
 import Data.Either (Either(..))
+import Data.String as String
 import Data.String.Regex (Regex)
 import Data.String.Regex as Regex
 import Data.String.Regex.Flags (noFlags)
@@ -198,28 +198,45 @@ mkUserId candidate =
   if Regex.test regexUserId candidate then
     Right (UserId candidate)
   else
-    Left &quot;Invalid UserId. Must be 8 characters long and only contain lowercase letters and numbers.&quot;
+    Left $ String.joinWith &quot; &quot;
+      [ &quot;Invalid UserId.&quot;
+      , &quot;Must be 8 characters long.&quot;
+      , &quot;Only lowercase letters and numbers.&quot;
+      ]
   where
   regexUserId :: Regex
-  regexUserId = unsafeRegex &quot;^[a-z0-9]{8}$&quot; noFlags
+  regexUserId =
+    unsafeRegex &quot;^[a-z0-9]{8}$&quot; noFlags
 </code></pre>
 <h2 id="define-instances"><a class="header" href="#define-instances">Define Instances</a></h2>
 <pre><code class="language-hs">instance Show UserId where
-  show (UserId s) = &quot;(unsafeFromString &quot; &lt;&gt; show s &lt;&gt; &quot;)&quot;
+  show (UserId s) =
+    &quot;(unsafeFromString &quot; &lt;&gt; show s &lt;&gt; &quot;)&quot;
 </code></pre>
 <h2 id="composing-a-data-ui-for-the-newtype"><a class="header" href="#composing-a-data-ui-for-the-newtype">Composing a Data UI for the newtype</a></h2>
 <p>And then compose a data UI for it:</p>
-<pre><code class="language-hs">demo :: forall html. Html html =&gt; DataUI' html _ _ UserId
-demo = ID.refineDataUi
-  { typeName: &quot;UserId&quot;
-  , refine
-  , unrefine
-  }
-  (ID.string { multiline: false })
+<pre><code class="language-hs">demo
+  :: forall html
+   . Html html
+  =&gt; DataUI' html _ _ UserId
+demo =
+  ID.refineDataUi
+    { typeName: &quot;UserId&quot;
+    , refine
+    , unrefine
+    }
+    (ID.string { multiline: false })
 
   where
   refine :: String -&gt; DataResult UserId
-  refine = mkUserId &gt;&gt;&gt; lmap (NonEmptyArray.singleton &lt;&lt;&lt; ID.mkDataError)
+  refine candidate =
+    case mkUserId candidate of
+      Right userId -&gt;
+        Right userId
+
+      Left errorMsg -&gt;
+        Left $ NonEmptyArray.singleton $
+          ID.mkDataError errorMsg
 
   unrefine :: UserId -&gt; String
   unrefine (UserId s) = s

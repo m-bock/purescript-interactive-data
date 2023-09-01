@@ -194,10 +194,14 @@ instance Show UserId where
 </code></pre>
 <h2 id="composing-a-data-ui-for-the-newtype"><a class="header" href="#composing-a-data-ui-for-the-newtype">Composing a Data UI for the newtype</a></h2>
 <p>And then compose a data UI for it:</p>
-<pre><code class="language-hs">demo :: forall html. Html html =&gt; DataUI' html _ _ UserId
-demo = ID.newtype_ (ID.TypeName &quot;UserId&quot;)
-  $ ID.string
-      { multiline: false }
+<pre><code class="language-hs">demo
+  :: forall html
+   . Html html
+  =&gt; DataUI' html _ _ UserId
+demo =
+  ID.newtype_ (ID.TypeName &quot;UserId&quot;)
+    $ ID.string
+        { multiline: false }
 </code></pre>
 <p>The UI will look like this:</p>
 <!-- START embed simpleNewtype 500 -->

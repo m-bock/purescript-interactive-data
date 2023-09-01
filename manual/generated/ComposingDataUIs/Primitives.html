@@ -189,12 +189,16 @@ import InteractiveData as ID
 <li>Numbers</li>
 </ul>
 <h2 id="int"><a class="header" href="#int">Int</a></h2>
-<pre><code class="language-hs">demoInt :: forall html. Html html =&gt; DataUI' html _ _ Int
-demoInt = ID.int
-  { text: Just &quot;The age of a person&quot;
-  , min: 0
-  , max: 120
-  }
+<pre><code class="language-hs">demoInt
+  :: forall html
+   . Html html
+  =&gt; DataUI' html _ _ Int
+demoInt =
+  ID.int
+    { text: Just &quot;The age of a person&quot;
+    , min: 0
+    , max: 120
+    }
 </code></pre>
 <!-- START embed int 300 -->
 <div style="display:grid; grid-template-rows: auto minmax(0, 1fr); gap: 10px">
@@ -218,8 +222,12 @@ demoInt = ID.int
 </div>
 <!-- END embed -->
 <h2 id="boolean"><a class="header" href="#boolean">Boolean</a></h2>
-<pre><code class="language-hs">demoBoolean :: forall html. Html html =&gt; DataUI' html _ _ Boolean
-demoBoolean = ID.boolean_
+<pre><code class="language-hs">demoBoolean
+  :: forall html
+   . Html html
+  =&gt; DataUI' html _ _ Boolean
+demoBoolean =
+  ID.boolean_
 </code></pre>
 <!-- START embed boolean 300 -->
 <div style="display:grid; grid-template-rows: auto minmax(0, 1fr); gap: 10px">
@@ -243,11 +251,15 @@ demoBoolean = ID.boolean_
 </div>
 <!-- END embed -->
 <h2 id="string"><a class="header" href="#string">String</a></h2>
-<pre><code class="language-hs">demoString :: forall html. Html html =&gt; DataUI' html _ _ String
-demoString = ID.string
-  { text: Just &quot;The name of a person&quot;
-  , maxLength: Just 100
-  }
+<pre><code class="language-hs">demoString
+  :: forall html
+   . Html html
+  =&gt; DataUI' html _ _ String
+demoString =
+  ID.string
+    { text: Just &quot;The name of a person&quot;
+    , maxLength: Just 100
+    }
 </code></pre>
 <!-- START embed string 300 -->
 <div style="display:grid; grid-template-rows: auto minmax(0, 1fr); gap: 10px">
@@ -271,8 +283,12 @@ demoString = ID.string
 </div>
 <!-- END embed -->
 <h2 id="number"><a class="header" href="#number">Number</a></h2>
-<pre><code class="language-hs">demoNumber :: forall html. Html html =&gt; DataUI' html _ _ Number
-demoNumber = ID.number_
+<pre><code class="language-hs">demoNumber
+  :: forall html
+   . Html html
+  =&gt; DataUI' html _ _ Number
+demoNumber =
+  ID.number_
 </code></pre>
 <!-- START embed number -->
 <div style="display:grid; grid-template-rows: auto minmax(0, 1fr); gap: 10px">

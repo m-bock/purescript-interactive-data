@@ -201,13 +201,17 @@ instance Show CustomADT where
 </code></pre>
 <h2 id="composing-a-data-ui-for-the-type"><a class="header" href="#composing-a-data-ui-for-the-type">Composing a Data UI for the type</a></h2>
 <p>And then compose a data UI for it:</p>
-<pre><code class="language-hs">demoCustomType :: forall html. Html html =&gt; DataUI' html _ _ CustomADT
-demoCustomType = ID.generic_ @&quot;Foo&quot; (ID.TypeName &quot;CustomADT&quot;)
-  { &quot;Foo&quot;: ID.int_
-  , &quot;Bar&quot;: ID.string_
-  , &quot;Baz&quot;: ID.number_ ~ ID.boolean_
-  , &quot;Qux&quot;: unit
-  }
+<pre><code class="language-hs">demoCustomType
+  :: forall html
+   . Html html
+  =&gt; DataUI' html _ _ CustomADT
+demoCustomType =
+  ID.generic_ @&quot;Foo&quot; (ID.TypeName &quot;CustomADT&quot;)
+    { &quot;Foo&quot;: ID.int_
+    , &quot;Bar&quot;: ID.string_
+    , &quot;Baz&quot;: ID.number_ ~ ID.boolean_
+    , &quot;Qux&quot;: unit
+    }
 </code></pre>
 <p>The UI will look like this:</p>
 <!-- START embed customType 500 -->

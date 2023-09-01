@@ -185,13 +185,17 @@ import InteractiveData as ID
 </code></pre>
 </details><hr><br>
 <!-- END imports -->
-<p>the interactive-data library provides Data UIs for common data types
+<p>The interactive-data library provides Data UIs for common data types
 like <code>Maybe</code>, <code>Either</code> and <code>Tuple</code>.</p>
 <h1 id="maybe"><a class="header" href="#maybe">Maybe</a></h1>
-<pre><code class="language-hs">demoMaybe :: forall html. Html html =&gt; DataUI' html _ _ (Maybe Int)
-demoMaybe = ID.maybe
-  { text: Just &quot;Call me maybe..&quot; }
-  ID.int_
+<pre><code class="language-hs">demoMaybe
+  :: forall html
+   . Html html
+  =&gt; DataUI' html _ _ (Maybe Int)
+demoMaybe =
+  ID.maybe
+    { text: Just &quot;Call me maybe..&quot; }
+    ID.int_
 </code></pre>
 <!-- START embed maybe 500 -->
 <div style="display:grid; grid-template-rows: auto minmax(0, 1fr); gap: 10px">
@@ -215,11 +219,15 @@ demoMaybe = ID.maybe
 </div>
 <!-- END embed -->
 <h1 id="either"><a class="header" href="#either">Either</a></h1>
-<pre><code class="language-hs">demoEither :: forall html. Html html =&gt; DataUI' html _ _ (Either String Int)
-demoEither = ID.either
-  { text: Just &quot;Some Result or some Error&quot; }
-  ID.string_
-  ID.int_
+<pre><code class="language-hs">demoEither
+  :: forall html
+   . Html html
+  =&gt; DataUI' html _ _ (Either String Int)
+demoEither =
+  ID.either
+    { text: Just &quot;Some Result or some Error&quot; }
+    ID.string_
+    ID.int_
 </code></pre>
 <!-- START embed either 500 -->
 <div style="display:grid; grid-template-rows: auto minmax(0, 1fr); gap: 10px">
@@ -243,11 +251,15 @@ demoEither = ID.either
 </div>
 <!-- END embed -->
 <h1 id="tuple"><a class="header" href="#tuple">Tuple</a></h1>
-<pre><code class="language-hs">demoTuple :: forall html. Html html =&gt; DataUI' html _ _ (Tuple Int String)
-demoTuple = ID.tuple
-  { text: Just &quot;Int and String&quot; }
-  ID.int_
-  ID.string_
+<pre><code class="language-hs">demoTuple
+  :: forall html
+   . Html html
+  =&gt; DataUI' html _ _ (Tuple Int String)
+demoTuple =
+  ID.tuple
+    { text: Just &quot;Int and String&quot; }
+    ID.int_
+    ID.string_
 </code></pre>
 <!-- START embed tuple 500 -->
 <div style="display:grid; grid-template-rows: auto minmax(0, 1fr); gap: 10px">
@@ -273,8 +285,12 @@ demoTuple = ID.tuple
 <h1 id="unit"><a class="header" href="#unit">Unit</a></h1>
 <p>There's even a Data UI for the unit type.
 It's useful in some cases. But it's UI is just empty.</p>
-<pre><code class="language-hs">demoUnit :: forall html. Html html =&gt; DataUI' html _ _ Unit
-demoUnit = ID.unit_
+<pre><code class="language-hs">demoUnit
+  :: forall html
+   . Html html
+  =&gt; DataUI' html _ _ Unit
+demoUnit =
+  ID.unit_
 </code></pre>
 <!-- START embed unit 200 -->
 <div style="display:grid; grid-template-rows: auto minmax(0, 1fr); gap: 10px">

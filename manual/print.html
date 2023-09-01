@@ -259,12 +259,16 @@ import InteractiveData as ID
 <li>Numbers</li>
 </ul>
 <h2 id="int"><a class="header" href="#int">Int</a></h2>
-<pre><code class="language-hs">demoInt :: forall html. Html html =&gt; DataUI' html _ _ Int
-demoInt = ID.int
-  { text: Just &quot;The age of a person&quot;
-  , min: 0
-  , max: 120
-  }
+<pre><code class="language-hs">demoInt
+  :: forall html
+   . Html html
+  =&gt; DataUI' html _ _ Int
+demoInt =
+  ID.int
+    { text: Just &quot;The age of a person&quot;
+    , min: 0
+    , max: 120
+    }
 </code></pre>
 <!-- START embed int 300 -->
 <div style="display:grid; grid-template-rows: auto minmax(0, 1fr); gap: 10px">
@@ -288,8 +292,12 @@ demoInt = ID.int
 </div>
 <!-- END embed -->
 <h2 id="boolean"><a class="header" href="#boolean">Boolean</a></h2>
-<pre><code class="language-hs">demoBoolean :: forall html. Html html =&gt; DataUI' html _ _ Boolean
-demoBoolean = ID.boolean_
+<pre><code class="language-hs">demoBoolean
+  :: forall html
+   . Html html
+  =&gt; DataUI' html _ _ Boolean
+demoBoolean =
+  ID.boolean_
 </code></pre>
 <!-- START embed boolean 300 -->
 <div style="display:grid; grid-template-rows: auto minmax(0, 1fr); gap: 10px">
@@ -313,11 +321,15 @@ demoBoolean = ID.boolean_
 </div>
 <!-- END embed -->
 <h2 id="string"><a class="header" href="#string">String</a></h2>
-<pre><code class="language-hs">demoString :: forall html. Html html =&gt; DataUI' html _ _ String
-demoString = ID.string
-  { text: Just &quot;The name of a person&quot;
-  , maxLength: Just 100
-  }
+<pre><code class="language-hs">demoString
+  :: forall html
+   . Html html
+  =&gt; DataUI' html _ _ String
+demoString =
+  ID.string
+    { text: Just &quot;The name of a person&quot;
+    , maxLength: Just 100
+    }
 </code></pre>
 <!-- START embed string 300 -->
 <div style="display:grid; grid-template-rows: auto minmax(0, 1fr); gap: 10px">
@@ -341,8 +353,12 @@ demoString = ID.string
 </div>
 <!-- END embed -->
 <h2 id="number"><a class="header" href="#number">Number</a></h2>
-<pre><code class="language-hs">demoNumber :: forall html. Html html =&gt; DataUI' html _ _ Number
-demoNumber = ID.number_
+<pre><code class="language-hs">demoNumber
+  :: forall html
+   . Html html
+  =&gt; DataUI' html _ _ Number
+demoNumber =
+  ID.number_
 </code></pre>
 <!-- START embed number -->
 <div style="display:grid; grid-template-rows: auto minmax(0, 1fr); gap: 10px">
@@ -377,7 +393,10 @@ import InteractiveData as ID
 </code></pre>
 </details><hr><br>
 <!-- END imports -->
-<pre><code class="language-hs">demo :: forall html. Html html =&gt; DataUI' html _ _ (Array Int)
+<pre><code class="language-hs">demo
+  :: forall html
+   . Html html
+  =&gt; DataUI' html _ _ (Array Int)
 demo =
   ID.array { init: Just [ 1, 2, 3 ] }
     ID.int_
@@ -427,12 +446,19 @@ import InteractiveData as ID
 </code></pre>
 <h2 id="create-data-ui-for-the-specific-record-type"><a class="header" href="#create-data-ui-for-the-specific-record-type">Create Data UI for the specific Record type</a></h2>
 <p>Now we can create a Data UI with the <code>record_</code> function like this:</p>
-<pre><code class="language-hs">demoRecord :: forall html. Html html =&gt; DataUI' html _ _ User
+<pre><code class="language-hs">demoRecord
+  :: forall html
+   . Html html
+  =&gt; DataUI' html _ _ User
 demoRecord =
   ID.record_
-    { name: ID.string_
-    , age: ID.int_
-    , address: ID.string { text: Just &quot;Street and zip code&quot; }
+    { name:
+        ID.string_
+    , age:
+        ID.int_
+    , address:
+        ID.string
+          { text: Just &quot;Street and zip code&quot; }
     }
 </code></pre>
 <p>The UI will look like this:</p>
@@ -509,17 +535,25 @@ import InteractiveData as ID
 </code></pre>
 <h2 id="composing-a-data-ui-for-a-variant-type"><a class="header" href="#composing-a-data-ui-for-a-variant-type">Composing a Data UI for a variant type</a></h2>
 <p>And then compose a data UI for it:</p>
-<pre><code class="language-hs">demoVariant :: forall html. Html html =&gt; DataUI' html _ _ RemoteData
+<pre><code class="language-hs">demoVariant
+  :: forall html
+   . Html html
+  =&gt; DataUI' html _ _ RemoteData
 demoVariant =
   ID.variant_ @&quot;notAsked&quot;
-    { notAsked: ID.record_ {}
-    , loading: ID.record_ { progress: ID.number_ }
+    { notAsked:
+        ID.record_ {}
+    , loading:
+        ID.record_
+          { progress: ID.number_ }
     , failed:
         ID.record_
           { errorMessage: ID.string_
           , errorCode: ID.int_
           }
-    , success: ID.record_ { data: ID.string_ }
+    , success:
+        ID.record_
+          { data: ID.string_ }
     }
 </code></pre>
 <p>The UI will look like this:</p>
@@ -560,13 +594,17 @@ import InteractiveData as ID
 </code></pre>
 </details><hr><br>
 <!-- END imports -->
-<p>the interactive-data library provides Data UIs for common data types
+<p>The interactive-data library provides Data UIs for common data types
 like <code>Maybe</code>, <code>Either</code> and <code>Tuple</code>.</p>
 <h1 id="maybe"><a class="header" href="#maybe">Maybe</a></h1>
-<pre><code class="language-hs">demoMaybe :: forall html. Html html =&gt; DataUI' html _ _ (Maybe Int)
-demoMaybe = ID.maybe
-  { text: Just &quot;Call me maybe..&quot; }
-  ID.int_
+<pre><code class="language-hs">demoMaybe
+  :: forall html
+   . Html html
+  =&gt; DataUI' html _ _ (Maybe Int)
+demoMaybe =
+  ID.maybe
+    { text: Just &quot;Call me maybe..&quot; }
+    ID.int_
 </code></pre>
 <!-- START embed maybe 500 -->
 <div style="display:grid; grid-template-rows: auto minmax(0, 1fr); gap: 10px">
@@ -590,11 +628,15 @@ demoMaybe = ID.maybe
 </div>
 <!-- END embed -->
 <h1 id="either"><a class="header" href="#either">Either</a></h1>
-<pre><code class="language-hs">demoEither :: forall html. Html html =&gt; DataUI' html _ _ (Either String Int)
-demoEither = ID.either
-  { text: Just &quot;Some Result or some Error&quot; }
-  ID.string_
-  ID.int_
+<pre><code class="language-hs">demoEither
+  :: forall html
+   . Html html
+  =&gt; DataUI' html _ _ (Either String Int)
+demoEither =
+  ID.either
+    { text: Just &quot;Some Result or some Error&quot; }
+    ID.string_
+    ID.int_
 </code></pre>
 <!-- START embed either 500 -->
 <div style="display:grid; grid-template-rows: auto minmax(0, 1fr); gap: 10px">
@@ -618,11 +660,15 @@ demoEither = ID.either
 </div>
 <!-- END embed -->
 <h1 id="tuple"><a class="header" href="#tuple">Tuple</a></h1>
-<pre><code class="language-hs">demoTuple :: forall html. Html html =&gt; DataUI' html _ _ (Tuple Int String)
-demoTuple = ID.tuple
-  { text: Just &quot;Int and String&quot; }
-  ID.int_
-  ID.string_
+<pre><code class="language-hs">demoTuple
+  :: forall html
+   . Html html
+  =&gt; DataUI' html _ _ (Tuple Int String)
+demoTuple =
+  ID.tuple
+    { text: Just &quot;Int and String&quot; }
+    ID.int_
+    ID.string_
 </code></pre>
 <!-- START embed tuple 500 -->
 <div style="display:grid; grid-template-rows: auto minmax(0, 1fr); gap: 10px">
@@ -648,8 +694,12 @@ demoTuple = ID.tuple
 <h1 id="unit"><a class="header" href="#unit">Unit</a></h1>
 <p>There's even a Data UI for the unit type.
 It's useful in some cases. But it's UI is just empty.</p>
-<pre><code class="language-hs">demoUnit :: forall html. Html html =&gt; DataUI' html _ _ Unit
-demoUnit = ID.unit_
+<pre><code class="language-hs">demoUnit
+  :: forall html
+   . Html html
+  =&gt; DataUI' html _ _ Unit
+demoUnit =
+  ID.unit_
 </code></pre>
 <!-- START embed unit 200 -->
 <div style="display:grid; grid-template-rows: auto minmax(0, 1fr); gap: 10px">
@@ -704,13 +754,17 @@ instance Show CustomADT where
 </code></pre>
 <h2 id="composing-a-data-ui-for-the-type"><a class="header" href="#composing-a-data-ui-for-the-type">Composing a Data UI for the type</a></h2>
 <p>And then compose a data UI for it:</p>
-<pre><code class="language-hs">demoCustomType :: forall html. Html html =&gt; DataUI' html _ _ CustomADT
-demoCustomType = ID.generic_ @&quot;Foo&quot; (ID.TypeName &quot;CustomADT&quot;)
-  { &quot;Foo&quot;: ID.int_
-  , &quot;Bar&quot;: ID.string_
-  , &quot;Baz&quot;: ID.number_ ~ ID.boolean_
-  , &quot;Qux&quot;: unit
-  }
+<pre><code class="language-hs">demoCustomType
+  :: forall html
+   . Html html
+  =&gt; DataUI' html _ _ CustomADT
+demoCustomType =
+  ID.generic_ @&quot;Foo&quot; (ID.TypeName &quot;CustomADT&quot;)
+    { &quot;Foo&quot;: ID.int_
+    , &quot;Bar&quot;: ID.string_
+    , &quot;Baz&quot;: ID.number_ ~ ID.boolean_
+    , &quot;Qux&quot;: unit
+    }
 </code></pre>
 <p>The UI will look like this:</p>
 <!-- START embed customType 500 -->
@@ -759,10 +813,14 @@ instance Show UserId where
 </code></pre>
 <h2 id="composing-a-data-ui-for-the-newtype"><a class="header" href="#composing-a-data-ui-for-the-newtype">Composing a Data UI for the newtype</a></h2>
 <p>And then compose a data UI for it:</p>
-<pre><code class="language-hs">demo :: forall html. Html html =&gt; DataUI' html _ _ UserId
-demo = ID.newtype_ (ID.TypeName &quot;UserId&quot;)
-  $ ID.string
-      { multiline: false }
+<pre><code class="language-hs">demo
+  :: forall html
+   . Html html
+  =&gt; DataUI' html _ _ UserId
+demo =
+  ID.newtype_ (ID.TypeName &quot;UserId&quot;)
+    $ ID.string
+        { multiline: false }
 </code></pre>
 <p>The UI will look like this:</p>
 <!-- START embed simpleNewtype 500 -->
@@ -795,8 +853,8 @@ demo = ID.newtype_ (ID.TypeName &quot;UserId&quot;)
 
 import Chameleon (class Html)
 import Data.Array.NonEmpty as NonEmptyArray
-import Data.Bifunctor (lmap)
 import Data.Either (Either(..))
+import Data.String as String
 import Data.String.Regex (Regex)
 import Data.String.Regex as Regex
 import Data.String.Regex.Flags (noFlags)
@@ -815,28 +873,45 @@ mkUserId candidate =
   if Regex.test regexUserId candidate then
     Right (UserId candidate)
   else
-    Left &quot;Invalid UserId. Must be 8 characters long and only contain lowercase letters and numbers.&quot;
+    Left $ String.joinWith &quot; &quot;
+      [ &quot;Invalid UserId.&quot;
+      , &quot;Must be 8 characters long.&quot;
+      , &quot;Only lowercase letters and numbers.&quot;
+      ]
   where
   regexUserId :: Regex
-  regexUserId = unsafeRegex &quot;^[a-z0-9]{8}$&quot; noFlags
+  regexUserId =
+    unsafeRegex &quot;^[a-z0-9]{8}$&quot; noFlags
 </code></pre>
 <h2 id="define-instances-1"><a class="header" href="#define-instances-1">Define Instances</a></h2>
 <pre><code class="language-hs">instance Show UserId where
-  show (UserId s) = &quot;(unsafeFromString &quot; &lt;&gt; show s &lt;&gt; &quot;)&quot;
+  show (UserId s) =
+    &quot;(unsafeFromString &quot; &lt;&gt; show s &lt;&gt; &quot;)&quot;
 </code></pre>
 <h2 id="composing-a-data-ui-for-the-newtype-1"><a class="header" href="#composing-a-data-ui-for-the-newtype-1">Composing a Data UI for the newtype</a></h2>
 <p>And then compose a data UI for it:</p>
-<pre><code class="language-hs">demo :: forall html. Html html =&gt; DataUI' html _ _ UserId
-demo = ID.refineDataUi
-  { typeName: &quot;UserId&quot;
-  , refine
-  , unrefine
-  }
-  (ID.string { multiline: false })
+<pre><code class="language-hs">demo
+  :: forall html
+   . Html html
+  =&gt; DataUI' html _ _ UserId
+demo =
+  ID.refineDataUi
+    { typeName: &quot;UserId&quot;
+    , refine
+    , unrefine
+    }
+    (ID.string { multiline: false })
 
   where
   refine :: String -&gt; DataResult UserId
-  refine = mkUserId &gt;&gt;&gt; lmap (NonEmptyArray.singleton &lt;&lt;&lt; ID.mkDataError)
+  refine candidate =
+    case mkUserId candidate of
+      Right userId -&gt;
+        Right userId
+
+      Left errorMsg -&gt;
+        Left $ NonEmptyArray.singleton $
+          ID.mkDataError errorMsg
 
   unrefine :: UserId -&gt; String
   unrefine (UserId s) = s
@@ -877,7 +952,10 @@ import InteractiveData as ID
 </code></pre>
 </details><hr><br>
 <!-- END imports -->
-<pre><code class="language-hs">demo :: forall html. Html html =&gt; DataUI' html _ _ (Map Int String)
+<pre><code class="language-hs">demo
+  :: forall html
+   . Html html
+  =&gt; DataUI' html _ _ (Map Int String)
 demo = ID.json
   { init: Map.fromFoldable
       [ 1 /\ &quot;one&quot;
