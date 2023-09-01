@@ -495,15 +495,21 @@ or keep the final UI composition in a <code>let</code> or <code>where</code> cla
    . Html html
   =&gt; DataUI' html
        ( ID.RecordMsg
-           ( address :: ID.WrapMsg ID.StringMsg
-           , age :: ID.WrapMsg ID.IntMsg
-           , name :: ID.WrapMsg ID.StringMsg
+           ( address ::
+               ID.WrapMsg ID.StringMsg
+           , age ::
+               ID.WrapMsg ID.IntMsg
+           , name ::
+               ID.WrapMsg ID.StringMsg
            )
        )
        ( ID.RecordState
-           ( address :: ID.WrapState ID.StringState
-           , age :: ID.WrapState ID.IntState
-           , name :: ID.WrapState ID.StringState
+           ( address ::
+               ID.WrapState ID.StringState
+           , age ::
+               ID.WrapState ID.IntState
+           , name ::
+               ID.WrapState ID.StringState
            )
        )
        User
@@ -701,7 +707,7 @@ It's useful in some cases. But it's UI is just empty.</p>
 demoUnit =
   ID.unit_
 </code></pre>
-<!-- START embed unit 200 -->
+<!-- START embed unit 250 -->
 <div style="display:grid; grid-template-rows: auto minmax(0, 1fr); gap: 10px">
   <div style="display: flex; justify-content: flex-end">
     <a href="generated/ComposingDataUIs//docs-embed?unit">
@@ -716,7 +722,7 @@ demoUnit =
     allowtransparency="true"
     style="border: 0px"
     width="100%"
-    height="200"
+    height="250"
     src="/docs-embed?unit"
     >
   </iframe>
@@ -1058,7 +1064,8 @@ import InteractiveData as ID
 <pre><code class="language-hs">newtype Color = Color String
 
 instance Show Color where
-  show (Color s) = &quot;(Color &quot; &lt;&gt; show s &lt;&gt; &quot;)&quot;
+  show (Color s) =
+    &quot;(Color &quot; &lt;&gt; show s &lt;&gt; &quot;)&quot;
 </code></pre>
 <h2 id="define-a-view"><a class="header" href="#define-a-view">Define a view</a></h2>
 <pre><code class="language-hs">type ViewColorCfg =
@@ -1079,34 +1086,41 @@ view = \_ (Color colorValue) -&gt;
         , C.onInput Color
         , C.value colorValue
         ]
-    , C.text &quot; Example of a custom Data UI, pick a color!&quot;
     ]
 </code></pre>
 <h2 id="optionally-define-actions"><a class="header" href="#optionally-define-actions">Optionally define actions</a></h2>
-<pre><code class="language-hs">actions :: Color -&gt; Array (ID.DataAction Color)
+<pre><code class="language-hs">actions
+  :: Color
+  -&gt; Array (ID.DataAction Color)
 actions _ =
   [ ID.DataAction
       { label: &quot;Red&quot;
       , msg: This $ Color &quot;#ff0000&quot;
-      , description: &quot;Set the color to red&quot;
+      , description:
+          &quot;Set the color to red&quot;
       }
   , ID.DataAction
       { label: &quot;Green&quot;
       , msg: This $ Color &quot;#00ff00&quot;
-      , description: &quot;Set the color to green&quot;
+      , description:
+          &quot;Set the color to green&quot;
       }
   , ID.DataAction
       { label: &quot;Blue&quot;
       , msg: This $ Color &quot;#0000ff&quot;
-      , description: &quot;Set the color to blue&quot;
+      , description:
+          &quot;Set the color to blue&quot;
       }
   ]
 </code></pre>
 <h2 id="define-the-data-ui"><a class="header" href="#define-the-data-ui">Define the Data UI</a></h2>
-<pre><code class="language-hs">color
+<pre><code class="language-hs">type ColorCfg =
+  ID.TrivialCfg ViewColorCfg Color
+
+color
   :: forall opt html
    . Html html
-  =&gt; ID.OptArgs (ID.TrivialCfg ViewColorCfg Color) opt
+  =&gt; ID.OptArgs ColorCfg opt
   =&gt; opt
   -&gt; DataUI' html Color Color Color
 color =
@@ -1115,7 +1129,10 @@ color =
     , view
     , typeName: &quot;Color&quot;
     , actions
-    , defaultConfig: { extraConfig1: &quot;a&quot;, extraConfig2: 0 }
+    , defaultConfig:
+        { extraConfig1: &quot;foo&quot;
+        , extraConfig2: 0
+        }
     }
 </code></pre>
 <h2 id="use-the-data-ui"><a class="header" href="#use-the-data-ui">Use the Data UI</a></h2>
@@ -1124,8 +1141,8 @@ color =
    . Html html
   =&gt; DataUI' html Color Color Color
 demo = color
-  { text: Just &quot;Hello!&quot;
-  , extraConfig1: &quot;a&quot;
+  { text: Just &quot;Pick a color!&quot;
+  , extraConfig1: &quot;bar&quot;
   , extraConfig2: 1
   }
 </code></pre>
