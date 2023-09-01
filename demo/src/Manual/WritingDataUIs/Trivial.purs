@@ -28,7 +28,8 @@ import InteractiveData as ID
 newtype Color = Color String
 
 instance Show Color where
-  show (Color s) = "(Color " <> show s <> ")"
+  show (Color s) =
+    "(Color " <> show s <> ")"
 
 {-
 
@@ -54,7 +55,6 @@ view = \_ (Color colorValue) ->
         , C.onInput Color
         , C.value colorValue
         ]
-    , C.text " Example of a custom Data UI, pick a color!"
     ]
 
 {-
@@ -62,22 +62,27 @@ view = \_ (Color colorValue) ->
 ## Optionally define actions
 -}
 
-actions :: Color -> Array (ID.DataAction Color)
+actions
+  :: Color
+  -> Array (ID.DataAction Color)
 actions _ =
   [ ID.DataAction
       { label: "Red"
       , msg: This $ Color "#ff0000"
-      , description: "Set the color to red"
+      , description:
+          "Set the color to red"
       }
   , ID.DataAction
       { label: "Green"
       , msg: This $ Color "#00ff00"
-      , description: "Set the color to green"
+      , description:
+          "Set the color to green"
       }
   , ID.DataAction
       { label: "Blue"
       , msg: This $ Color "#0000ff"
-      , description: "Set the color to blue"
+      , description:
+          "Set the color to blue"
       }
   ]
 
@@ -86,10 +91,13 @@ actions _ =
 ## Define the Data UI
 -}
 
+type ColorCfg =
+  ID.TrivialCfg ViewColorCfg Color
+
 color
   :: forall opt html
    . Html html
-  => ID.OptArgs (ID.TrivialCfg ViewColorCfg Color) opt
+  => ID.OptArgs ColorCfg opt
   => opt
   -> DataUI' html Color Color Color
 color =
@@ -98,7 +106,10 @@ color =
     , view
     , typeName: "Color"
     , actions
-    , defaultConfig: { extraConfig1: "a", extraConfig2: 0 }
+    , defaultConfig:
+        { extraConfig1: "foo"
+        , extraConfig2: 0
+        }
     }
 
 {-
@@ -111,8 +122,8 @@ demo
    . Html html
   => DataUI' html Color Color Color
 demo = color
-  { text: Just "Hello!"
-  , extraConfig1: "a"
+  { text: Just "Pick a color!"
+  , extraConfig1: "bar"
   , extraConfig2: 1
   }
 
