@@ -310,7 +310,7 @@ viewRoot { atControls, atImage } =
             <>
               case atImage of
                 Left {} -> []
-                Right { atJson, atPicture } ->
+                Right { atPicture } ->
                   [ el.itemPicture []
                       [ el.label []
                           [ C.text "Sample data rendering" ]
