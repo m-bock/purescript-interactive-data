@@ -51,7 +51,9 @@ demoRecord =
         ID.int_
     , address:
         ID.string
-          { text: Just "Street and zip code" }
+          { text: Just
+              "Street and zip code"
+          }
     }
 
 {-
@@ -78,20 +80,26 @@ sampleRecord5
   => DataUI' html
        ( ID.RecordMsg
            ( address ::
-               ID.WrapMsg ID.StringMsg
+               ID.WrapMsg
+                 ID.StringMsg
            , age ::
-               ID.WrapMsg ID.IntMsg
+               ID.WrapMsg
+                 ID.IntMsg
            , name ::
-               ID.WrapMsg ID.StringMsg
+               ID.WrapMsg
+                 ID.StringMsg
            )
        )
        ( ID.RecordState
            ( address ::
-               ID.WrapState ID.StringState
+               ID.WrapState
+                 ID.StringState
            , age ::
-               ID.WrapState ID.IntState
+               ID.WrapState
+                 ID.IntState
            , name ::
-               ID.WrapState ID.StringState
+               ID.WrapState
+                 ID.StringState
            )
        )
        User

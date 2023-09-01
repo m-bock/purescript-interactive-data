@@ -51,10 +51,13 @@ demoMaybe =
 demoEither
   :: forall html
    . Html html
-  => DataUI' html _ _ (Either String Int)
+  => DataUI' html _ _
+       (Either String Int)
 demoEither =
   ID.either
-    { text: Just "Some Result or some Error" }
+    { text: Just
+        "Some Result or some Error"
+    }
     ID.string_
     ID.int_
 
@@ -70,7 +73,8 @@ demoEither =
 demoTuple
   :: forall html
    . Html html
-  => DataUI' html _ _ (Tuple Int String)
+  => DataUI' html _ _
+       (Tuple Int String)
 demoTuple =
   ID.tuple
     { text: Just "Int and String" }

@@ -41,20 +41,27 @@ Create a smart constructor for the newtype:
 
 -}
 
-mkUserId :: String -> Either String UserId
+mkUserId
+  :: String -> Either String UserId
 mkUserId candidate =
-  if Regex.test regexUserId candidate then
-    Right (UserId candidate)
-  else
-    Left $ String.joinWith " "
+  let
+    result =
+      Regex.test regexUserId candidate
+
+    errorMsg = String.joinWith " "
       [ "Invalid UserId."
       , "Must be 8 characters long."
       , "Only lowercase letters and numbers."
       ]
-  where
-  regexUserId :: Regex
-  regexUserId =
-    unsafeRegex "^[a-z0-9]{8}$" noFlags
+  in
+    if result then
+      Right (UserId candidate)
+    else
+      Left errorMsg
+
+regexUserId :: Regex
+regexUserId =
+  unsafeRegex "^[a-z0-9]{8}$" noFlags
 
 {-
 
@@ -64,7 +71,9 @@ mkUserId candidate =
 
 instance Show UserId where
   show (UserId s) =
-    "(unsafeFromString " <> show s <> ")"
+    "(unsafeFromString "
+      <> show s
+      <> ")"
 
 {-
 

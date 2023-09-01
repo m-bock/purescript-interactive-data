@@ -34,7 +34,10 @@ type Sample = Array
   , extraNote :: Maybe String
   }
 
-demo :: forall html. Html html => DataUI' html _ _ Sample
+demo
+  :: forall html
+   . Html html
+  => DataUI' html _ _ Sample
 demo = ID.dataUi
 
 {-

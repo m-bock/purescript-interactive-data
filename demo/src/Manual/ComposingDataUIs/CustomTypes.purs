@@ -58,7 +58,8 @@ demoCustomType
    . Html html
   => DataUI' html _ _ CustomADT
 demoCustomType =
-  ID.generic_ @"Foo" (ID.TypeName "CustomADT")
+  ID.generic_ @"Foo"
+    (ID.TypeName "CustomADT")
     { "Foo": ID.int_
     , "Bar": ID.string_
     , "Baz": ID.number_ ~ ID.boolean_
