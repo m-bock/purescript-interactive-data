@@ -79,9 +79,14 @@ viewStandalone { viewContent, actions, typeName, text, filteredErrors } =
                   mempty
             ]
         , content: C.div
+
         , actions:
             styleNode C.div
-              [ "display: flex" ]
+              [ "display: flex"
+              , "flex-wrap: wrap"
+              , "justify-content: flex-end"
+              ]
+
         , item:
             styleNode C.div
               case ctx.viewMode of

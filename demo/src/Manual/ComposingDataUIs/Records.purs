@@ -77,15 +77,21 @@ sampleRecord5
    . Html html
   => DataUI' html
        ( ID.RecordMsg
-           ( address :: ID.WrapMsg ID.StringMsg
-           , age :: ID.WrapMsg ID.IntMsg
-           , name :: ID.WrapMsg ID.StringMsg
+           ( address ::
+               ID.WrapMsg ID.StringMsg
+           , age ::
+               ID.WrapMsg ID.IntMsg
+           , name ::
+               ID.WrapMsg ID.StringMsg
            )
        )
        ( ID.RecordState
-           ( address :: ID.WrapState ID.StringState
-           , age :: ID.WrapState ID.IntState
-           , name :: ID.WrapState ID.StringState
+           ( address ::
+               ID.WrapState ID.StringState
+           , age ::
+               ID.WrapState ID.IntState
+           , name ::
+               ID.WrapState ID.StringState
            )
        )
        User

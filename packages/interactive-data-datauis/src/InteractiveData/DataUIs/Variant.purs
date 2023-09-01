@@ -41,12 +41,12 @@ view { mkMsg, caseKey, caseKeys } =
       el =
         { caseLabels: styleNode C.div
             [ "display: flex"
-            , "flex-direction: column"
             , case ctx.viewMode of
                 Inline -> "flex-direction: column"
                 Standalone -> "flex-direction: row"
             , "gap: 5px"
             , "margin-bottom: 15px"
+            , "flex-wrap: wrap"
             ]
         , caseLabel: C.div
         }
