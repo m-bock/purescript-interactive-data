@@ -33,12 +33,16 @@ The interactive-data library provides Data UIs for the following PureScript prim
 ## Int
 -}
 
-demoInt :: forall html. Html html => DataUI' html _ _ Int
-demoInt = ID.int
-  { text: Just "The age of a person"
-  , min: 0
-  , max: 120
-  }
+demoInt
+  :: forall html
+   . Html html
+  => DataUI' html _ _ Int
+demoInt =
+  ID.int
+    { text: Just "The age of a person"
+    , min: 0
+    , max: 120
+    }
 
 {-
 <!-- START embed int 300 -->
@@ -47,8 +51,12 @@ demoInt = ID.int
 ## Boolean
 -}
 
-demoBoolean :: forall html. Html html => DataUI' html _ _ Boolean
-demoBoolean = ID.boolean_
+demoBoolean
+  :: forall html
+   . Html html
+  => DataUI' html _ _ Boolean
+demoBoolean =
+  ID.boolean_
 
 {-
 <!-- START embed boolean 300 -->
@@ -57,11 +65,15 @@ demoBoolean = ID.boolean_
 ## String
 -}
 
-demoString :: forall html. Html html => DataUI' html _ _ String
-demoString = ID.string
-  { text: Just "The name of a person"
-  , maxLength: Just 100
-  }
+demoString
+  :: forall html
+   . Html html
+  => DataUI' html _ _ String
+demoString =
+  ID.string
+    { text: Just "The name of a person"
+    , maxLength: Just 100
+    }
 
 {-
 <!-- START embed string 300 -->
@@ -70,8 +82,12 @@ demoString = ID.string
 ## Number
 -}
 
-demoNumber :: forall html. Html html => DataUI' html _ _ Number
-demoNumber = ID.number_
+demoNumber
+  :: forall html
+   . Html html
+  => DataUI' html _ _ Number
+demoNumber =
+  ID.number_
 
 {-
 <!-- START embed number -->

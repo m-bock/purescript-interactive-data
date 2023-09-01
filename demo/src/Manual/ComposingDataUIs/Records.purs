@@ -39,12 +39,19 @@ type User =
 Now we can create a Data UI with the `record_` function like this:
 -}
 
-demoRecord :: forall html. Html html => DataUI' html _ _ User
+demoRecord
+  :: forall html
+   . Html html
+  => DataUI' html _ _ User
 demoRecord =
   ID.record_
-    { name: ID.string_
-    , age: ID.int_
-    , address: ID.string { text: Just "Street and zip code" }
+    { name:
+        ID.string_
+    , age:
+        ID.int_
+    , address:
+        ID.string
+          { text: Just "Street and zip code" }
     }
 
 {-

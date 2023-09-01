@@ -24,7 +24,10 @@ import InteractiveData as ID
 
 -}
 
-demo :: forall html. Html html => DataUI' html _ _ (Map Int String)
+demo
+  :: forall html
+   . Html html
+  => DataUI' html _ _ (Map Int String)
 demo = ID.json
   { init: Map.fromFoldable
       [ 1 /\ "one"

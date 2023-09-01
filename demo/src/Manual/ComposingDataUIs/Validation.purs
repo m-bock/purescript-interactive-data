@@ -18,8 +18,8 @@ import Prelude
 
 import Chameleon (class Html)
 import Data.Array.NonEmpty as NonEmptyArray
-import Data.Bifunctor (lmap)
 import Data.Either (Either(..))
+import Data.String as String
 import Data.String.Regex (Regex)
 import Data.String.Regex as Regex
 import Data.String.Regex.Flags (noFlags)
@@ -46,10 +46,15 @@ mkUserId candidate =
   if Regex.test regexUserId candidate then
     Right (UserId candidate)
   else
-    Left "Invalid UserId. Must be 8 characters long and only contain lowercase letters and numbers."
+    Left $ String.joinWith " "
+      [ "Invalid UserId."
+      , "Must be 8 characters long."
+      , "Only lowercase letters and numbers."
+      ]
   where
   regexUserId :: Regex
-  regexUserId = unsafeRegex "^[a-z0-9]{8}$" noFlags
+  regexUserId =
+    unsafeRegex "^[a-z0-9]{8}$" noFlags
 
 {-
 
@@ -58,7 +63,8 @@ mkUserId candidate =
 -}
 
 instance Show UserId where
-  show (UserId s) = "(unsafeFromString " <> show s <> ")"
+  show (UserId s) =
+    "(unsafeFromString " <> show s <> ")"
 
 {-
 
@@ -68,17 +74,28 @@ And then compose a data UI for it:
 
 -}
 
-demo :: forall html. Html html => DataUI' html _ _ UserId
-demo = ID.refineDataUi
-  { typeName: "UserId"
-  , refine
-  , unrefine
-  }
-  (ID.string { multiline: false })
+demo
+  :: forall html
+   . Html html
+  => DataUI' html _ _ UserId
+demo =
+  ID.refineDataUi
+    { typeName: "UserId"
+    , refine
+    , unrefine
+    }
+    (ID.string { multiline: false })
 
   where
   refine :: String -> DataResult UserId
-  refine = mkUserId >>> lmap (NonEmptyArray.singleton <<< ID.mkDataError)
+  refine candidate =
+    case mkUserId candidate of
+      Right userId ->
+        Right userId
+
+      Left errorMsg ->
+        Left $ NonEmptyArray.singleton $
+          ID.mkDataError errorMsg
 
   unrefine :: UserId -> String
   unrefine (UserId s) = s

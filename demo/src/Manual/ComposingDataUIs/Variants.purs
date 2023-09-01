@@ -41,17 +41,25 @@ And then compose a data UI for it:
 
 -}
 
-demoVariant :: forall html. Html html => DataUI' html _ _ RemoteData
+demoVariant
+  :: forall html
+   . Html html
+  => DataUI' html _ _ RemoteData
 demoVariant =
   ID.variant_ @"notAsked"
-    { notAsked: ID.record_ {}
-    , loading: ID.record_ { progress: ID.number_ }
+    { notAsked:
+        ID.record_ {}
+    , loading:
+        ID.record_
+          { progress: ID.number_ }
     , failed:
         ID.record_
           { errorMessage: ID.string_
           , errorCode: ID.int_
           }
-    , success: ID.record_ { data: ID.string_ }
+    , success:
+        ID.record_
+          { data: ID.string_ }
     }
 
 {-

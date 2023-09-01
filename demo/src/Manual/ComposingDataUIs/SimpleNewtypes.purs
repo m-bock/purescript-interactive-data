@@ -44,10 +44,14 @@ And then compose a data UI for it:
 
 -}
 
-demo :: forall html. Html html => DataUI' html _ _ UserId
-demo = ID.newtype_ (ID.TypeName "UserId")
-  $ ID.string
-      { multiline: false }
+demo
+  :: forall html
+   . Html html
+  => DataUI' html _ _ UserId
+demo =
+  ID.newtype_ (ID.TypeName "UserId")
+    $ ID.string
+        { multiline: false }
 
 {-
 

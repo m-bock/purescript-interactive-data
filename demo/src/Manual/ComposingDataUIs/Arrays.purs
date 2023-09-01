@@ -19,7 +19,10 @@ import InteractiveData as ID
 <!-- END imports -->
 -}
 
-demo :: forall html. Html html => DataUI' html _ _ (Array Int)
+demo
+  :: forall html
+   . Html html
+  => DataUI' html _ _ (Array Int)
 demo =
   ID.array { init: Just [ 1, 2, 3 ] }
     ID.int_

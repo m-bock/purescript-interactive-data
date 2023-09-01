@@ -76,22 +76,17 @@ update msg state@(JsonState val) =
 
 view :: forall html. IDHtml html => { rows :: Int } -> JsonState -> html JsonMsg
 view { rows } (JsonState value) =
-  let
-    el =
-      { textarea: styleNode C.textarea
-          [ "width: 100%"
-          , "font-family: monospace"
-          , "border: 1px solid #ccc"
-          , "border-radius: 3px"
-          ]
-      }
-  in
-    el.textarea
-      [ C.onInput SetJson
-      , C.value value
-      , C.rows $ Int.toNumber rows
-      ]
-      []
+  -- let
+  --   el =
+  --     { textarea: styleNode C.textarea
+  --         [ "width: 100%"
+  --         , "font-family: monospace"
+  --         , "border: 1px solid #ccc"
+  --         , "border-radius: 3px"
+  --         ]
+  --     }
+  -- in
+  C.text "x"
 
 -------------------------------------------------------------------------------
 --- DataActions

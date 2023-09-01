@@ -22,7 +22,7 @@ import InteractiveData as ID
 {-
 <!-- END imports -->
 
-the interactive-data library provides Data UIs for common data types
+The interactive-data library provides Data UIs for common data types
 like `Maybe`, `Either` and `Tuple`.
 
 
@@ -30,10 +30,14 @@ like `Maybe`, `Either` and `Tuple`.
 
 -}
 
-demoMaybe :: forall html. Html html => DataUI' html _ _ (Maybe Int)
-demoMaybe = ID.maybe
-  { text: Just "Call me maybe.." }
-  ID.int_
+demoMaybe
+  :: forall html
+   . Html html
+  => DataUI' html _ _ (Maybe Int)
+demoMaybe =
+  ID.maybe
+    { text: Just "Call me maybe.." }
+    ID.int_
 
 {-
 
@@ -44,11 +48,15 @@ demoMaybe = ID.maybe
 
 -}
 
-demoEither :: forall html. Html html => DataUI' html _ _ (Either String Int)
-demoEither = ID.either
-  { text: Just "Some Result or some Error" }
-  ID.string_
-  ID.int_
+demoEither
+  :: forall html
+   . Html html
+  => DataUI' html _ _ (Either String Int)
+demoEither =
+  ID.either
+    { text: Just "Some Result or some Error" }
+    ID.string_
+    ID.int_
 
 {-
 
@@ -59,11 +67,15 @@ demoEither = ID.either
 
 -}
 
-demoTuple :: forall html. Html html => DataUI' html _ _ (Tuple Int String)
-demoTuple = ID.tuple
-  { text: Just "Int and String" }
-  ID.int_
-  ID.string_
+demoTuple
+  :: forall html
+   . Html html
+  => DataUI' html _ _ (Tuple Int String)
+demoTuple =
+  ID.tuple
+    { text: Just "Int and String" }
+    ID.int_
+    ID.string_
 
 {-
 
@@ -76,8 +88,12 @@ There's even a Data UI for the unit type.
 It's useful in some cases. But it's UI is just empty.
 -}
 
-demoUnit :: forall html. Html html => DataUI' html _ _ Unit
-demoUnit = ID.unit_
+demoUnit
+  :: forall html
+   . Html html
+  => DataUI' html _ _ Unit
+demoUnit =
+  ID.unit_
 
 {-
 
