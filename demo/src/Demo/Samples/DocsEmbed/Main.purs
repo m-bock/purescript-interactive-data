@@ -117,6 +117,9 @@ viewWrapper { atInteractiveData, atDataStr } =
           [ "font-size: 10px"
           , "color: #c3c3c3"
           , "padding: 0 10px"
+          , "height: 80px"
+          , "overflow: auto"
+          , "background: #1d1f21"
           ]
       }
   in
