@@ -229,8 +229,7 @@ viewRoot { atControls, atImage } =
   let
     el =
       { root: styleNode C.div
-          [ "display: grid"
-          , "position: fixed"
+          [ "position: fixed"
           , "top: 0"
           , "left: 0"
           , "width: 100%"
@@ -242,9 +241,8 @@ viewRoot { atControls, atImage } =
           , "grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr)"
           , "grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr"
           , "gap: 60px 30px"
-          , "height: 800px"
+          , "height: 100%"
           , "max-width: 800px"
-          , "place-self: center"
           ]
       , itemControls: styleNode C.div
           [ "background-color: #eee"
@@ -257,20 +255,20 @@ viewRoot { atControls, atImage } =
           [ "background-color: #eee"
           , "border: 1px solid #333"
           , "padding: 10px"
-          , "grid-column: 1 / 3"
+          , "grid-column: 1 / 4"
           , "grid-row: 5 / 7"
           , "border-radius: 5px"
           , "position: relative"
           ]
-      , itemJson: styleNode C.div
-          [ "background-color: #eee"
-          , "border: 1px solid #333"
-          , "padding: 10px"
-          , "grid-column: 3 / 4"
-          , "grid-row: 5 / 7"
-          , "border-radius: 5px"
-          , "position: relative"
-          ]
+      -- , itemJson: styleNode C.div
+      --     [ "background-color: #eee"
+      --     , "border: 1px solid #333"
+      --     , "padding: 10px"
+      --     , "grid-column: 3 / 4"
+      --     , "grid-row: 5 / 7"
+      --     , "border-radius: 5px"
+      --     , "position: relative"
+      --     ]
       , label: styleNode C.div
           [ "font-size: 12px"
           , "color: #333"
@@ -308,21 +306,22 @@ viewRoot { atControls, atImage } =
               , atControls
               ]
 
-          ] <>
-            case atImage of
-              Left {} -> []
-              Right { atJson, atPicture } ->
-                [ el.itemPicture []
-                    [ el.label []
-                        [ C.text "Sample data rendering" ]
-                    , atPicture
-                    ]
-                , el.itemJson []
-                    [ el.label []
-                        [ C.text "JSON encoded data" ]
-                    , atJson
-                    ]
-                ]
+          ]
+            <>
+              case atImage of
+                Left {} -> []
+                Right { atJson, atPicture } ->
+                  [ el.itemPicture []
+                      [ el.label []
+                          [ C.text "Sample data rendering" ]
+                      , atPicture
+                      ]
+                  -- , el.itemJson []
+                  --     [ el.label []
+                  --         [ C.text "JSON encoded data" ]
+                  --     , atJson
+                  --     ]
+                  ]
       , el.linkSection []
           [ el.link [ C.href "https://github.com/thought2/purescript-interactive-data" ]
               [ C.text "Github" ]
