@@ -238,11 +238,13 @@ myHalogenComponent =
 
   handleAction msg = do
     H.modify_ $ ui.update msg
+
     state &lt;- H.get
     logShow $ extract state
+    -- ^ On every action,
+    --   log the current state
 
--- ^ On every action,
---   log the current state
+    pure unit
 </code></pre>
 <h2 id="mount-the-component-to-the-dom"><a class="header" href="#mount-the-component-to-the-dom">Mount the component to the DOM</a></h2>
 <p>This step should be familiar to you if you have used Halogen before.</p>
