@@ -1,10 +1,11 @@
 module InteractiveData.DataUIs.String
-  ( StringMsg
+  ( CfgString
+  , StringMsg
   , StringState
-  , CfgString
+  , defaultCfgString
+  , moduleName
   , string
   , string_
-  , defaultCfgString
   ) where
 
 import InteractiveData.Core.Prelude
@@ -12,6 +13,14 @@ import InteractiveData.Core.Prelude
 import Chameleon as C
 import Data.Int as Int
 import Data.String as Str
+import InteractiveData.DataUIs.StyledExtra (styledElems)
+
+{- START moduleName -}
+
+moduleName :: String
+moduleName = "InteractiveData.DataUIs.String"
+
+{- END moduleName -}
 
 -------------------------------------------------------------------------------
 --- Types
@@ -67,20 +76,23 @@ view
   (StringState state) =
   withCtx \ctx ->
     let
-      el =
+      scope :: String
+      scope = {- START scope -} "InteractiveData.DataUIs.String#view" {- END scope -}
+
+      el = styledElems scope
         { root: C.div
-        , input: styleLeaf C.input
+        , input: C.input /\
             [ "width: 100%"
             , "border: 1px solid #ccc"
             , "border-radius: 3px"
             ]
-        , textarea: styleNode C.textarea
+        , textarea: C.textarea /\
             [ "width: 100%"
             , "font-family: 'Signika Negative'"
             , "border: 1px solid #ccc"
             , "border-radius: 3px"
             ]
-        , details: styleNode C.div
+        , details: C.div /\
             [ "font-size: 10px"
             , "margin-top: 5px"
             ]
@@ -89,7 +101,8 @@ view
       multiLineInput :: html StringMsg
       multiLineInput =
         el.textarea
-          [ C.onInput SetString
+          [ C.id scope
+          , C.onInput SetString
           , C.value state
           , C.rows $ Int.toNumber rows
           , maybe C.noProp C.maxlength maxLength
@@ -99,7 +112,9 @@ view
       singleLineInput :: html StringMsg
       singleLineInput =
         el.input
-          [ C.type_ "text"
+          [ C.id ("input__" <> scope)
+          , C.attr "data-foo" "bar"
+          , C.type_ "text"
           , C.onInput SetString
           , C.value state
           , maybe C.noProp C.maxlength maxLength
@@ -110,15 +125,14 @@ view
         if isMultiline then multiLineInput
         else singleLineInput
     in
-      case ctx.viewMode of
-        Standalone ->
-          el.root []
+      el.root [ C.id moduleName ]
+        case ctx.viewMode of
+          Standalone ->
             [ getLineInput multiline
-            , el.details []
+            , el.details [ C.id "details" ]
                 [ C.text ("Length: " <> show (Str.length state)) ]
             ]
-        Inline ->
-          el.root []
+          Inline ->
             [ singleLineInput
             ]
 

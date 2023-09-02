@@ -87,11 +87,13 @@ myHalogenComponent =
 
   handleAction msg = do
     H.modify_ $ ui.update msg
+
     state <- H.get
     logShow $ extract state
+    -- ^ On every action,
+    --   log the current state
 
--- ^ On every action,
---   log the current state
+    pure unit
 
 {-
 ## Mount the component to the DOM

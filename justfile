@@ -118,6 +118,9 @@ gen-readme:
     node scripts/gen-readme.js
     doctoc README.md
 
+gen-purs:
+    node scripts/gen-purs.js
+
 gen-mdbook:
     #!/bin/bash
     node scripts/gen-mdbook.js

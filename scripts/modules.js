@@ -104,20 +104,10 @@ const main = () => {
 
   const mods = getModList(graph);
 
-    // for (let i = 0; i < mods.length; i++) {
-    //   const mod = mods[i];
-    //   console.log(`${i + 1}. ${mod.modulePath}`);
-    //   for (const dep of mod.importedBy) {
-    //     console.log(`      - ${graph[dep].modulePath}`);
-    //   }
-    //   console.log(``);
-    // }
-
   for (let mod of mods) {
     console.log(mod.modulePath);
   }
 
-  // console.log(mods.length)
 };
 
 main();
