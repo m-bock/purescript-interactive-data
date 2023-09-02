@@ -20,6 +20,10 @@ workspace:
         - "strings"
         - "tuples"
 
+    ts-bridge:
+      git: "https://github.com/thought2/purescript-ts-bridge.git"
+      ref: ca18c863330a383bf67bce452af75e9c089693ce
+
   package_set:
     registry: 36.0.0
   build_opts:
