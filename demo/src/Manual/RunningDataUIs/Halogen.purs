@@ -20,6 +20,7 @@ import Effect.Aff (Aff)
 import Effect.Class.Console (logShow)
 import Halogen as H
 import Halogen.Aff as HA
+import Halogen.HTML as HE
 import Halogen.VDom.Driver as HD
 import InteractiveData (InteractiveDataApp)
 import InteractiveData as ID
@@ -27,7 +28,8 @@ import InteractiveData as ID
 {-
 <!-- END imports -->
 
-This chapters describes how to run a Data UI with Halogen.
+This chapter describes how to run a Data UI with Halogen.
+The code example is self-contained.
 
 ## Create an `InteractiveDataApp`
 Refer to the previous chapters for details about this step.
@@ -68,16 +70,28 @@ myHalogenComponent =
     }
   where
   { ui, extract } = myApp
+  -- ^ Unwrap some useful values
 
   initialState _ = ui.init
 
   render state =
-    runHalogenHtml $ ui.view state
+    HE.div_
+      [ runHalogenHtml $ ui.view state
+      -- ^ Embed interactive-data
+      --   control panel
+
+      , HE.text (show $ extract state)
+      -- ^ Some other Halogen HTML
+      --   Shows current data
+      ]
 
   handleAction msg = do
     H.modify_ $ ui.update msg
     state <- H.get
     logShow $ extract state
+
+-- ^ On every action,
+--   log the current state
 
 {-
 ## Mount the component to the DOM
