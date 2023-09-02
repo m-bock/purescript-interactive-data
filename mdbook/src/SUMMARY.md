@@ -26,8 +26,8 @@
 - [General Concepts]()
   - [Standalone and Inline views]()
   - [Fast Forwarding]()
-- [Running Data UIs]()
-  - [Halogen]()
+- [Running Data UIs](./generated/RunningDataUIs.md)
+  - [Halogen](./generated/RunningDataUIs/Halogen.md)
   - [React Basic]()
 
 # Appendix

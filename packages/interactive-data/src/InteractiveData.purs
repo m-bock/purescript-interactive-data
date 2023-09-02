@@ -101,6 +101,7 @@ import InteractiveData.Entry
   ( toApp
   , mkDataError
   , DataUI'
+  , InteractiveDataApp
   ) as Export
 
 import DataMVC.Types
