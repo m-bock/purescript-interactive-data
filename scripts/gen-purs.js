@@ -18,7 +18,7 @@ moduleName = "${moduleName}"
   },
   name: (content, arg, index, fileSource) => {
     const name = getClosestName(fileSource, index);
-    return `  "${name}" `;
+    return `  "#${name}" `;
   },
   scope: (content, arg, index, fileSource) => {
     const name = getClosestName(fileSource, index);

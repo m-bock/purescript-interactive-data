@@ -13,7 +13,6 @@ import InteractiveData.Core.Prelude
 import Chameleon as C
 import Data.Int as Int
 import Data.String as Str
-import InteractiveData.DataUIs.StyledExtra (styledElems)
 
 {- START moduleName -}
 
@@ -76,10 +75,10 @@ view
   (StringState state) =
   withCtx \ctx ->
     let
-      scope :: String
-      scope = {- START scope -} "InteractiveData.DataUIs.String#view" {- END scope -}
+      name :: String
+      name = {- START name -}  "#view" {- END name -}
 
-      el = styledElems scope
+      el = styledElems (moduleName <> name)
         { root: C.div
         , input: C.input /\
             [ "width: 100%"
@@ -101,8 +100,7 @@ view
       multiLineInput :: html StringMsg
       multiLineInput =
         el.textarea
-          [ C.id scope
-          , C.onInput SetString
+          [ C.onInput SetString
           , C.value state
           , C.rows $ Int.toNumber rows
           , maybe C.noProp C.maxlength maxLength
@@ -112,9 +110,7 @@ view
       singleLineInput :: html StringMsg
       singleLineInput =
         el.input
-          [ C.id ("input__" <> scope)
-          , C.attr "data-foo" "bar"
-          , C.type_ "text"
+          [ C.type_ "text"
           , C.onInput SetString
           , C.value state
           , maybe C.noProp C.maxlength maxLength
@@ -125,7 +121,7 @@ view
         if isMultiline then multiLineInput
         else singleLineInput
     in
-      el.root [ C.id moduleName ]
+      el.root_
         case ctx.viewMode of
           Standalone ->
             [ getLineInput multiline

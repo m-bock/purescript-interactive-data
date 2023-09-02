@@ -260,3 +260,7 @@ import InteractiveData.Core
 import InteractiveData.Core.Util.RecordProjection
   ( pick
   ) as Export
+
+import InteractiveData.Core.StyledExtra
+  ( styledElems
+  ) as Export

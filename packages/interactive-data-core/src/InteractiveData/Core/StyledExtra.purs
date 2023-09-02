@@ -1,4 +1,4 @@
-module InteractiveData.DataUIs.StyledExtra
+module InteractiveData.Core.StyledExtra
   ( class StyledElems
   , styledElems
   , class StyledElemsRL
@@ -16,6 +16,7 @@ import Data.Tuple.Nested (type (/\), (/\))
 import Prim.Row as Row
 import Prim.RowList (class RowToList, RowList)
 import Prim.RowList as RL
+import Prim.Symbol as Sym
 import Record as Record
 import Type.Proxy (Proxy(..))
 
@@ -52,10 +53,14 @@ instance StyledElemsRL RL.Nil row () where
 instance
   ( StyledElemsRL rowlistPrev rowIn rowOutPrev
   , Row.Cons sym typ rowTrash rowIn
-  , Row.Cons sym styledElem rowOutPrev rowOut
+  , Row.Cons sym (Array (Prop a) -> styledElem_) rowOutPrev rowOutTmp
+  , Row.Cons sym_ styledElem_ rowOutTmp rowOut
+  , Sym.Append sym "_" sym_
   , Row.Lacks sym rowOutPrev
-  , StyledElemsOne typ styledElem
+  , Row.Lacks sym_ rowOutTmp
+  , StyledElemsOne typ (Array (Prop a) -> styledElem_)
   , IsSymbol sym
+  , IsSymbol sym_
   ) =>
   StyledElemsRL
     (RL.Cons sym typ rowlistPrev)
@@ -74,13 +79,21 @@ instance
       spec :: typ
       spec = Record.get proxySym recordIn
 
-      styledElem :: styledElem
+      styledElem :: Array (Prop a) -> styledElem_
       styledElem = styledElemsOne spec
+
+      styledElem_ :: styledElem_
+      styledElem_ = styledElem []
 
       proxySym :: Proxy sym
       proxySym = Proxy
+
+      proxySym_ :: Proxy sym_
+      proxySym_ = Proxy
     in
-      Record.insert proxySym styledElem recordPrev
+      recordPrev
+        # Record.insert proxySym styledElem
+        # Record.insert proxySym_ styledElem_
 
 --------------------------------------------------------------------------------
 
