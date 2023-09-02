@@ -125,7 +125,7 @@ view
         case ctx.viewMode of
           Standalone ->
             [ getLineInput multiline
-            , el.details [ C.id "details" ]
+            , el.details_
                 [ C.text ("Length: " <> show (Str.length state)) ]
             ]
           Inline ->
