@@ -5,6 +5,9 @@ module Manual.RunningDataUIs.Halogen where
 
 {-
 <!-- END hide -->
+
+# Running Data UIs with Halogen
+
 <!-- START imports -->
 -}
 
@@ -23,8 +26,6 @@ import InteractiveData as ID
 
 {-
 <!-- END imports -->
-
-# Running Data UIs with Halogen
 
 This chapters describes how to run a Data UI with Halogen.
 
@@ -80,6 +81,8 @@ myHalogenComponent =
 
 {-
 ## Mount the component to the DOM
+
+This step should be familiar to you if you have used Halogen before.
 -}
 
 main :: Effect Unit

@@ -9,6 +9,9 @@ module Manual.RunningDataUIs
 
 {-
 <!-- END hide -->
+
+# Running Data UIs
+
 <!-- START imports -->
 -}
 
@@ -19,8 +22,6 @@ import InteractiveData as ID
 
 {-
 <!-- END imports -->
-
-# Running Data UIs
 
 The `interactive-data` library is framework agnostic.
 It is up to the user to provide the necessary plumbing to run the UI.
