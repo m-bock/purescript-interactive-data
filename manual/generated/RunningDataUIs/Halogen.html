@@ -167,6 +167,7 @@
                     <main>
                         <!-- START hide  -->
 <!-- END hide -->
+<h1 id="running-data-uis-with-halogen"><a class="header" href="#running-data-uis-with-halogen">Running Data UIs with Halogen</a></h1>
 <!-- START imports  -->
 <details><summary>Imports for the code samples</summary>
 <pre><code class="language-hs">import Prelude
@@ -184,7 +185,6 @@ import InteractiveData as ID
 </code></pre>
 </details><hr><br>
 <!-- END imports -->
-<h1 id="running-data-uis-with-halogen"><a class="header" href="#running-data-uis-with-halogen">Running Data UIs with Halogen</a></h1>
 <p>This chapters describes how to run a Data UI with Halogen.</p>
 <h2 id="create-an-interactivedataapp"><a class="header" href="#create-an-interactivedataapp">Create an <code>InteractiveDataApp</code></a></h2>
 <p>Refer to the previous chapters for details about this step.</p>
@@ -231,6 +231,7 @@ myHalogenComponent =
     logShow $ extract state
 </code></pre>
 <h2 id="mount-the-component-to-the-dom"><a class="header" href="#mount-the-component-to-the-dom">Mount the component to the DOM</a></h2>
+<p>This step should be familiar to you if you have used Halogen before.</p>
 <pre><code class="language-hs">main :: Effect Unit
 main = do
   HA.runHalogenAff do
