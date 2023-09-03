@@ -146,7 +146,7 @@ suggest-apply:
 
 # CI
 
-ci-fast: spell format build gen build-strict dist
+ci-fast: spell format gen-purs build gen build-strict dist
 
 ci: clean install && check-git-clean
     just ci-fast
