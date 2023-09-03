@@ -3,7 +3,6 @@ module InteractiveData.DataUIs.String
   , StringMsg
   , StringState
   , defaultCfgString
-  , moduleName
   , string
   , string_
   ) where
@@ -13,13 +12,6 @@ import InteractiveData.Core.Prelude
 import Chameleon as C
 import Data.Int as Int
 import Data.String as Str
-
-{- START moduleName -}
-
-moduleName :: String
-moduleName = "InteractiveData.DataUIs.String"
-
-{- END moduleName -}
 
 -------------------------------------------------------------------------------
 --- Types
@@ -75,31 +67,36 @@ view
   (StringState state) =
   withCtx \ctx ->
     let
-      name :: String
-      name = {- START name -}  "#view" {- END name -}
+      el = styleElems
+        "InteractiveData.DataUIs.String#view"
+        { root:
+            C.div
 
-      el = styledElems (moduleName <> name)
-        { root: C.div
-        , input: C.input /\
-            [ "width: 100%"
-            , "border: 1px solid #ccc"
-            , "border-radius: 3px"
-            ]
-        , textarea: C.textarea /\
-            [ "width: 100%"
-            , "font-family: 'Signika Negative'"
-            , "border: 1px solid #ccc"
-            , "border-radius: 3px"
-            ]
-        , details: C.div /\
-            [ "font-size: 10px"
-            , "margin-top: 5px"
-            ]
+        , singleLineInput:
+            C.input /\
+              [ "width: 100%"
+              , "border: 1px solid #ccc"
+              , "border-radius: 3px"
+              ]
+
+        , multilineInput:
+            C.textarea /\
+              [ "width: 100%"
+              , "font-family: 'Signika Negative'"
+              , "border: 1px solid #ccc"
+              , "border-radius: 3px"
+              ]
+
+        , details:
+            C.div /\
+              [ "font-size: 10px"
+              , "margin-top: 5px"
+              ]
         }
 
       multiLineInput :: html StringMsg
       multiLineInput =
-        el.textarea
+        el.multilineInput
           [ C.onInput SetString
           , C.value state
           , C.rows $ Int.toNumber rows
@@ -109,7 +106,7 @@ view
 
       singleLineInput :: html StringMsg
       singleLineInput =
-        el.input
+        el.singleLineInput
           [ C.type_ "text"
           , C.onInput SetString
           , C.value state

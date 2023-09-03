@@ -21,7 +21,9 @@ const mkRegex = ({ open, close }) => {
 export const patchAll = (lang) => (patchData) => (source) => {
   const regex = mkRegex(lang);
 
-  const newSource = source.replace(
+  let newSource = source;
+
+  newSource = source.replace(
     regex,
     (match, nameOpen, arg_, content, nameClose, index, all) => {
       if (nameOpen !== nameClose) {
@@ -39,12 +41,37 @@ export const patchAll = (lang) => (patchData) => (source) => {
 
       const arg = arg_.trim();
 
-      const newContent =
-        typeof patch === "function" ? patch(content, arg, index, all) : patch;
+      const getNewContent = (patch_) =>
+        typeof patch_ === "function"
+          ? patch_(content, arg, index, all)
+          : typeof patch_ === "string"
+          ? patch
+          : content;
+
+      const newContent = getNewContent(patch);
 
       return mkReplace(lang)(name, arg)(newContent);
     }
   );
+
+  const regexPatches = Object.values(patchData).filter((val) =>
+    Array.isArray(val)
+  );
+
+  for (const [regex, patch] of regexPatches) {
+    newSource = source.replace(regex, (...args) => {
+      const newContent =
+        typeof patch === "function"
+          ? patch(...args)
+          : typeof patch_ === "string"
+          ? patch
+          : (() => {
+              throw new Error("unsupported patch");
+            })();
+
+      return newContent;
+    });
+  }
 
   return newSource;
 };

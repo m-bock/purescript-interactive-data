@@ -5,29 +5,49 @@ import * as fs from "fs";
 const pursSrc = "packages/*/src";
 
 const patch = patchAll(langs.purs)({
-  moduleName: (content, arg, _, fileSource) => {
-    const res = fileSource.match(/module\s+(?<moduleName>[A-Za-z.]+)\s*/m);
-    const { moduleName } = res.groups;
+  moduleName: [
+    /\n\nmoduleName :: String\nmoduleName = "[^"]+"\n\n/g,
+    (match, index, fileSource) => {
+      const res = fileSource.match(/module\s+(?<moduleName>[A-Za-z.]+)\s*/m);
+      const { moduleName } = res.groups;
 
-    return `
+      return `
 
 moduleName :: String
 moduleName = "${moduleName}"
 
 `;
-  },
+    },
+  ],
+
+  styleElems: [
+    /el = styleElems([\s]*)"[^"]+"\n/g,
+    (match, ws, index, fileSource) => {
+      const res = fileSource.match(/module\s+(?<moduleName>[A-Za-z.]+)\s*/m);
+      const { moduleName } = res.groups;
+      const name = getClosestName(fileSource, index);
+
+      return `el = styleElems${ws}"${moduleName}#${name}"\n`;
+    },
+  ],
+
   name: (content, arg, index, fileSource) => {
     const name = getClosestName(fileSource, index);
     return `  "#${name}" `;
   },
+
   scope: (content, arg, index, fileSource) => {
     const name = getClosestName(fileSource, index);
     const res = fileSource.match(/module\s+(?<moduleName>[A-Za-z.]+)\s*/m);
     const { moduleName } = res.groups;
-    
+
     return ` "${moduleName}#${name}" `;
-  }
+  },
 });
+
+const patchExtra = {
+  'genModuleName = "([^"]*)"': "",
+};
 
 const getClosestName = (source, index) => {
   const lines = source.split("\n");
