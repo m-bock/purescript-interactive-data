@@ -210,6 +210,7 @@ import Chameleon.Styled
   , styleNode
   , toStyle
   , mergeDecl
+  , styleElems
   ) as Export
 
 import Chameleon.Transformers.Ctx.Class
@@ -259,11 +260,4 @@ import InteractiveData.Core
 
 import InteractiveData.Core.Util.RecordProjection
   ( pick
-  ) as Export
-
-import Chameleon.Styled
-  ( styleElemsXstyleElems"InteractiveData.Core.Prelude"
-XstyleElemsXstyleElems"InteractiveData.Core.Prelude"
-"InteractiveData.Core.Prelude"
-
   ) as Export
