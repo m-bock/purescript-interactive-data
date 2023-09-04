@@ -39,6 +39,9 @@ install:
 
 pre-push: ci-fast ci-tmpdir
 
+check-ts:
+    tsc --noEmit
+
 # Dist
 
 clean-dist:
@@ -146,7 +149,7 @@ suggest-apply:
 
 # CI
 
-ci-fast: spell format gen-purs build gen build-strict dist
+ci-fast: spell check-ts format gen-purs build gen build-strict dist
 
 ci: clean install && check-git-clean
     just ci-fast
