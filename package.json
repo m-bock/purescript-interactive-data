@@ -1,6 +1,5 @@
 {
-  "name": "purescript-interactive-data-mono",
-  "version": "1.0.0",
+  "name": "purescript-interactive-data",
   "type": "module",
   "author": "Michael Bock <no-day@posteo.net>",
   "license": "MIT",
@@ -20,7 +19,8 @@
     "purs-virtual-dom-assets": "^0.2.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "spago": "^0.93.9"
+    "spago": "^0.93.9",
+    "typescript": "^5.2.2"
   },
   "devDependencies": {
     "@parcel/transformer-html": "^2.9.3",
