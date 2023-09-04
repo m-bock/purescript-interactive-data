@@ -163,6 +163,7 @@ ci-tmpdir:
     nix develop --command just ci
     
 check-git-clean:
+    git status
     [ "" = "$(git status --porcelain)" ]
 
 # IDE
