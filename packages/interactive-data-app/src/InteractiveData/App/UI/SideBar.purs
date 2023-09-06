@@ -14,8 +14,9 @@ type ViewCfg html msg = { menu :: html msg }
 view :: forall html msg. IDHtml html => ViewCfg html msg -> html msg
 view { menu } = withCtx \{ showLogo } ->
   let
-    el =
-      { root: styleNode C.div
+    el = styleElems
+      "InteractiveData.App.UI.SideBar#view"
+      { root: 
           """
             height: 100%;
             display: flex;
@@ -23,10 +24,9 @@ view { menu } = withCtx \{ showLogo } ->
             justify-content: space-between;
             overflow: auto;
           """
-      , poweredBy: styleNode C.div
+      , poweredBy: 
           [ decl
               """
-                font-size: 0.8em;
                 color: #999;
                 padding: 0.5em;
                 text-align: center;
@@ -36,6 +36,7 @@ view { menu } = withCtx \{ showLogo } ->
                 gap: 10px;
                 stroke:#dfdfdf;
                 margin-bottom: 15px;
+                
               """
           , declWith ":hover"
               """
@@ -44,14 +45,16 @@ view { menu } = withCtx \{ showLogo } ->
               """
           ]
 
-      , logo: styleNode C.div
+      , logoText: "font-size: 10px"
+
+      , logo:
           [ decl
               """
-                width: 50px;
-                height: 50px;
+                width: 30px;
+                height: 30px;
               """
           ]
-      , link: styleNode C.a
+      , link: C.a /\
           [ declWith ":link" [ "text-decoration : none" ]
           , declWith ":visited" [ "text-decoration : none" ]
           , declWith ":hover" [ "text-decoration : none" ]
@@ -59,16 +62,16 @@ view { menu } = withCtx \{ showLogo } ->
           ]
       }
   in
-    el.root []
+    el.root_
       [ menu
       , if showLogo then
           el.link [ C.href "https://github.com/thought2/purescript-interactive-data" ]
-            [ el.poweredBy []
-                [ el.logo []
+            [ el.poweredBy_
+                [ el.logo_
                     [ UI.Assets.viewLogo ]
-                , C.div []
+                , el.logoText_
                     [ C.span_ [ C.text "built with " ]
-                    , C.span []
+                    , C.span_
                         [ C.text "interactive-data" ]
                     ]
                 ]

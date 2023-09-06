@@ -39,7 +39,11 @@ derive newtype instance Show sta => Show (ArrayState sta)
 --- Extract
 -------------------------------------------------------------------------------
 
-extract :: forall sta a. { extract :: sta -> DataResult a } -> ArrayState sta -> DataResult (Array a)
+extract
+  :: forall sta a
+   . { extract :: sta -> DataResult a }
+  -> ArrayState sta
+  -> DataResult (Array a)
 extract item (ArrayState s) =
   traverse item.extract s
 
@@ -146,17 +150,21 @@ viewItem
 viewItem _ index childDataTree _ =
   withCtx \ctx ->
     let
-      el =
-        { root: styleNode C.div
-            [ "display: flex"
-            , "align-items: flex-start"
-            , "justify-content: space-between"
-            , "overflow-x: auto"
-            , "width: 100%"
-            ]
-        , item: styleNode C.div
-            [ "flex: 1"
-            ]
+      el = styleElems
+        "InteractiveData.DataUIs.Array#viewItem"
+        { root: C.div
+            /\ decl
+              [ "display: flex"
+              , "align-items: flex-start"
+              , "justify-content: space-between"
+              , "overflow-x: auto"
+              , "width: 100%"
+              , "gap: 15px"
+              ]
+        , item: C.div /\
+            decl
+              [ "flex: 1"
+              ]
         , actions: C.div
         }
 

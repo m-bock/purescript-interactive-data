@@ -21,7 +21,7 @@ moduleName = "${moduleName}"
   ],
 
   styleElems: [
-    /el = styleElems([\s]*)"[^"]+"\n/g,
+    /el = styleElems([\s]*)"[^"]*"\n/g,
     (match, ws, index, fileSource) => {
       const res = fileSource.match(/module\s+(?<moduleName>[A-Za-z.]+)\s*/m);
       const { moduleName } = res.groups;

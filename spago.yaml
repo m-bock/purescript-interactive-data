@@ -1,6 +1,6 @@
 workspace:
   extra_packages:
-    chameleon-styled: 2.1.0
+    chameleon-styled: 2.3.0
     chameleon-halogen: 1.0.3
     tidy:
       git: https://github.com/natefaubion/purescript-tidy.git
