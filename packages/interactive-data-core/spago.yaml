@@ -12,6 +12,7 @@ package:
     - foreign-object
     - heterogeneous
     - identity
+    - interpolate
     - maybe
     - newtype
     - prelude

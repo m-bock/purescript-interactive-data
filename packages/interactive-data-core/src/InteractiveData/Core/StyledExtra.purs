@@ -1,7 +1,6 @@
 module InteractiveData.Core.StyledExtra
   ( styleElemsD
-  )
-  where
+  ) where
 
 import Prelude
 

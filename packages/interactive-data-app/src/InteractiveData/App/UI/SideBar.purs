@@ -16,7 +16,7 @@ view { menu } = withCtx \{ showLogo } ->
   let
     el = styleElems
       "InteractiveData.App.UI.SideBar#view"
-      { root: 
+      { root:
           """
             height: 100%;
             display: flex;
@@ -24,7 +24,7 @@ view { menu } = withCtx \{ showLogo } ->
             justify-content: space-between;
             overflow: auto;
           """
-      , poweredBy: 
+      , poweredBy:
           [ decl
               """
                 color: #999;
