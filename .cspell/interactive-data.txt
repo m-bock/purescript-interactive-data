@@ -16,6 +16,7 @@ notfound
 nowrap
 opta
 rcase
+rgba
 rmsg
 Routable
 rsta
