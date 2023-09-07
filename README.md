@@ -34,7 +34,7 @@ Define UIs in terms of data types.
 ## Live Demo
 
 <a href="https://interactive-data.app/sample-painting-app-halogen">
-  <img src="https://github.com/thought2/assets/blob/3ac74450fed65cc663c6e0e88db52b75fc323c28/interactive-data/demo3.png" width="400">
+  <img src="https://github.com/thought2/assets/blob/087767a099737001713bbeede2db29414bd3a139/interactive-data/demo4.png" width="400">
 </a>
 
 - Painting App ([Source](demo/src/Demo/Samples/PaintingApp))
