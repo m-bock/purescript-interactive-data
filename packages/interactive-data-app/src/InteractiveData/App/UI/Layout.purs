@@ -56,6 +56,7 @@ view { viewHeader, viewSidebar, viewBody, viewFooter } = withCtx \ctx ->
           /\
             ( if showSidebar then
                 [ "border-right: 1px solid #E0E0E0"
+                , "min-width: 140px"
                 ]
               else
                 [ "width: 0px" ]
@@ -63,7 +64,6 @@ view { viewHeader, viewSidebar, viewBody, viewFooter } = withCtx \ctx ->
           /\
             [ "transition: width 100ms ease-in-out"
             , "flex: 0 0 auto;"
-            , "min-width: 140px"
             ]
       , main: C.div /\
           ( [ "height: 100%"
