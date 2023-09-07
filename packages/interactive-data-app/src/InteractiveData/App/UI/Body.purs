@@ -17,9 +17,10 @@ view { viewContent } =
     el =
       { body: styleNode C.div unit
       , content: styleNode C.div
-          [ "padding: 10px"
+          [ "padding: 5px"
           , "padding-right: 15px"
-          , "max-width: 600px"
+          , "padding-left: 15px"
+          , "max-width: 800px"
           ]
       }
   in

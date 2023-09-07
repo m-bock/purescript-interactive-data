@@ -70,7 +70,7 @@ viewRoot { viewBreadcrumbs, right } =
           [ "background-color: #F8F8F8"
           , "padding: 5px"
           , "display: grid"
-          , "height: 100%"
+          , "height: 25px"
           , "box-shadow: 0px 1px 3px #ccc"
           , "justify-content: space-between"
           , "align-items: center"

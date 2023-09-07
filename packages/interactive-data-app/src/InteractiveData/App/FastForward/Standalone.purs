@@ -15,13 +15,14 @@ view
   -> html msg
 view items =
   let
-    el =
-      { root: styleNode C.div unit
-      , item: styleNode C.div
-          $
-            [ "margin-bottom: 20px" ]
+    el = styleElems
+      "InteractiveData.App.FastForward.Standalone#view"
+      { root: C.div
+      , item: C.div
           /\ declWith ":not(:last-child)"
-            [ "border-bottom: 1px solid #ccc" ]
+            [ "margin-bottom: 20px"
+            , "border-bottom: 1px solid #ccc"
+            ]
       }
 
     countItems = Array.length items

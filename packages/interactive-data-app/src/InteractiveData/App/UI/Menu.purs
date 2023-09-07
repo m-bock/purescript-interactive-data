@@ -201,13 +201,14 @@ viewRow
   -> html msg
 viewRow { onSetExpanded } opts@{ path, isExpanded, isLeaf } =
   let
-    el =
-      { row: styleNode C.div
+    el = styleElems "InteractiveData.App.UI.Menu#viewRow"
+      { root: C.div /\
           [ "display: flex; "
           , "align-items: center"
           , "padding: 5px"
+          , "gap: 3px"
           ]
-      , icon: styleNode C.div
+      , icon: C.div /\
           [ "cursor: pointer"
           , "width: 20px"
           , "height: 20px"
@@ -217,34 +218,35 @@ viewRow { onSetExpanded } opts@{ path, isExpanded, isLeaf } =
           , "align-items: center"
           , "justify-content: center"
           ]
-      , iconInner: styleNode C.div
-          [ "height: 24px"
-          , "width: 14px"
-          , "scale: 0.4"
+      , iconInner: C.div /\
+          [ "width: 6px"
+          , "display: flex"
+          , "align-items: center"
+          , "justify-content: center"
           ]
-      , iconDash: styleNode C.div
-          [ "height: 20px"
-          , "width: 24px"
-          , "scale: 0.6"
+      , iconDash: C.div /\
+          [ "width: 10px"
+          , "display: flex"
+          , "align-items: center"
+          , "justify-content: center"
           ]
+      , label: C.div
       }
 
   in
-    el.row []
+    el.root_
       [ el.icon
           [ if isLeaf then C.noProp
             else C.onClick (onSetExpanded path (not isExpanded))
           ]
           [ if isLeaf then
-              el.iconDash
-                []
+              el.iconDash_
                 [ UI.Assets.viewDash ]
             else
-              el.iconInner
-                []
+              el.iconInner_
                 [ UI.Assets.viewChevronRight ]
           ]
-      , opts.viewLabel
+      , el.label_ [ opts.viewLabel ]
       ]
 
 -------------------------------------------------------------------------------

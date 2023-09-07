@@ -9,12 +9,13 @@ module InteractiveData.App.UI.DataLabel
 
 import InteractiveData.Core.Prelude
 
+import Chameleon as C
 import Data.Array as Array
+import Data.Monoid (guard)
 import Data.String as Str
 import Data.Tuple (fst)
 import InteractiveData.App.UI.Assets as UI.Assets
 import InteractiveData.Core.Types.DataPathExtra (segmentToString)
-import Chameleon as C
 
 type ViewCfg =
   { dataPath :: PathInContext DataPathSegment
@@ -55,29 +56,35 @@ type ViewOpt msg =
   { onHit :: Maybe msg
   , isSelected :: Boolean
   , size :: Size
+  , headline :: Boolean
   }
 
 data Size = Small | Medium | Large
 
 viewDataLabel' :: forall html msg. IDHtml html => ViewCfg -> ViewOpt msg -> html msg
-viewDataLabel' { dataPath, mkTitle } { onHit, isSelected } = withCtx \ctx ->
+viewDataLabel' { dataPath, mkTitle } { onHit, isSelected, headline } = withCtx \ctx ->
   let
-    el =
+    el = styleElems
+      "InteractiveData.App.UI.DataLabel#viewDataLabel'"
       { datalabel:
-          styleNode C.div
-            $
-              [ "border: 1px solid rgb(232,232,232)"
+          C.div
+            /\
+              [ "border: 1px solid rgb(161 161 161)"
               , "display: inline-flex"
               , "flex-direction: row"
               , "align-items: center"
               , "gap: 2px"
               , "padding-top: 1px"
               , "padding-bottom: 1px"
-              , "padding-left: 3px"
-              , "padding-right: 3px"
-              , "border-radius: 2px"
-              , "height: 18px"
+              , "padding-left: 6px"
+              , "padding-right: 6px"
+              , "border-radius: 12px"
+              , "height: 22px"
+              , "min-width: 22px"
               , "font-size: 12px"
+              , "box-sizing: border-box"
+              , "justify-content: center"
+              , guard headline "font-weight: bold"
               ]
             /\
               declWith ":hover" case onHit of
@@ -89,7 +96,7 @@ viewDataLabel' { dataPath, mkTitle } { onHit, isSelected } = withCtx \ctx ->
                 Nothing -> []
                 Just _ ->
                   [ "cursor: pointer"
-                  , "background-color: #e1ffe9"
+                  , "background-color: #f7f7f7"
                   ]
             /\ declWith " > svg"
               [ "width:10px"
@@ -114,14 +121,13 @@ viewDataLabel' { dataPath, mkTitle } { onHit, isSelected } = withCtx \ctx ->
     icon = case maybeSegment of
       Just (SegCase _) | isSelected -> UI.Assets.viewDiamondFilled
       Just (SegCase _) -> UI.Assets.viewDiamond
-      Just (SegField _) -> UI.Assets.viewLabel
+      Just (SegField _) -> C.noHtml
       Nothing -> UI.Assets.viewHome
 
     title' :: String
     title' = mkTitle dataPath
 
   in
-
     el.datalabel
       [ maybe C.noProp (\_ -> C.title title') onHit
       , maybe C.noProp C.onClick onHit
@@ -140,7 +146,7 @@ view cfg = getAllArgs defaults >>> viewDataLabel' cfg
     { onHit: Nothing
     , isSelected: false
     , size: Medium
-
+    , headline: false
     }
 
 printDataPath :: DataPath -> String

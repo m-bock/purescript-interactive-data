@@ -437,7 +437,7 @@ viewDiamond =
 viewDash :: forall html msg. C.Html html => html msg
 viewDash =
   C.elem (C.ElemName "svg")
-    [ C.attr "viewBox" "0 0 24 24", C.attr "fill" "none", C.attr "xmlns" "http://www.w3.org/2000/svg" ]
+    [ C.attr "fill" "none", C.attr "xmlns" "http://www.w3.org/2000/svg", C.attr "viewBox" "2 11 20 2" ]
     [ C.elem (C.ElemName "path")
         [ C.attr "d" "M3 12L21 12"
         , C.attr "stroke" "#000000"

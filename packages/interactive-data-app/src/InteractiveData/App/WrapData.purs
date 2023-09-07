@@ -67,7 +67,6 @@ viewStandalone { viewContent, actions, typeName, text, filteredErrors } =
                   "background-color: #f8f8f8"
                 Standalone ->
                   "background-color: white"
-            , "margin-bottom: 5px"
             , "position: relative"
             , "border-radius: 5px"
             , "padding-bottom: 5px"
@@ -233,6 +232,7 @@ viewInline { viewContent, typeName, text, filteredErrors } =
                           }
                           { onHit: Just (That $ GlobalSelectDataPath $ dataPathToStrings ctx.path)
                           , size: UIDataLabel.Large
+                          , headline: true
                           }
                       , el.typeName []
                           [ C.text typeName ]
