@@ -63,16 +63,16 @@ footerRoot
   -> html msg
 footerRoot { errors, viewError, isExpanded, onChangeIsExpanded } =
   let
-    el =
-      { footerRoot: styleNode C.div
+    el = styleElems "InteractiveData.App.UI.Footer#footerRoot"
+      { footerRoot: C.div /\
           [ "display: flex"
           , "flex-direction: column"
           , "align-items: stretch"
           , "background-color: #ffede3"
           , "border-top: 1px solid #eee"
           ]
-      , errors: styleNode C.div
-          $
+      , errors: C.div
+          /\
             [ "overflow-y: auto"
             , "flex-grow: 1"
             , "max-height: 200px"
@@ -81,14 +81,14 @@ footerRoot { errors, viewError, isExpanded, onChangeIsExpanded } =
             , "padding-left: 5px"
             , "padding-right: 5px"
             ]
-          <>
+          /\
             if isExpanded then
               [ "max-height: 200px"
               ]
             else
               [ "max-height: 0px"
               ]
-      , headline: styleNode C.div
+      , headline: C.div /\
           [ "display: flex"
           , "flex-direction: row"
           , "justify-content: space-between"
@@ -96,7 +96,7 @@ footerRoot { errors, viewError, isExpanded, onChangeIsExpanded } =
           , "font-size: 12px"
           , "color: #a1a1a1"
           ]
-      , expandIcon: styleNode C.div
+      , expandIcon: C.div /\
           [ "cursor: pointer"
           , "width: 20px"
           ]
@@ -133,7 +133,9 @@ footerViewError
   -> html msg
 footerViewError { viewDataPath } (DataError dataPath errorCase_) = withCtx \_ ->
   let
-    el = { root: styleNode C.div [ "margin-bottom: 5px" ] }
+    el =
+      styleElems ""
+        { root: C.div /\ [ "margin-bottom: 5px" ] }
   in
     el.root []
       [ UICard.view

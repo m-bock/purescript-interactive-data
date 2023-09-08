@@ -18,8 +18,8 @@ type ViewCfg msg =
 view :: forall html msg. IDHtml html => ViewCfg msg -> html msg
 view { onBackToHome, path, reason } =
   let
-    el =
-      { notfound: styleNode C.div
+    el = styleElems "InteractiveData.App.UI.NotFound#view"
+      { notfound: C.div /\
           [ "display: flex"
           , "flex-direction: column"
           , "justify-content: center"
@@ -27,37 +27,36 @@ view { onBackToHome, path, reason } =
           , "height: 100%"
           , "gap: 20px"
           ]
-      , text: styleNode C.div
+      , text: C.div /\
           [ "font-size: 12px"
           , "cursor: pointer"
           ]
-      , icon: styleNode C.div
-          $ decl
-              [ "width: 100px"
-              , "animation: $anim 400ms ease-out"
-              ]
+      , icon: C.div
           /\
-            anim "anim"
-              [ "0%" /\
-                  [ "transform: rotate(-360deg) scale(0)" ]
-              , "80%" /\
-                  [ "transform: rotate(10deg) scale(1)" ]
-              , "100%" /\
-                  [ "transform: rotate(0deg) scale(1)" ]
-              ]
-      , headline: styleNode C.div
+            [ "width: 100px"
+            , "animation: $anim 400ms ease-out"
+            ]
+          /\ anim "anim"
+            [ "0%" /\
+                [ "transform: rotate(-360deg) scale(0)" ]
+            , "80%" /\
+                [ "transform: rotate(10deg) scale(1)" ]
+            , "100%" /\
+                [ "transform: rotate(0deg) scale(1)" ]
+            ]
+      , headline: C.div /\
           [ "font-size: 20px" ]
-      , path: styleNode C.span
+      , path: C.span /\
           [ "font-weight: bold" ]
       }
   in
-    el.notfound []
-      [ el.icon []
+    el.notfound_
+      [ el.icon_
           [ UI.Assets.viewPageNotFound
           ]
-      , el.headline []
+      , el.headline_
           [ C.text "Not Found: "
-          , el.path [] [ C.text ("/" <> printPath path) ]
+          , el.path_ [ C.text ("/" <> printPath path) ]
           , C.text $ " (" <> reason <> ")"
           ]
       , el.text [ C.onClick onBackToHome ]

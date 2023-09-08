@@ -204,10 +204,6 @@ import Chameleon.Styled
   , declWith
   , registerStyleMap
   , runStyleT
-  , styleKeyedLeaf
-  , styleKeyedNode
-  , styleLeaf
-  , styleNode
   , toStyle
   , mergeDecl
   , styleElems
@@ -264,4 +260,6 @@ import InteractiveData.Core.Util.RecordProjection
 
 import InteractiveData.Core.StyledExtra
   ( styleElemsD
+  , styles
+  , css
   ) as Export

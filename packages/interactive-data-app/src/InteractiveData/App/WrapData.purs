@@ -60,34 +60,32 @@ viewStandalone :: forall html msg. IDHtml html => ViewDataCfg html msg -> html m
 viewStandalone { viewContent, actions, typeName, text, filteredErrors } =
   withCtx \(ctx :: IDViewCtx) ->
     let
-      el =
-        { data_: styleNode C.div
-            [ case ctx.viewMode of
-                Inline ->
-                  "background-color: #f8f8f8"
-                Standalone ->
-                  "background-color: white"
-            , "position: relative"
-            , "border-radius: 5px"
-            , "padding-bottom: 5px"
-            , "padding-top: 10px"
-            , case ctx.viewMode of
-                Inline ->
-                  "border: 1px solid #ddd"
-                Standalone ->
-                  mempty
-            ]
+      el = styleElems "InteractiveData.App.WrapData#viewStandalone"
+        { data_: C.div
+            /\ case ctx.viewMode of
+              Inline ->
+                [ "background-color: #f8f8f8"
+                , "border: 1px solid #ddd"
+                ]
+              Standalone ->
+                [ "background-color: white" ]
+            /\
+              [ "position: relative"
+              , "border-radius: 5px"
+              , "padding-bottom: 5px"
+              , "padding-top: 10px"
+              ]
         , content: C.div
 
         , actions:
-            styleNode C.div
+            C.div /\
               [ "display: flex"
               , "flex-wrap: wrap"
               , "justify-content: flex-end"
               ]
 
         , item:
-            styleNode C.div
+            C.div /\
               case ctx.viewMode of
                 Inline ->
                   [ "padding-left: 10px"
@@ -96,32 +94,32 @@ viewStandalone { viewContent, actions, typeName, text, filteredErrors } =
                 Standalone -> []
 
         , subRow:
-            styleNode C.div
+            C.div /\
               [ "display: flex"
               , "align-items: center"
               , "justify-content: space-between"
               ]
-        , typeName: styleNode C.div
+        , typeName: C.div /\
             [ "font-size: 20px"
             , "grid-area: b"
             , "font-weight: bold"
             , "margin-bottom: 3px"
             ]
-        , text: styleNode C.div
+        , text: C.div /\
             [ "font-size: 11px"
             ]
 
-        , header: styleNode C.div
+        , header: C.div /\
             [ "margin-bottom: 20px"
             ]
-        , errors: styleNode C.div
+        , errors: C.div /\
             [ "color: red"
             , "display: flex"
             , "flex-direction: column"
             , "gap: 3px"
             , "margin-top: 10px"
             ]
-        , error: styleNode C.div
+        , error: C.div /\
             [ "font-size: 11px" ]
         }
 
@@ -132,11 +130,11 @@ viewStandalone { viewContent, actions, typeName, text, filteredErrors } =
     in
       el.data_
         []
-        [ el.header []
-            [ el.item []
-                [ el.subRow []
-                    [ el.typeName [] [ C.text typeName ]
-                    , el.actions []
+        [ el.header_
+            [ el.item_
+                [ el.subRow_
+                    [ el.typeName_ [ C.text typeName ]
+                    , el.actions_
                         ( map
                             (\dataAction -> UIActionButton.view { dataAction })
                             actions
@@ -144,19 +142,19 @@ viewStandalone { viewContent, actions, typeName, text, filteredErrors } =
                     ]
                 ]
             , text # maybe C.noHtml \text' -> el.item []
-                [ el.text []
+                [ el.text_
                     [ C.text text' ]
                 ]
             ]
 
-        , el.item [] <<< pure $ el.content []
+        , el.item_ <<< pure $ el.content_
             [ viewContent ]
 
         , if showErrors then
-            el.errors []
+            el.errors_
               ( filteredErrors
                   # map \error' ->
-                      el.error []
+                      el.error_
                         [ C.text $ printErrorCase error' ]
               )
           else
@@ -167,40 +165,40 @@ viewInline :: forall html msg. IDHtml html => ViewDataCfg html msg -> html msg
 viewInline { viewContent, typeName, text, filteredErrors } =
   withCtx \ctx ->
     let
-      el =
-        { typeRow: styleNode C.div
+      el = styleElems "InteractiveData.App.WrapData#viewInline"
+        { typeRow:
             [ "display: flex"
             , "flex-direction: column"
             , "height: 100%"
             , "gap: 3px"
             ]
-        , text: styleNode C.div
+        , text:
             [ "font-size: 11px"
             ]
-        , caption: styleNode C.div
+        , caption:
             [ "display: flex"
             , "align-items: center"
             , "justify-content: space-between"
             , "height: 100%"
             ]
-        , typeName: styleNode C.div
+        , typeName:
             [ "font-size: 12px"
             , "margin-right: 10px"
             ]
-        , root: styleNode C.div
+        , root:
             [ "min-width: 120px"
             , "display: grid"
             ]
-        , content: styleNode C.div
+        , content:
             [ ""
             ]
-        , errors: styleNode C.div
+        , errors:
             [ "color: red"
             , "display: flex"
             , "flex-direction: column"
             , "gap: 3px"
             ]
-        , error: styleNode C.div
+        , error:
             [ "font-size: 11px" ]
         }
 
@@ -210,10 +208,10 @@ viewInline { viewContent, typeName, text, filteredErrors } =
 
       typeRow :: html msg
       typeRow =
-        el.typeRow []
+        el.typeRow_
           [ case text of
               Just text' ->
-                el.text []
+                el.text_
                   [ C.text text' ]
               Nothing ->
                 C.noHtml
@@ -225,7 +223,7 @@ viewInline { viewContent, typeName, text, filteredErrors } =
             UICard.defaultViewOpt
               { viewCaption = Just
                   $ fromOutHtml
-                  $ el.caption []
+                  $ el.caption_
                       [ UIDataLabel.view
                           { dataPath: { before: [], path: ctx.path }
                           , mkTitle: UIDataLabel.mkTitleGoto
@@ -234,21 +232,21 @@ viewInline { viewContent, typeName, text, filteredErrors } =
                           , size: UIDataLabel.Large
                           , headline: true
                           }
-                      , el.typeName []
+                      , el.typeName_
                           [ C.text typeName ]
                       ]
               , viewSubCaption = Just typeRow
-              , viewBody = Just $ C.div []
-                  [ el.content []
+              , viewBody = Just $ C.div_
+                  [ el.content_
                       [ viewContent ]
                   ]
               , viewFooter =
                   if showErrors then
                     Just $
-                      el.errors []
+                      el.errors_
                         ( filteredErrors
                             # map \error' ->
-                                el.error []
+                                el.error_
                                   [ C.text $ printErrorCase error' ]
                         )
                   else

@@ -15,6 +15,7 @@ import Data.Array (mapWithIndex)
 import Data.Array as Array
 import Data.Map (Map)
 import Data.Map as Map
+import Data.Monoid (guard)
 import Data.Tuple (fst)
 import InteractiveData.App.UI.Assets as UI.Assets
 import InteractiveData.App.UI.DataLabel as UIDataLabel
@@ -84,8 +85,8 @@ viewLabel
   -> html msg
 viewLabel { onSelectPath } { path, label } =
   let
-    el =
-      { label: styleNode C.div
+    el = styleElems "InteractiveData.App.UI.Menu#viewLabel"
+      { label: C.div /\
           [ "cursor: pointer"
           , "display: flex"
           , "gap: 4px"
@@ -144,11 +145,11 @@ viewTree
 viewTree cfg { path, tree } =
   let
     SumTree { children } = tree
-    el =
+    el = styleElems "InteractiveData.App.UI.Menu#viewTree"
       { item: C.div
-      , sub: styleNode C.div
+      , sub: C.div /\
           [ "padding-left: 15px" ]
-      , root: styleNode C.div
+      , root: C.div /\
           [ "padding: 5px" ]
       }
 
@@ -212,7 +213,7 @@ viewRow { onSetExpanded } opts@{ path, isExpanded, isLeaf } =
           [ "cursor: pointer"
           , "width: 20px"
           , "height: 20px"
-          , if isExpanded then "transform: rotate(90deg)" else mempty
+          , guard isExpanded "transform: rotate(90deg)"
           , "transition: transform 100ms ease-in-out"
           , "display: flex"
           , "align-items: center"

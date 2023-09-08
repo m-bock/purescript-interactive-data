@@ -29,13 +29,13 @@ view
 view fields =
   withCtx \ctx ->
     let
-      el =
-        { fieldsCountInfo: styleNode C.div
+      el = styleElems "InteractiveData.DataUIs.Record#view"
+        { fieldsCountInfo: C.div /\
             [ "font-style: italic"
             , "font-size: 10px"
             , "color: #999"
             ]
-        , root: styleNode C.div
+        , root: C.div /\
             [ "display: flex"
             , "gap: 20px"
             , "flex-direction: column"
@@ -48,15 +48,15 @@ view fields =
         1 -> "1 field"
         n -> show n <> " fields"
     in
-      el.root []
+      el.root_
         if Array.null fields then
-          [ el.fieldsCountInfo []
+          [ el.fieldsCountInfo_
               [ C.text countFieldsText ]
           ]
         else
           case ctx.viewMode of
             Inline ->
-              [ el.fieldsCountInfo []
+              [ el.fieldsCountInfo_
                   [ C.text countFieldsText ]
               ]
             Standalone | not ctx.fastForward -> []
@@ -73,8 +73,8 @@ viewRow _ (seg /\ tree) = withCtx \ctx ->
   let
     newPath = ctx.path <> [ SegField seg ]
 
-    el =
-      { root: styleNode C.div
+    el = styleElems "InteractiveData.DataUIs.Record#viewRow"
+      { root: C.div /\
           [ "overflow-x: auto"
           ]
       }
@@ -84,7 +84,7 @@ viewRow _ (seg /\ tree) = withCtx \ctx ->
       newPath
       tree
   in
-    el.root []
+    el.root_
       [ C.noHtml
       , putCtx ctx { path = newPath, viewMode = Inline } $
           FastForwardInline.view trivialTrees

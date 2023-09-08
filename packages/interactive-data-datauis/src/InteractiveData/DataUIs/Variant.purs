@@ -38,16 +38,15 @@ view { mkMsg, caseKey, caseKeys } =
       singleCase :: Boolean
       singleCase = countCases == 1
 
-      el =
-        { caseLabels: styleNode C.div
+      el = styleElems "InteractiveData.DataUIs.Variant#view"
+        { caseLabels: C.div /\
             [ "display: flex"
-            , case ctx.viewMode of
-                Inline -> "flex-direction: column"
-                Standalone -> "flex-direction: row"
             , "gap: 5px"
             , "margin-bottom: 15px"
             , "flex-wrap: wrap"
-            ]
+            ] /\ case ctx.viewMode of
+                Inline -> "flex-direction: column"
+                Standalone -> "flex-direction: row"
         , caseLabel: C.div
         }
 

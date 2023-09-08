@@ -24,12 +24,12 @@ view
 view { dataPath, viewDataLabel, isAbsolute } =
   let
 
-    el =
-      { root: styleNode C.div
+    el = styleElems "InteractiveData.App.UI.Breadcrumbs#view"
+      { root: C.div /\
           [ "display: flex"
           , "align-items: center"
           ]
-      , iconArrow: styleNode C.div
+      , iconArrow: C.div /\
           [ "height: 24px"
           , "width: 14px"
           , "scale: 0.3"
@@ -52,11 +52,11 @@ view { dataPath, viewDataLabel, isAbsolute } =
       if isAbsolute then [ rootSegment ] <> segments
       else segments
   in
-    el.root []
+    el.root_
       ( allSegments
           # intersperse
               ( C.div_
-                  [ el.iconArrow []
+                  [ el.iconArrow_
                       [ UI.Assets.viewChevronRight ]
                   ]
               )

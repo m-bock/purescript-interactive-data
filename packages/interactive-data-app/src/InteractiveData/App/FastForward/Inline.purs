@@ -17,19 +17,19 @@ view
   -> html msg
 view items =
   let
-    el =
-      { root: styleNode C.div
+    el = styleElems "InteractiveData.App.FastForward.Inline#view"
+      { root: C.div /\
           [ "display: flex"
           , "flex-direction: row"
           , "justify-content: space-between"
           , "align-items: start"
           ]
-      , spacer: styleNode C.div
+      , spacer: C.div /\
           [ "width: 15px" ]
       , item: C.div
-      , lastItem: styleNode C.div
+      , lastItem: C.div /\
           [ "flex-grow: 1" ]
-      , iconArrow: styleNode C.div
+      , iconArrow:  C.div /\
           [ "height: 24px"
           , "width: 14px"
           , "scale: 0.3"

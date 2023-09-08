@@ -112,8 +112,8 @@ view
 view cfg (ArrayState items) =
   withCtx \ctx ->
     let
-      el =
-        { root: styleNode C.div
+      el = styleElems "InteractiveData.DataUIs.Array#view"
+        { root: C.div /\
             [ "display: flex"
             , "flex-direction: column"
             , "gap: 20px"
@@ -126,16 +126,16 @@ view cfg (ArrayState items) =
     in
       case ctx.viewMode of
         Standalone ->
-          el.root []
+          el.root_
             ( Array.zip items cfg.childDataTrees
                 #
                   mapWithIndex \index (item /\ childDataTree) ->
-                    el.item []
+                    el.item_
                       [ viewItem (pick cfg) index childDataTree item
                       ]
             )
         Inline ->
-          el.root []
+          el.root_
             [ C.text (printItemsString countItems)
             ]
 
@@ -152,20 +152,18 @@ viewItem _ index childDataTree _ =
     let
       el = styleElems
         "InteractiveData.DataUIs.Array#viewItem"
-        { root: C.div
-            /\ decl
-              [ "display: flex"
-              , "align-items: flex-start"
-              , "justify-content: space-between"
-              , "overflow-x: auto"
-              , "width: 100%"
-              , "gap: 15px"
-              ]
-        , item: C.div /\
-            decl
-              [ "flex: 1"
-              ]
-        , actions: C.div
+        { root:
+            [ "display: flex"
+            , "align-items: flex-start"
+            , "justify-content: space-between"
+            , "overflow-x: auto"
+            , "width: 100%"
+            , "gap: 15px"
+            ]
+        , item:
+            [ "flex: 1"
+            ]
+        , actions: unit
         }
 
       newPath = ctx.path <> [ SegField $ SegDynamicIndex index ]
@@ -176,13 +174,13 @@ viewItem _ index childDataTree _ =
         childDataTree
 
     in
-      el.root []
-        [ el.item []
+      el.root_
+        [ el.item_
             [ putCtx ctx { path = newPath, viewMode = Inline }
                 $ EntryMsg index
                 <$> FastForwardInline.view trivialTrees
             ]
-        , el.actions []
+        , el.actions_
             [ UIActionButton.view
                 { dataAction: DataAction
                     { label: "Delete"

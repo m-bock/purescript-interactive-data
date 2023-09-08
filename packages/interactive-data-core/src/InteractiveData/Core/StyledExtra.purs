@@ -1,11 +1,15 @@
 module InteractiveData.Core.StyledExtra
-  ( styleElemsD
-  ) where
+  ( css
+  , styleElemsD
+  , styles
+  )
+  where
 
 import Prelude
 
 import Chameleon.Styled (Style, decl, declWith, toStyle)
 import Chameleon.Styled.Elems (class StyleElems, styleElems')
+import Data.Array (intercalate)
 import Data.Interpolate (i)
 import Data.Tuple.Nested ((/\))
 import Prim.TypeError (class Warn, Text)
@@ -35,3 +39,9 @@ debug color _ name =
       , "outline-offset: -1px"
       , "position: relative"
       ]
+
+styles :: Array String -> String
+styles = intercalate "\n" <<< map (\s -> s <> "\n")
+
+css :: String -> String
+css = identity

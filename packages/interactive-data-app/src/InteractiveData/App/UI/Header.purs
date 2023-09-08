@@ -65,8 +65,8 @@ viewRoot
   -> html msg
 viewRoot { viewBreadcrumbs, right } =
   let
-    el =
-      { header: styleNode C.div
+    el = styleElems "InteractiveData.App.UI.Header#viewRoot"
+      { header: C.div /\
           [ "background-color: #F8F8F8"
           , "padding: 5px"
           , "display: grid"
@@ -76,12 +76,12 @@ viewRoot { viewBreadcrumbs, right } =
           , "align-items: center"
           , "grid-template-areas: 'a c'"
           ]
-      , breadcrumbs: styleNode C.div
+      , breadcrumbs: C.div /\
           [ "width: 100%"
           , "grid-area: a"
           , "overflow-x: auto"
           ]
-      , right: styleNode C.div
+      , right: C.div /\
           [ "grid-area: c" ]
       }
   in
@@ -101,12 +101,11 @@ viewTypeName
 viewTypeName { typeName } =
   let
 
-    el =
-      { typeName:
-          styleNode C.div
-            [ "font-size: 16px"
-            , "font-weight: bold"
-            ]
+    el = styleElems "InteractiveData.App.UI.Header#viewTypeName"
+      { typeName: C.div /\
+          [ "font-size: 16px"
+          , "font-weight: bold"
+          ]
       }
   in
     el.typeName []
@@ -119,9 +118,9 @@ viewRightCorner
   -> html msg
 viewRightCorner { showMenu, setShowMenu } =
   let
-    el =
+    el = styleElems "InteractiveData.App.UI.Header#viewRightCorner"
       { menuIcon:
-          styleNode C.div
+          C.div /\
             [ "cursor: pointer"
             , "width: 25px"
             , "height: 25px"

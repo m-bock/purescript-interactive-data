@@ -75,23 +75,23 @@ view
   (IntState value) =
   withCtx \_ ->
     let
-      el =
-        { root: styleNode C.div
+      el = styleElems "InteractiveData.DataUIs.Int#view"
+        { root: C.div /\
             [ "display: flex"
             , "flex-direction: row"
             , "align-items: center"
             , "justify-content: space-between"
             , "gap: 10px"
             ]
-        , slider: styleNode C.div
+        , slider: C.div /\
             [ "flex: 3" ]
-        , input: styleNode C.div
+        , input: C.div /\
             [ "flex: 1" ]
         }
 
     in
-      el.root []
-        [ el.slider []
+      el.root_
+        [ el.slider_
             [ UISlider.view
                 { min
                 , max

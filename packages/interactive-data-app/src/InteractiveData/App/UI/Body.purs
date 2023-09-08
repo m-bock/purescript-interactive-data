@@ -14,9 +14,9 @@ type ViewCfg (html :: Type -> Type) msg =
 view :: forall html msg. IDHtml html => ViewCfg html msg -> html msg
 view { viewContent } =
   let
-    el =
-      { body: styleNode C.div unit
-      , content: styleNode C.div
+    el = styleElems "InteractiveData.App.UI.Body#view"
+      { root: C.div
+      , content: C.div /\
           [ "padding: 5px"
           , "padding-right: 15px"
           , "padding-left: 15px"
@@ -24,7 +24,7 @@ view { viewContent } =
           ]
       }
   in
-    el.body []
-      [ el.content []
+    el.root_
+      [ el.content_
           [ viewContent ]
       ]

@@ -77,8 +77,8 @@ update msg state@(JsonState val) =
 view :: forall html. IDHtml html => { rows :: Int } -> JsonState -> html JsonMsg
 view { rows } (JsonState value) =
   let
-    el =
-      { textarea: styleNode C.textarea
+    el = styleElems "InteractiveData.DataUIs.Json#view"
+      { textarea: C.textarea /\
           [ "width: 100%"
           , "font-family: monospace"
           , "border: 1px solid #ccc"

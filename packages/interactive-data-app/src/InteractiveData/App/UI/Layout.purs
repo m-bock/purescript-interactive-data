@@ -32,21 +32,21 @@ view { viewHeader, viewSidebar, viewBody, viewFooter } = withCtx \ctx ->
       "InteractiveData.App.UI.Layout#view"
       { root: C.div
           /\
-            guard ctx.fullscreen
-              [ "position: fixed"
-              , "top: 0px"
-              , "left: 0px"
-              , "right: 0px"
-              , "bottom: 0px"
-              ]
-          /\
             [ "display: flex"
             , "flex-direction: column"
             , "height: 100%"
             , "font-family: 'Signika Negative'"
             , "background-color: white"
             ]
-      , header: C.div /\ [ "z-index: 3000" ]
+          /\ guard ctx.fullscreen
+            [ "position: fixed"
+            , "top: 0px"
+            , "left: 0px"
+            , "right: 0px"
+            , "bottom: 0px"
+            ]
+      , header: C.div /\
+          [ "z-index: 3000" ]
       , layout: C.div /\
           [ "width: 100%"
           , "display: flex"
@@ -54,24 +54,22 @@ view { viewHeader, viewSidebar, viewBody, viewFooter } = withCtx \ctx ->
           ]
       , sidebar: C.div
           /\
-            ( if showSidebar then
-                [ "border-right: 1px solid #E0E0E0"
-                , "min-width: 140px"
-                ]
-              else
-                [ "width: 0px" ]
-            )
-          /\
             [ "transition: width 100ms ease-in-out"
             , "flex: 0 0 auto;"
             ]
+          /\
+            if showSidebar then
+              [ "border-right: 1px solid #E0E0E0"
+              , "min-width: 140px"
+              ]
+            else
+              [ "width: 0px" ]
       , main: C.div /\
-          ( [ "height: 100%"
-            , "display: flex"
-            , "flex-direction: column"
-            , "flex: 1"
-            ]
-          )
+          [ "height: 100%"
+          , "display: flex"
+          , "flex-direction: column"
+          , "flex: 1"
+          ]
 
       , footer: C.div /\
           [ "width: 100%"

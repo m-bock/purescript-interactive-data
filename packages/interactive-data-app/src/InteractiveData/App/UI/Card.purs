@@ -41,9 +41,9 @@ view
   , borderColor
   } =
   let
-    el =
+    el = styleElems "InteractiveData.App.UI.Card#view"
 
-      { card: styleNode C.div
+      { card: C.div /\
           [ "background-color: " <> backgroundColor
           , "position: relative"
           , "border-radius: 5px"
@@ -54,20 +54,20 @@ view
           , "flex-direction: column"
           , "box-sizing: border-box"
           ]
-      , caption: styleNode C.div
+      , caption: C.div /\
           [ "border-bottom: 1px solid " <> borderColor
           , "padding: 5px"
           , "box-sizing: border-box"
           ]
-      , subCaption: styleNode C.div
+      , subCaption: C.div /\
           [ "padding: 5px"
           , "box-sizing: border-box"
           ]
-      , body: styleNode C.div
+      , body: C.div /\
           [ "padding: 5px"
           , "box-sizing: border-box"
           ]
-      , footer: styleNode C.div
+      , footer: C.div /\
           [ "border-top: 1px solid " <> borderColor
           , "padding: 5px"
           ]

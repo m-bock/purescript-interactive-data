@@ -59,21 +59,22 @@ view :: forall html. IDHtml html => BooleanState -> html BooleanMsg
 view (BooleanState value) =
   withCtx \ctx ->
     let
-      el =
-        { caseLabels: styleNode C.div
-            [ "display: flex"
-            , "flex-direction: column"
-            , case ctx.viewMode of
-                Inline -> "flex-direction: column"
-                Standalone -> "flex-direction: row"
-            , "gap: 5px"
-            , "margin-bottom: 15px"
-            ]
-        , caseLabel: C.div
+      el = styleElems "InteractiveData.DataUIs.Boolean#view"
+        { caseLabels: C.div
+            /\
+              [ "display: flex"
+              , "flex-direction: column"
+              , "gap: 5px"
+              , "margin-bottom: 15px"
+              ]
+            /\ case ctx.viewMode of
+              Inline -> "flex-direction: column"
+              Standalone -> "flex-direction: row"
+        , caseLabel: unit
         }
     in
-      el.caseLabels []
-        [ el.caseLabel []
+      el.caseLabels_
+        [ el.caseLabel_
             [ UIDataLabel.view
                 { dataPath:
                     { before: []
@@ -85,7 +86,7 @@ view (BooleanState value) =
                 , onHit: Just $ SetBoolean true
                 }
             ]
-        , el.caseLabel []
+        , el.caseLabel_
             [ UIDataLabel.view
                 { dataPath:
                     { before: []
