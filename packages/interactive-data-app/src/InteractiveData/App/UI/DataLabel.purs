@@ -11,7 +11,6 @@ import InteractiveData.Core.Prelude
 
 import Chameleon as C
 import Data.Array as Array
-import Data.Foldable (fold)
 import Data.Monoid (guard)
 import Data.String as Str
 import Data.Tuple (fst)

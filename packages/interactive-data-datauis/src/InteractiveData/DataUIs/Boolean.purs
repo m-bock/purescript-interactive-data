@@ -70,7 +70,7 @@ view (BooleanState value) =
             /\ case ctx.viewMode of
               Inline -> "flex-direction: column"
               Standalone -> "flex-direction: row"
-        , caseLabel: unit
+        , caseLabel: C.div
         }
     in
       el.caseLabels_

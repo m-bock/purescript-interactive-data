@@ -46,9 +46,9 @@ view { menu } = withCtx \{ showLogo } ->
                 """
             ]
 
-      , logoText: "font-size: 10px"
+      , logoText: C.div /\ "font-size: 10px"
 
-      , logo:
+      , logo: C.div /\
           [ css
               """
                 width: 30px;

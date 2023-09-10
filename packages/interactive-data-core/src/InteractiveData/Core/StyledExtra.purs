@@ -54,6 +54,3 @@ type FormatCfgCSS =
 
 css_ :: forall @sym replace. Format FormatCfgCSS sym replace => replace -> String
 css_ = fmtWith @FormatCfgCSS @sym
-
-str :: String -> String
-str = identity

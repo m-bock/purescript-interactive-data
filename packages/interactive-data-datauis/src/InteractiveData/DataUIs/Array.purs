@@ -152,7 +152,7 @@ viewItem _ index childDataTree _ =
     let
       el = styleElems
         "InteractiveData.DataUIs.Array#viewItem"
-        { root:
+        { root: C.div /\
             [ "display: flex"
             , "align-items: flex-start"
             , "justify-content: space-between"
@@ -160,10 +160,10 @@ viewItem _ index childDataTree _ =
             , "width: 100%"
             , "gap: 15px"
             ]
-        , item:
+        , item: C.div /\
             [ "flex: 1"
             ]
-        , actions: unit
+        , actions: C.div
         }
 
       newPath = ctx.path <> [ SegField $ SegDynamicIndex index ]

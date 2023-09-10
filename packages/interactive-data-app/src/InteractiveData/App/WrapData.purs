@@ -166,39 +166,39 @@ viewInline { viewContent, typeName, text, filteredErrors } =
   withCtx \ctx ->
     let
       el = styleElems "InteractiveData.App.WrapData#viewInline"
-        { typeRow:
+        { typeRow: C.div /\
             [ "display: flex"
             , "flex-direction: column"
             , "height: 100%"
             , "gap: 3px"
             ]
-        , text:
+        , text: C.div /\
             [ "font-size: 11px"
             ]
-        , caption:
+        , caption: C.div /\
             [ "display: flex"
             , "align-items: center"
             , "justify-content: space-between"
             , "height: 100%"
             ]
-        , typeName:
+        , typeName: C.div /\
             [ "font-size: 12px"
             , "margin-right: 10px"
             ]
-        , root:
+        , root: C.div /\
             [ "min-width: 120px"
             , "display: grid"
             ]
-        , content:
+        , content: C.div /\
             [ ""
             ]
-        , errors:
+        , errors: C.div /\
             [ "color: red"
             , "display: flex"
             , "flex-direction: column"
             , "gap: 3px"
             ]
-        , error:
+        , error: C.div /\
             [ "font-size: 11px" ]
         }
 

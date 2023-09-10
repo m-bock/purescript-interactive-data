@@ -7,7 +7,6 @@ module InteractiveData.App.UI.Card
 import InteractiveData.Core.Prelude
 
 import Chameleon as C
-import Data.Interpolate (i)
 
 type ViewCfg (html :: Type -> Type) msg =
   { viewCaption :: Maybe (html msg)
