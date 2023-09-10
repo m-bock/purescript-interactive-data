@@ -39,14 +39,16 @@ view { mkMsg, caseKey, caseKeys } =
       singleCase = countCases == 1
 
       el = styleElems "InteractiveData.DataUIs.Variant#view"
-        { caseLabels: C.div /\
-            [ "display: flex"
-            , "gap: 5px"
-            , "margin-bottom: 15px"
-            , "flex-wrap: wrap"
-            ] /\ case ctx.viewMode of
-                Inline -> "flex-direction: column"
-                Standalone -> "flex-direction: row"
+        { caseLabels: C.div
+            /\
+              [ "display: flex"
+              , "gap: 5px"
+              , "margin-bottom: 15px"
+              , "flex-wrap: wrap"
+              ]
+            /\ case ctx.viewMode of
+              Inline -> "flex-direction: column"
+              Standalone -> "flex-direction: row"
         , caseLabel: C.div
         }
 

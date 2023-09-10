@@ -120,7 +120,7 @@ viewRightCorner { showMenu, setShowMenu } =
   let
     el = styleElems "InteractiveData.App.UI.Header#viewRightCorner"
       { menuIcon:
-          C.div /\ css 
+          C.div /\ css
             """
               cursor: pointer;
               width: 25px;

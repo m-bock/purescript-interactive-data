@@ -29,7 +29,7 @@ view items =
       , item: C.div
       , lastItem: C.div /\
           [ "flex-grow: 1" ]
-      , iconArrow:  C.div /\
+      , iconArrow: C.div /\
           [ "height: 24px"
           , "width: 14px"
           , "scale: 0.3"

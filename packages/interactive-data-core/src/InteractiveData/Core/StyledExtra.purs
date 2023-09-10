@@ -3,8 +3,7 @@ module InteractiveData.Core.StyledExtra
   , css_
   , styleElemsD
   , styles
-  )
-  where
+  ) where
 
 import Prelude
 
