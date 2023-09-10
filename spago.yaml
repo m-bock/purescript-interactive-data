@@ -1,7 +1,6 @@
 workspace:
   extra_packages:
-    chameleon-styled: # 2.4.0
-      path: ../purescript-chameleon-styled
+    chameleon-styled: 2.5.0
     chameleon-halogen: 1.0.3
     tidy:
       git: https://github.com/natefaubion/purescript-tidy.git
@@ -21,9 +20,7 @@ workspace:
         - "language-cst-parser"
         - "strings"
         - "tuples"
-    fmt: 
-      git: https://github.com/thought2/purescript-fmt.git
-      ref: v0.1.0
+    fmt: 0.1.0
 
   package_set:
     registry: 36.0.0
