@@ -26,14 +26,16 @@ view { dataPath, viewDataLabel, isAbsolute } =
 
     el = styleElems "InteractiveData.App.UI.Breadcrumbs#view"
       { root: C.div /\
-          [ "display: flex"
-          , "align-items: center"
-          ]
+          """
+            display: flex;
+            align-items: center;
+          """
       , iconArrow: C.div /\
-          [ "height: 24px"
-          , "width: 14px"
-          , "scale: 0.3"
-          ]
+          """
+            height: 24px;
+            width: 14px;
+            scale: 0.3;
+          """
       }
 
     rootSegment :: html msg

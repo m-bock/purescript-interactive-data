@@ -9,6 +9,7 @@ package:
     - data-mvc
     - dodo-printer
     - either
+    - fmt
     - foreign-object
     - heterogeneous
     - identity

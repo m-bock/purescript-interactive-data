@@ -31,53 +31,67 @@ view { viewHeader, viewSidebar, viewBody, viewFooter } = withCtx \ctx ->
     el = styleElems
       "InteractiveData.App.UI.Layout#view"
       { root: C.div
-          /\
-            [ "display: flex"
-            , "flex-direction: column"
-            , "height: 100%"
-            , "font-family: 'Signika Negative'"
-            , "background-color: white"
-            ]
-          /\ guard ctx.fullscreen
-            [ "position: fixed"
-            , "top: 0px"
-            , "left: 0px"
-            , "right: 0px"
-            , "bottom: 0px"
-            ]
-      , header: C.div /\
-          [ "z-index: 3000" ]
-      , layout: C.div /\
-          [ "width: 100%"
-          , "display: flex"
-          , "height: 100%"
-          ]
+          /\ css
+            """
+              display: flex;
+              flex-direction: column;
+              height: 100%;
+              font-family: "Signika Negative";
+              background-color: white;
+            """
+          /\ (guard ctx.fullscreen <<< css)
+            """
+              position: fixed;
+              top: 0px;
+              left: 0px;
+              right: 0px;
+              bottom: 0px;
+            """
+      , header: C.div
+          /\ css
+            """
+              z-index: 3000;
+            """
+      , layout: C.div
+          /\ css
+            """
+              display: flex;
+              width: 100%;
+              height: 100%;
+            """
       , sidebar: C.div
+          /\ css
+            """
+              transition: width 100ms ease-in-out;
+              flex: 0 0 auto;
+            """
           /\
-            [ "transition: width 100ms ease-in-out"
-            , "flex: 0 0 auto;"
-            ]
-          /\
-            if showSidebar then
-              [ "border-right: 1px solid #E0E0E0"
-              , "min-width: 140px"
-              ]
-            else
-              [ "width: 0px" ]
-      , main: C.div /\
-          [ "height: 100%"
-          , "display: flex"
-          , "flex-direction: column"
-          , "flex: 1"
-          ]
+            if showSidebar then css
+              """
+                border-right: 1px solid #e0e0e0;
+                min-width: 140px;
+              """
+            else css
+              """
+                width: 0px;
+              """
+      , main: C.div /\ css
+          """
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+          """
 
-      , footer: C.div /\
-          [ "width: 100%"
-          ]
-      , content: C.div /\
-          [ "flex-grow: 1"
-          , "overflow-y: auto"
-          ]
+      , footer: C.div /\ css
+          """
+            width: 100%;
+          """
+      , content: C.div /\ css
+          """
+            flex-grow: 1;
+            overflow-y: auto;
+          """
       }
   in
     el.root

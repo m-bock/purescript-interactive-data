@@ -1,6 +1,7 @@
 import { globSync } from "glob";
 import { patchAll, langs } from "./patch-file.js";
 import * as fs from "fs";
+import * as prettier from "prettier";
 
 const pursSrc = "packages/*/src";
 
@@ -17,6 +18,28 @@ moduleName :: String
 moduleName = "${moduleName}"
 
 `;
+    },
+  ],
+
+  multilineIndent: [
+    /(declWith "[^"]*?"|css_?\)?|C\.(?:[a-z])+ \/\\)\n([ ]*?)(@?)"""([\s\S]*?)"""/g,
+    async (match, cssFn, indent, at, innerStr) => {
+
+      const innerStrNew = innerStr
+        .split("\n")
+        .map((x) => `${x.trim()}`)
+        .join("\n");
+
+      const innerStrNewFormatted = await prettier.format(innerStrNew, {
+        parser: "css",
+      });
+
+      const result = innerStrNewFormatted.trim()
+        .split("\n")
+        .map((x) => `${indent}  ${x}`)
+        .join("\n");
+
+      return `${cssFn}\n${indent}${at}"""\n${result}\n${indent}"""`;
     },
   ],
 
@@ -79,7 +102,7 @@ const runFile = async (absFile) => {
 
   const source = fs.readFileSync(absFile, "utf8").toString();
 
-  const result = patch(source);
+  const result = await patch(source);
 
   fs.writeFileSync(absFile, result, "utf8");
 };

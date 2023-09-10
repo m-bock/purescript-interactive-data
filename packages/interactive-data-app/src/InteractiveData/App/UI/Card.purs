@@ -7,6 +7,7 @@ module InteractiveData.App.UI.Card
 import InteractiveData.Core.Prelude
 
 import Chameleon as C
+import Data.Interpolate (i)
 
 type ViewCfg (html :: Type -> Type) msg =
   { viewCaption :: Maybe (html msg)
@@ -43,34 +44,50 @@ view
   let
     el = styleElems "InteractiveData.App.UI.Card#view"
 
-      { card: C.div /\
-          [ "background-color: " <> backgroundColor
-          , "position: relative"
-          , "border-radius: 5px"
-          , "border: 1px solid " <> borderColor
-          , "height: 100%"
-          , "width: 100%"
-          , "display: flex"
-          , "flex-direction: column"
-          , "box-sizing: border-box"
-          ]
-      , caption: C.div /\
-          [ "border-bottom: 1px solid " <> borderColor
-          , "padding: 5px"
-          , "box-sizing: border-box"
-          ]
-      , subCaption: C.div /\
-          [ "padding: 5px"
-          , "box-sizing: border-box"
-          ]
-      , body: C.div /\
-          [ "padding: 5px"
-          , "box-sizing: border-box"
-          ]
-      , footer: C.div /\
-          [ "border-top: 1px solid " <> borderColor
-          , "padding: 5px"
-          ]
+      { card: C.div
+          /\ css_
+            @"""
+              position: relative;
+              border-radius: 5px;
+              height: 100%;
+              width: 100%;
+              display: flex;
+              flex-direction: column;
+              box-sizing: border-box;
+              background-color: <backgroundColor>;
+              border: 1px solid <borderColor>;
+            """
+            { backgroundColor
+            , borderColor
+            }
+      , caption: C.div
+          /\ css_
+            @"""
+              padding: 5px;
+              box-sizing: border-box;
+              border-bottom: 1px solid <borderColor>;
+            """
+            { borderColor }
+
+      , subCaption: C.div
+          /\ css
+            """
+              padding: 5px;
+              box-sizing: border-box;
+            """
+      , body: C.div
+          /\ css
+            """
+              padding: 5px;
+              box-sizing: border-box;
+            """
+      , footer: C.div
+          /\ css_
+            @"""
+              padding: 5px;
+              border-top: 1px solid <borderColor>;
+            """
+            { borderColor }
       }
   in
     el.card []

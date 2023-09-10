@@ -11,6 +11,7 @@ import InteractiveData.Core.Prelude
 
 import Chameleon as C
 import Data.Array as Array
+import Data.Foldable (fold)
 import Data.Monoid (guard)
 import Data.String as Str
 import Data.Tuple (fst)
@@ -68,41 +69,46 @@ viewDataLabel' { dataPath, mkTitle } { onHit, isSelected, headline } = withCtx \
       "InteractiveData.App.UI.DataLabel#viewDataLabel'"
       { datalabel:
           C.div
+            /\ css
+              """
+                border: 1px solid rgb(161 161 161);
+                display: inline-flex;
+                flex-direction: row;
+                align-items: center;
+                gap: 2px;
+                padding-top: 1px;
+                padding-bottom: 1px;
+                padding-left: 6px;
+                padding-right: 6px;
+                border-radius: 12px;
+                height: 22px;
+                min-width: 22px;
+                font-size: 12px;
+                box-sizing: border-box;
+                justify-content: center;
+              """
             /\
-              [ "border: 1px solid rgb(161 161 161)"
-              , "display: inline-flex"
-              , "flex-direction: row"
-              , "align-items: center"
-              , "gap: 2px"
-              , "padding-top: 1px"
-              , "padding-bottom: 1px"
-              , "padding-left: 6px"
-              , "padding-right: 6px"
-              , "border-radius: 12px"
-              , "height: 22px"
-              , "min-width: 22px"
-              , "font-size: 12px"
-              , "box-sizing: border-box"
-              , "justify-content: center"
-              , guard headline "font-weight: bold"
+              [ guard headline "font-weight: bold"
               ]
             /\
-              declWith ":hover" case onHit of
-                Nothing -> []
-                Just _ ->
-                  [ "background-color: #d5ebdb" ]
-            /\
-              decl case onHit of
-                Nothing -> []
-                Just _ ->
-                  [ "cursor: pointer"
-                  , "background-color: #f7f7f7"
-                  ]
+              ( onHit # map \_ -> declWith ":hover"
+                  """
+                    background-color: #d5ebdb;
+                  """
+              )
+            /\ case onHit of
+              Nothing -> mempty
+              Just _ -> css
+                """
+                  cursor: pointer;
+                  background-color: #f7f7f7;
+                """
             /\ declWith " > svg"
-              [ "width:10px"
-              , "height:10px"
-              , "display:inline-block"
-              ]
+              """
+                width: 10px;
+                height: 10px;
+                display: inline-block;
+              """
       }
 
     maybeSegment :: Maybe DataPathSegment

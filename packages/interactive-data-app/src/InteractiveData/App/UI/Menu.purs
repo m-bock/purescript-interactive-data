@@ -203,34 +203,47 @@ viewRow
 viewRow { onSetExpanded } opts@{ path, isExpanded, isLeaf } =
   let
     el = styleElems "InteractiveData.App.UI.Menu#viewRow"
-      { root: C.div /\
-          [ "display: flex; "
-          , "align-items: center"
-          , "padding: 5px"
-          , "gap: 3px"
-          ]
-      , icon: C.div /\
-          [ "cursor: pointer"
-          , "width: 20px"
-          , "height: 20px"
-          , guard isExpanded "transform: rotate(90deg)"
-          , "transition: transform 100ms ease-in-out"
-          , "display: flex"
-          , "align-items: center"
-          , "justify-content: center"
-          ]
+      { root: C.div
+          /\ css
+            """
+              display: flex;
+              align-items: center;
+              padding: 5px;
+              gap: 3px;
+            """
+      , icon: C.div
+          /\ css
+            """
+              cursor: pointer;
+              width: 20px;
+              height: 20px;
+              transition: transform 100ms ease-in-out;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+            """
+          /\
+            [ guard isExpanded $ css
+                """
+                  transform: rotate(90deg);
+                """
+            ]
       , iconInner: C.div /\
-          [ "width: 6px"
-          , "display: flex"
-          , "align-items: center"
-          , "justify-content: center"
-          ]
+          css
+            """
+              width: 6px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+            """
       , iconDash: C.div /\
-          [ "width: 10px"
-          , "display: flex"
-          , "align-items: center"
-          , "justify-content: center"
-          ]
+          css
+            """
+              width: 10px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+            """
       , label: C.div
       }
 

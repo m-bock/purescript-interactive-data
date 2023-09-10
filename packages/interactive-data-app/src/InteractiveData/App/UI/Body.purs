@@ -16,12 +16,13 @@ view { viewContent } =
   let
     el = styleElems "InteractiveData.App.UI.Body#view"
       { root: C.div
-      , content: C.div /\
-          [ "padding: 5px"
-          , "padding-right: 15px"
-          , "padding-left: 15px"
-          , "max-width: 800px"
-          ]
+      , content: C.div /\ css
+          """
+            padding: 5px;
+            padding-right: 15px;
+            padding-left: 15px;
+            max-width: 800px;
+          """
       }
   in
     el.root_

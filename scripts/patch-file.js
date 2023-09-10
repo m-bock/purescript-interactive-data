@@ -2,7 +2,7 @@
 
 /**
  * @typedef {[RegExp, (match : string, groups: string[], index: number, all :string ) => string]} RegexPatch_
- * @typedef {[RegExp, (match : string, ...args: any[] ) => string]} RegexPatch
+ * @typedef {[RegExp, (match : string, ...args: any[] ) => string | Promise<string> ]} RegexPatch
  */
 
 export const langs = {
@@ -52,7 +52,7 @@ export const patchAll =
   /**
    * @param {string} source
    * */
-  (source) => {
+  async (source) => {
     const regex = mkRegex(lang);
 
     let newSource = source;
@@ -91,7 +91,7 @@ export const patchAll =
     );
 
     for (const [regex, patch] of regexPatches) {
-      newSource = source.replace(regex, (...args) => {
+      newSource = await replaceAsync(newSource, regex, async (...args) => {
         const newContent =
           typeof patch === "function"
             ? patch(...args)
@@ -107,3 +107,25 @@ export const patchAll =
 
     return newSource;
   };
+
+/**
+ *
+ * @param {string} str
+ * @param {RegExp} regex
+ * @param {(match: string, ...args: any) => Promise<string>} asyncFn
+ * @returns {Promise<string>}
+ */
+const replaceAsync = async (str, regex, asyncFn) => {
+  /**
+   * @type {Promise<string>[]}
+   */
+  const promises = [];
+
+  str.replace(regex, (match, ...args) => {
+    const promise = asyncFn(match, ...args);
+    promises.push(promise);
+    return match;
+  });
+  const data = await Promise.all(promises);
+  return str.replace(regex, () => data.shift() || "");
+};
