@@ -9,7 +9,6 @@ package:
     - foldable-traversable
     - foreign
     - interactive-data-core
-    - interpolate
     - maybe
     - newtype
     - ordered-collections
